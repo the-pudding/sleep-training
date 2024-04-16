@@ -5,7 +5,7 @@
 
 <div id="article">
 	<h1>Is sleep training harmful?</h1>
-	<Scrolly />
+	<!-- <Scrolly /> -->
     <Bubbles />
 </div>
 
