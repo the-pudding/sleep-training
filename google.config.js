@@ -1,11 +1,16 @@
 export default [
 	{
-		"id": "1352iFuTSDDFPNAXBbOaEXkF8mCdjPu6B43hpUF2P3C4",
+		"id": "143FqsB6LPSqvYaQd3XMLr_hSKMfUSlpqnHcOy1mpTJk",
 		"filepath": "src/data/copy.json"
 	},
 	{
-		"id": "1te65h_nywgXVAzvV-9E5fmHGblcKvctf_cNZgeam9Tk",
+		"id": "1MizY39V74oRceOTsXGrVf33FreIyAMaYPBEAJp-q4ws",
 		"gid": "0",
-		"filepath": "src/data/test.csv"
+		"filepath": "src/data/studies.csv"
+	},
+	{
+		"id": "1MizY39V74oRceOTsXGrVf33FreIyAMaYPBEAJp-q4ws",
+		"gid": "1045886147",
+		"filepath": "src/data/articles.csv"
 	}
 ]
