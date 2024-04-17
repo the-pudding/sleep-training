@@ -1,6 +1,6 @@
 <script>
-	export let title = "Title TK";
-	export let description = "Description TK";
+	export let title = "Sleep Training";
+	export let description = "Sleep Training";
 	export let url = "https://pudding.cool";
 	export let keywords = "";
 	export let preloadFont = [];
