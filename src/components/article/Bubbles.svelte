@@ -2,6 +2,7 @@
     import { forceSimulation, forceY, forceX, forceCollide } from 'd3-force';
     import { scaleLinear, scaleSqrt, scaleOrdinal, scaleBand } from 'd3-scale';
     import { extent } from 'd3-array';
+    import { fade } from "svelte/transition";
     import Legend from "$components/article/Legend.svelte";
     import Tooltip from "$components/article/Tooltip.svelte";
 
@@ -80,7 +81,7 @@
             class="inner-bubbles" 
             transform="translate({margin.left}, {margin.top})"
         >
-            {#each nodes as node}
+            {#each nodes as node, index}
                 <!-- svelte-ignore a11y-no-static-element-interactions -->
                 <circle
                     cx={node.x}
@@ -94,6 +95,7 @@
                         : 1}
                     on:mouseover={() => (hovered = node)}
                     on:focus={() => (hovered = node)}
+                    in:fade={{ delay: index * 10 }}
                 />
             {/each}
         </g>

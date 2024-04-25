@@ -1,5 +1,5 @@
 <script>
-	// import Scrolly from "$components/article/Scrolly.svelte";
+	import Scrolly from "$components/article/Scrolly.svelte";
     import Bubbles from "$components/article/Bubbles.svelte"
 
     import { onMount } from 'svelte';
@@ -25,8 +25,14 @@
 
 <div id="article">
 	<h1>Is sleep training harmful?</h1>
-	<!-- <Scrolly /> -->
-    <Bubbles {data} width={500} height={400}/>
+    <section>
+        <div class="sticky">
+            <Bubbles {data} width={500} height={400}/>
+        </div>
+        <div class="steps">
+            <Scrolly />
+        </div>
+    </section>
 </div>
 
 <style>
@@ -45,4 +51,17 @@
 		background: var(--color-mark);
 		padding: 0 8px;
 	}
+    section {
+        position: relative;
+    }
+    
+    .sticky {
+        position: sticky;
+        top: 35%;
+    }
+
+    .steps {
+        position: relative;
+        z-index: 200;
+    }
 </style>
