@@ -1,6 +1,7 @@
 <script>
 	import Scrolly from "$components/article/Scrolly.svelte";
     import Bubbles from "$components/article/Bubbles.svelte"
+    import Editorial from "$components/article/Editorial.svelte"
     import { onMount } from 'svelte';
     import { csvParse } from 'd3';
 	import copy from '$data/copy.json';
@@ -33,7 +34,7 @@
 
 	// COPY FILTERING
 	let copy_1 = copy;
-	// let copy_2 = copy;
+	let copy_2 = copy;
 
     // CURRENT STEP DISPATCHING
     let currentStep;
@@ -64,6 +65,11 @@
             <Scrolly copy={copy_1} on:currentStepChanged={handleCurrentStepChanged} />
         </div>
     </section>
+	<section>
+		<div class="editorial-container">
+			<Editorial copy={copy_2} />
+		</div>
+	</section>
 	<!-- <section>
 		<div class="steps">
             <Scrolly copy={copy_2} on:currentStepChanged={handleCurrentStepChanged} />

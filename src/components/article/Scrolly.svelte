@@ -11,7 +11,6 @@
 </script>
 
 <section id="scrolly">
-	<!-- <div class="spacer" /> -->
 	<Scrolly bind:value={currentStep}>
 		{#each Object.values(copy) as text, i}
 			{@const active = currentStep === i}
@@ -23,14 +22,9 @@
 	<div class="current-step">
         {currentStep}
     </div>
-	<!-- <div class="spacer" /> -->
 </section>
 
 <style>
-	/* .spacer {
-		height: 75vh;
-	} */
-
 	.step {
 		height: 60vh;
 		opacity: .3;

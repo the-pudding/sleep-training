@@ -35,10 +35,12 @@
     $: maxRadius = Math.max(...data.map(d => radiusScale(d.participants)));
     $: adjustedWidth = innerWidth - maxRadius * 2;
 
+    // MAKE Y SCALE
     $: xScale = scaleLinear()
         .domain(extent(data, d => d.year))
         .range([maxRadius, adjustedWidth]);
 
+    // GROUPED SCALE
     $: xScaleGrouped = scaleBand()
         .domain(["Advocate", "Neutral", "Oppose"])
         .range([maxRadius, adjustedWidth])
@@ -54,6 +56,9 @@
     let colorScale = scaleOrdinal()
         .domain(["Advocate", "Neutral", "Oppose"])
         .range(colorRange);
+
+    // CREATE Y SCALE FOR TIME
+    // CREATE MAP AND SCALES
 
     $: {
         simulation.nodes(data)
@@ -73,9 +78,8 @@
         hovered = null;
         } else {
         groupByPosition = false;
-        setTimeout(() => {
-            hovered = data[13];
-        }, 1000);
+        hovered = data[13];
+        // Function to reinstall pointer events on Scrolly
         }
     }
 
@@ -85,6 +89,8 @@
 <div class="bubbles-container" bind:clientWidth={width}>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
+
+    <!-- CURRENT STEP: CONDITIONALLY RENDER TIMELINE AXIS AND MAP COMPONENTS -->
     <svg {width} {height}
     on:mouseleave={() => 
         (hovered = null)}
