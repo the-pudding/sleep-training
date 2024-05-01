@@ -1,20 +1,28 @@
 <script>
 	import Scrolly from "$components/helpers/Scrolly.svelte";
-	import copy from '../../data/copy.json';
-	let value;
-	$: console.log({ value })
+	import { createEventDispatcher } from 'svelte';
+	export let copy;
+
+	let currentStep = null;
+  	const dispatch = createEventDispatcher();
+	  $: {
+		dispatch('currentStepChanged', currentStep);
+	}
 </script>
 
 <section id="scrolly">
 	<!-- <div class="spacer" /> -->
-	<Scrolly bind:value>
+	<Scrolly bind:value={currentStep}>
 		{#each Object.values(copy) as text, i}
-			{@const active = value === i}
+			{@const active = currentStep === i}
 			<div class="step" class:active>
 				<p class="step-content">{text}</p>
 			</div>
 		{/each}
 	</Scrolly>
+	<div class="current-step">
+        {currentStep}
+    </div>
 	<!-- <div class="spacer" /> -->
 </section>
 
@@ -26,13 +34,15 @@
 	.step {
 		height: 60vh;
 		opacity: .3;
-		/* background: var(--color-gray-100); */
-		text-align: center;
 		transition: opacity 300ms ease;
+		display: flex;
+		place-items: center;
+		justify-content: center;
 	}
 
 	.step-content {
 		background-color: white;
+		padding: 0.75rem 1rem;
 		border-radius: 5px;
 		border: 1px solid black;
 	}
@@ -43,5 +53,11 @@
 
 	.step.active {
 		opacity: 1;
+	}
+
+	.current-step {
+		position: fixed;
+		bottom: 0;
+		right: 0;
 	}
 </style>

@@ -6,17 +6,22 @@
     import Legend from "$components/article/Legend.svelte";
     import Tooltip from "$components/article/Tooltip.svelte";
 
+    // IMPORT FROM PARENT
     export let data;
     export let width;
     export let height;
+    export let currentStep;
     
+    // VARIABLES
     const margin = { top: 0, right: 0, bottom: 20, left: 0 };
     $: innerWidth = width - margin.right - margin.left;
     // let innerHeight = height - margin.top - margin.bottom;
     let nodes = [];
     let hovered;
     let hoveredPosition;
+    let groupByPosition = false;
 
+    // FORCE SIMULATION SETUP
     let simulation = forceSimulation(data)
         .on("tick", () => {
             nodes = simulation.nodes();
@@ -26,6 +31,7 @@
         .domain(extent(data, d => d.participants))
         .range(width < 568 ? [2, 20] : [8, 40]);
 
+    // Width adjustment for radii
     $: maxRadius = Math.max(...data.map(d => radiusScale(d.participants)));
     $: adjustedWidth = innerWidth - maxRadius * 2;
 
@@ -56,21 +62,28 @@
             .force("collide", forceCollide().radius(d => radiusScale(d.participants) + 1))
             .alpha(1) // Reset alpha when data changes to ensure movement
             .restart();
-
     }
 
-    let groupByPosition = false;
+    $: {
+        if (currentStep >= 0 && currentStep <= 1) {
+        groupByPosition = false;
+        hovered = null;
+        } else if (currentStep > 1 && currentStep <= 2) {
+        groupByPosition = true;
+        hovered = null;
+        } else {
+        groupByPosition = false;
+        setTimeout(() => {
+            hovered = data[13];
+        }, 1000);
+        }
+    }
+
 </script>
 
 <Legend {colorScale} bind:hoveredPosition />
 <div class="bubbles-container" bind:clientWidth={width}>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <div class="sorting"
-    on:click={() => {groupByPosition = !groupByPosition}} 
-    >
-    SORT
-    </div>
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <svg {width} {height}
     on:mouseleave={() => 
@@ -108,7 +121,14 @@
 
 <style>
     circle {
-    transition: stroke 300ms ease, opacity 300ms ease;
+    transition: stroke 300ms ease, opacity 300ms ease, cx 100ms ease, cy 100ms ease;
     cursor: pointer;
   }
 </style>
+
+<!-- BIN -->
+<!-- <div class="sorting"
+on:click={() => {groupByPosition = !groupByPosition}} 
+>
+SORT
+</div> -->
