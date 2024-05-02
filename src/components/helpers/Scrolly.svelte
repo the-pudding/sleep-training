@@ -17,6 +17,7 @@
 	export let bottom = 0;
 	export let increments = 100;
 	export let value = undefined;
+	export let startStep;
 
 	const steps = [];
 	const threshold = [];
@@ -42,7 +43,7 @@
 			}
 		}
 
-		if (maxRatio > 0) value = maxIndex;
+		if (maxRatio > 0) value = maxIndex + startStep;
 		else value = undefined;
 	};
 

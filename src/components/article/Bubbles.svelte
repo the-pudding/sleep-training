@@ -19,7 +19,7 @@
     let nodes = [];
     let hovered;
     let hoveredPosition;
-    let groupByPosition = false;
+    let groupByPosition = true;
 
     // FORCE SIMULATION SETUP
     let simulation = forceSimulation(data)
@@ -28,18 +28,20 @@
         });
 
     $: radiusScale = scaleSqrt()
-        .domain(extent(data, d => d.participants))
+        .domain(extent(data, d => d.participants || d.backlinks)) 
         .range(width < 568 ? [2, 20] : [8, 40]);
 
     // Width adjustment for radii
-    $: maxRadius = Math.max(...data.map(d => radiusScale(d.participants)));
+    $: maxRadius = Math.max(...data.map(d => radiusScale(d.participants || d.backlinks))); 
     $: adjustedWidth = innerWidth - maxRadius * 2;
+
 
     // MAKE Y SCALE
     $: xScale = scaleLinear()
         .domain(extent(data, d => d.year))
         .range([maxRadius, adjustedWidth]);
 
+    $: xMidpoint = (xScale.range()[1] - xScale.range()[0]) / 2 + xScale.range()[0];
     // GROUPED SCALE
     $: xScaleGrouped = scaleBand()
         .domain(["Advocate", "Neutral", "Oppose"])
@@ -62,24 +64,23 @@
 
     $: {
         simulation.nodes(data)
-            .force("x", forceX().x(d => (groupByPosition ?  xScaleGrouped(d.position) : xScale(d.year))).strength(0.8))
+            .force("x", forceX().x(d => (groupByPosition ?  xScaleGrouped(d.position) : xMidpoint)))
             .force("y", forceY(height / 2).strength(1))
             .force("collide", forceCollide().radius(d => radiusScale(d.participants) + 1))
             .alpha(1) // Reset alpha when data changes to ensure movement
-            .restart();
+            .restart();       
     }
 
     $: {
-        if (currentStep >= 0 && currentStep <= 1) {
+        if (currentStep === 2) {
         groupByPosition = false;
-        hovered = null;
-        } else if (currentStep > 1 && currentStep <= 2) {
-        groupByPosition = true;
-        hovered = null;
         } else {
-        groupByPosition = false;
+            groupByPosition = true;
+        }
+        if (currentStep === 3) {
         hovered = data[13];
-        // Function to reinstall pointer events on Scrolly
+        } else {
+            hovered = null;
         }
     }
 
@@ -105,7 +106,7 @@
                 <circle
                     cx={node.x}
                     cy={node.y}
-                    r={radiusScale(node.participants)} 
+                    r={node.participants ? radiusScale(node.participants) : radiusScale(node.backlinks)}
                     fill={colorScale(node.position)}
                     opacity={hovered || hoveredPosition
                         ? hovered === node || hoveredPosition === node.position
