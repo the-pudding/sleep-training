@@ -10,7 +10,6 @@
     export let data;
     export let width;
     export let height;
-    export let currentStep;
     
     // VARIABLES
     const margin = { top: 0, right: 0, bottom: 20, left: 0 };
@@ -19,34 +18,26 @@
     let nodes = [];
     let hovered;
     let hoveredPosition;
-    let groupByPosition = true;
+    // let groupByPosition = true;
 
     // FORCE SIMULATION SETUP
     let simulation = forceSimulation(data)
         .on("tick", () => {
             nodes = simulation.nodes();
+            // console.log("Node positions:", nodes.map(n => ({ x: n.x, y: n.y })));
         });
 
     $: radiusScale = scaleSqrt()
-        .domain(extent(data, d => d.participants || d.backlinks)) 
+        .domain(extent(data, d => d.participants)) 
         .range(width < 568 ? [2, 20] : [8, 40]);
 
-    // Width adjustment for radii
-    $: maxRadius = Math.max(...data.map(d => radiusScale(d.participants || d.backlinks))); 
-    $: adjustedWidth = innerWidth - maxRadius * 2;
+    // $: maxRadius = Math.max(...data.map(d => radiusScale(d.participants)));
 
-
-    // MAKE Y SCALE
-    $: xScale = scaleLinear()
-        .domain(extent(data, d => d.year))
-        .range([maxRadius, adjustedWidth]);
-
-    $: xMidpoint = (xScale.range()[1] - xScale.range()[0]) / 2 + xScale.range()[0];
-    // GROUPED SCALE
+    // SCALE: GROUPED BY POSITION
     $: xScaleGrouped = scaleBand()
         .domain(["Advocate", "Neutral", "Oppose"])
-        .range([maxRadius, adjustedWidth])
-        .paddingInner(0)
+        .range([0, innerWidth])
+        .paddingInner(0.2)
         .paddingOuter(0);
 
     const colorRange = [
@@ -59,39 +50,21 @@
         .domain(["Advocate", "Neutral", "Oppose"])
         .range(colorRange);
 
-    // CREATE Y SCALE FOR TIME
-    // CREATE MAP AND SCALES
-
     $: {
         simulation.nodes(data)
-            .force("x", forceX().x(d => (groupByPosition ?  xScaleGrouped(d.position) : xMidpoint)))
+            .force("x", forceX().x(d => (xScaleGrouped(d.position))))
+            // .force("x", forceX(width / 2).strength(1))
             .force("y", forceY(height / 2).strength(1))
             .force("collide", forceCollide().radius(d => radiusScale(d.participants) + 1))
-            .alpha(1) // Reset alpha when data changes to ensure movement
-            .restart();       
+            .alpha(1)
+            .restart();
     }
-
-    $: {
-        if (currentStep === 2) {
-        groupByPosition = false;
-        } else {
-            groupByPosition = true;
-        }
-        if (currentStep === 3) {
-        hovered = data[13];
-        } else {
-            hovered = null;
-        }
-    }
-
 </script>
 
 <Legend {colorScale} bind:hoveredPosition />
 <div class="bubbles-container" bind:clientWidth={width}>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
-
-    <!-- CURRENT STEP: CONDITIONALLY RENDER TIMELINE AXIS AND MAP COMPONENTS -->
     <svg {width} {height}
     on:mouseleave={() => 
         (hovered = null)}
@@ -106,7 +79,7 @@
                 <circle
                     cx={node.x}
                     cy={node.y}
-                    r={node.participants ? radiusScale(node.participants) : radiusScale(node.backlinks)}
+                    r={radiusScale(node.participants)}
                     fill={colorScale(node.position)}
                     opacity={hovered || hoveredPosition
                         ? hovered === node || hoveredPosition === node.position
@@ -132,10 +105,3 @@
     cursor: pointer;
   }
 </style>
-
-<!-- BIN -->
-<!-- <div class="sorting"
-on:click={() => {groupByPosition = !groupByPosition}} 
->
-SORT
-</div> -->

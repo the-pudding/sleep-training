@@ -1,6 +1,5 @@
 <script>
-	import Scroll from "$components/article/Scroll.svelte";
-    import Bubbles from "$components/article/Bubbles.svelte"
+    import Section from "./article/Section.svelte";
     import Editorial from "$components/article/Editorial.svelte"
     import { onMount } from 'svelte';
     import { csvParse } from 'd3';
@@ -11,8 +10,6 @@
     // DATA IMPORT
     let data_studies = [];
     let data_articles = [];
-	let renderedData = [];
-	let advocateStudies = [];
 
     onMount(async () => {
         const response = await fetch('src/data/studies.csv');
@@ -39,10 +36,6 @@
             year: +d.year,
             backlinks: +d.backlinks || 0
         }));
-
-		// DATA FILTERING
-        console.log(data_articles);
-		advocateStudies = data_studies.filter(d => d.position === "Advocate");
     });
 
 
@@ -55,37 +48,12 @@
     function handleCurrentStepChanged(event) {
         currentStep = event.detail;
     }
-
-	// CONDITIONAL RENDERING
-    $: {
-        switch (true) {
-            case currentStep >= 0 && currentStep <= 1:
-                renderedData = data_studies;
-                break;
-            case currentStep > 1 && currentStep <= 2:
-                renderedData = data_studies;
-                break;
-            case currentStep > 2 && currentStep <= 3:
-                renderedData = advocateStudies;
-                break;
-                case currentStep > 3 && currentStep <= 6:
-                renderedData = data_articles;
-                break;
-            default:
-                renderedData = data_studies;
-        }
-    }
 </script>
 
 <div id="article">
 	<h1>Is sleep training harmful?</h1>
     <section>
-        <div class="sticky">
-            <Bubbles data={renderedData} width={500} height={400} {currentStep} />
-        </div>
-        <div class="steps">
-            <Scroll startStep={0} copy={copy_1} on:currentStepChanged={handleCurrentStepChanged} />
-        </div>
+        <Section {data_articles} {data_studies} {currentStep} copy={copy_1} on:currentStepChanged={handleCurrentStepChanged} />
     </section>
 	<section>
 		<div class="editorial-container">
@@ -93,12 +61,7 @@
 		</div>
 	</section>
 	<section>
-        <div class="sticky">
-            <Bubbles data={renderedData} width={500} height={400} {currentStep} />
-        </div>
-		<div class="steps">
-            <Scroll startStep={4} copy={copy_2} on:currentStepChanged={handleCurrentStepChanged} />
-        </div>
+        <Section {data_articles} {data_studies} {currentStep} copy={copy_2} on:currentStepChanged={handleCurrentStepChanged} />
 	</section>
 	<!-- <Footer /> -->
 </div>
@@ -121,17 +84,5 @@
 	}
     section {
         position: relative;
-    }
-    
-    .sticky {
-        position: sticky;
-        z-index: 1;
-        top: 35%;
-    }
-
-    .steps {
-        position: relative;
-        z-index: 2;
-		pointer-events: none;
     }
 </style>
