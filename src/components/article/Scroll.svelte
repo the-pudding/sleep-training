@@ -1,12 +1,11 @@
 <script>
 	import Scrolly from "$components/helpers/Scrolly.svelte";
-	import { currentStepStore } from "$components/currentStep";
+	import { stepStore } from "$components/stepStore";
 
-;
 	export let copy;
 	let currentStep;
 
-	$: currentStepStore.updateStep(currentStep);
+	$: stepStore.updateStep(currentStep);
 </script>
 
 <section id="scrolly">
@@ -14,7 +13,7 @@
 		{#each Object.values(copy) as p, i}
 			{@const active = currentStep === i}
 			<div class="step" class:active>
-				<p class="step-content">{p}</p>
+				<p class="step-content">{p.text}</p>
 			</div>
 		{/each}
 	</Scrolly>

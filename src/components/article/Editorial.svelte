@@ -4,8 +4,8 @@
 
 <div class="editorial">
     <div class="spacer" />
-    {#each Object.entries(copy) as [key, value]}
-        <p class="editorial-paragraph">{value}</p>
+    {#each copy as p}
+        <p class="editorial-paragraph">{p.text}</p>
     {/each}
     <div class="spacer" />
 </div>

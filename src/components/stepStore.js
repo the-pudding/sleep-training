@@ -1,13 +1,12 @@
 import { writable } from 'svelte/store';
 
-function createCurrentStepStore() {
+function createStepStore() {
     let step = 0;
     let prevStep = 0;
 
     const { subscribe, set } = writable(0);
 
     const updateStep = (currentStep) => {
-        console.log("prevStep:", prevStep, "currentStep:", currentStep);
         if (currentStep > prevStep) {
           step++;
         } else if (currentStep < prevStep) {
@@ -15,10 +14,9 @@ function createCurrentStepStore() {
         }
         prevStep = currentStep; // Update prevStep after conditional logic
         set(step);
-        console.log('step', step);
     };
 
     return { subscribe, updateStep };
 }
 
-export const currentStepStore = createCurrentStepStore();
+export const stepStore = createStepStore();

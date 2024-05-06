@@ -12,7 +12,7 @@
     export let height;
     
     // VARIABLES
-    const margin = { top: 0, right: 0, bottom: 20, left: 0 };
+    const margin = { top: 0, right: 0, bottom: 20, left: 150 };
     $: innerWidth = width - margin.right - margin.left;
     // let innerHeight = height - margin.top - margin.bottom;
     let nodes = [];
@@ -31,17 +31,19 @@
         "#404E4D",
         "#7D82B8"
     ];
-    let colorScale = scaleOrdinal()
+    const colorScale = scaleOrdinal()
         .domain(["Advocate", "Neutral", "Oppose"])
         .range(colorRange);
 
     $: radiusScale = scaleSqrt()
         .domain(extent(data, d => d.radius)) 
-        .range(width < 568 ? [2, 20] : [8, 40]);
+        .range([Math.min(innerWidth / 20, 4), Math.min(innerWidth / 10, 20)]);
     // $: maxRadius = Math.max(...data.map(d => radiusScale(d.participants)));
 
+    $: positionCategories = Array.from(new Set(data.map(d => d.position)));
+
     $: xScaleGrouped = scaleBand()
-        .domain(["Advocate", "Neutral"])
+        .domain(positionCategories)
         .range([0, innerWidth])
         .paddingInner(0.2)
         .paddingOuter(0);

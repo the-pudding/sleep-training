@@ -1,15 +1,18 @@
 <script>
-    import Section from "./article/Section.svelte";
+    import Section from "$components/article/Section.svelte";
     import Editorial from "$components/article/Editorial.svelte";
-    import { onMount } from 'svelte';
+    import { onMount, setContext } from 'svelte';
     import { csvParse } from 'd3';
 	import copy from '$data/copy.json';
+
+    console.log("copy", copy);
 
     // DATA IMPORT
     let data = {
         studies: [],
         articles: []
     };
+    setContext("copy", copy);
 
     onMount(async () => {
         const response = await fetch('src/data/studies.csv');
@@ -40,24 +43,20 @@
         }));
     });
 
-	// COPY FILTERING
-	let copy_1 = copy.copy_1[0];
-	let copy_2 = copy.copy_2[0];
-
 </script>
 
 <div id="article">
 	<h1>Is sleep training harmful?</h1>
     <section>
-        <Section {data} copy={copy_1} />
+        <Section {data} copy={copy.intro} />
     </section>
 	<section>
 		<div class="editorial-container">
-			<Editorial copy={copy_1} />
+			<Editorial copy={copy.part_2} />
 		</div>
 	</section>
 	<section>
-        <Section {data} copy={copy_2} />
+        <Section {data} copy={copy.part_3} />
 	</section>
 	<!-- <Footer /> -->
 </div>

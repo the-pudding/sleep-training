@@ -1,18 +1,22 @@
 <script>
     import Scroll from "./Scroll.svelte";
     import Bubbles from "./Bubbles.svelte";
-    import { currentStepStore } from "$components/currentStep";
+    import { stepStore } from "$components/stepStore";
+    // import { getContext } from "svelte";
+    // $: data = getContext('data');
+    // let data;
 
     export let copy;
     export let data;
 
+
     let step;
-    currentStepStore.subscribe(value => {
+    stepStore.subscribe(value => {
         step = value;
     });
 
     let scrollyActive = true;
-    let renderedData = [];
+    let renderedData;
     
     $: {
         switch (true) {
@@ -21,11 +25,11 @@
                 break;
             case step > 2 && step <= 3:
                 renderedData = data.articles;
-            break;
+                break;
             default:
                 renderedData = data.studies;
-        }
     }
+}
 </script>
 
 
