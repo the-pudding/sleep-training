@@ -17,7 +17,6 @@
 	export let bottom = 0;
 	export let increments = 100;
 	export let value = undefined;
-	export let startStep;
 
 	const steps = [];
 	const threshold = [];
@@ -25,7 +24,7 @@
 	let nodes = [];
 	let intersectionObservers = [];
 	let container;
-
+	let counter = 0;
 	$: top, bottom, update();
 
 	const update = () => {
@@ -43,7 +42,7 @@
 			}
 		}
 
-		if (maxRatio > 0) value = maxIndex + startStep;
+		if (maxRatio > 0) value = maxIndex + counter;
 		else value = undefined;
 	};
 

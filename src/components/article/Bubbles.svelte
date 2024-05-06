@@ -24,38 +24,38 @@
     let simulation = forceSimulation(data)
         .on("tick", () => {
             nodes = simulation.nodes();
-            // console.log("Node positions:", nodes.map(n => ({ x: n.x, y: n.y })));
         });
-
-    $: radiusScale = scaleSqrt()
-        .domain(extent(data, d => d.participants)) 
-        .range(width < 568 ? [2, 20] : [8, 40]);
-
-    // $: maxRadius = Math.max(...data.map(d => radiusScale(d.participants)));
-
-    // SCALE: GROUPED BY POSITION
-    $: xScaleGrouped = scaleBand()
-        .domain(["Advocate", "Neutral", "Oppose"])
-        .range([0, innerWidth])
-        .paddingInner(0.2)
-        .paddingOuter(0);
 
     const colorRange = [
         "#4FB477",
         "#404E4D",
         "#7D82B8"
     ];
-
     let colorScale = scaleOrdinal()
         .domain(["Advocate", "Neutral", "Oppose"])
         .range(colorRange);
 
+    $: radiusScale = scaleSqrt()
+        .domain(extent(data, d => d.radius)) 
+        .range(width < 568 ? [2, 20] : [8, 40]);
+    // $: maxRadius = Math.max(...data.map(d => radiusScale(d.participants)));
+
+    $: xScaleGrouped = scaleBand()
+        .domain(["Advocate", "Neutral"])
+        .range([0, innerWidth])
+        .paddingInner(0.2)
+        .paddingOuter(0);
+
     $: {
         simulation.nodes(data)
-            .force("x", forceX().x(d => (xScaleGrouped(d.position))))
+            .force("x", forceX().x(d => (
+                xScaleGrouped(d.position)
+            )))
             // .force("x", forceX(width / 2).strength(1))
             .force("y", forceY(height / 2).strength(1))
-            .force("collide", forceCollide().radius(d => radiusScale(d.participants) + 1))
+            .force("collide", forceCollide().radius(d => 
+                radiusScale(d.radius) + 1)
+            )
             .alpha(1)
             .restart();
     }
@@ -74,12 +74,13 @@
             class="inner-bubbles" 
             transform="translate({margin.left}, {margin.top})"
         >
+        <!-- IF ELSE STATEMENT -->
             {#each nodes as node, index}
                 <!-- svelte-ignore a11y-no-static-element-interactions -->
                 <circle
                     cx={node.x}
                     cy={node.y}
-                    r={radiusScale(node.participants)}
+                    r={radiusScale(node.radius)}
                     fill={colorScale(node.position)}
                     opacity={hovered || hoveredPosition
                         ? hovered === node || hoveredPosition === node.position

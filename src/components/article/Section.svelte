@@ -1,44 +1,43 @@
 <script>
     import Scroll from "./Scroll.svelte";
     import Bubbles from "./Bubbles.svelte";
+    import { currentStepStore } from "$components/currentStep";
 
     export let copy;
-    export let data_studies;
-    export let data_articles;
-    export let currentStep;
+    export let data;
 
+    let step;
+    currentStepStore.subscribe(value => {
+        step = value;
+    });
+
+    let scrollyActive = true;
     let renderedData = [];
-
+    
     $: {
         switch (true) {
-            case currentStep >= 0 && currentStep <= 1:
-                renderedData = data_studies;
+            case step >= 0 && step <= 1:
+                renderedData = data.studies;
                 break;
-            case currentStep > 1 && currentStep <= 3:
-                renderedData = data_studies;
-                break;
-            case currentStep > 3 && currentStep <= 6:
-                renderedData = data_articles;
+            case step > 2 && step <= 3:
+                renderedData = data.articles;
             break;
             default:
-                renderedData = data_studies;
+                renderedData = data.studies;
         }
-        console.log('data', renderedData);
-    }
-
-    function handleCurrentStepChanged(event) {
-        currentStep = event.detail;
     }
 </script>
 
 
 <div class="sticky">
-    <Bubbles data={renderedData} width={500} height={400} {currentStep} />
+    <Bubbles data={renderedData} width={500} height={400}/>
 </div>
 <div class="steps">
-    <Scroll startStep={0} {copy} on:currentStepChanged={handleCurrentStepChanged} />
+    <Scroll {copy} />
 </div>
-
+<div class="current-step" class:scrollyActive={scrollyActive}>
+    {step}
+</div>
 
 <style>
     .sticky {
@@ -52,4 +51,10 @@
         z-index: 2;
 		pointer-events: none;
     }
+
+    .current-step.scrollyActive {
+		position: fixed;
+		bottom: 0;
+		right: 0;
+	}
 </style>
