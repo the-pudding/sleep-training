@@ -17,6 +17,12 @@
         : data.x + xNudge;
     $: yPosition = data.y + yNudge;
 
+    $: {
+      console.log(data.authors);
+    }
+
+    $: label = data.type === 'study' ? 'participants' : data.type === 'article' ? 'backlinks' : null;
+
     function truncateText(text, maxLength) {
         if (text.length > maxLength) {
             return text.substring(0, maxLength) + '...';
@@ -38,11 +44,16 @@
     </h1>
     <!-- Additional info under the country name -->
     <div class='info'>
-        <span class="author">
+        <p>
+          {label}
+          {data.radius}
+        </p>
+        <p class="author">
+          Authors
         {truncateText(data.authors, 50)}
-        </span>
+        </p>
         <a class="link" href="{data.url}" style="background: {colorScale(data.position)}">
-            LINK
+            Link
         </a> 
     </div>
 </div>
@@ -76,6 +87,7 @@
   
     .author {
       font-size: 0.8rem;
+      color: black;
     }
   
     .link {

@@ -31,17 +31,17 @@
         "#404E4D",
         "#7D82B8"
     ];
-    const colorScale = scaleOrdinal()
-        .domain(["Advocate", "Neutral", "Oppose"])
+
+    $: positionCategories = Array.from(new Set(data.map(d => d.position)));
+    $: colorScale = scaleOrdinal()
+        .domain(positionCategories)
         .range(colorRange);
 
     $: radiusScale = scaleSqrt()
         .domain(extent(data, d => d.radius)) 
         .range([Math.min(innerWidth / 20, 4), Math.min(innerWidth / 10, 20)]);
     // $: maxRadius = Math.max(...data.map(d => radiusScale(d.participants)));
-
-    $: positionCategories = Array.from(new Set(data.map(d => d.position)));
-
+    
     $: xScaleGrouped = scaleBand()
         .domain(positionCategories)
         .range([0, innerWidth])

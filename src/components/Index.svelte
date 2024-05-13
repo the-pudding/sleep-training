@@ -5,8 +5,6 @@
     import { csvParse } from 'd3';
 	import copy from '$data/copy.json';
 
-    console.log("copy", copy);
-
     // DATA IMPORT
     let data = {
         studies: [],
