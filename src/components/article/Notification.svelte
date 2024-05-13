@@ -1,50 +1,47 @@
 <script>
-    export let data = [];
-  
-    function getIcon(platform) {
+  import { fly, fade } from 'svelte/transition';
+  export let comment;
+  export let index;
+
+  console.log(index);
+
+    function getPlatformDetails(platform) {
+      let iconUrl;
       switch (platform) {
         case 'reddit':
-          return '🎺';
+          iconUrl = '🎺';
+          break;
         case 'instagram':
-          return '🐦';
+          iconUrl = '🎺';
+          break;
         default:
-          return '⚠️';
+          iconUrl = '⚠️';
+          break;
       }
-    }
-  
-    function getBgColor(platform) {
-      switch (platform) {
-        case 'reddit':
-          return '#ff4500';
-        case 'instagram':
-          return '#1da1f2';
-        // Add more cases for other platforms as needed
-        default:
-          return '#808080';
-      }
+      return { icon: iconUrl };
     }
   </script>
   
+  <div class="notification" in:fade={{ duration: 200, delay: index * 100 }} >
+    <span class="icon">{getPlatformDetails(comment.platform).icon}</span>
+    {comment.comment}
+  </div>
+
   <style>
     .notification {
       display: flex;
       align-items: center;
+      font-size: 14px;
+      background-color: #404E4D;
       padding: 10px;
-      background-color: var(--bg-color);
       color: white;
       border-radius: 5px;
       margin-bottom: 10px;
+      /* transform: translateY(-20px); */
+      transition: transform 300ms ease;
     }
-  
     .icon {
       font-size: 1.5rem;
       margin-right: 10px;
     }
   </style>
-  
-  {#each data as notification (notification.id)}
-    <div class="notification" style="--bg-color: {getBgColor(notification.platform)}">
-      <span class="icon">{getIcon(notification.platform)}</span>
-      {notification.description}
-    </div>
-  {/each}

@@ -1,6 +1,7 @@
 <script>
     import Section from "$components/article/Section.svelte";
     import Editorial from "$components/article/Editorial.svelte";
+    import HeroComments from "$components/article/HeroComments.svelte";
     import { onMount, setContext } from 'svelte';
     import { csvParse } from 'd3';
 	import copy from '$data/copy.json';
@@ -8,7 +9,8 @@
     // DATA IMPORT
     let data = {
         studies: [],
-        articles: []
+        articles: [],
+        comments: []
     };
     setContext("copy", copy);
 
@@ -26,7 +28,6 @@
             radius: +d.participants || 0,
             citations: +d.citations || 0
         }));
-
         const response_articles = await fetch('src/data/articles.csv');
         const csvArticles = await response_articles.text();
         data.articles = csvParse(csvArticles, d => ({
@@ -39,13 +40,24 @@
             year: +d.year,
             radius: +d.backlinks || 0
         }));
+        const response_comments = await fetch('src/data/comments.csv');
+        const csvComments = await response_comments.text();
+        data.comments = csvParse(csvComments, d => ({
+            comment: d.comment,
+            category: d.category,
+            platform: d.platform,
+            url: d.url
+        }));
     });
 
 </script>
 
 <div id="article">
-	<h1>Is sleep training harmful?</h1>
+    <section class="spacer">
+        <HeroComments data={data.comments} />
+    </section>
     <section>
+        <h1>Is sleep training harmful?</h1>
         <Section {data} copy={copy.intro} />
     </section>
 	<section>
@@ -77,5 +89,9 @@
 	}
     section {
         position: relative;
+    }
+    .spacer {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
     }
 </style>
