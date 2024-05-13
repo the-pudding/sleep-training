@@ -14,6 +14,8 @@
     };
     setContext("copy", copy);
 
+    let commentsConfused = [];
+
     onMount(async () => {
         const response = await fetch('src/data/studies.csv');
         const csvText = await response.text();
@@ -48,12 +50,13 @@
             platform: d.platform,
             url: d.url
         }));
+        commentsConfused = data.comments.filter(d => d.category === "confused");
+        console.log(commentsConfused);
     });
-
 </script>
 
 <div id="article">
-    <section class="spacer">
+    <section>
         <HeroComments data={data.comments} />
     </section>
     <section>
@@ -62,7 +65,7 @@
     </section>
 	<section>
 		<div class="editorial-container">
-			<Editorial copy={copy.part_2} />
+			<Editorial copy={copy.part_2} notifications={commentsConfused} />
 		</div>
 	</section>
 	<section>
@@ -89,9 +92,7 @@
 	}
     section {
         position: relative;
-    }
-    .spacer {
-        margin-top: 2vh;
-        margin-bottom: 2vh;
+        margin-top: 1.5vh;
+        margin-bottom: 1.5vh;
     }
 </style>

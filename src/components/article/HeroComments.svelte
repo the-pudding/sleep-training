@@ -14,3 +14,9 @@
         <Notification {comment} {index} />
     {/each}
 </div>
+
+<style>
+    .hero-comments-container {
+        min-height: 95vh;
+    }
+</style>
