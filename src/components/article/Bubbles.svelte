@@ -32,7 +32,7 @@
         "#7D82B8"
     ];
     $: positionCategories = Array.from(new Set(data.map(d => d.position)));
-    
+
     $: colorScale = scaleOrdinal()
         .domain(positionCategories)
         .range(colorRange);

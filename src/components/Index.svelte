@@ -3,6 +3,7 @@
 	import copy from '$data/copy.json';
 
     import Section from "$components/article/Section.svelte";
+    import SectionSwitch from "$components/article/SectionSwitch.svelte";
     import Editorial from "$components/article/Editorial.svelte";
     import HeroComments from "$components/article/HeroComments.svelte";
 
@@ -33,6 +34,9 @@
 	<section>
         <Section copy={copy.part_3} />
 	</section>
+    <section>
+        <SectionSwitch copy={copy.part_3} />
+    </section>
 	<!-- <Footer /> -->
 </div>
 

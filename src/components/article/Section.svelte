@@ -13,7 +13,6 @@
         step = value;
     });
 
-    let scrollyActive = true;
     let renderedData;
     let focusHover;
     let focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];
@@ -45,7 +44,7 @@
 <div class="steps">
     <Scroll {copy} />
 </div>
-<div class="current-step" class:scrollyActive={scrollyActive}>
+<div class="current-step">
     {step}
 </div>
 
@@ -62,7 +61,7 @@
 		pointer-events: none;
     }
 
-    .current-step.scrollyActive {
+    .current-step {
 		position: fixed;
 		bottom: 0;
 		right: 0;
