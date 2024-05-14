@@ -10,16 +10,11 @@
     const xNudge = 5;
     const yNudge = 5;
 
-    // If the x position + the tooltip width exceeds the chart width, offset backward to prevent overflow
     $: xPosition =
         data.x + tooltipWidth + xNudge > width
         ? data.x - tooltipWidth - xNudge
         : data.x + xNudge;
     $: yPosition = data.y + yNudge;
-
-    $: {
-      console.log(data.authors);
-    }
 
     $: label = data.type === 'study' ? 'participants' : data.type === 'article' ? 'backlinks' : null;
 
@@ -50,7 +45,7 @@
         </p>
         <p class="author">
           Authors
-        {truncateText(data.authors, 50)}
+          {truncateText(data.authors, 50)}
         </p>
         <a class="link" href="{data.url}" style="background: {colorScale(data.position)}">
             Link

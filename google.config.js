@@ -12,5 +12,10 @@ export default [
 		"id": "1MizY39V74oRceOTsXGrVf33FreIyAMaYPBEAJp-q4ws",
 		"gid": "1045886147",
 		"filepath": "src/data/articles.csv"
+	},
+	{
+		"id": "1MizY39V74oRceOTsXGrVf33FreIyAMaYPBEAJp-q4ws",
+		"gid": "1141708286",
+		"filepath": "src/data/comments.csv"
 	}
 ]

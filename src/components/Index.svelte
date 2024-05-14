@@ -1,61 +1,42 @@
 <script>
-    import Section from "$components/article/Section.svelte";
-    import Editorial from "$components/article/Editorial.svelte";
-    import { onMount, setContext } from 'svelte';
-    import { csvParse } from 'd3';
+    import { setContext, getContext } from 'svelte';
 	import copy from '$data/copy.json';
 
+    import Section from "$components/article/Section.svelte";
+    import SectionSwitch from "$components/article/SectionSwitch.svelte";
+    import Editorial from "$components/article/Editorial.svelte";
+    import HeroComments from "$components/article/HeroComments.svelte";
+
     // DATA IMPORT
-    let data = {
-        studies: [],
-        articles: []
-    };
+    let data = getContext("data")
+
+    // COPY CONTEXT SETTING
     setContext("copy", copy);
 
-    onMount(async () => {
-        const response = await fetch('src/data/studies.csv');
-        const csvText = await response.text();
-        data.studies = csvParse(csvText, d => ({
-            title: d.title,
-            authors: d.authors, 
-            position: d.position,
-            url: d.url,
-            country: d.country,
-            type: d.type,
-            year: +d.year,
-            radius: +d.participants || 0,
-            citations: +d.citations || 0
-        }));
-
-        const response_articles = await fetch('src/data/articles.csv');
-        const csvArticles = await response_articles.text();
-        data.articles = csvParse(csvArticles, d => ({
-            title: d.title,
-            authors: d.authors, 
-            position: d.position,
-            url: d.url,
-            type: d.type,
-            country: d.country,
-            year: +d.year,
-            radius: +d.backlinks || 0
-        }));
-    });
-
+    // DATA FILTERING
+    let commentsConfused = data.comments.filter(d => d.category === "confused");
+    let commentsDivided = data.comments.filter(d => d.category === "divided");
 </script>
 
 <div id="article">
-	<h1>Is sleep training harmful?</h1>
     <section>
-        <Section {data} copy={copy.intro} />
+        <HeroComments notifications={commentsDivided} />
+    </section>
+    <section>
+        <h1>Is sleep training harmful?</h1>
+        <Section copy={copy.intro} />
     </section>
 	<section>
 		<div class="editorial-container">
-			<Editorial copy={copy.part_2} />
+			<Editorial copy={copy.part_2} notifications={commentsConfused} />
 		</div>
 	</section>
 	<section>
-        <Section {data} copy={copy.part_3} />
+        <Section copy={copy.part_3} />
 	</section>
+    <section>
+        <SectionSwitch copy={copy.part_3} />
+    </section>
 	<!-- <Footer /> -->
 </div>
 
@@ -77,5 +58,7 @@
 	}
     section {
         position: relative;
+        margin-top: 1.5vh;
+        margin-bottom: 1.5vh;
     }
 </style>

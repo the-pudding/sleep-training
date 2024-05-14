@@ -3,6 +3,7 @@
     import { scaleLinear, scaleSqrt, scaleOrdinal, scaleBand } from 'd3-scale';
     import { extent } from 'd3-array';
     import { fade } from "svelte/transition";
+
     import Legend from "$components/article/Legend.svelte";
     import Tooltip from "$components/article/Tooltip.svelte";
 
@@ -10,29 +11,28 @@
     export let data;
     export let width;
     export let height;
+    export let focusHover;
     
-    // VARIABLES
+    // SETUP
+    let nodes = [];
+    let hoveredPosition;
+    let hovered;
+    $: if (focusHover !== undefined) {
+        hovered = focusHover;
+    }
+
     const margin = { top: 0, right: 0, bottom: 20, left: 150 };
     $: innerWidth = width - margin.right - margin.left;
     // let innerHeight = height - margin.top - margin.bottom;
-    let nodes = [];
-    let hovered;
-    let hoveredPosition;
-    // let groupByPosition = true;
 
-    // FORCE SIMULATION SETUP
-    let simulation = forceSimulation(data)
-        .on("tick", () => {
-            nodes = simulation.nodes();
-        });
-
+    // AXES
     const colorRange = [
         "#4FB477",
         "#404E4D",
         "#7D82B8"
     ];
-
     $: positionCategories = Array.from(new Set(data.map(d => d.position)));
+
     $: colorScale = scaleOrdinal()
         .domain(positionCategories)
         .range(colorRange);
@@ -40,7 +40,6 @@
     $: radiusScale = scaleSqrt()
         .domain(extent(data, d => d.radius)) 
         .range([Math.min(innerWidth / 20, 4), Math.min(innerWidth / 10, 20)]);
-    // $: maxRadius = Math.max(...data.map(d => radiusScale(d.participants)));
     
     $: xScaleGrouped = scaleBand()
         .domain(positionCategories)
@@ -48,16 +47,17 @@
         .paddingInner(0.2)
         .paddingOuter(0);
 
+    // FORCE SIMULATION
+    let simulation = forceSimulation(data)
+        .on("tick", () => {
+            nodes = simulation.nodes();
+        });
+
     $: {
         simulation.nodes(data)
-            .force("x", forceX().x(d => (
-                xScaleGrouped(d.position)
-            )))
-            // .force("x", forceX(width / 2).strength(1))
+            .force("x", forceX().x(d => (xScaleGrouped(d.position))))
             .force("y", forceY(height / 2).strength(1))
-            .force("collide", forceCollide().radius(d => 
-                radiusScale(d.radius) + 1)
-            )
+            .force("collide", forceCollide().radius(d => radiusScale(d.radius) + 1))
             .alpha(1)
             .restart();
     }
@@ -67,44 +67,36 @@
 <div class="bubbles-container" bind:clientWidth={width}>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <svg {width} {height}
-    on:mouseleave={() => 
-        (hovered = null)}
-    >
+    <svg {width} {height} on:mouseleave={() => (hovered = null)}>
         <!-- svelte-ignore a11y-no-static-element-interactions -->
-        <g 
-            class="inner-bubbles" 
-            transform="translate({margin.left}, {margin.top})"
-        >
-        <!-- IF ELSE STATEMENT -->
-            {#each nodes as node, index}
-                <!-- svelte-ignore a11y-no-static-element-interactions -->
-                <circle
-                    cx={node.x}
-                    cy={node.y}
-                    r={radiusScale(node.radius)}
-                    fill={colorScale(node.position)}
-                    opacity={hovered || hoveredPosition
-                        ? hovered === node || hoveredPosition === node.position
-                            ? 1
-                            : 0.3
-                        : 1}
-                    on:mouseover={() => (hovered = node)}
-                    on:focus={() => (hovered = node)}
-                    in:fade={{ delay: index * 10 }}
-                />
-            {/each}
+        <g class="inner-bubbles" transform="translate({margin.left}, {margin.top})">
+        {#each nodes as node, index}
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <circle
+                cx={node.x}
+                cy={node.y}
+                r={radiusScale(node.radius)}
+                fill={colorScale(node.position)}
+                opacity={hovered || hoveredPosition
+                    ? hovered === node || hoveredPosition === node.position
+                        ? 1
+                        : 0.3
+                    : 1}
+                on:mouseover={() => (hovered = node)}
+                on:focus={() => (hovered = node)}
+                in:fade={{ delay: index * 10 }}
+            />
+        {/each}
         </g>
     </svg>
     {#if hovered}
-        <Tooltip data={hovered} {colorScale} {width}
-        />
+        <Tooltip data={hovered} {colorScale} {width} />
     {/if}
 </div>
 
 <style>
     circle {
-    transition: stroke 300ms ease, opacity 300ms ease, cx 100ms ease, cy 100ms ease;
-    cursor: pointer;
-  }
+        transition: stroke 300ms ease, opacity 300ms ease, cx 100ms ease, cy 100ms ease;
+        cursor: pointer;
+    }
 </style>
