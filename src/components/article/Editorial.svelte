@@ -5,7 +5,6 @@
 
     let comments = null;
     $: comments = notifications !== null ? notifications : null;
-    console.log("editorial", comments);
 </script>
 
 <div class="editorial">
@@ -13,6 +12,7 @@
     {#each copy as p}
         <p class="editorial-paragraph">{p.text}</p>
     {/each}
+    <div class="spacer" />
     {#if comments !== null}
         <div>
             {#each comments as comment, index}
@@ -25,11 +25,11 @@
 
 <style>
     .spacer {
-		height: 3vh;
+		height: 5vh;
 	}
 
     .editorial-paragraph {
-        font-size: 12px;
+        font-size: 14px;
         color: black
     }
 </style>
