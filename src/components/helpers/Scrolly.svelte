@@ -24,7 +24,6 @@
 	let nodes = [];
 	let intersectionObservers = [];
 	let container;
-	let counter = 0;
 	$: top, bottom, update();
 
 	const update = () => {
@@ -42,7 +41,7 @@
 			}
 		}
 
-		if (maxRatio > 0) value = maxIndex + counter;
+		if (maxRatio > 0) value = maxIndex;
 		else value = undefined;
 	};
 

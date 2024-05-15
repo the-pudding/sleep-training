@@ -2,23 +2,18 @@
     import { stepStore } from "$components/stepStore";
 
     import Scroll from "./Scroll.svelte";
-    import Bubbles from "./Bubbles.svelte";
+    // import Bubbles from "./Bubbles.svelte";
     import Timeline from "./Timeline.svelte";
-    import Map from "$components/article/Map.svelte";
+    // import Map from "$components/article/Map.svelte";
 
     export let copy;
-    let focusHover = null;
-
-    let step;
-    stepStore.subscribe(value => {
-        step = value;
-    });
-
+    // export let focusHover;
+    export let data;
 </script>
 
 
 <div class="sticky">
-    <Timeline width={500} height={800} />
+    <Timeline {data} width={500} height={800} />
 </div>
 <div class="steps">
     <Scroll {copy} />
@@ -30,9 +25,6 @@
 <div class="steps">
     <Scroll {copy} />
 </div> -->
-<div class="current-step">
-    {step}
-</div>
 
 <style>
     .spacer {
@@ -48,10 +40,4 @@
         z-index: 2;
 		pointer-events: none;
     }
-
-    .current-step {
-		position: fixed;
-		bottom: 0;
-		right: 0;
-	}
 </style>

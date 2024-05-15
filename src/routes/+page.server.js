@@ -1,11 +1,10 @@
 import { csvParse } from 'd3';
 
 export async function load({fetch}) {
-	let data = { studies: [], articles: [], comments: [] };
+	let data = { studies: [], articles: [], comments: [], studiesCopy: [] };
 
 	const response = await fetch('src/data/studies.csv');
 	const csvStudies = await response.text();
-	console.log("csvText", csvStudies);
 	data.studies = csvParse(csvStudies, d => ({
 		title: d.title,
 		authors: d.authors, 
@@ -17,6 +16,7 @@ export async function load({fetch}) {
 		radius: +d.participants || 0,
 		citations: +d.citations || 0
 	}));
+	data.studiesCopy = data.studies;
 	const response_articles = await fetch('src/data/articles.csv');
 	const csvArticles = await response_articles.text();
 	data.articles = csvParse(csvArticles, d => ({

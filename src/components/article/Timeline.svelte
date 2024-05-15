@@ -3,12 +3,11 @@
     import { scaleLinear } from 'd3-scale';
     import { extent } from 'd3-array';
     import { fade } from "svelte/transition";
-    import { getContext, onMount } from 'svelte';
   
     export let height;
     export let width;
+    export let data;
 
-    let data = getContext("data").studies
     let nodes = [];
     let margin = { top: 20, right: 20, bottom: 20, left: 40 };
   
@@ -19,24 +18,21 @@
       .domain(extent(data, d => d.year))
       .range([innerHeight, 0]);
 
-   // FORCE SIMULATION
-   let simulation;
-    onMount(() => {
-    setTimeout(() => {
-        // FORCE SIMULATION
-        simulation = forceSimulation(data)
+    // FORCE SIMULATION
+    let simulation = forceSimulation(data)
         .on("tick", () => {
             nodes = simulation.nodes();
         });
 
+    
+    $: {
         simulation.nodes(data)
-        .force('x', forceX(innerWidth / 2))
-        .force('y', forceY(d => yScale(d.year)).strength(0.5))
-        .force('collide', forceCollide(10))
-        .alpha(1)
-        .restart();
-    }, 3000); // Adjust the timeout duration as needed
-    });
+            .force('x', forceX(innerWidth / 2))
+            .force('y', forceY(d => yScale(d.year)).strength(0.5))
+            .force('collide', forceCollide(10))
+            .alpha(1)
+            .restart();
+    }
 
     $: years = [...new Set(data.map(d => d.year))];
 </script>

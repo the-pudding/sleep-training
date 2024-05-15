@@ -3,8 +3,9 @@
     export let copy;
     export let notifications;
 
-    let comments = null;
-    $: comments = notifications !== null ? notifications : null;
+    let comments;
+    $: comments = notifications !== undefined ? notifications : undefined;
+    $: console.log(comments);
 </script>
 
 <div class="editorial">
@@ -13,7 +14,7 @@
         <p class="editorial-paragraph">{p.text}</p>
     {/each}
     <div class="spacer" />
-    {#if comments !== null}
+    {#if comments !== undefined}
         <div>
             {#each comments as comment, index}
                 <Notification {comment} {index} />
