@@ -5,7 +5,6 @@
 
     let comments;
     $: comments = notifications !== undefined ? notifications : undefined;
-    $: console.log(comments);
 </script>
 
 <div class="editorial">

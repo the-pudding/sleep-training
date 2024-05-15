@@ -10,7 +10,10 @@
     setContext("copy", copy);
 
     // DATA IMPORT
-    let data = getContext("data")
+    let data = getContext("data");
+	let dataCopy = { studies: [] };
+    dataCopy.studies = data.studies;
+    console.log(dataCopy);
     
     // STEP LOGIC
     let step;
@@ -73,7 +76,7 @@
         <!-- <Section copy={copy.part_3} on:stepChanged={handleStepChanged} /> -->
 	</section>
     <section>
-        <SectionSwitch data={data.studiesCopy} {focusHover} copy={copy.viz_studies} />
+        <SectionSwitch data={dataCopy.studies} {focusHover} copy={copy.viz_studies} />
     </section>
 	<!-- <Footer /> -->
     <div class="current-step">
