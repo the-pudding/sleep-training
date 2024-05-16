@@ -11,44 +11,6 @@
 
     // DATA IMPORT
     let data = getContext("data");
-	  let dataCopy = { studies: [] };
-    dataCopy.studies = data.studies;
-
-    // STEP LOGIC
-    function toto(step) {
-      // Writte your switch logic here
-      switch (true) {
-        case step >= 0 && step <= 1:
-            return {
-              renderedData: data.studies,
-              focusHover: null
-            }
-        case step >= 1 && step <= 2:
-            return {
-              renderedData: data.studies,
-              focusHover: focusMiddlemiss
-            }
-        case step > 2 && step <= 3:
-            return {
-              renderedData: data.articles,
-              focusHover: null
-            }
-        default:
-            return {
-              renderedData: data.studies
-            }
-      }
-    }
-    function test(step) {
-      // Writte your switch logic here
-            return {
-              renderedData: [data.articles[0]]
-            }
-    }
-
-    // DATA FILTERING
-    // let renderedData;
-    // let focusHover;
 
     // FOCUSED TOOLTIPS
     let focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];
@@ -58,26 +20,39 @@
     let commentsDivided = data.comments.filter(d => d.category === "divided");
     let commentsCortisol = data.comments.filter(d => d.category === "brain damage");
 
-    // DATA LOADING
-    // function dataLogic(step) {
-    //     switch (true) {
-    //     case step >= 0 && step <= 1:
-    //         renderedData = data.studies;
-    //         focusHover = null;
-    //         break;
-    //     case step >= 1 && step <= 2:
-    //         renderedData = data.studies;
-    //         focusHover = focusMiddlemiss;
-    //         break;
-    //     case step > 2 && step <= 3:
-    //         focusHover = null;
-    //         renderedData = data.articles;
-    //         break;
-    //     default:
-    //         renderedData = data.studies;
-    //     }
-    // }
-
+    // STEP LOGIC
+    function Section1(step) {
+      switch (true) {
+        case step >= 0 && step <= 1:
+            return {
+              renderedData: data.articles,
+              focusHover: null,
+            }
+        case step >= 1 && step <= 2:
+            return {
+              renderedData: data.studies,
+              focusHover: focusMiddlemiss
+            }
+        default:
+            return {
+              renderedData: data.articles,
+              focusHover: null
+            }
+      }
+    }
+    function Section2(step) {
+        switch (true) {
+        case step >= 1 && step <= 2:
+            return {
+              renderedData: data.articles,
+            }
+        default:
+            return {
+              renderedData: data.studies,
+              focusHover: null
+            }
+      }
+    }
 </script>
 
 <div id="article">
@@ -89,24 +64,18 @@
 		</div>
     </section>
     <section>
-        <Section copy={copy.viz_all} handleStepChanged={toto} />
+        <Section copy={copy.viz_all} stepHandler={Section1} />
     </section>
-	<section>
-        <Section copy={copy.viz_reddit} handleStepChanged={test} />
-	</section>
 	<section>
         <div class="editorial-container">
 			<Editorial copy={copy.mosaic_cortisol} notifications={commentsCortisol} />
 		</div>
-        <!-- <Section copy={copy.part_3} on:stepChanged={handleStepChanged} /> -->
+        <Section copy={copy.viz_reddit} stepHandler={Section2} />
 	</section>
     <section>
-        <SectionSwitch data={dataCopy.studies} copy={copy.viz_studies} />
+        <SectionSwitch copy={copy.viz_studies} />
     </section>
 	<!-- <Footer /> -->
-    <div class="current-step">
-        <!-- {step} -->
-    </div>
 </div>
 
 <style>
@@ -130,9 +99,4 @@
         margin-top: 1.5vh;
         margin-bottom: 1.5vh;
     }
-    .current-step {
-		position: fixed;
-		bottom: 0;
-		right: 0;
-	}
 </style>

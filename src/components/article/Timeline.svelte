@@ -5,6 +5,7 @@
     import { fade } from "svelte/transition";
   
     export let height;
+    // export let focusHover;
     export let width;
     export let data;
 

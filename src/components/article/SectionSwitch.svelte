@@ -1,5 +1,5 @@
 <script>
-    import { stepStore } from "$components/stepStore";
+    import { getContext } from 'svelte';
 
     import Scroll from "./Scroll.svelte";
     // import Bubbles from "./Bubbles.svelte";
@@ -7,24 +7,26 @@
     // import Map from "$components/article/Map.svelte";
 
     export let copy;
-    // export let focusHover;
-    export let data;
+    let step;
+    let focusHover = null;
+    let data = getContext("data").studies
+
+    data = data.map(d => Object.assign({}, d))
 </script>
 
 
 <div class="sticky">
-    <Timeline {data} width={500} height={800} />
+    <Timeline {focusHover} bind:data={data} width={500} height={800} />
 </div>
 <div class="steps">
-    <Scroll {copy} />
+    <Scroll {copy} bind:step={step} />
+</div>
+<div class="current-step">
+    {#if step !== undefined}
+        <p>Step: {step}</p>
+    {/if}
 </div>
 <div class="spacer"></div>
-<!-- <div class="sticky">
-    <Map width={500} height={800} />
-</div>
-<div class="steps">
-    <Scroll {copy} />
-</div> -->
 
 <style>
     .spacer {
@@ -40,4 +42,9 @@
         z-index: 2;
 		pointer-events: none;
     }
+    .current-step {
+		position: fixed;
+		bottom: 0;
+		right: 0;
+	}
 </style>

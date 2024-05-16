@@ -1,19 +1,8 @@
 <script>
 	import Scrolly from "$components/helpers/Scrolly.svelte";
-	import { createEventDispatcher } from 'svelte';
-	// import { stepStore } from "$components/stepStore";
 
 	export let copy;
 	export let step;
-
-	// let step;
-	// const dispatch = createEventDispatcher();
-
-	// $: {
-	// 	dispatch('stepChanged', step);
-	// }
-
-	// $: stepStore.updateStep(tep);
 </script>
 
 <section id="scrolly">
