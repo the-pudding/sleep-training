@@ -11,19 +11,44 @@
 
     // DATA IMPORT
     let data = getContext("data");
-	let dataCopy = { studies: [] };
+	  let dataCopy = { studies: [] };
     dataCopy.studies = data.studies;
-    console.log(dataCopy);
-    
+
     // STEP LOGIC
-    let step;
-    function handleStepChanged(event) {
-        step = event.detail;
+    function toto(step) {
+      // Writte your switch logic here
+      switch (true) {
+        case step >= 0 && step <= 1:
+            return {
+              renderedData: data.studies,
+              focusHover: null
+            }
+        case step >= 1 && step <= 2:
+            return {
+              renderedData: data.studies,
+              focusHover: focusMiddlemiss
+            }
+        case step > 2 && step <= 3:
+            return {
+              renderedData: data.articles,
+              focusHover: null
+            }
+        default:
+            return {
+              renderedData: data.studies
+            }
+      }
+    }
+    function test(step) {
+      // Writte your switch logic here
+            return {
+              renderedData: [data.articles[0]]
+            }
     }
 
     // DATA FILTERING
     // let renderedData;
-    let focusHover;
+    // let focusHover;
 
     // FOCUSED TOOLTIPS
     let focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];
@@ -64,10 +89,10 @@
 		</div>
     </section>
     <section>
-        <Section data={data.studies} {focusHover} copy={copy.viz_all} on:stepChanged={handleStepChanged} />
+        <Section copy={copy.viz_all} handleStepChanged={toto} />
     </section>
 	<section>
-        <Section data={data.articles} {focusHover} copy={copy.viz_reddit} on:stepChanged={handleStepChanged} />
+        <Section copy={copy.viz_reddit} handleStepChanged={test} />
 	</section>
 	<section>
         <div class="editorial-container">
@@ -76,11 +101,11 @@
         <!-- <Section copy={copy.part_3} on:stepChanged={handleStepChanged} /> -->
 	</section>
     <section>
-        <SectionSwitch data={dataCopy.studies} {focusHover} copy={copy.viz_studies} />
+        <SectionSwitch data={dataCopy.studies} copy={copy.viz_studies} />
     </section>
 	<!-- <Footer /> -->
     <div class="current-step">
-        {step}
+        <!-- {step} -->
     </div>
 </div>
 

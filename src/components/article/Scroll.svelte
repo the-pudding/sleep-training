@@ -4,13 +4,14 @@
 	// import { stepStore } from "$components/stepStore";
 
 	export let copy;
+	export let step;
 
-	let step;
-	const dispatch = createEventDispatcher();
+	// let step;
+	// const dispatch = createEventDispatcher();
 
-	$: {
-		dispatch('stepChanged', step);
-	}
+	// $: {
+	// 	dispatch('stepChanged', step);
+	// }
 
 	// $: stepStore.updateStep(tep);
 </script>

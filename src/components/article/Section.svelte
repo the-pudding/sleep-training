@@ -1,19 +1,31 @@
 <script>
     import Scroll from "./Scroll.svelte";
     import Bubbles from "./Bubbles.svelte";
+	  import { getContext } from "svelte";
 
     export let copy;
-    export let step = 0;
-    export let data;
-    export let focusHover;
+    export let handleStepChanged;
+
+    let data = getContext("data");
+
+    $: step = 0;
+    $: renderedData = [];
+    $: focusHover = null;
+
+    $: {
+      const newValues = handleStepChanged(step);
+      renderedData = newValues.renderedData;
+      focusHover = newValues.focusHover;
+    }
+
 </script>
 
 
 <div class="sticky">
-    <Bubbles {focusHover} {data} width={500} height={400}/>
+    <Bubbles {focusHover} bind:data={renderedData} width={500} height={400}/>
 </div>
 <div class="steps">
-    <Scroll {copy} bind:step on:stepChanged />
+    <Scroll {copy} bind:step={step} />
 </div>
 
 <style>
