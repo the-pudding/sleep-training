@@ -1,15 +1,17 @@
 <script>
     import { forceSimulation, forceY, forceX, forceCollide } from 'd3-force';
-    import { scaleLinear } from 'd3-scale';
+    import { scaleLinear, scaleOrdinal } from 'd3-scale';
     import { extent } from 'd3-array';
     import { fade } from "svelte/transition";
+    import Tooltip from "$components/article/Tooltip.svelte";
   
     export let height;
-    // export let focusHover;
     export let width;
     export let data;
 
     let nodes = [];
+    let hoveredPosition;
+    let hovered;
     let margin = { top: 20, right: 20, bottom: 20, left: 40 };
   
     $: innerHeight = height - margin.top - margin.bottom;
@@ -18,6 +20,18 @@
     $: yScale = scaleLinear()
       .domain(extent(data, d => d.year))
       .range([innerHeight, 0]);
+
+    const colorRange = [
+        "#4FB477",
+        "#404E4D",
+        "#7D82B8"
+    ];
+    $: positionCategories = Array.from(new Set(data.map(d => d.position)));
+
+    $: colorScale = scaleOrdinal()
+        .domain(positionCategories)
+        .range(colorRange);
+
 
     // FORCE SIMULATION
     let simulation = forceSimulation(data)
@@ -38,7 +52,8 @@
     $: years = [...new Set(data.map(d => d.year))];
 </script>
 
-<svg {width} {height}>
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<svg {width} {height} on:mouseleave={() => (hovered = null)}>
   <g transform="translate({margin.left},{margin.top})">
     <line x1={innerWidth / 2} y1="0" x2={innerWidth / 2} y2={innerHeight} stroke="black" />
     {#each nodes as node, index}
@@ -46,7 +61,14 @@
         cx={node.x}
         cy={node.y}
         r="5"
-        fill="steelblue"
+        fill={colorScale(node.position)}
+        opacity={hovered || hoveredPosition
+            ? hovered === node || hoveredPosition === node.position
+                ? 1
+                : 0.3
+            : 1}
+        on:mouseover={() => (hovered = node)}
+        on:focus={() => (hovered = node)}
         in:fade={{ delay: index * 10 }}
       />
     {/each}
@@ -58,3 +80,13 @@
     {/each}
   </g>
 </svg>
+{#if hovered}
+    <Tooltip data={hovered} {colorScale} {width} />
+{/if}
+
+<style>
+    circle {
+        transition: stroke 300ms ease, opacity 300ms ease, cx 100ms ease, cy 100ms ease;
+        cursor: pointer;
+    }
+</style>

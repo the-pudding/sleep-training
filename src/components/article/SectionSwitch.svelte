@@ -30,12 +30,12 @@
 
 <style>
     .spacer {
-		height: 5vh;
+		height: 2vh;
 	}
     .sticky {
         position: sticky;
         z-index: 1;
-        top: 35%;
+        top: 10%;
     }
     .steps {
         position: relative;
