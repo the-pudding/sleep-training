@@ -4,19 +4,27 @@
     import Scroll from "./Scroll.svelte";
     // import Bubbles from "./Bubbles.svelte";
     import Timeline from "./Timeline.svelte";
-    // import Map from "$components/article/Map.svelte";
+    import Map from "$components/article/Map.svelte";
 
     export let copy;
     let step;
     let focusHover = null;
     let data = getContext("data").studies
+    let dataMap = getContext("data").studies
 
     data = data.map(d => Object.assign({}, d))
+    dataMap = data.map(d => Object.assign({}, d))
 </script>
 
 
-<div class="sticky">
+<!-- <div class="sticky">
     <Timeline {focusHover} bind:data={data} width={500} height={800} />
+</div>
+<div class="steps">
+    <Scroll {copy} bind:step={step} />
+</div> -->
+<div class="sticky">
+    <Map bind:data={dataMap} width={800} height={600} />
 </div>
 <div class="steps">
     <Scroll {copy} bind:step={step} />
