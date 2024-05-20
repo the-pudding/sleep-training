@@ -1,6 +1,7 @@
 <script>
     import { setContext, getContext } from 'svelte';
     import Section from "$components/article/Section.svelte";
+    import Debunk from "$components/article/Debunk.svelte";
     import Editorial from "$components/article/Editorial.svelte";
     import HeroComments from "$components/article/HeroComments.svelte";
 
@@ -55,27 +56,30 @@
 </script>
 
 <div id="article">
-    <section>
-        <HeroComments notifications={commentsDivided} />
-        <div class="editorial-container">
-            <h1>Is sleep training harmful?</h1>
-			<Editorial copy={copy.editorial_intro} />
-		</div>
-    </section>
-    <section>
-        <Section copy={copy.viz_all} stepHandler={Section1} switcher="bubbles" />
-    </section>
+  <section>
+      <HeroComments notifications={commentsDivided} />
+      <div class="editorial-container">
+          <h1>Is sleep training harmful?</h1>
+    <Editorial copy={copy.editorial_intro} />
+  </div>
+  </section>
+  <section>
+    <Debunk copy={copy.editorial_intro} target="narvaez" />
+  </section>
+  <section>
+    <Section copy={copy.viz_all} stepHandler={Section1} switcher="bubbles" />
+  </section>
 	<section>
-        <div class="editorial-container">
+    <div class="editorial-container">
 			<Editorial copy={copy.mosaic_cortisol} notifications={commentsCortisol} />
 		</div>
-        <Section copy={copy.viz_reddit} stepHandler={Section2} switcher="bubbles" />
+      <Section copy={copy.viz_reddit} stepHandler={Section2} switcher="bubbles" />
 	</section>
-    <section>
-      <Section copy={copy.viz_studies} stepHandler={Section1} switcher="timeline" />
-    </section>
-    <section>
-      <Section copy={copy.viz_studies} stepHandler={Section1} switcher="map" />
+  <section>
+    <Section copy={copy.viz_studies} stepHandler={Section1} switcher="timeline" />
+  </section>
+  <section>
+    <Section copy={copy.viz_studies} stepHandler={Section1} switcher="map" />
   </section>
 	<!-- <Footer /> -->
 </div>

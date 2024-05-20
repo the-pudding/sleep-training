@@ -20,12 +20,12 @@
     }
 
     // TO REMOVE
-    let data = getContext("data").studies
-    data = data.map(d => Object.assign({}, d))
+    let data = getContext("data").studies;
+    data = data.map(d => Object.assign({}, d));
 
     // Re-assigned to avoid force conflicts
-    let dataMap = getContext("data").studies
-    dataMap = data.map(d => Object.assign({}, d))
+    let dataMap = getContext("data").studies;
+    dataMap = data.map(d => Object.assign({}, d));
 
 </script>
 
