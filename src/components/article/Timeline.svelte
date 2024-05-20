@@ -12,6 +12,9 @@
     let nodes = [];
     let hoveredPosition;
     let hovered;
+    // $: if (focusHover !== undefined) {
+    //     hovered = focusHover;
+    // }
     let margin = { top: 20, right: 20, bottom: 20, left: 40 };
   
     $: innerHeight = height - margin.top - margin.bottom;
@@ -44,7 +47,7 @@
         simulation.nodes(data)
             .force('x', forceX(innerWidth / 2))
             .force('y', forceY(d => yScale(d.year)).strength(0.5))
-            .force('collide', forceCollide(10))
+            .force('collide', forceCollide(6))
             .alpha(1)
             .restart();
     }

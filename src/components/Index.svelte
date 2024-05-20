@@ -1,7 +1,6 @@
 <script>
     import { setContext, getContext } from 'svelte';
     import Section from "$components/article/Section.svelte";
-    import SectionSwitch from "$components/article/SectionSwitch.svelte";
     import Editorial from "$components/article/Editorial.svelte";
     import HeroComments from "$components/article/HeroComments.svelte";
 
@@ -64,17 +63,20 @@
 		</div>
     </section>
     <section>
-        <Section copy={copy.viz_all} stepHandler={Section1} />
+        <Section copy={copy.viz_all} stepHandler={Section1} switcher="bubbles" />
     </section>
 	<section>
         <div class="editorial-container">
 			<Editorial copy={copy.mosaic_cortisol} notifications={commentsCortisol} />
 		</div>
-        <Section copy={copy.viz_reddit} stepHandler={Section2} />
+        <Section copy={copy.viz_reddit} stepHandler={Section2} switcher="bubbles" />
 	</section>
     <section>
-        <SectionSwitch copy={copy.viz_studies} />
+      <Section copy={copy.viz_studies} stepHandler={Section1} switcher="timeline" />
     </section>
+    <section>
+      <Section copy={copy.viz_studies} stepHandler={Section1} switcher="map" />
+  </section>
 	<!-- <Footer /> -->
 </div>
 
