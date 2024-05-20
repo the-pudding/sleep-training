@@ -39,7 +39,7 @@ export async function load({fetch}) {
 	const response_references = await fetch('src/data/references.csv');
 	const csvReferences = await response_references.text();
 	data.references = csvParse(csvReferences, d => ({
-		target: d.source,
+		target: d.article,
 		authors: d.authors,
 		title: d.title,
 	}));

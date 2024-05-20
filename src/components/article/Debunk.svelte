@@ -1,10 +1,8 @@
 <script>
     import { getContext } from "svelte";
-    export let copy;
     export let target;
 
     let data = getContext("data").references;
-    console.log("refs", data);
 </script>
 
 <table>
@@ -15,10 +13,10 @@
       </tr>
     </thead>
     <tbody>
-      {#each data as ref}
+        {#each data.filter(d => d.target === target) as d}
         <tr>
-          <td>{ref.authors}</td>
-          <td>{ref.title}</td>
+          <td>{d.authors}</td>
+          <td>{d.title}</td>
         </tr>
       {/each}
     </tbody>

@@ -57,14 +57,11 @@
 
 <div id="article">
   <section>
-      <HeroComments notifications={commentsDivided} />
-      <div class="editorial-container">
-          <h1>Is sleep training harmful?</h1>
-    <Editorial copy={copy.editorial_intro} />
-  </div>
-  </section>
-  <section>
-    <Debunk copy={copy.editorial_intro} target="narvaez" />
+    <HeroComments notifications={commentsDivided} />
+    <div class="editorial-container">
+      <h1>Is sleep training harmful?</h1>
+      <Editorial copy={copy.editorial_intro} />
+    </div>    
   </section>
   <section>
     <Section copy={copy.viz_all} stepHandler={Section1} switcher="bubbles" />
@@ -73,7 +70,7 @@
     <div class="editorial-container">
 			<Editorial copy={copy.mosaic_cortisol} notifications={commentsCortisol} />
 		</div>
-      <Section copy={copy.viz_reddit} stepHandler={Section2} switcher="bubbles" />
+    <Section copy={copy.viz_reddit} stepHandler={Section2} switcher="bubbles" />
 	</section>
   <section>
     <Section copy={copy.viz_studies} stepHandler={Section1} switcher="timeline" />
@@ -81,6 +78,7 @@
   <section>
     <Section copy={copy.viz_studies} stepHandler={Section1} switcher="map" />
   </section>
+  <Debunk target="narvaez" />
 	<!-- <Footer /> -->
 </div>
 
