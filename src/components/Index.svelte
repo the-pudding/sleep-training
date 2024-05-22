@@ -4,6 +4,7 @@
     import Debunk from "$components/article/Debunk.svelte";
     import Editorial from "$components/article/Editorial.svelte";
     import HeroComments from "$components/article/HeroComments.svelte";
+    import Mosaic from "$components/article/Mosaic.svelte";
 
     // COPY CONTEXT SETTING
     import copy from '$data/copy.json';
@@ -63,6 +64,7 @@
       <Editorial copy={copy.editorial_intro} />
     </div>    
   </section>
+  <Mosaic album="articles" />
   <section>
     <Section copy={copy.viz_all} stepHandler={Section1} switcher="bubbles" />
   </section>
