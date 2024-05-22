@@ -15,7 +15,7 @@
     // $: if (focusHover !== undefined) {
     //     hovered = focusHover;
     // }
-    let margin = { top: 20, right: 20, bottom: 20, left: 40 };
+    let margin = { top: 10, right: 20, bottom: 20, left: 40 };
   
     $: innerHeight = height - margin.top - margin.bottom;
     $: innerWidth = width - margin.left - margin.right;

@@ -42,6 +42,7 @@ export async function load({fetch}) {
 		target: d.article,
 		authors: d.authors,
 		title: d.title,
+		date: d.date,
 	}));
 
 	return { data };

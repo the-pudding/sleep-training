@@ -71,7 +71,6 @@
         <path class="earth" d={pathGenerator({ type: 'Sphere' })} />
         {#each worldMap.features as feature}
           <path class="country" d={pathGenerator(feature)}>
-            <title>{countryNameAccessor(feature)}</title>
           </path>
         {/each}
         {#each nodes as node, index}
@@ -110,9 +109,10 @@
   }
 
   .country {
-    fill: #ccc;
+    fill: white;
     stroke: black;
     stroke-width: 0.5px;
+    pointer-events: none;
   }
 
   .country:hover {

@@ -5,6 +5,7 @@
     import Editorial from "$components/article/Editorial.svelte";
     import HeroComments from "$components/article/HeroComments.svelte";
     import Mosaic from "$components/article/Mosaic.svelte";
+    import Video from "$components/article/Video.svelte";
 
     // COPY CONTEXT SETTING
     import copy from '$data/copy.json';
@@ -65,6 +66,7 @@
     </div>    
   </section>
   <Mosaic album="articles" />
+  <Video video="cbum" />
   <section>
     <Section copy={copy.viz_all} stepHandler={Section1} switcher="bubbles" />
   </section>
@@ -90,19 +92,17 @@
 		padding: 16px;
 		margin: 0 auto;
 	}
-
 	:global(#article section) {
 		margin: 32px auto;
 		padding-top: 32px;
 	}
-
 	:global(#article h2 span) {
 		background: var(--color-mark);
 		padding: 0 8px;
 	}
-    section {
-        position: relative;
-        margin-top: 1.5vh;
-        margin-bottom: 1.5vh;
-    }
+  section {
+    position: relative;
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+  }
 </style>

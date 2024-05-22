@@ -23,6 +23,13 @@
         { url: 'assets/images/social/social_1.png' },
         { url: 'assets/images/social/social_2.png' }
       ];
+    } else if (album === 'posts') {
+      return [
+        { url: 'assets/images/social/post_1.jpg' },
+        { url: 'assets/images/social/post_2.jpg' },
+        { url: 'assets/images/social/post_3.jpg' },
+        { url: 'assets/images/social/post_4.jpg' },
+      ];
     }
     return [];
   };
