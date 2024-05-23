@@ -31,6 +31,11 @@
         { url: 'assets/images/social/post_3.jpg' },
         { url: 'assets/images/social/post_4.jpg' },
       ];
+    } else if (album === 'debunk') {
+      return [
+        { url: 'assets/images/debunk/narvaez.jpg' },
+        { url: 'assets/images/debunk/sears.jpg' },
+      ];
     }
     return [];
   };

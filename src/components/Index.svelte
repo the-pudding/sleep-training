@@ -111,7 +111,7 @@
   <div class="editorial-container">
     <Editorial copy={copy.editorial_articles_debunk_1} />
   </div> 
-  <Mosaic album="debunk" height=45 />
+  <Mosaic album="debunk" height=35 />
   <div class="editorial-container">
     <Editorial copy={copy.editorial_articles_debunk_2} />
   </div> 
