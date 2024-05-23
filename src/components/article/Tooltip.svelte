@@ -1,29 +1,63 @@
 <script>
-    export let data;
-    export let width;
+  export let data;
+  export let width;
 
-    import { fly, fade } from "svelte/transition";
+  import { fly, fade } from "svelte/transition";
 
-    let tooltipWidth;
+  let tooltipWidth;
 
-    const xNudge = 20;
-    const yNudge = 15;
+  // TOOLTIP POSITIONING
+  const xNudge = 20;
+  const yNudge = 15;
 
-    $: xPosition =
-        data.x + tooltipWidth + xNudge > width
-        ? data.x - tooltipWidth - xNudge
-        : data.x + xNudge;
-    $: yPosition = data.y + yNudge;
+  $: xPosition =
+      data.x + tooltipWidth + xNudge > width
+      ? data.x - tooltipWidth - xNudge
+      : data.x + xNudge;
+  $: yPosition = data.y + yNudge;
 
-    $: labelSize = data.type === 'study' ? 'PARTICIPANTS' : data.type === 'article' ? 'BACKLINKS' : null;
-    $: labelAuthor = data.type === 'study' ? 'AUTHOR' : data.type === 'article' ? 'PUBLISHER' : null;
+  // TOOLTIP CONTENT
+  function truncateText(text, maxLength) {
+      if (text.length > maxLength) {
+          return text.substring(0, maxLength) + '...';
+      }
+      return text;
+  }
+  let labelOne = '';
+  let textOne = '';
+  let labelTwo = '';
+  let textTwo = '';
+  let title = '';
 
-    function truncateText(text, maxLength) {
-        if (text.length > maxLength) {
-            return text.substring(0, maxLength) + '...';
-        }
-        return text;
-    }
+  $: {
+    switch (data.type) {
+      case 'study':
+        labelOne = 'AUTHOR:';
+        textOne = truncateText(data.authors.toUpperCase(), 60);
+        labelTwo = 'PARTICIPANTS';
+        textTwo = data.radius;
+        title = truncateText(data.title.toUpperCase(), 70);
+        break;
+      case 'article':
+        labelOne = 'PUBLISHER:';
+        textOne = data.publisher.toUpperCase();
+        labelTwo = 'BACKLINKS';
+        textTwo = data.radius;
+        title = truncateText(data.title.toUpperCase(), 70);
+        break;
+      case 'reddit':
+        labelOne = 'UPVOTES';
+        textOne = data.radius;
+        labelTwo = 'COMMENT';
+        textTwo = data.comment;
+        title = truncateText(data.username.toUpperCase(), 40);
+        break;
+      default:
+        textTwo = '';
+        labelTwo = '';
+        break;
+  }
+  }
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -35,19 +69,12 @@
     bind:clientWidth={tooltipWidth}
 >
     <p class="tooltip-title">
-    {truncateText(data.title.toUpperCase(), 70)}
+    {title}
     </p>
     <!-- Additional info under the country name -->
     <div class='info'>
-        <p class='info-element'>{labelSize}: {data.radius}</p>
-        <p class='info-element'>
-          {labelAuthor}: 
-          {#if data.type === 'study'}
-            {truncateText(data.authors.toUpperCase(), 60)}
-          {:else if data.type === 'article'}
-            {data.publisher.toUpperCase()}
-          {/if}
-        </p>
+        <p class='info-element'>{labelOne}: {textOne}</p>
+        <p class='info-element'>{labelTwo}: {textTwo}</p>
     </div>
 </div>
 

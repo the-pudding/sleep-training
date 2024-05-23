@@ -1,9 +1,9 @@
 <script>
-    import Scroll from "./Scroll.svelte";
-    import Bubbles from "./Bubbles.svelte";
-    import Timeline from "./Timeline.svelte";
-    import Map from "$components/article/Map.svelte";
     import { getContext } from 'svelte';
+    import Scroll from "$components/article/Scroll.svelte";
+    import Bubbles from "$components/article/Bubbles.svelte";
+    import Timeline from "$components/article/Timeline.svelte";
+    import Map from "$components/article/Map.svelte";
 
     export let copy;
     export let stepHandler;
@@ -19,11 +19,11 @@
       focusHover = newValues.focusHover;
     }
 
-    // TO REMOVE
+    // TIMELINE DATA
     let data = getContext("data").studies;
     data = data.map(d => Object.assign({}, d));
 
-    // Re-assigned to avoid force conflicts
+    // MAP DATA
     let dataMap = getContext("data").studies;
     dataMap = data.map(d => Object.assign({}, d));
 
@@ -31,19 +31,19 @@
 
 {#if switcher === "bubbles"}
 <div class="sticky" style="top: 25%;">
-    <Bubbles {focusHover} bind:data={renderedData} width={500} height={400}/>
+    <Bubbles {focusHover} bind:data={renderedData} width={800} height={400}/>
 </div>
 <div class="steps">
     <Scroll {copy} bind:step={step} />
 </div>
 {:else if switcher === "other"}
     {#if step >= 2 }
-    <div class="sticky" style="top: 10%; display: flex;">
-        <Timeline bind:data={data} width={500} height={800} />
-    </div>
-    {:else}
     <div class="sticky" style="top: 20%;">
         <Map bind:data={dataMap} width={700} height={600} />
+    </div>
+    {:else}
+    <div class="sticky" style="top: 10%; display: flex;">
+        <Timeline bind:data={data} width={500} height={800} />
     </div>
     {/if}
 <div class="steps">

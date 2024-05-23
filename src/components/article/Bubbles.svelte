@@ -37,7 +37,7 @@
 
     $: radiusScale = scaleSqrt()
         .domain(extent(data, d => d.radius)) 
-        .range([Math.min(innerWidth / 20, 4), Math.min(innerWidth / 10, 20)]);
+        .range([Math.min(innerWidth / 20, 4), Math.min(innerWidth / 12, 18)]);
     
     $: xScaleGrouped = scaleBand()
         .domain(positions)

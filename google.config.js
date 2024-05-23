@@ -22,6 +22,11 @@ export default [
 		"id": "1MizY39V74oRceOTsXGrVf33FreIyAMaYPBEAJp-q4ws",
 		"gid": "2126274759",
 		"filepath": "src/data/references.csv"
+	},
+	{
+		"id": "1MizY39V74oRceOTsXGrVf33FreIyAMaYPBEAJp-q4ws",
+		"gid": "83264273",
+		"filepath": "src/data/reddit.csv"
 	}
 ]
 

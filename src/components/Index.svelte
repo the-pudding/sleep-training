@@ -13,9 +13,14 @@
 
     // DATA IMPORT
     let data = getContext("data");
+    const dataAll = [...data.studies, ...data.articles, ...data.reddit];
 
     // FOCUSED TOOLTIPS
-    let focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];
+    const focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];
+    const focusNarvaez = data.articles.filter(d => d.url === "https://www.psychologytoday.com/intl/blog/moral-landscapes/201112/dangers-crying-it-out")[0];
+    const focusRedditResearch = data.reddit.filter(d => d.username === "leftpantleg420")[0];
+    const focusUmbrellaReview = data.studies.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/35778903/")[0];
+    const focusReview = data.studies.filter(d => d.url === "https://aasm.org/resources/practiceparameters/review_nightwakingschildren.pdf")[0];
 
     // NOTIFICATION LOADING
     let commentsConfused = data.comments.filter(d => d.category === "confused");
@@ -23,17 +28,32 @@
     let commentsCortisol = data.comments.filter(d => d.category === "brain damage");
 
     // STEP LOGIC
-    function Section1(step) {
+    function SectionIntro(step) {
       switch (true) {
-        case step >= 0 && step <= 1:
+        case step >= 0 && step < 1:
             return {
-              renderedData: data.articles,
+              renderedData: dataAll,
               focusHover: null,
             }
-        case step >= 1 && step <= 2:
+        case step >= 1 && step < 2:
             return {
-              renderedData: data.studies,
-              focusHover: focusMiddlemiss
+              renderedData: dataAll,
+              focusHover: focusNarvaez,
+            }
+        case step >= 5 && step < 6:
+            return {
+              renderedData: data.reddit,
+              focusHover: null,
+            }
+        case step >= 6 && step < 7:
+          return {
+              renderedData: data.reddit,
+              focusHover: focusRedditResearch,
+            }
+        case step >= 7 && step < 9:
+          return {
+              renderedData: data.articles,
+              focusHover: null,
             }
         default:
             return {
@@ -42,15 +62,25 @@
             }
       }
     }
-    function Section2(step) {
+    function SectionStudies(step) {
         switch (true) {
-        case step >= 1 && step <= 2:
+        case step >= 0 && step < 1:
             return {
-              renderedData: data.articles,
+              renderedData: data.studies,
+            }
+        case step >= 1 && step < 2:
+            return {
+              renderedData: data.studies,
+              focusHover: focusReview,
+            }
+        case step >= 3 && step < 4:
+            return {
+              renderedData: data.studies,
+              focusHover: focusUmbrellaReview,
             }
         default:
             return {
-              renderedData: data.studies,
+              renderedData: data.articles,
               focusHover: null
             }
       }
@@ -58,8 +88,8 @@
 </script>
 
 <div id="article">
-  <h1>Is sleep training harmful?</h1>
-  <h2>Misinformation and facts behind the internets most polarising parenting debate.</h2>
+  <h1>{copy.title}</h1>
+  <h2>{copy.description}</h2>
   <section>
     <HeroComments notifications={commentsDivided} />
     <div class="spacer"></div>
@@ -67,21 +97,26 @@
       <Editorial copy={copy.editorial_intro} />
     </div>    
   </section>
-  <Mosaic album="articles" />
-  <Video video="cbum" />
   <section>
-    <Section copy={copy.viz_all} stepHandler={Section1} switcher="bubbles" />
+    <Section copy={copy.viz_all} stepHandler={SectionIntro} switcher="bubbles" />
   </section>
-	<section>
-    <div class="editorial-container">
-			<Editorial copy={copy.mosaic_cortisol} notifications={commentsCortisol} />
-		</div>
-    <Section copy={copy.viz_reddit} stepHandler={Section2} switcher="bubbles" />
-	</section>
+  <Mosaic album="articles" height=90 />
+  <div class="editorial-container">
+    <Editorial copy={copy.mosaic_divided} />
+  </div> 
   <section>
-    <Section copy={copy.viz_studies} stepHandler={Section1} switcher="other" />
+    <Section copy={copy.viz_studies} stepHandler={SectionStudies} switcher="bubbles" />
+    <!-- FOOTNOTE COMPONENT copy.footnote_1 -->
   </section>
-  <Debunk target="narvaez" />
+  <div class="editorial-container">
+    <Editorial copy={copy.editorial_articles_debunk_1} />
+  </div> 
+  <Mosaic album="debunk" height=45 />
+  <div class="editorial-container">
+    <Editorial copy={copy.editorial_articles_debunk_2} />
+  </div> 
+  <!-- <Video video="cbum" />
+  <Debunk target="narvaez" /> -->
 	<!-- <Footer /> -->
 </div>
 

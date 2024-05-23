@@ -4,6 +4,7 @@
   import { cubicInOut } from 'svelte/easing';
 
   export let album = 'articles';
+  export let height;
 
   let images = [];
   let visible = false;
@@ -40,7 +41,7 @@
   });
 </script>
 
-<div class="image-mosaic">
+<div class="image-mosaic" style="min-height: {height}vh">
   {#each images as image, i}
     {#if visible}
       <div
@@ -59,7 +60,6 @@
     position: relative;
     width: 80%;
     margin: 0 auto;
-    height: 100vh;
   }
 
   .image-container {

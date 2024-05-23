@@ -1,7 +1,7 @@
 import { csvParse } from 'd3';
 
 export async function load({fetch}) {
-	let data = { studies: [], articles: [], comments: [], references: [] };
+	let data = { studies: [], articles: [], comments: [], references: [], reddit: [] };
 
 	const response = await fetch('src/data/studies.csv');
 	const csvStudies = await response.text();
@@ -45,6 +45,16 @@ export async function load({fetch}) {
 		authors: d.authors,
 		title: d.title,
 		date: d.date,
+	}));
+	const response_reddit = await fetch('src/data/reddit.csv');
+	const csvReddit = await response_reddit.text();
+	data.reddit = csvParse(csvReddit, d => ({
+		comment: d.comments,
+		position: d.position,
+		radius: d.upVotes,
+		url: d.url,
+		username: d.username,
+		type: d.type,
 	}));
 
 	return { data };
