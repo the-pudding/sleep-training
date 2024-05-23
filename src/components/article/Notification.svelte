@@ -17,7 +17,10 @@
   
 <div class="notification" in:fade={{ duration: 200, delay: index * 100 }} >
   <div class="notification-content">
-    <img class="icon" src="{getPlatformDetails(comment.platform).icon}" alt="reddit or instagram icon" />
+    <div class="notification-likes">
+      <img class="icon" src="{getPlatformDetails(comment.platform).icon}" alt="reddit or instagram icon" />
+      {comment.likes} Likes
+    </div>
     <p>{comment.comment}</p>
   </div>
   <div class="notification-source">
@@ -27,19 +30,28 @@
 
 <style>
   .notification {
+    font-family: "National 2 Web";
     display: flex-column;
-    font-size: 12px;
     background-color: #404E4D;
     padding: 10px;
     color: white;
     border-radius: 5px;
     margin-bottom: 10px;
-    /* transform: translateY(-20px); */
     transition: transform 300ms ease;
+  }
+  .notification p {
+    font-size: 12px;
   }
   .notification-content {
     display: flex;
+    flex-direction: column;
+    align-items: left;
+  }
+  .notification-likes {
+    display: flex;
     align-items: center;
+    font-size: 12px;
+    font-weight: lighter;
   }
   .icon {
     height: 15px;

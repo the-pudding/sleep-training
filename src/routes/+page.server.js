@@ -22,6 +22,7 @@ export async function load({fetch}) {
 		title: d.title,
 		authors: d.authors, 
 		position: d.position,
+		publisher: d.publisher,
 		url: d.url,
 		type: d.type,
 		country: d.country,
@@ -34,7 +35,8 @@ export async function load({fetch}) {
 		comment: d.comment,
 		category: d.category,
 		platform: d.platform,
-		url: d.url
+		url: d.url,
+		likes: d.likes,
 	}));
 	const response_references = await fetch('src/data/references.csv');
 	const csvReferences = await response_references.text();

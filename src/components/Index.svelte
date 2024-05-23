@@ -58,10 +58,12 @@
 </script>
 
 <div id="article">
+  <h1>Is sleep training harmful?</h1>
+  <h2>Misinformation and facts behind the internets most polarising parenting debate.</h2>
   <section>
     <HeroComments notifications={commentsDivided} />
+    <div class="spacer"></div>
     <div class="editorial-container">
-      <h1>Is sleep training harmful?</h1>
       <Editorial copy={copy.editorial_intro} />
     </div>    
   </section>
@@ -77,10 +79,7 @@
     <Section copy={copy.viz_reddit} stepHandler={Section2} switcher="bubbles" />
 	</section>
   <section>
-    <Section copy={copy.viz_studies} stepHandler={Section1} switcher="timeline" />
-  </section>
-  <section>
-    <Section copy={copy.viz_studies} stepHandler={Section1} switcher="map" />
+    <Section copy={copy.viz_studies} stepHandler={Section1} switcher="other" />
   </section>
   <Debunk target="narvaez" />
 	<!-- <Footer /> -->
@@ -97,7 +96,6 @@
 		padding-top: 32px;
 	}
 	:global(#article h2 span) {
-		background: var(--color-mark);
 		padding: 0 8px;
 	}
   section {
@@ -105,4 +103,18 @@
     margin-top: 1.5vh;
     margin-bottom: 1.5vh;
   }
+  h1 {
+    font-family: "Tiempos Text Web";
+    font-weight: 700;
+    font-size: var(--44px);
+    color: #4FB477;
+  }
+  h2 {
+    font-family: "Tiempos Text Web";
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .spacer {
+		height: 5vh;
+	}
 </style>

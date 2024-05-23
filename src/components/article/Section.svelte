@@ -30,23 +30,22 @@
 </script>
 
 {#if switcher === "bubbles"}
-<div class="sticky" style="top: 35%;">
+<div class="sticky" style="top: 25%;">
     <Bubbles {focusHover} bind:data={renderedData} width={500} height={400}/>
 </div>
 <div class="steps">
     <Scroll {copy} bind:step={step} />
 </div>
-{:else if switcher === "timeline"}
-<div class="sticky" style="top: 10%;">
-    <Timeline bind:data={data} width={500} height={800} />
-</div>
-<div class="steps">
-    <Scroll {copy} bind:step={step} />
-</div>
-{:else if switcher === "map"}
-<div class="sticky" style="top: 20%;">
-    <Map bind:data={dataMap} width={700} height={600} />
-</div>
+{:else if switcher === "other"}
+    {#if step >= 2 }
+    <div class="sticky" style="top: 10%; display: flex;">
+        <Timeline bind:data={data} width={500} height={800} />
+    </div>
+    {:else}
+    <div class="sticky" style="top: 20%;">
+        <Map bind:data={dataMap} width={700} height={600} />
+    </div>
+    {/if}
 <div class="steps">
     <Scroll {copy} bind:step={step} />
 </div>

@@ -1,17 +1,20 @@
 <script>
-    export let colorScale;
+    export let positionColor;
+    export let data;
     export let hoveredPosition;
+
+    $: positions = Array.from(new Set(data.map(d => d.position)));
 </script>
 
 <div class="legend">
-    {#each colorScale.domain() as position}
+    {#each positions as position}
         <!-- svelte-ignore a11y-mouse-events-have-key-events -->
         <p
           on:mouseover={() => hoveredPosition = position}
           on:mouseleave={() => hoveredPosition = null}
           class:unhovered={hoveredPosition && hoveredPosition !== position} 
         >
-            <span style="background-color: {colorScale(position)}"></span>
+            <span style="background-color: {positionColor(position)}"></span>
             {position}
         </p> 
     {/each}
@@ -21,16 +24,17 @@
     .legend {
     display: flex;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     column-gap: 10px;
     row-gap: 5px;
     margin-bottom: 0.25rem;
   }
 
-  p {
+  .legend p {
     margin: 0;
     font-size: 0.8rem;
+    font-family: "National 2 Web";
     text-transform: uppercase;
     display: flex;
     align-items: center;
@@ -44,7 +48,6 @@
     height: 9px;
     display: inline-block;
     border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.5);
   }
 
   .unhovered {

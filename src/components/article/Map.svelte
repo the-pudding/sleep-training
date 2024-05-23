@@ -66,7 +66,7 @@
 <div class="map-container" style="width: 100%; height: {height}px;">
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <svg width="100%" {height} on:mouseleave={() => (hovered = null)}>
-    <g class="map-bounds" transform="translate({margin.left}, {margin.top})">
+    <g class="map-bounds" transform="translate(-50, {margin.top})">
       {#if pathGenerator}
         <path class="earth" d={pathGenerator({ type: 'Sphere' })} />
         {#each worldMap.features as feature}
@@ -101,22 +101,18 @@
 
 <style>
   .map-container {
-    background-color: white;
+    background-color: #F4F4F9;
   }
 
   .earth {
-    fill: white;
+    fill: #F4F4F9;
   }
 
   .country {
-    fill: white;
+    fill: #F4F4F9;
     stroke: black;
     stroke-width: 0.5px;
     pointer-events: none;
-  }
-
-  .country:hover {
-    fill: #999;
   }
 
   circle {

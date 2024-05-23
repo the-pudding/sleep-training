@@ -26,23 +26,21 @@
     // let innerHeight = height - margin.top - margin.bottom;
 
     // AXES
-    const colorRange = [
-        "#4FB477",
-        "#404E4D",
-        "#7D82B8"
-    ];
-    $: positionCategories = Array.from(new Set(data.map(d => d.position)));
+    const colorMapping = {
+        Advocate: "#4FB477",
+        Neutral: "#7D82B8",
+        Oppose: "#404E4D"
+    };
 
-    $: colorScale = scaleOrdinal()
-        .domain(positionCategories)
-        .range(colorRange);
+    $: positionColor = (position) => colorMapping[position] || "#000000";
+    $: positions = Array.from(new Set(data.map(d => d.position)));
 
     $: radiusScale = scaleSqrt()
         .domain(extent(data, d => d.radius)) 
         .range([Math.min(innerWidth / 20, 4), Math.min(innerWidth / 10, 20)]);
     
     $: xScaleGrouped = scaleBand()
-        .domain(positionCategories)
+        .domain(positions)
         .range([0, innerWidth])
         .paddingInner(0.2)
         .paddingOuter(0);
@@ -63,7 +61,7 @@
     }
 </script>
 
-<Legend {colorScale} bind:hoveredPosition />
+<Legend {positionColor} {colorMapping} {data} bind:hoveredPosition />
 <div class="bubbles-container" bind:clientWidth={width}>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -76,7 +74,7 @@
                 cx={node.x}
                 cy={node.y}
                 r={radiusScale(node.radius)}
-                fill={colorScale(node.position)}
+                fill={hovered === node ? "#81A0DD" : positionColor(node.position)}
                 opacity={hovered || hoveredPosition
                     ? hovered === node || hoveredPosition === node.position
                         ? 1
@@ -90,7 +88,7 @@
         </g>
     </svg>
     {#if hovered}
-        <Tooltip data={hovered} {colorScale} {width} />
+        <Tooltip data={hovered} {width} />
     {/if}
 </div>
 

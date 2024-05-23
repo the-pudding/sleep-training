@@ -8,7 +8,6 @@
 </script>
 
 <div class="editorial">
-    <div class="spacer" />
     {#each copy as p}
         <p class="editorial-paragraph">{p.text}</p>
     {/each}
@@ -20,16 +19,14 @@
             {/each}
         </div>
     {/if}
-    <div class="spacer" />
 </div>
 
 <style>
+    .editorial {
+        margin-top: 4vh;
+        margin-bottom: 4vh;
+    }
     .spacer {
 		height: 5vh;
 	}
-
-    .editorial-paragraph {
-        font-size: 14px;
-        color: black
-    }
 </style>

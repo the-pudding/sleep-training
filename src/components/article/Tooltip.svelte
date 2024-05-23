@@ -1,14 +1,13 @@
 <script>
     export let data;
-    export let colorScale;
     export let width;
 
     import { fly, fade } from "svelte/transition";
 
     let tooltipWidth;
 
-    const xNudge = 5;
-    const yNudge = 5;
+    const xNudge = 20;
+    const yNudge = 15;
 
     $: xPosition =
         data.x + tooltipWidth + xNudge > width
@@ -16,7 +15,8 @@
         : data.x + xNudge;
     $: yPosition = data.y + yNudge;
 
-    $: label = data.type === 'study' ? 'participants' : data.type === 'article' ? 'backlinks' : null;
+    $: labelSize = data.type === 'study' ? 'PARTICIPANTS' : data.type === 'article' ? 'BACKLINKS' : null;
+    $: labelAuthor = data.type === 'study' ? 'AUTHOR' : data.type === 'article' ? 'PUBLISHER' : null;
 
     function truncateText(text, maxLength) {
         if (text.length > maxLength) {
@@ -34,63 +34,47 @@
     style="left:{xPosition}px; top:{yPosition}px;"
     bind:clientWidth={tooltipWidth}
 >
-    <h1>
-    {truncateText(data.title, 50)}
-    </h1>
+    <p class="tooltip-title">
+    {truncateText(data.title.toUpperCase(), 70)}
+    </p>
     <!-- Additional info under the country name -->
     <div class='info'>
-        <p>
-          {label}
-          {data.radius}
+        <p class='info-element'>{labelSize}: {data.radius}</p>
+        <p class='info-element'>
+          {labelAuthor}: 
+          {#if data.type === 'study'}
+            {truncateText(data.authors.toUpperCase(), 60)}
+          {:else if data.type === 'article'}
+            {data.publisher.toUpperCase()}
+          {/if}
         </p>
-        <p class="author">
-          Authors
-          {truncateText(data.authors, 50)}
-        </p>
-        <a class="link" href="{data.url}" style="background: {colorScale(data.position)}">
-            Link
-        </a> 
     </div>
 </div>
 
 
 <style>
     .tooltip {
+      min-width: 130px;
       max-width: 40%;
       position: absolute;
       pointer-events: none;
-      padding: 8px 6px;
-      background: white;
+      padding: 1rem 1rem;
+      background: #81A0DD;
       box-shadow: rgba(0, 0, 0, 0.15) 2px 3px 8px;
-      border-radius: 3px;
-      min-width: 130px;
+      border-radius: 4px;
       transition: top 300ms ease, left 300ms ease;
     }
-  
-    h1 {
+    .tooltip-title {
       margin: 0;
       font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: 3px;
+      font-weight: 700;
     }
-  
     .info {
-      display: flex;
-      justify-content: space-between;
-      column-gap: 8px;
-    }
-  
-    .author {
       font-size: 0.8rem;
-      color: black;
+      display: inline-block;
     }
-  
-    .link {
-      font-size: 0.65rem;
-      height: 25px;
-      padding: 3px 4px 2px 4px;
-      border-radius: 3px;
-      text-transform: uppercase;
-      white-space: nowrap;
+    .info-element {
+      margin-bottom: 0px;
+      padding-bottom: 0px;
     }
   </style>

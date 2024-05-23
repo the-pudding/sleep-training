@@ -1,9 +1,10 @@
 
 body {
-	background-color: var(--color-bg, white);
+	/* background-color: var(--color-bg, white); */
+	background-color: #F4F4F9;
 	color: var(--color-fg, black);
 	line-height: 1.4;
-	font-family: var(--font-body, serif);
+	/* font-family: var(--font-body, serif); */
 	font-feature-settings: 'kern' 1, 'onum' 0, 'liga' 0, 'tnum' 1;
 	text-rendering: optimizeLegibility;
 	word-wrap: break-word;
@@ -18,6 +19,9 @@ h5,
 h6,
 p {
 	margin: 16px 0;
+	font-family: "National 2 Web";
+    font-weight: 400;
+	font-size: 14px;
 }
 
 mark {

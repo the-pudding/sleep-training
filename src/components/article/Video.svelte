@@ -2,7 +2,7 @@
     export let video = 'cbum';
   
     let videoUrl = '';
-    let isPlaying = true;
+    let isPlaying = false;
   
     const getVideoUrl = (video) => {
       if (video === 'cbum') {
@@ -53,12 +53,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 60vh;
   }
   
   video {
     max-width: 100%;
     max-height: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
   }
   
   .play-pause-icon {

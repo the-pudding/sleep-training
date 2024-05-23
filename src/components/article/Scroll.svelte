@@ -27,14 +27,12 @@
 	}
 
 	.step-content {
-		background-color: white;
-		padding: 0.75rem 1rem;
+		background-color: #ECE3DA;
 		border-radius: 5px;
-		border: 1px solid black;
 	}
 
 	.step p {
-		padding: 1rem;
+		padding: 1.5rem 1rem;
 	}
 
 	.step.active {
