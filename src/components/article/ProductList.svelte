@@ -1,8 +1,8 @@
 <script>
     const images = [
-        { url: 'assets/images/products/product_1.jpg' },
-        { url: 'assets/images/products/product_2.jpg' },
-        { url: 'assets/images/products/product_3.jpg' },
+        { url: 'assets/images/products/products_1.jpg' },
+        { url: 'assets/images/products/products_2.jpg' },
+        { url: 'assets/images/products/products_3.jpg' },
       ];
   </script>
   
@@ -29,7 +29,7 @@
   
     .image-item img {
       width: 100%;
-      height: 30vh;
+      height: 40vh;
       object-fit: cover;
       border-radius: 2px;
     }
