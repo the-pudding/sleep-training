@@ -52,6 +52,13 @@
         textTwo = data.comment;
         title = truncateText(data.username.toUpperCase(), 40);
         break;
+      case 'instagram':
+        labelOne = 'FOLLOWER COUNT';
+        textOne = data.radius;
+        labelTwo = '';
+        textTwo = '';
+        title = truncateText(data.username.toUpperCase(), 40);
+        break;
       default:
         textTwo = '';
         labelTwo = '';

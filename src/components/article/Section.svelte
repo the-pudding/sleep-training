@@ -4,6 +4,7 @@
     import Bubbles from "$components/article/Bubbles.svelte";
     import Timeline from "$components/article/Timeline.svelte";
     import Map from "$components/article/Map.svelte";
+    import Pie from "$components/article/Pie.svelte";
 
     export let copy;
     export let stepHandler;
@@ -30,25 +31,38 @@
 </script>
 
 {#if switcher === "bubbles"}
-<div class="sticky" style="top: 25%;">
-    <Bubbles {focusHover} bind:data={renderedData} width={800} height={400}/>
-</div>
-<div class="steps">
-    <Scroll {copy} bind:step={step} />
-</div>
-{:else if switcher === "other"}
-    {#if step >= 0 && step < 3}
-    <div class="sticky" style="top: 10%; display: flex;">
-        <Timeline bind:data={data} width={500} height={800} />
+    <div class="sticky" style="top: 25%;">
+        <Bubbles {focusHover} bind:data={renderedData} width={800} height={400}/>
     </div>
-    {:else if step >= 3 && step <= 4 }
-    <div class="sticky" style="top: 20%;">
-        <Map bind:data={dataMap} width={700} height={600} />
+    <div class="steps">
+        <Scroll {copy} bind:step={step} />
     </div>
+{:else if switcher === "transitions"}
+    {#if step >= 0 && step < 2}
+        <div class="sticky" style="top: 10%; display: flex;">
+            <Timeline bind:data={data} width={500} height={800} />
+        </div>
+    {:else if step >= 2 && step <= 3 }
+        <div class="sticky" style="top: 20%;">
+            <Map bind:data={dataMap} width={700} height={600} />
+        </div>
     {/if}
-<div class="steps">
-    <Scroll {copy} bind:step={step} />
-</div>
+    <div class="steps">
+        <Scroll {copy} bind:step={step} />
+    </div>
+{:else if switcher === "instagram"}
+    {#if step >= 0 && step < 2}
+        <div class="sticky" style="top: 25%;">
+            <Bubbles {focusHover} bind:data={renderedData} width={800} height={400}/>
+        </div>
+    {:else if step >= 2 && step <= 3 }
+        <div class="sticky" style="top: 25%;">
+            <Pie data={renderedData} width={800} />
+        </div>
+    {/if}
+    <div class="steps">
+        <Scroll {copy} bind:step={step} />
+    </div>
 {/if}
 <div class="current-step">
     {#if step !== undefined}

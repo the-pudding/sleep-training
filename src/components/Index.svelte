@@ -2,6 +2,7 @@
     import { setContext, getContext } from 'svelte';
     import Section from "$components/article/Section.svelte";
     import Debunk from "$components/article/Debunk.svelte";
+    import ProductList from "$components/article/ProductList.svelte";
     import Editorial from "$components/article/Editorial.svelte";
     import HeroComments from "$components/article/HeroComments.svelte";
     import Mosaic from "$components/article/Mosaic.svelte";
@@ -14,6 +15,7 @@
     // DATA IMPORT
     let data = getContext("data");
     const dataAll = [...data.studies, ...data.articles];
+    console.log(data.instagram);
 
     // FOCUSED TOOLTIPS
     const focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];
@@ -113,7 +115,7 @@
     }
     function SectionPrice(step) {
         switch (true) {
-        case step >= 1 && step < 2:
+        case step >= 1 && step < 3:
             return {
               renderedData: data.studies,
               focusHover: focusPrice,
@@ -126,18 +128,15 @@
       }
     }
     function SectionTransitions(step) {
-      // NEED INSTAGRAM DATA
-        switch (true) {
-        case step >= 1 && step < 2:
-            return {
-              renderedData: data.studies,
-              focusHover: null,
-            }
-        default:
-            return {
-              renderedData: data.studies,
-              focusHover: null
-            }
+      return {
+        renderedData: data.studies,
+        focusHover: null
+      }
+    }
+    function SectionInstagram(step) {
+      return {
+        renderedData: data.instagram,
+        focusHover: null
       }
     }
 </script>
@@ -164,7 +163,7 @@
     <Section copy={copy.viz_reddit} stepHandler={SectionReddit} switcher="bubbles" />
   </section>
   <section>
-    <Mosaic album="articles" height=90 />
+    <Mosaic album="articles" height=70 />
     <div class="editorial-container">
       <Editorial copy={copy.mosaic_divided} />
     </div>
@@ -210,22 +209,23 @@
       <Editorial copy={copy.mosaic_thecut} />
     </div>
     <Mosaic album="social" height=35 />
-    <div class="editorial-container">
-      <Editorial copy={copy.chart_instagram} />
-    </div> 
-    <!-- CHART COMPONENT -->
-    <div class="editorial-container">
-      <Editorial copy={copy.editorial_instagram} notifications={commentsLazy} />
-    </div> 
   </section>
   <section>
-    <Section copy={copy.viz_transitions} stepHandler={SectionTransitions} switcher="other" />
+    <Section copy={copy.chart_instagram} stepHandler={SectionInstagram} switcher="instagram" />
   </section>
   <section>
     <div class="editorial-container">
-      <Editorial copy={copy.editorial_influencerPackages} />
+      <Editorial copy={copy.lazy_parenting} notifications={commentsLazy} />
+    </div> 
+  </section>
+  <section>
+    <Section copy={copy.viz_transitions} stepHandler={SectionTransitions} switcher="transitions" />
+  </section>
+  <section>
+    <div class="editorial-container">
+      <Editorial copy={copy.editorial_influencerPackages} spacer="none" />
     </div>
-    <!-- ProductList -->
+    <ProductList />
     <div class="editorial-container">
       <Editorial copy={copy.editorial_conclusion} />
     </div>

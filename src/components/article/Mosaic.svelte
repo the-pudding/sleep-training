@@ -9,8 +9,6 @@
 
   let images = [];
 
-  $: console.log(isSocial);
-
   const getImageUrls = (album) => {
     if (album === 'articles') {
       return [

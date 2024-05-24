@@ -1,6 +1,6 @@
 <script>
     import { forceSimulation, forceY, forceX, forceCollide } from 'd3-force';
-    import { scaleLinear, scaleSqrt, scaleOrdinal, scaleBand } from 'd3-scale';
+    import { scaleSqrt, scaleBand } from 'd3-scale';
     import { extent } from 'd3-array';
     import { fade } from "svelte/transition";
 
@@ -31,14 +31,13 @@
         Neutral: "#7D82B8",
         Oppose: "#404E4D"
     };
-
     $: positionColor = (position) => colorMapping[position] || "#000000";
-    $: positions = Array.from(new Set(data.map(d => d.position)));
 
     $: radiusScale = scaleSqrt()
         .domain(extent(data, d => d.radius)) 
         .range([Math.min(innerWidth / 20, 4), Math.min(innerWidth / 12, 18)]);
     
+    $: positions = Array.from(new Set(data.map(d => d.position)));
     $: xScaleGrouped = scaleBand()
         .domain(positions)
         .range([0, innerWidth])

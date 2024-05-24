@@ -11,6 +11,6 @@
 
 <style>
     .hero-comments-container {
-        min-height: 95vh;
+        min-height: 85vh;
     }
 </style>

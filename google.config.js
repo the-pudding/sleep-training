@@ -28,5 +28,11 @@ export default [
 		"gid": "83264273",
 		"filepath": "src/data/reddit.csv"
 	}
+	,
+	{
+		"id": "1MizY39V74oRceOTsXGrVf33FreIyAMaYPBEAJp-q4ws",
+		"gid": "629710705",
+		"filepath": "src/data/instagram.csv"
+	}
 ]
 
