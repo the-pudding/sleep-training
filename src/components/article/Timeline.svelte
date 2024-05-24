@@ -24,17 +24,13 @@
       .domain(extent(data, d => d.year))
       .range([innerHeight, 0]);
 
-    const colorRange = [
-        "#4FB477",
-        "#404E4D",
-        "#7D82B8"
-    ];
-    $: positionCategories = Array.from(new Set(data.map(d => d.position)));
+    const colorMapping = {
+        Advocate: "#4FB477",
+        Neutral: "#7D82B8",
+        Oppose: "#404E4D"
+    };
 
-    $: colorScale = scaleOrdinal()
-        .domain(positionCategories)
-        .range(colorRange);
-
+    $: positionColor = (position) => colorMapping[position] || "#000000";
 
     // FORCE SIMULATION
     let simulation = forceSimulation(data)
@@ -65,7 +61,7 @@
         cx={node.x}
         cy={node.y}
         r="5"
-        fill={colorScale(node.position)}
+        fill={hovered === node ? "#81A0DD" : positionColor(node.position)}
         opacity={hovered || hoveredPosition
             ? hovered === node || hoveredPosition === node.position
                 ? 1

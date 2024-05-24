@@ -37,13 +37,13 @@
     <Scroll {copy} bind:step={step} />
 </div>
 {:else if switcher === "other"}
-    {#if step >= 2 }
-    <div class="sticky" style="top: 20%;">
-        <Map bind:data={dataMap} width={700} height={600} />
-    </div>
-    {:else}
+    {#if step >= 0 && step < 3}
     <div class="sticky" style="top: 10%; display: flex;">
         <Timeline bind:data={data} width={500} height={800} />
+    </div>
+    {:else if step >= 3 && step <= 4 }
+    <div class="sticky" style="top: 20%;">
+        <Map bind:data={dataMap} width={700} height={600} />
     </div>
     {/if}
 <div class="steps">

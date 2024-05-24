@@ -23,16 +23,13 @@
 
   let pathGenerator = d3.geoPath().projection(projection);
 
-  const colorRange = [
-    "#4FB477",
-    "#404E4D",
-    "#7D82B8"
-  ];
+  const colorMapping = {
+        Advocate: "#4FB477",
+        Neutral: "#7D82B8",
+        Oppose: "#404E4D"
+    };
 
-  $: positionCategories = Array.from(new Set(data.map(d => d.position)));
-  $: colorScale = scaleOrdinal()
-    .domain(positionCategories)
-    .range(colorRange);
+  $: positionColor = (position) => colorMapping[position] || "#000000";
 
   const simulation = d3.forceSimulation(data)
     .force('x', d3.forceX(d => {
@@ -80,7 +77,7 @@
             r="5"
             cx={node.x}
             cy={node.y}
-            fill={colorScale(node.position)}
+            fill={hovered === node ? "#81A0DD" : positionColor(node.position)}
             opacity={hovered || hoveredPosition
                 ? hovered === node || hoveredPosition === node.position
                     ? 1

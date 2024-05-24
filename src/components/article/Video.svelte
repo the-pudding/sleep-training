@@ -49,6 +49,7 @@
 
 <style>
   .video-container {
+    margin: 4vh 0;
     position: relative;
     display: flex;
     justify-content: center;

@@ -13,19 +13,22 @@
 
     // DATA IMPORT
     let data = getContext("data");
-    const dataAll = [...data.studies, ...data.articles, ...data.reddit];
+    const dataAll = [...data.studies, ...data.articles];
 
     // FOCUSED TOOLTIPS
     const focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];
     const focusNarvaez = data.articles.filter(d => d.url === "https://www.psychologytoday.com/intl/blog/moral-landscapes/201112/dangers-crying-it-out")[0];
     const focusRedditResearch = data.reddit.filter(d => d.username === "leftpantleg420")[0];
     const focusUmbrellaReview = data.studies.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/35778903/")[0];
+    const focusPrice = data.studies.filter(d => d.url === "https://publications.aap.org/pediatrics/article-abstract/130/4/643/30241/Five-Year-Follow-up-of-Harms-and-Benefits-of?redirectedFrom=fulltext")[0];
     const focusReview = data.studies.filter(d => d.url === "https://aasm.org/resources/practiceparameters/review_nightwakingschildren.pdf")[0];
 
     // NOTIFICATION LOADING
     let commentsConfused = data.comments.filter(d => d.category === "confused");
     let commentsDivided = data.comments.filter(d => d.category === "divided");
     let commentsCortisol = data.comments.filter(d => d.category === "brain damage");
+    let commentsAttachment = data.comments.filter(d => d.category === "attachment");
+    let commentsLazy = data.comments.filter(d => d.category === "lazy");
 
     // STEP LOGIC
     function SectionIntro(step) {
@@ -40,24 +43,28 @@
               renderedData: dataAll,
               focusHover: focusNarvaez,
             }
-        case step >= 5 && step < 6:
+        default:
             return {
-              renderedData: data.reddit,
-              focusHover: null,
+              renderedData: dataAll,
+              focusHover: null
             }
-        case step >= 6 && step < 7:
-          return {
+      }
+    }
+    function SectionReddit(step) {
+        switch (true) {
+        case step >= 1 && step < 2:
+            return {
               renderedData: data.reddit,
               focusHover: focusRedditResearch,
             }
-        case step >= 7 && step < 9:
-          return {
+        case step >= 2 && step < 4:
+            return {
               renderedData: data.articles,
               focusHover: null,
             }
         default:
             return {
-              renderedData: data.articles,
+              renderedData: data.reddit,
               focusHover: null
             }
       }
@@ -73,6 +80,11 @@
               renderedData: data.studies,
               focusHover: focusReview,
             }
+        case step >= 2 && step < 3:
+            return {
+              renderedData: data.studies,
+              focusHover: null,
+            }
         case step >= 3 && step < 4:
             return {
               renderedData: data.studies,
@@ -80,7 +92,50 @@
             }
         default:
             return {
-              renderedData: data.articles,
+              renderedData: data.studies,
+              focusHover: null
+            }
+      }
+    }
+    function SectionMiddlemiss(step) {
+        switch (true) {
+        case step >= 1 && step < 2:
+            return {
+              renderedData: data.studies,
+              focusHover: focusMiddlemiss,
+            }
+        default:
+            return {
+              renderedData: data.studies,
+              focusHover: null
+            }
+      }
+    }
+    function SectionPrice(step) {
+        switch (true) {
+        case step >= 1 && step < 2:
+            return {
+              renderedData: data.studies,
+              focusHover: focusPrice,
+            }
+        default:
+            return {
+              renderedData: data.studies,
+              focusHover: null
+            }
+      }
+    }
+    function SectionTransitions(step) {
+      // NEED INSTAGRAM DATA
+        switch (true) {
+        case step >= 1 && step < 2:
+            return {
+              renderedData: data.studies,
+              focusHover: null,
+            }
+        default:
+            return {
+              renderedData: data.studies,
               focusHover: null
             }
       }
@@ -100,23 +155,81 @@
   <section>
     <Section copy={copy.viz_all} stepHandler={SectionIntro} switcher="bubbles" />
   </section>
-  <Mosaic album="articles" height=90 />
-  <div class="editorial-container">
-    <Editorial copy={copy.mosaic_divided} />
-  </div> 
+  <section>
+    <div class="editorial-container">
+      <Editorial copy={copy.editorial_confusion} notifications={commentsConfused} />
+    </div>
+  </section>
+  <section>
+    <Section copy={copy.viz_reddit} stepHandler={SectionReddit} switcher="bubbles" />
+  </section>
+  <section>
+    <Mosaic album="articles" height=90 />
+    <div class="editorial-container">
+      <Editorial copy={copy.mosaic_divided} />
+    </div>
+  </section>
   <section>
     <Section copy={copy.viz_studies} stepHandler={SectionStudies} switcher="bubbles" />
     <!-- FOOTNOTE COMPONENT copy.footnote_1 -->
   </section>
-  <div class="editorial-container">
-    <Editorial copy={copy.editorial_articles_debunk_1} />
-  </div> 
-  <Mosaic album="debunk" height=35 />
-  <div class="editorial-container">
-    <Editorial copy={copy.editorial_articles_debunk_2} />
-  </div> 
-  <!-- <Video video="cbum" />
-  <Debunk target="narvaez" /> -->
+  <section>
+    <div class="editorial-container">
+      <Editorial copy={copy.editorial_articles_debunk_1} />
+    </div> 
+    <Mosaic album="debunk" height=25 />
+    <div class="editorial-container">
+      <Editorial copy={copy.debunk_sears} spacer="none" />
+      <Debunk target="sears" />
+    </div>
+    <div class="editorial-container">
+      <Editorial copy={copy.editorial_brain_damage} notifications={commentsCortisol} />
+    </div>
+    <div class="spacer"></div>
+    <Mosaic album="posts" height=75 isSocial={true} />
+    <div class="editorial-container">
+      <Editorial copy={copy.mosaic_cortisol} />
+    </div>
+  </section>
+  <section>
+    <Section copy={copy.viz_studies_middlemiss} stepHandler={SectionMiddlemiss} switcher="bubbles" />
+  </section>
+  <section>
+    <div class="editorial-container">
+      <Editorial copy={copy.debunk_narvaez} spacer="none" />
+      <Debunk target="narvaez" />
+    </div>
+    <Video video="cbum" />
+    <div class="editorial-container">
+      <Editorial copy={copy.mosaic_attachment} notifications={commentsAttachment} />
+    </div>
+    <Section copy={copy.viz_studies_conclude} stepHandler={SectionPrice} switcher="bubbles" />
+  </section>
+  <section>
+    <div class="editorial-container">
+      <Editorial copy={copy.mosaic_thecut} />
+    </div>
+    <Mosaic album="social" height=35 />
+    <div class="editorial-container">
+      <Editorial copy={copy.chart_instagram} />
+    </div> 
+    <!-- CHART COMPONENT -->
+    <div class="editorial-container">
+      <Editorial copy={copy.editorial_instagram} notifications={commentsLazy} />
+    </div> 
+  </section>
+  <section>
+    <Section copy={copy.viz_transitions} stepHandler={SectionTransitions} switcher="other" />
+  </section>
+  <section>
+    <div class="editorial-container">
+      <Editorial copy={copy.editorial_influencerPackages} />
+    </div>
+    <!-- ProductList -->
+    <div class="editorial-container">
+      <Editorial copy={copy.editorial_conclusion} />
+    </div>
+  </section>
 	<!-- <Footer /> -->
 </div>
 

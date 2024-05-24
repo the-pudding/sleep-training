@@ -5,9 +5,11 @@
 
   export let album = 'articles';
   export let height;
+  export let isSocial = false;
 
   let images = [];
-  let visible = false;
+
+  $: console.log(isSocial);
 
   const getImageUrls = (album) => {
     if (album === 'articles') {
@@ -26,10 +28,10 @@
       ];
     } else if (album === 'posts') {
       return [
-        { url: 'assets/images/social/post_1.jpg' },
-        { url: 'assets/images/social/post_2.jpg' },
-        { url: 'assets/images/social/post_3.jpg' },
-        { url: 'assets/images/social/post_4.jpg' },
+        { url: 'assets/images/posts/post_1.jpg' },
+        { url: 'assets/images/posts/post_2.jpg' },
+        { url: 'assets/images/posts/post_3.jpg' },
+        { url: 'assets/images/posts/post_4.jpg' },
       ];
     } else if (album === 'debunk') {
       return [
@@ -42,20 +44,27 @@
 
   onMount(() => {
     images = getImageUrls(album);
-    visible = true;
   });
 </script>
 
 <div class="image-mosaic" style="min-height: {height}vh">
   {#each images as image, i}
-    {#if visible}
+    {#if isSocial === false}
       <div
         class="image-container"
-        style="z-index: {i}; transform: translate({i % 2 === 0 ? '-20%' : '20%'}, {i * 11}vh);"
+        style="z-index: {i}; transform: translate({i % 2 === 0 ? '0%' : '35%'}, {i * 9}vh); max-width: 75%;"
         in:fly={{ y: -200, duration: 1000, delay: i * 100, easing: cubicInOut }}
       >
         <img src={image.url} alt="Image {i}" />
       </div>
+    {:else}
+      <div
+      class="image-container"
+      style="z-index: {i}; transform: translate({i % 2 === 0 ? '5%' : '80%'}, {i * 16}vh); max-width: 50%;"
+      in:fly={{ y: -200, duration: 1000, delay: i * 100, easing: cubicInOut }}
+    >
+      <img src={image.url} alt="Image {i}" />
+    </div>
     {/if}
   {/each}
 </div>
