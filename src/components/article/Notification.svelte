@@ -2,6 +2,7 @@
   import { fade } from 'svelte/transition';
   export let comment;
   export let index;
+  export let ready;
 
   function getPlatformDetails(platform) {
     const iconUrl =
@@ -15,6 +16,7 @@
   }
 </script>
   
+{#if ready}
 <div class="notification" in:fade={{ duration: 200, delay: index * 100 }} >
   <div class="notification-content">
     <div class="notification-likes">
@@ -27,6 +29,7 @@
     <a href="{comment.url}">SOURCE</a>
   </div>
 </div>
+{/if}
 
 <style>
   .notification {

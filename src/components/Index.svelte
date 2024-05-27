@@ -1,5 +1,6 @@
 <script>
     import { setContext, getContext } from 'svelte';
+    import { extent } from 'd3-array';
     import Section from "$components/article/Section.svelte";
     import Debunk from "$components/article/Debunk.svelte";
     import ProductList from "$components/article/ProductList.svelte";
@@ -15,7 +16,11 @@
     // DATA IMPORT
     let data = getContext("data");
     const dataAll = [...data.studies, ...data.articles];
-    console.log(data.instagram);
+
+    // MIN AND MAX
+    console.log(data.studies);
+    const extentRadius = extent(dataAll, d => d.radius);
+    console.log(extentRadius)
 
     // FOCUSED TOOLTIPS
     const focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];

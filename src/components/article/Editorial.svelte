@@ -11,17 +11,22 @@
 
     let comments;
     $: comments = notifications !== undefined ? notifications : undefined;
+
+    let ready = false;
+    setTimeout(() => {
+        ready = true;
+    }, 600)
 </script>
 
 <div class="editorial">
     {#each copy as p}
-        <p class="editorial-paragraph">{p.text}</p>
+        <p class="editorial-paragraph">{@html p.text}</p>
     {/each}
     <div class="spacer" style="height: {noSpacer ? '0vh' : '3vh'}"/>
     {#if comments !== undefined}
         <div>
             {#each comments as comment, index}
-                <Notification {comment} {index} />
+                <Notification {comment} {index} {ready} />
             {/each}
         </div>
     {/if}

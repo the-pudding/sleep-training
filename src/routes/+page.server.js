@@ -51,7 +51,7 @@ export async function load({fetch}) {
 	data.reddit = csvParse(csvReddit, d => ({
 		comment: d.comments,
 		position: d.position,
-		radius: d.upVotes,
+		radius: +d.upVotes,
 		url: d.url,
 		username: d.username,
 		type: d.type,
@@ -60,7 +60,7 @@ export async function load({fetch}) {
 	const csvInstagram = await response_instagram.text();
 	data.instagram = csvParse(csvInstagram, d => ({
 		position: d.position,
-		radius: d.followerCount,
+		radius: +d.followerCount,
 		url: d.url,
 		username: d.username,
 		type: d.type,

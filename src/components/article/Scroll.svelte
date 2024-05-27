@@ -10,7 +10,7 @@
 		{#each Object.values(copy) as p, i}
 			{@const active = step === i}
 			<div class="step" class:active>
-				<p class="step-content">{p.text}</p>
+				<p class="step-content">{@html p.text}</p>
 			</div>
 		{/each}
 	</Scrolly>

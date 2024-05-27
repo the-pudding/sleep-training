@@ -88,7 +88,7 @@
 
 <style>
     .tooltip {
-      min-width: 130px;
+      min-width: 250px;
       max-width: 40%;
       position: absolute;
       pointer-events: none;

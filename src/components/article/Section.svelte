@@ -32,13 +32,13 @@
 
 {#if switcher === "bubbles"}
     <div class="sticky" style="top: 25%;">
-        <Bubbles {focusHover} bind:data={renderedData} width={800} height={400}/>
+        <Bubbles {focusHover} bind:data={renderedData} width={400} height={400}/>
     </div>
     <div class="steps">
         <Scroll {copy} bind:step={step} />
     </div>
 {:else if switcher === "transitions"}
-    {#if step >= 0 && step < 2}
+    {#if step == undefined || step < 2}
         <div class="sticky" style="top: 10%; display: flex;">
             <Timeline bind:data={data} width={500} height={800} />
         </div>
@@ -51,7 +51,7 @@
         <Scroll {copy} bind:step={step} />
     </div>
 {:else if switcher === "instagram"}
-    {#if step >= 0 && step < 2}
+    {#if step == undefined || step < 2}
         <div class="sticky" style="top: 25%;">
             <Bubbles {focusHover} bind:data={renderedData} width={800} height={400}/>
         </div>
@@ -74,6 +74,8 @@
     .sticky {
         position: sticky;
         z-index: 1;
+        display: flex;
+        justify-content: center;
     }
     .steps {
         position: relative;
