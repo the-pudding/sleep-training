@@ -1,9 +1,11 @@
 <script>
     import { forceSimulation, forceY, forceX, forceCollide } from 'd3-force';
-    import { scaleSqrt, scaleBand } from 'd3-scale';
+    import { scaleSqrt, scaleBand, scaleLinear } from 'd3-scale';
     import { extent } from 'd3-array';
     import { fade } from "svelte/transition";
-
+    import { getContext, onMount } from 'svelte';
+    import { fly } from 'svelte/transition'
+    
     import Legend from "$components/article/Legend.svelte";
     import Tooltip from "$components/article/Tooltip.svelte";
 
@@ -13,6 +15,7 @@
     export let data;
     export let height;
     export let focusHover;
+    export let switcher;
 
     let viewportWidth;
 
@@ -22,8 +25,19 @@
     let nodes = [];
     let hoveredPosition;
     let hovered;
+    let mounted = false;;
+    let positions;
+    let xScaleGrouped;
+    let dataLength = 0;
     $: if (focusHover !== undefined) {
         hovered = focusHover;
+    }
+
+    function getRange(data){
+        if(data[0].type == "reddit"){
+            return [5,20]
+        }
+        return [5,20];
     }
 
     const margin = { top: 0, right: 0, bottom: 20, left: 150 };
@@ -37,47 +51,57 @@
         Oppose: "#404E4D"
     };
 
-    $: positionColor = (position) => colorMapping[position] || "#000000";
-
-    $: radiusScale = scaleSqrt()
+    $: radiusScale = scaleLinear()
                 .domain(extent(data, d => d.radius)) 
-                .range([Math.min(innerWidth / 20, 4), Math.min(innerWidth / 12, 12)]);
-        // if (data[0].type === "studies") {
-        //     radiusScale = scaleSqrt()
-        //         .domain(extent(data, d => d.radius)) 
-        //         .range([Math.min(innerWidth / 20, 4), Math.min(innerWidth / 12, 20)]);
-        // } else {
-        //     radiusScale = scaleSqrt()
-        //         .domain(extent(data, d => d.radius)) 
-        //         .range([Math.min(innerWidth / 20, 4), Math.min(innerWidth / 12, 12)]);
-        // }
+                .range(getRange(data)).clamp(true);
     
-    $: positions = Array.from(new Set(data.map(d => d.position)));
 
-    $: xScaleGrouped = scaleBand()
-        .domain(positions)
-        .range([0, innerWidth])
-        .paddingInner(0.2)
-        .paddingOuter(0);
-
-    // FORCE SIMULATION
-    let simulation = forceSimulation(data)
-        .on("tick", () => {
-            nodes = simulation.nodes();
-        });
-
-    $: {
-        simulation.nodes(data)
-            .force("x", forceX().x(d => (xScaleGrouped(d.position))))
-            .force("y", forceY(height / 2).strength(1))
-            .force("collide", forceCollide().radius(d => radiusScale(d.radius) + 1))
-            .alpha(1)
-            .restart();
+    function positionColor(position){
+        return colorMapping[position] || "#000000";
     }
+
+    $: data, rerunSimulation();
+
+    function rerunSimulation(){
+        if(mounted && dataLength !== data.length){
+
+            console.log("re-running simulation")
+
+            let dataToSimulate = data.map(d => d);
+            dataLength = dataToSimulate.length;
+
+            positions = Array.from(new Set(dataToSimulate.map(d => d.position)));
+
+            let simulation = forceSimulation(dataToSimulate)
+                .on("tick", () => {
+                    nodes = simulation.nodes();
+                });
+
+            xScaleGrouped = scaleBand()
+                .domain(positions)
+                .range([0, innerWidth])
+                .paddingInner(0.2)
+                .paddingOuter(0);
+
+            simulation.nodes(dataToSimulate)
+                .force("x", forceX().x(d => {
+                    return xScaleGrouped(d.position)
+                }))
+                .force("y", forceY(height / 2).strength(1))
+                .force("collide", forceCollide().radius(d => radiusScale(d.radius) + 1))
+                .alpha(1)
+                .restart();
+        }
+    }
+
+    onMount(() => {
+        mounted = true;
+    })
 </script>
 
 
 <svelte:window bind:innerWidth={viewportWidth} />
+<h1 transition:fly>re-entering</h1>
 <div class="chart-container">
     <Legend {positionColor} {colorMapping} {data} bind:hoveredPosition />
     <div class="bubbles-container" style="width: {width}px; margin: 0 auto;">
