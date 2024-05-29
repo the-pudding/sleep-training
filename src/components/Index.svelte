@@ -17,11 +17,6 @@
     let data = getContext("data");
     const dataAll = [...data.studies, ...data.articles];
 
-    // MIN AND MAX
-    console.log(data.studies);
-    const extentRadius = extent(dataAll, d => d.radius);
-    console.log(extentRadius)
-
     // FOCUSED TOOLTIPS
     const focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];
     const focusNarvaez = data.articles.filter(d => d.url === "https://www.psychologytoday.com/intl/blog/moral-landscapes/201112/dangers-crying-it-out")[0];
@@ -87,12 +82,7 @@
               renderedData: data.studies,
               focusHover: focusReview,
             }
-        case step >= 2 && step < 3:
-            return {
-              renderedData: data.studies,
-              focusHover: null,
-            }
-        case step >= 3 && step < 4:
+        case step >= 2 && step < 4:
             return {
               renderedData: data.studies,
               focusHover: focusUmbrellaReview,

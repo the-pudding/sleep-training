@@ -18,7 +18,6 @@
 
     function changeAnimationStarted(){
         if(step == 0){
-        console.log("notification animation started");
         animationStarted = true;
         }
     }

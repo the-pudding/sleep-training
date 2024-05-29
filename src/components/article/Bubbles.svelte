@@ -38,6 +38,9 @@
         } else if (data[0].type == "study" || data[0].type == "article") {
             return [6,30];
         }
+        else if (data[0].type == "instagram") {
+            return [8,40];
+        }
         return [6,22];
     }
 

@@ -15,7 +15,6 @@
 
   function changeAnimationStarted(){
     if(step == 0){
-      console.log("animation started");
       animationStarted = true;
     }
     
