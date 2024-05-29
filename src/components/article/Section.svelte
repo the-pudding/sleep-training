@@ -36,7 +36,6 @@
 
 {#if mounted}
     {#if switcher === "bubbles"}
-        <h1>{step}</h1>
         <div class="sticky" style="top: 25%;">
             <Bubbles {switcher} {focusHover} bind:data={renderedData} width={400} height={400}/>
         </div>
