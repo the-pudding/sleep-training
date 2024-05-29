@@ -15,7 +15,6 @@
     export let data;
     export let height;
     export let focusHover;
-    export let switcher;
 
     let viewportWidth;
 
@@ -36,8 +35,10 @@
     function getRange(data){
         if(data[0].type == "reddit"){
             return [5,20]
+        } else if (data[0].type == "study" || data[0].type == "article") {
+            return [6,30];
         }
-        return [5,20];
+        return [6,22];
     }
 
     const margin = { top: 0, right: 0, bottom: 20, left: 150 };
@@ -80,8 +81,8 @@
             xScaleGrouped = scaleBand()
                 .domain(positions)
                 .range([0, innerWidth])
-                .paddingInner(0.2)
-                .paddingOuter(0);
+                .paddingInner(0.3)
+                .paddingOuter(0.4);
 
             simulation.nodes(dataToSimulate)
                 .force("x", forceX().x(d => {
@@ -101,7 +102,7 @@
 
 
 <svelte:window bind:innerWidth={viewportWidth} />
-<h1 transition:fly>re-entering</h1>
+<!-- <h1 transition:fly>re-entering</h1> -->
 <div class="chart-container">
     <Legend {positionColor} {colorMapping} {data} bind:hoveredPosition />
     <div class="bubbles-container" style="width: {width}px; margin: 0 auto;">

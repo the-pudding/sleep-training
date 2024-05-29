@@ -2,7 +2,6 @@
   import { fade } from 'svelte/transition';
   export let comment;
   export let index;
-  export let ready;
 
   function getPlatformDetails(platform) {
     const iconUrl =
@@ -16,20 +15,18 @@
   }
 </script>
   
-{#if ready}
-<div class="notification" in:fade={{ duration: 200, delay: index * 100 }} >
-  <div class="notification-content">
-    <div class="notification-likes">
-      <img class="icon" src="{getPlatformDetails(comment.platform).icon}" alt="reddit or instagram icon" />
-      {comment.likes} Likes
+  <div class="notification">
+    <div class="notification-content">
+      <div class="notification-likes">
+        <img class="icon" src="{getPlatformDetails(comment.platform).icon}" alt="reddit or instagram icon" />
+        {comment.likes} Likes
+      </div>
+      <p>{comment.comment}</p>
     </div>
-    <p>{comment.comment}</p>
+    <div class="notification-source">
+      <a href="{comment.url}">SOURCE</a>
+    </div>
   </div>
-  <div class="notification-source">
-    <a href="{comment.url}">SOURCE</a>
-  </div>
-</div>
-{/if}
 
 <style>
   .notification {
