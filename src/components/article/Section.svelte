@@ -21,13 +21,11 @@
       focusHover = newValues.focusHover;
     }
 
-    // TIMELINE DATA
     let data = getContext("data").studies;
-    data = data.map(d => Object.assign({}, d));
-
+    // TIMELINE DATA
+    let dataTimeline = data.map(d => Object.assign({}, d));
     // MAP DATA
-    let dataMap = getContext("data").studies;
-    dataMap = data.map(d => Object.assign({}, d));
+    let dataMap = data.map(d => Object.assign({}, d));
 
     onMount(() => {
         mounted = true;
@@ -38,6 +36,7 @@
 
 {#if mounted}
     {#if switcher === "bubbles"}
+        <h1>{step}</h1>
         <div class="sticky" style="top: 25%;">
             <Bubbles {switcher} {focusHover} bind:data={renderedData} width={400} height={400}/>
         </div>
@@ -47,7 +46,7 @@
     {:else if switcher === "transitions"}
         {#if step == undefined || step < 2}
             <div class="sticky" style="top: 10%; display: flex;">
-                <Timeline bind:data={data} width={500} height={800} />
+                <Timeline bind:data={dataTimeline} width={500} height={800} />
             </div>
         {:else if step >= 2 && step <= 3 }
             <div class="sticky" style="top: 20%;">

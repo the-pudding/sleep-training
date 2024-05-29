@@ -1,10 +1,9 @@
 <script>
     import { forceSimulation, forceY, forceX, forceCollide } from 'd3-force';
-    import { scaleSqrt, scaleBand, scaleLinear } from 'd3-scale';
+    import { scaleBand, scaleLinear } from 'd3-scale';
     import { extent } from 'd3-array';
     import { fade } from "svelte/transition";
-    import { getContext, onMount } from 'svelte';
-    import { fly } from 'svelte/transition'
+    import { onMount } from 'svelte';
     
     import Legend from "$components/article/Legend.svelte";
     import Tooltip from "$components/article/Tooltip.svelte";
@@ -28,6 +27,7 @@
     let positions;
     let xScaleGrouped;
     let dataLength = 0;
+
     $: if (focusHover !== undefined) {
         hovered = focusHover;
     }
