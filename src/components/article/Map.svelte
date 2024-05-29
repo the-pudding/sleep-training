@@ -1,7 +1,6 @@
 <script>
   import * as d3 from 'd3';
   import worldMap from "$data/world-geojson2.json";
-  import { scaleOrdinal } from 'd3-scale';
   import { fade } from "svelte/transition";
   import Tooltip from "$components/article/Tooltip.svelte";
 
@@ -15,8 +14,6 @@
   let nodes = [];
   let hoveredPosition;
   let hovered;
-
-  const countryNameAccessor = d => d.properties["NAME"];
 
   let projection = d3.geoMercator()
     .fitSize([innerWidth, innerHeight], worldMap);
@@ -92,7 +89,7 @@
     </g>
   </svg>
   {#if hovered}
-    <Tooltip data={hovered} {colorScale} {width} />
+    <Tooltip data={hovered} {width} />
   {/if}
 </div>
 
