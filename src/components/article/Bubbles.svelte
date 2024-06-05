@@ -1,5 +1,6 @@
 <script>
     import { forceSimulation, forceY, forceX, forceCollide } from 'd3-force';
+    import { forceCluster } from 'd3-force-cluster'
     import { scaleBand, scaleLinear } from 'd3-scale';
     import { extent } from 'd3-array';
     import { fade } from "svelte/transition";
@@ -76,6 +77,14 @@
 
             positions = Array.from(new Set(dataToSimulate.map(d => d.position)));
 
+            const clusterCenters = positions.map((position, index) => {
+                const angle = (index / positions.length) * Math.PI * 2;
+                const radius = Math.min(innerWidth, height) / 3;
+                const x = Math.cos(angle) * radius + innerWidth / 2;
+                const y = Math.sin(angle) * radius + height / 2;
+                return { x, y };
+            });
+
             let simulation = forceSimulation(dataToSimulate)
                 .on("tick", () => {
                     nodes = simulation.nodes();
@@ -92,7 +101,16 @@
                     return xScaleGrouped(d.position)
                 }))
                 .force("y", forceY(height / 2).strength(1))
-                .force("collide", forceCollide().radius(d => radiusScale(d.radius) + 1))
+                
+                .force("collide", forceCollide()
+                    .radius(d => radiusScale(d.radius) + 1)
+                )
+                
+                // .force("cluster", forceCluster()
+                //     .centers(clusterCenters)
+                //     .strength(0.5)
+                // )
+
                 .alpha(1)
                 .restart();
         }
