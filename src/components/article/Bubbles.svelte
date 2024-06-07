@@ -1,12 +1,13 @@
 <script>
     import { forceSimulation, forceY, forceX, forceCollide } from 'd3-force';
-    import { forceCluster } from 'd3-force-cluster'
+    // import { forceCluster } from 'd3-force-cluster'
     import { scaleBand, scaleLinear } from 'd3-scale';
     import { extent } from 'd3-array';
     import { fade } from "svelte/transition";
     import { onMount } from 'svelte';
     
     import Legend from "$components/article/Legend.svelte";
+    import RadiusLegend from '$components/article/RadiusLegend.svelte';
     import Tooltip from "$components/article/Tooltip.svelte";
 
     // SVG WIDTH ASSIGNMENT NOT WORKING, G CENTERING NOT WORKING
@@ -15,24 +16,29 @@
     export let data;
     export let height;
     export let focusHover;
-
-    let viewportWidth;
-
-    $: width = viewportWidth * 0.75;
     
     // SETUP
+    let viewportWidth;
+    $: width = viewportWidth * 0.75;
     let nodes = [];
     let hoveredPosition;
     let hovered;
     let mounted = false;;
     let positions;
+    let scaleValues;
     let xScaleGrouped;
     let dataLength = 0;
+
+    const margin = { top: 0, right: 0, bottom: 20, left: 150 };
+    $: innerWidth = width - margin.right - margin.left;
+    // let innerHeight = height - margin.top - margin.bottom;
 
     $: if (focusHover !== undefined) {
         hovered = focusHover;
     }
 
+    // SCALES
+    // RADIUS SCALE
     function getRange(data){
         if(data[0].type == "reddit"){
             return [5,20]
@@ -45,25 +51,37 @@
         return [6,22];
     }
 
-    const margin = { top: 0, right: 0, bottom: 20, left: 150 };
-    $: innerWidth = width - margin.right - margin.left;
-    // let innerHeight = height - margin.top - margin.bottom;
+    $: radiusScale = scaleLinear()
+                .domain(extent(data, d => d.radius)) 
+                .range(getRange(data)).clamp(true);
 
-    // AXES
+    $: if (radiusScale) {
+        scaleValues = {
+            largest: radiusScale.range()[1],
+            smallest: radiusScale.range()[0],
+            median: (radiusScale.range()[1] + radiusScale.range()[0]) / 2
+        };
+    }
+    
+    // COLOR SCALE
     const colorMapping = {
         Advocate: "#4FB477",
         Neutral: "#7D82B8",
         Oppose: "#404E4D"
     };
-
-    $: radiusScale = scaleLinear()
-                .domain(extent(data, d => d.radius)) 
-                .range(getRange(data)).clamp(true);
     
-
     function positionColor(position){
         return colorMapping[position] || "#000000";
     }
+
+
+    // const clusterCenters = positions.map((position, index) => {
+    //     const angle = (index / positions.length) * Math.PI * 2;
+    //     const radius = Math.min(innerWidth, height) / 3;
+    //     const x = Math.cos(angle) * radius + innerWidth / 2;
+    //     const y = Math.sin(angle) * radius + height / 2;
+    //     return { x, y };
+    // });
 
     $: data, rerunSimulation();
 
@@ -77,13 +95,12 @@
 
             positions = Array.from(new Set(dataToSimulate.map(d => d.position)));
 
-            const clusterCenters = positions.map((position, index) => {
-                const angle = (index / positions.length) * Math.PI * 2;
-                const radius = Math.min(innerWidth, height) / 3;
-                const x = Math.cos(angle) * radius + innerWidth / 2;
-                const y = Math.sin(angle) * radius + height / 2;
-                return { x, y };
-            });
+            // scaleValues = {
+            //     largest: radiusScale.range()[1],
+            //     smallest: radiusScale.range()[0],
+            //     median: (radiusScale.range()[1] + radiusScale.range()[0]) / 2
+            // };
+            // console.log("in simulation", scaleValues)
 
             let simulation = forceSimulation(dataToSimulate)
                 .on("tick", () => {
@@ -155,6 +172,7 @@
             <Tooltip data={hovered} {width} />
         {/if}
     </div>
+    <RadiusLegend {scaleValues} {data} />
 </div>
 
 <style>

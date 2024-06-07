@@ -7,7 +7,6 @@
     import HeroComments from "$components/article/HeroComments.svelte";
     import Mosaic from "$components/article/Mosaic.svelte";
     import Video from "$components/article/Video.svelte";
-    import Bubbles from "$components/article/Bubbles.svelte";
 
     // COPY CONTEXT SETTING
     import copy from '$data/copy.json';
@@ -15,7 +14,7 @@
 
     // DATA IMPORT
     let data = getContext("data");
-    const dataAll = [...data.studies, ...data.articles];
+    const dataAll = [...data.articles, ...data.reddit];
 
     // FOCUSED TOOLTIPS
     const focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];
@@ -132,13 +131,11 @@
 <div id="article">
   <h1>{copy.title}</h1>
   <h2>{copy.description}</h2>
-  <section>
-    <HeroComments notifications={commentsDivided} />
-    <div class="spacer"></div>
-    <div class="editorial-container">
-      <Editorial copy={copy.editorial_intro} />
-    </div>    
-  </section>
+  <HeroComments notifications={commentsDivided} />
+  <div class="spacer"></div>
+  <div class="editorial-container">
+    <Editorial copy={copy.editorial_intro} />
+  </div>    
   <section>
     <Section copy={copy.viz_all} stepHandler={SectionIntro} switcher="bubbles" />
   </section>
@@ -150,11 +147,9 @@
   <section>
     <Section stepHandler={SectionReddit} switcher="bubbles-fixed" />
   </section>
-  <section>
-    <div class="editorial-container" spacer="none" >
-      <Editorial copy={copy.viz_reddit_comments} notifications={commentsConfused} />
-    </div>
-  </section>
+  <div class="editorial-container" spacer="none" >
+    <Editorial copy={copy.viz_reddit_comments} notifications={commentsConfused} />
+  </div>
   <div class="editorial-container">
     <h3 class="sub-title">News data</h3>
     <Editorial copy={copy.viz_articles} spacer="none" />
@@ -162,79 +157,69 @@
   <section>
     <Section stepHandler={SectionArticles} switcher="bubbles-fixed" />
   </section>
-  <section>
-    <Editorial copy={copy.editorial_clickbait} />
+  <Editorial copy={copy.editorial_clickbait} />
     <Mosaic album="articles" height=70 />
     <div class="editorial-container">
       <Editorial copy={copy.editorial_against} />
     </div>
-  </section>
+  <div class="editorial-container">
+    <h3 class="sub-title">Medical data</h3>
+    <Editorial copy={copy.editorial_medical} />
+  </div>
   <section>
-    <div class="editorial-container">
-      <h3 class="sub-title">Medical data</h3>
-      <Editorial copy={copy.editorial_medical} />
-    </div>
     <Section copy={copy.viz_studies} stepHandler={SectionStudies} switcher="bubbles" />
     <!-- FOOTNOTE COMPONENT copy.footnote_1 -->
   </section>
-  <section>
-    <div class="editorial-container">
-      <Editorial copy={copy.editorial_articles_debunk_1} />
-    </div> 
-    <Mosaic album="debunk" height=25 />
-    <div class="editorial-container">
-      <Editorial copy={copy.debunk_sears} spacer="none" />
-      <Debunk target="sears" />
-    </div>
-    <div class="editorial-container">
-      <Editorial copy={copy.editorial_brain_damage} notifications={commentsCortisol} />
-    </div>
-    <div class="spacer"></div>
-    <Mosaic album="posts" height=75 isSocial={true} />
-    <div class="editorial-container">
-      <Editorial copy={copy.mosaic_cortisol} />
-    </div>
-  </section>
+  <div class="editorial-container">
+    <Editorial copy={copy.editorial_articles_debunk_1} />
+  </div> 
+  <Mosaic album="debunk" height=25 />
+  <div class="editorial-container">
+    <Editorial copy={copy.debunk_sears} spacer="none" />
+    <Debunk target="sears" />
+  </div>
+  <div class="editorial-container">
+    <Editorial copy={copy.editorial_brain_damage} notifications={commentsCortisol} />
+  </div>
+  <div class="spacer"></div>
+  <Mosaic album="posts" height=75 isSocial={true} />
+  <div class="editorial-container">
+    <Editorial copy={copy.mosaic_cortisol} />
+  </div>
   <section>
     <Section copy={copy.viz_studies_middlemiss} stepHandler={SectionMiddlemiss} switcher="bubbles" />
   </section>
+  <div class="editorial-container">
+    <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} />
+    <Video video="cbum" />
+  </div>
+  <div class="editorial-container">
+    <Editorial copy={copy.debunk_narvaez_2} spacer="none" />
+    <Debunk target="narvaez" />
+  </div>
   <section>
-    <div class="editorial-container">
-      <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} />
-      <Video video="cbum" />
-    </div>
-    <div class="editorial-container">
-      <Editorial copy={copy.debunk_narvaez_2} spacer="none" />
-      <Debunk target="narvaez" />
-    </div>
     <Section copy={copy.viz_studies_conclude} stepHandler={SectionPrice} switcher="bubbles" />
   </section>
-  <section>
-    <div class="editorial-container">
-      <Editorial copy={copy.mosaic_thecut} />
-    </div>
-    <Mosaic album="social" height=35 />
-  </section>
+  <div class="editorial-container">
+    <Editorial copy={copy.mosaic_thecut} />
+  </div>
+  <Mosaic album="social" height=35 />
   <section>
     <Section copy={copy.chart_instagram} stepHandler={SectionInstagram} switcher="instagram" />
   </section>
-  <section>
-    <div class="editorial-container">
-      <Editorial copy={copy.lazy_parenting} notifications={commentsLazy} />
-    </div> 
-  </section>
+  <div class="editorial-container">
+    <Editorial copy={copy.lazy_parenting} notifications={commentsLazy} />
+  </div> 
   <section>
     <Section copy={copy.viz_transitions} stepHandler={SectionTransitions} switcher="transitions" />
   </section>
-  <section>
-    <div class="editorial-container">
-      <Editorial copy={copy.editorial_influencerPackages} spacer="none" />
-    </div>
-    <ProductList />
-    <div class="editorial-container">
-      <Editorial copy={copy.editorial_conclusion} />
-    </div>
-  </section>
+  <div class="editorial-container">
+    <Editorial copy={copy.editorial_influencerPackages} spacer="none" />
+  </div>
+  <ProductList />
+  <div class="editorial-container">
+    <Editorial copy={copy.editorial_conclusion} />
+  </div>
 	<!-- <Footer /> -->
 </div>
 
@@ -244,10 +229,10 @@
 		padding: 16px;
 		margin: 0 auto;
 	}
-	:global(#article section) {
-		/* margin: 32px auto;
-		padding-top: 32px; */
-	}
+	/* :global(#article section) {
+		margin: 32px auto;
+		padding-top: 32px;
+	} */
 	:global(#article h2 span) {
 		padding: 0 8px;
 	}
