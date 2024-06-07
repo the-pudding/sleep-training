@@ -1,3 +1,31 @@
+/* Atlas */
+@font-face {
+	font-family: "Atlas Grotesk";
+	src: url("https://pudding.cool/assets/fonts/atlas/AtlasGrotesk-Regular-Web.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-stretch: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Atlas Grotesk";
+	src: url("https://pudding.cool/assets/fonts/atlas/AtlasGrotesk-Bold-Web.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-stretch: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Atlas Grotesk";
+	src: url("https://pudding.cool/assets/fonts/atlas/AtlasGrotesk-Light-Web.woff2") format("woff2");
+	font-weight: 300;
+	font-style: normal;
+	font-stretch: normal;
+	font-display: swap;
+}
+
 /* National */
 @font-face {
 	font-family: "National 2 Web";

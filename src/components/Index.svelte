@@ -1,6 +1,5 @@
 <script>
     import { setContext, getContext } from 'svelte';
-    import { extent } from 'd3-array';
     import Section from "$components/article/Section.svelte";
     import Debunk from "$components/article/Debunk.svelte";
     import ProductList from "$components/article/ProductList.svelte";
@@ -8,6 +7,7 @@
     import HeroComments from "$components/article/HeroComments.svelte";
     import Mosaic from "$components/article/Mosaic.svelte";
     import Video from "$components/article/Video.svelte";
+    import Bubbles from "$components/article/Bubbles.svelte";
 
     // COPY CONTEXT SETTING
     import copy from '$data/copy.json';
@@ -53,22 +53,15 @@
       }
     }
     function SectionReddit(step) {
-        switch (true) {
-        case step >= 1 && step < 2:
-            return {
-              renderedData: data.reddit,
-              focusHover: focusRedditResearch,
-            }
-        case step >= 2 && step < 4:
-            return {
-              renderedData: data.articles,
-              focusHover: null,
-            }
-        default:
-            return {
-              renderedData: data.reddit,
-              focusHover: null
-            }
+      return {
+        renderedData: data.reddit,
+        focusHover: null
+      }
+    }
+    function SectionArticles(step) {
+      return {
+        renderedData: data.articles,
+        focusHover: null
       }
     }
     function SectionStudies(step) {
@@ -82,7 +75,7 @@
               renderedData: data.studies,
               focusHover: focusReview,
             }
-        case step >= 2 && step < 4:
+        case step >= 2 && step < 3:
             return {
               renderedData: data.studies,
               focusHover: focusUmbrellaReview,
@@ -149,21 +142,38 @@
   <section>
     <Section copy={copy.viz_all} stepHandler={SectionIntro} switcher="bubbles" />
   </section>
+  <div class="editorial-container">
+    <Editorial copy={copy.editorial_advocate} spacer="none" />
+    <h3 class="sub-title">Reddit data</h3>
+    <Editorial copy={copy.viz_reddit} />
+  </div>
   <section>
-    <div class="editorial-container">
-      <Editorial copy={copy.editorial_confusion} notifications={commentsConfused} />
+    <Section stepHandler={SectionReddit} switcher="bubbles-fixed" />
+  </section>
+  <section>
+    <div class="editorial-container" spacer="none" >
+      <Editorial copy={copy.viz_reddit_comments} notifications={commentsConfused} />
     </div>
   </section>
+  <div class="editorial-container">
+    <h3 class="sub-title">News data</h3>
+    <Editorial copy={copy.viz_articles} spacer="none" />
+  </div>
   <section>
-    <Section copy={copy.viz_reddit} stepHandler={SectionReddit} switcher="bubbles" />
+    <Section stepHandler={SectionArticles} switcher="bubbles-fixed" />
   </section>
   <section>
+    <Editorial copy={copy.editorial_clickbait} />
     <Mosaic album="articles" height=70 />
     <div class="editorial-container">
-      <Editorial copy={copy.mosaic_divided} />
+      <Editorial copy={copy.editorial_against} />
     </div>
   </section>
   <section>
+    <div class="editorial-container">
+      <h3 class="sub-title">Medical data</h3>
+      <Editorial copy={copy.editorial_medical} />
+    </div>
     <Section copy={copy.viz_studies} stepHandler={SectionStudies} switcher="bubbles" />
     <!-- FOOTNOTE COMPONENT copy.footnote_1 -->
   </section>
@@ -190,12 +200,12 @@
   </section>
   <section>
     <div class="editorial-container">
-      <Editorial copy={copy.debunk_narvaez} spacer="none" />
-      <Debunk target="narvaez" />
+      <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} />
+      <Video video="cbum" />
     </div>
-    <Video video="cbum" />
     <div class="editorial-container">
-      <Editorial copy={copy.mosaic_attachment} notifications={commentsAttachment} />
+      <Editorial copy={copy.debunk_narvaez_2} spacer="none" />
+      <Debunk target="narvaez" />
     </div>
     <Section copy={copy.viz_studies_conclude} stepHandler={SectionPrice} switcher="bubbles" />
   </section>
@@ -235,8 +245,8 @@
 		margin: 0 auto;
 	}
 	:global(#article section) {
-		margin: 32px auto;
-		padding-top: 32px;
+		/* margin: 32px auto;
+		padding-top: 32px; */
 	}
 	:global(#article h2 span) {
 		padding: 0 8px;
@@ -260,4 +270,8 @@
   .spacer {
 		height: 5vh;
 	}
+  .sub-title {
+    font-size: 28px;
+    margin-top: 6vh;
+  }
 </style>

@@ -1,6 +1,6 @@
 <script>
     import { forceSimulation, forceY, forceX, forceCollide } from 'd3-force';
-    import { scaleLinear, scaleOrdinal } from 'd3-scale';
+    import { scaleLinear } from 'd3-scale';
     import { extent } from 'd3-array';
     import { fade } from "svelte/transition";
     import Tooltip from "$components/article/Tooltip.svelte";
@@ -90,7 +90,7 @@
         cursor: pointer;
     }
     text {
-      font-family: "National 2 Web";
+      font-family: "Atlas Grotesk";
       font-weight: 400;
       font-size: 12px;
     }

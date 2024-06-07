@@ -24,7 +24,6 @@
     .legend {
     display: flex;
     justify-content: center;
-    flex-direction: column;
     flex-wrap: wrap;
     column-gap: 10px;
     row-gap: 5px;
@@ -34,7 +33,7 @@
   .legend p {
     margin: 0;
     font-size: 0.8rem;
-    font-family: "National 2 Web";
+    font-family: "Atlas Grotesk";
     text-transform: uppercase;
     display: flex;
     align-items: center;

@@ -42,6 +42,10 @@
         <div class="steps">
             <Scroll {copy} bind:step={step} />
         </div>
+    {:else if switcher === "bubbles-fixed"}
+        <div class="sticky" style="top: 25%;">
+            <Bubbles {switcher} {focusHover} bind:data={renderedData} width={400} height={400}/>
+        </div>
     {:else if switcher === "transitions"}
         {#if step == undefined || step < 2}
             <div class="sticky" style="top: 10%; display: flex;">

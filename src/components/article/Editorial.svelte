@@ -26,10 +26,13 @@
     $: comments = notifications !== undefined ? notifications : undefined;
 </script>
 
-<section id="scrolly">
+<section id="scrolly" class="scrolly-editorial">
 	<Scrolly bind:value={step} >
         <div class="editorial-wrapper">
         {#if animationStarted}
+            {#if copy[0].subtitle}
+                <h3>{copy[0].subtitle}</h3>
+            {/if}
             <div class="editorial" in:fade={{ duration: 1000, delay: 200 }}>
                     {#each copy as p}
                         <p class="editorial-paragraph">{@html p.text}</p>
@@ -56,6 +59,9 @@
 <style>
     .editorial {
         margin-top: 4vh;
-        margin-bottom: 4vh;
+    }
+    .scrolly-editorial {
+        padding-top: 0px !important;
+        margin-top: 0px !important;
     }
 </style>

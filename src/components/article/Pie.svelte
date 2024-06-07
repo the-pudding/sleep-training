@@ -69,7 +69,7 @@
 
   <style>
     .label {
-      font-family: "National 2 Web";
+      font-family: "Atlas Grotesk";
       fill: #ffffff;
     }
     .tooltip {

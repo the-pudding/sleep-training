@@ -56,7 +56,7 @@
     border: 0.5px solid black;
     cursor: pointer;
     color: black;
-    font-family: "National 2 Web";
+    font-family: "Atlas Grotesk";
   }
   
   .table-container {

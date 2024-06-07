@@ -30,7 +30,7 @@
 
 <style>
   .notification {
-    font-family: "National 2 Web";
+    font-family: "Atlas Grotesk";
     display: flex-column;
     background-color: #404E4D;
     padding: 10px;
@@ -40,7 +40,7 @@
     transition: transform 300ms ease;
   }
   .notification p {
-    font-size: 12px;
+    font-size: 14px;
   }
   .notification-content {
     display: flex;
