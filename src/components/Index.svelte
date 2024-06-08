@@ -7,6 +7,7 @@
     import HeroComments from "$components/article/HeroComments.svelte";
     import Mosaic from "$components/article/Mosaic.svelte";
     import Video from "$components/article/Video.svelte";
+    import ForceBubbles from "$components/article/ForceBubbles.svelte"
 
     // COPY CONTEXT SETTING
     import copy from '$data/copy.json';
@@ -129,6 +130,7 @@
 </script>
 
 <div id="article">
+  <!-- <ForceBubbles /> -->
   <h1>{copy.title}</h1>
   <h2>{copy.description}</h2>
   <HeroComments notifications={commentsDivided} />
