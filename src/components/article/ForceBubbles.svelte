@@ -67,7 +67,6 @@
         dataToSimulate = packing().leaves();
 
         nodes = dataToSimulate;
-        
 
         // YOU ACTUALLY DON'T NEED THE SIMULATION TO RUN, but it's here if you do!
 
@@ -75,11 +74,11 @@
         //     // .force('charge', forceManyBody().strength(2))
         //     .force("x", forceX($viewport.width / 2).strength(0.01))
         //     .force("y", forceY($viewport.height/3).strength(0.01))
-        //     .force("cluster", forceCluster())
+            // .force("cluster", forceCluster())
         //     .force("collide", forceCollide())
-        //     .on("tick" () => {
-        //          nodes = simulation.nodes();
-        //      })
+            // .on("tick", () => {
+            //      nodes = simulation.nodes();
+            //  })
     })
 
 
