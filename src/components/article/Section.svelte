@@ -9,9 +9,6 @@
     let mounted = false;
 
     let data = getContext("data").studies;
-    // TIMELINE DATA
-    let dataTimeline = data.map(d => Object.assign({}, d));
-    // MAP DATA
     let dataMap = data.map(d => Object.assign({}, d));
 
     onMount(() => {
@@ -23,5 +20,5 @@
 
 {#if mounted && stepHandler}
     <!-- THIS FEELS CLEANER TO ME -->
-    <ScrollSection {switcher} {stepHandler} {copy} {dataTimeline} {dataMap} />
+    <ScrollSection {switcher} {stepHandler} {copy} {dataMap} />
 {/if}

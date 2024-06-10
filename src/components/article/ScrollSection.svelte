@@ -8,7 +8,6 @@
 
     export let copy;
     export let switcher;
-    export let dataTimeline;
     export let dataMap;
     export let stepHandler;
 
@@ -29,13 +28,10 @@
         <div class="sticky" class:switcher style="">
             {#if renderedData}
                 {#if switcher == "bubbles"}
-                    <!-- note that i have each group as the "position" here, but you can change that -->
-                    <!-- if you change it though, you'll need to assign each grouping to a # -->
-                    <ForceBubbles {renderedData} groupedBy={"position"} step={value} />
-                
+                    <ForceBubbles {renderedData} groupedBy={"position"} step={value} />                
                 {:else if switcher === "transitions"}
                     {#if value == undefined || value < 2}
-                        <Timeline bind:data={dataTimeline} width={500} height={800} />
+                        <Timeline width={500} height={800} />
                     {:else if value >= 2 && value <= 3 }    
                         <Map bind:data={dataMap} width={700} height={600} />
                     {/if}
@@ -105,5 +101,4 @@
 	.step.active {
 		opacity: 1;
 	}
-
 </style>

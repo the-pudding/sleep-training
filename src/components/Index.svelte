@@ -144,7 +144,7 @@
   <div class="editorial-container">
     <Editorial copy={copy.editorial_advocate} spacer="none" />
     <h3 class="sub-title">Reddit data</h3>
-    <Editorial copy={copy.viz_reddit} />
+    <Editorial copy={copy.viz_reddit} spacer="none" />
   </div>
   <section>
     <Section stepHandler={SectionReddit} switcher="bubbles-fixed" />
