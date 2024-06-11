@@ -1,26 +1,41 @@
 <script>
     import Notification from "$components/article/Notification.svelte";
     import { fade } from 'svelte/transition';
+    import Scrolly from "$components/helpers/Scrolly.svelte";
     export let notifications;
 
-    let ready = false;
-    setTimeout(() => {
-        ready = true;
-    }, 100)
+    let step;
+    let animationStarted = false;
+
+    $: step, changeAnimationStarted();
+
+    function changeAnimationStarted(){
+        if(step == 0) {
+            setTimeout(() => {
+                animationStarted = true;
+            }, 1000)
+        }
+    }
+    $: console.log("step", step)
 </script>
 
-{#if ready}
-<div class="hero-comments-container">
-    {#each notifications as comment, index}
-        <div class="notification-wrapper" in:fade={{ duration: 1000, delay: 2000 + index * 100 }}>
-            <Notification {comment} {index} />
+<section id="scrolly" class="scrolly-editorial">
+	<Scrolly bind:value={step} >
+        <div class="hero-comments-container">
+                {#each notifications as comment, index}
+                    <div class="notification-wrapper">
+                        <Notification {comment} {animationStarted} {index} />
+                    </div>
+                {/each} 
         </div>
-    {/each} 
-</div>
-{/if}
+    </Scrolly>
+</section>
+
 
 <style>
     .hero-comments-container {
         min-height: 85vh;
     }
 </style>
+
+<!-- in:fade={{ duration: 4000, delay: index * 1000 }} -->

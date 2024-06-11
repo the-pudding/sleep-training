@@ -1,7 +1,7 @@
 <script>
-  import { fade } from 'svelte/transition';
   export let comment;
   export let index;
+  export let animationStarted;
 
   function getPlatformDetails(platform) {
     const iconUrl =
@@ -15,18 +15,18 @@
   }
 </script>
   
-  <div class="notification">
-    <div class="notification-content">
-      <div class="notification-likes">
-        <img class="icon" src="{getPlatformDetails(comment.platform).icon}" alt="reddit or instagram icon" />
-        {comment.likes} Likes
-      </div>
-      <p>{comment.comment}</p>
+<div class="notification" class:animationStarted style="--delay:{index};">
+  <div class="notification-content">
+    <div class="notification-likes">
+      <img class="icon" src="{getPlatformDetails(comment.platform).icon}" alt="reddit or instagram icon" />
+      {comment.likes} Likes
     </div>
-    <div class="notification-source">
-      <a href="{comment.url}">SOURCE</a>
-    </div>
+    <p>{comment.comment}</p>
   </div>
+  <div class="notification-source">
+    <a href="{comment.url}">SOURCE</a>
+  </div>
+</div>
 
 <style>
   .notification {
@@ -37,7 +37,11 @@
     color: white;
     border-radius: 5px;
     margin-bottom: 10px;
-    transition: transform 300ms ease;
+    opacity: 0;
+    transition: opacity calc(var(--delay) * calc(1s));
+  }
+  .notification.animationStarted {
+    opacity: 1;
   }
   .notification p {
     font-size: 14px;

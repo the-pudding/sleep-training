@@ -1,20 +1,27 @@
 <script>
+  import viewport from '$stores/viewport.js';
   export let data;
   export let width;
 
+  export let x;
+  export let y;
   import { fly, fade } from "svelte/transition";
 
-  let tooltipWidth;
+  let tooltipWidth = width;
 
   // TOOLTIP POSITIONING
-  const xNudge = 20;
+  let xNudge = 0;
+  $: {
+      if ((x + width) > $viewport.width) {
+      xNudge = -width;
+    } else {
+      xNudge = 0;
+    }
+  }
   const yNudge = 15;
 
-  $: xPosition =
-      data.x + tooltipWidth + xNudge > width
-      ? data.x - tooltipWidth - xNudge
-      : data.x + xNudge;
-  $: yPosition = data.y + yNudge;
+  $: xPosition = x + xNudge;
+  $: yPosition = y + yNudge;
 
   // TOOLTIP CONTENT
   function truncateText(text, maxLength) {
@@ -72,8 +79,7 @@
     class="tooltip" 
     in:fly={{ y: 10, duration: 200, delay: 200 }}
     out:fade
-    style="left:{xPosition}px; top:{yPosition}px;"
-    bind:clientWidth={tooltipWidth}
+    style="left:{xPosition}px; top:{yPosition}px; width:{tooltipWidth}px;"
 >
     <p class="tooltip-title">
     {title}
@@ -88,8 +94,6 @@
 
 <style>
     .tooltip {
-      min-width: 250px;
-      max-width: 40%;
       position: absolute;
       pointer-events: none;
       padding: 1rem 1rem;

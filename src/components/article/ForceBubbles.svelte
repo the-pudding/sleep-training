@@ -1,14 +1,19 @@
 <script>
 
-    import { interpolate, forceManyBody, select ,selectAll, forceX, forceY, max, scaleOrdinal, range, schemeCategory10, group, hierarchy, pack, rollup, quadtree, forceSimulation, scaleLinear } from "d3";
+    import { max, scaleOrdinal, range, schemeCategory10, group, hierarchy, pack, rollup, quadtree, forceSimulation, scaleLinear } from "d3";
     import { onMount } from "svelte";
-    import Circle from "$components/article/Circle.svelte";
-    import viewport from "$stores/viewport.js";
+    import { hoveredCircle } from '$stores/misc.js';
 
+    import Tooltip from "$components/article/Tooltip.svelte";
+    import Circle from "$components/article/Circle.svelte";
+    import ClusterLabels from "$components/article/ClusterLabels.svelte";
+    import viewport from "$stores/viewport.js";
+    // import Legend from "$components/article/Legend.svelte";
 
     export let renderedData;
     export let groupedBy;
     export let step;
+    export let focusHover;
 
     let dataToSimulate;
     let nodes = [];
@@ -21,7 +26,10 @@
         "Neutral":2
     }
 
-    let color = scaleOrdinal(range(Object.keys(ordinalGroup).length), ["red","green","blue"]);
+    $: console.log("focushover", focusHover);
+
+    let color = scaleOrdinal(range(Object.keys(ordinalGroup).length), ["#4FB477","#7D82B8","#404E4D"]);
+
 
     //your bubbles were really big, so tried to tone it down here, keeping them between 3 and 10px;
     let radiusScale = scaleLinear().domain([1,20]).range([3,10]).clamp(true)
@@ -38,7 +46,6 @@
     }
 
     function showBubbles(){
-
         console.log("showing bubbles")
         animatedIn = true;
     }
@@ -148,27 +155,30 @@
 
         return force;
     }
-
-
 </script>
 <div class="bubbles">
+    <!-- <Legend positionColor={color} data={renderedData} /> -->
 <svg
     width={$viewport.width}
     height={$viewport.height}>
     <g>
-
         {#if nodes}
             {#each nodes as point,i}
-                <Circle {point} {i} color={color(point.data.group)} {animatedIn}}/>
+                <Circle {point} {i} color={color(point.data.group)} {animatedIn} {focusHover} />
             {/each}
+            <ClusterLabels {nodes} />
         {/if}
     </g>
 </svg>
+{#if $hoveredCircle != undefined}
+    <Tooltip data={$hoveredCircle.data.info} x={$hoveredCircle.x} y={$hoveredCircle.y} width={200} />
+{/if}
 </div>
 
 <style>
     .bubbles {
         width: 100vw;
         height: 100vh;
+        position: relative;
     }
 </style>

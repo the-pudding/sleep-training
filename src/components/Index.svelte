@@ -7,7 +7,6 @@
     import HeroComments from "$components/article/HeroComments.svelte";
     import Mosaic from "$components/article/Mosaic.svelte";
     import Video from "$components/article/Video.svelte";
-    import ForceBubbles from "$components/article/ForceBubbles.svelte"
 
     // COPY CONTEXT SETTING
     import copy from '$data/copy.json';
@@ -20,7 +19,7 @@
     // FOCUSED TOOLTIPS
     const focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];
     const focusNarvaez = data.articles.filter(d => d.url === "https://www.psychologytoday.com/intl/blog/moral-landscapes/201112/dangers-crying-it-out")[0];
-    const focusRedditResearch = data.reddit.filter(d => d.username === "leftpantleg420")[0];
+    // const focusRedditResearch = data.reddit.filter(d => d.username === "leftpantleg420")[0];
     const focusUmbrellaReview = data.studies.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/35778903/")[0];
     const focusPrice = data.studies.filter(d => d.url === "https://publications.aap.org/pediatrics/article-abstract/130/4/643/30241/Five-Year-Follow-up-of-Harms-and-Benefits-of?redirectedFrom=fulltext")[0];
     const focusReview = data.studies.filter(d => d.url === "https://aasm.org/resources/practiceparameters/review_nightwakingschildren.pdf")[0];
@@ -34,6 +33,7 @@
 
     // STEP LOGIC
     function SectionIntro(step) {
+      console.log(step);
       switch (true) {
         case step >= 0 && step < 1:
             return {
@@ -131,10 +131,10 @@
 
 <div id="article">
   <!-- <ForceBubbles /> -->
-  <h1>{copy.title}</h1>
-  <h2>{copy.description}</h2>
   <HeroComments notifications={commentsDivided} />
   <div class="spacer"></div>
+  <h1>{copy.title}</h1>
+  <h2>{copy.description}</h2>
   <div class="editorial-container">
     <Editorial copy={copy.editorial_intro} />
   </div>    

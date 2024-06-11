@@ -1,7 +1,7 @@
 <script>
     export let positionColor;
     export let data;
-    export let hoveredPosition;
+    import { hoveredCircle } from '$stores/misc.js';
 
     $: positions = Array.from(new Set(data.map(d => d.position)));
 </script>
@@ -10,9 +10,8 @@
     {#each positions as position}
         <!-- svelte-ignore a11y-mouse-events-have-key-events -->
         <p
-          on:mouseover={() => hoveredPosition = position}
-          on:mouseleave={() => hoveredPosition = null}
-          class:unhovered={hoveredPosition && hoveredPosition !== position} 
+          on:mouseover={() => $hoveredCircle.data.info.position = position}
+          on:mouseleave={() => $hoveredCircle = null}
         >
             <span style="background-color: {positionColor(position)}"></span>
             {position}

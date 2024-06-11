@@ -14,11 +14,17 @@
     let renderedData;
     let focusHover = null;
     let value;
+    let newValues;
 
-    let newValues = stepHandler(value);
-    renderedData = newValues.renderedData;
-    focusHover = newValues.focusHover;
+    $: value, handleStepChange()
 
+    function handleStepChange() {
+        newValues = stepHandler(value);
+        renderedData = newValues.renderedData;
+        focusHover = newValues.focusHover;
+    }
+
+    $: console.log("new values", newValues);
 </script>
 
 {#if copy}
@@ -28,7 +34,7 @@
         <div class="sticky" class:switcher style="">
             {#if renderedData}
                 {#if switcher == "bubbles"}
-                    <ForceBubbles {renderedData} groupedBy={"position"} step={value} />                
+                    <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} step={value} />                
                 {:else if switcher === "transitions"}
                     {#if value == undefined || value < 2}
                         <Timeline width={500} height={800} />
