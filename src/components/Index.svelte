@@ -147,7 +147,7 @@
   </section>
   <div class="editorial-container">
     <Editorial copy={copy.editorial_advocate} spacer="none" />
-    <Editorial copy={copy.viz_reddit} spacer="none" title="Reddit data" />
+    <Editorial copy={copy.viz_reddit} spacer="none" title="Public opinion analysis" />
   </div>
   <section>
     <Section stepHandler={SectionReddit} switcher="bubbles-fixed" />
@@ -156,7 +156,7 @@
     <Editorial copy={copy.viz_reddit_comments} notifications={commentsConfused} />
   </div>
   <div class="editorial-container">
-    <Editorial copy={copy.viz_articles} spacer="none" title="News data"/>
+    <Editorial copy={copy.viz_articles} spacer="none" title="Media discourse analysis"/>
   </div>
   <section>
     <Section stepHandler={SectionArticles} switcher="bubbles-fixed" />
@@ -167,7 +167,7 @@
       <Editorial copy={copy.editorial_against} />
     </div>
   <div class="editorial-container">    
-    <Editorial copy={copy.editorial_medical} title="Medical data" />
+    <Editorial copy={copy.editorial_medical} title="Academic data analysis" />
   </div>
   <section>
     <Section copy={copy.viz_studies} stepHandler={SectionStudies} switcher="bubbles" />
@@ -202,7 +202,7 @@
     <Section copy={copy.viz_studies_conclude} stepHandler={SectionPrice} switcher="bubbles" />
   </section>
   <div class="editorial-container">
-    <Editorial copy={copy.mosaic_thecut} />
+    <Editorial copy={copy.mosaic_thecut} title="Analysis of Instagram discourse" />
   </div>
   <Mosaic album="social" height=35 />
   <section>

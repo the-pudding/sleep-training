@@ -36,7 +36,7 @@
                 {:else if switcher === "transitions"}
                     {#if value == undefined || value < 2}
                         <Timeline />
-                    {:else if value >= 2 && value <= 3 }    
+                    {:else if value >= 2 && value <= 4 }    
                         <Map bind:data={dataMap} />
                     {/if}
                 {:else if switcher === "instagram"}
