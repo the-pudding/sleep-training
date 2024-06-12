@@ -74,8 +74,11 @@
 					const data = [null,null];
 
 					Promise.all([
+						import("../../_app/immutable/entry/start.9832454b.js"),
+						import("../../_app/immutable/entry/app.2e009b82.js")
 						import("../../_app/immutable/entry/start.48945326.js"),
 						import("../../_app/immutable/entry/app.e79c5dfb.js")
+  main
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 3],
