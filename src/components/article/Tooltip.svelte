@@ -39,15 +39,15 @@
   $: {
     switch (data.type) {
       case 'study':
-        labelOne = 'AUTHOR:';
-        textOne = truncateText(data.authors.toUpperCase(), 60);
+        labelOne = 'AUTHORS';
+        textOne = truncateText(data.authors, 60);
         labelTwo = 'PARTICIPANTS';
         textTwo = data.radius;
         title = truncateText(data.title.toUpperCase(), 70);
         break;
       case 'article':
-        labelOne = 'PUBLISHER:';
-        textOne = data.publisher.toUpperCase();
+        labelOne = 'PUBLISHER';
+        textOne = data.publisher;
         labelTwo = 'BACKLINKS';
         textTwo = data.radius;
         title = truncateText(data.title.toUpperCase(), 70);
@@ -56,11 +56,11 @@
         labelOne = 'UPVOTES';
         textOne = data.radius;
         labelTwo = 'COMMENT';
-        textTwo = data.comment;
+        textTwo = truncateText(data.comment, 140);
         title = truncateText(data.username.toUpperCase(), 40);
         break;
       case 'instagram':
-        labelOne = 'FOLLOWER COUNT';
+        labelOne = 'FOLLOWERS';
         textOne = data.radius;
         labelTwo = '';
         textTwo = '';
@@ -87,7 +87,9 @@
     <!-- Additional info under the country name -->
     <div class='info'>
         <p class='info-element'>{labelOne}: {textOne}</p>
+        {#if data.type != "instagram"}
         <p class='info-element'>{labelTwo}: {textTwo}</p>
+        {/if}
     </div>
 </div>
 
@@ -104,14 +106,15 @@
     }
     .tooltip-title {
       margin: 0;
-      font-size: 1rem;
+      font-size: 12px;
       font-weight: 700;
     }
     .info {
-      font-size: 0.8rem;
+      font-size: 14px;
       display: inline-block;
     }
     .info-element {
+      font-size: 12px;
       margin-bottom: 0px;
       padding-bottom: 0px;
     }

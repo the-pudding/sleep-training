@@ -1,6 +1,8 @@
 <script>
-    export let nodes;
     import { groups } from "d3";
+
+    export let nodes;
+    export let animatedIn;
 
     let data;
     $: {
@@ -21,7 +23,19 @@
     }
 </script>
 
-{#each data as position}
-    {@const center = centroid(position[1])}
-    <text x={center.x} y={center.y}>{position[0]}</text>
-{/each}
+{#if animatedIn}
+    {#each data as position}
+        {@const center = centroid(position[1])}
+        <rect x={center.x - 3} y={center.y - 17} width={position[0].length * 10} height={25} fill="white"/>
+        <text x={center.x} y={center.y} class="cluster-label">{position[0]}</text>
+    {/each}
+{/if}
+
+<style>
+.cluster-label {
+    color: white;
+    font-size: 0.8rem;
+    font-family: "Atlas Grotesk";
+    text-transform: uppercase;
+}
+</style>

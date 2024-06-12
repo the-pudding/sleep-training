@@ -88,8 +88,6 @@
     function rerunSimulation(){
         if(mounted && dataLength !== data.length){
 
-            console.log("re-running simulation")
-
             let dataToSimulate = data.map(d => d);
             dataLength = dataToSimulate.length;
 

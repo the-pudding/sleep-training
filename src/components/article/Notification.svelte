@@ -38,11 +38,14 @@
     border-radius: 5px;
     margin-bottom: 10px;
     opacity: 0;
-    transition: opacity calc(var(--delay) * calc(1s));
+    transform: translateY(50px);
+    transition: opacity 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) calc(var(--delay) * 0.2s), transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) calc(var(--delay) * 0.2s);
   }
   .notification.animationStarted {
     opacity: 1;
+    transform: translateY(0);
   }
+
   .notification p {
     font-size: 14px;
   }

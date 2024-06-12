@@ -92,8 +92,8 @@
 
 <style>
     circle {
-        transition: stroke 300ms ease, opacity 300ms ease, cx 100ms ease, cy 100ms ease;
-        cursor: pointer;
+      transition: stroke 300ms ease, opacity 300ms ease, cx 100ms ease, cy 100ms ease;
+      cursor: pointer;
     }
     text {
       font-family: "Atlas Grotesk";

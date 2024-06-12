@@ -1,35 +1,42 @@
 <script>
     import Notification from "$components/article/Notification.svelte";
     import Scrolly from "$components/helpers/Scrolly.svelte";
+    import Debunk from "$components/article/Debunk.svelte";
     import { fade } from 'svelte/transition';
     export let copy;
     export let notifications;
     export let spacer = null;
-
-    let noSpacer = false;
-    if (spacer === "none") {
-      noSpacer = true;
-    }
+    export let title = null;
+    export let debunk = null;
 
     let step;
+    let comments;
+    $: comments = notifications !== undefined ? notifications : undefined;
     let animationStarted = false;
 
     $: step, changeAnimationStarted();
 
     function changeAnimationStarted(){
-        if(step == 0){
-        animationStarted = true;
+        if(step == 0) {
+            setTimeout(() => {
+                animationStarted = true;
+            }, 1000)
         }
     }
 
-    let comments;
-    $: comments = notifications !== undefined ? notifications : undefined;
+    let noSpacer = false;
+    if (spacer === "none") {
+      noSpacer = true;
+    }
 </script>
 
 <section id="scrolly" class="scrolly-editorial">
 	<Scrolly bind:value={step} >
         <div class="editorial-wrapper">
         {#if animationStarted}
+            {#if title}
+                <h3 class="sub-title">{title}</h3>
+            {/if}
             {#if copy[0].subtitle}
                 <h3>{copy[0].subtitle}</h3>
             {/if}
@@ -43,15 +50,22 @@
         </div>
     </Scrolly>
 </section>
+
 <div class="editorial-comments">
-    {#if animationStarted && comments !== undefined}
-        <div>
-            {#each comments as comment, index}
-                <div class="notification-wrapper" in:fade={{ duration: 1000, delay: 2000 + index * 100 }}>
-                    <Notification {comment} {index} {step} />
-                </div>
-            {/each}
-        </div>
+    {#if comments}
+        {#each comments as comment, index}
+            <div class="notification-wrapper">
+                <Notification {comment} {index} {animationStarted} />
+            </div>
+        {/each}
+    {/if}
+</div>
+
+<div class="debunk">
+    {#if animationStarted}
+        {#if debunk}
+            <Debunk target={debunk} />
+        {/if}
     {/if}
 </div>
 
@@ -64,4 +78,8 @@
         padding-top: 0px !important;
         margin-top: 0px !important;
     }
+    .sub-title {
+    font-size: 28px;
+    margin-top: 6vh;
+  }
 </style>

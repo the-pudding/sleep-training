@@ -1,6 +1,6 @@
 <script>
 
-    import { max, scaleOrdinal, range, schemeCategory10, group, hierarchy, pack, rollup, quadtree, forceSimulation, scaleLinear } from "d3";
+    import { max, scaleOrdinal, range, group, hierarchy, pack, rollup, quadtree, forceSimulation, scaleLinear } from "d3";
     import { onMount } from "svelte";
     import { hoveredCircle } from '$stores/misc.js';
 
@@ -8,7 +8,6 @@
     import Circle from "$components/article/Circle.svelte";
     import ClusterLabels from "$components/article/ClusterLabels.svelte";
     import viewport from "$stores/viewport.js";
-    // import Legend from "$components/article/Legend.svelte";
 
     export let renderedData;
     export let groupedBy;
@@ -26,10 +25,7 @@
         "Neutral":2
     }
 
-    $: console.log("focushover", focusHover);
-
     let color = scaleOrdinal(range(Object.keys(ordinalGroup).length), ["#4FB477","#7D82B8","#404E4D"]);
-
 
     //your bubbles were really big, so tried to tone it down here, keeping them between 3 and 10px;
     let radiusScale = scaleLinear().domain([1,20]).range([3,10]).clamp(true)
@@ -46,7 +42,6 @@
     }
 
     function showBubbles(){
-        console.log("showing bubbles")
         animatedIn = true;
     }
 
@@ -157,7 +152,6 @@
     }
 </script>
 <div class="bubbles">
-    <!-- <Legend positionColor={color} data={renderedData} /> -->
 <svg
     width={$viewport.width}
     height={$viewport.height}>
@@ -166,7 +160,7 @@
             {#each nodes as point,i}
                 <Circle {point} {i} color={color(point.data.group)} {animatedIn} {focusHover} />
             {/each}
-            <ClusterLabels {nodes} />
+            <ClusterLabels {nodes} {animatedIn} />
         {/if}
     </g>
 </svg>

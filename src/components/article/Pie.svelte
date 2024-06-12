@@ -1,9 +1,10 @@
 <script>
     import * as d3 from 'd3';
+    import viewport from "$stores/viewport.js";
   
     export let data;
-  
     export let width;
+    
     let height = 400;
     let radius = Math.min(width, height) / 2;
   
@@ -12,15 +13,11 @@
     let color;
     let pieData = [];
 
-    const margin = { top: 0, right: 0, bottom: 20, left: 150 };
-    $: innerWidth = width - margin.right - margin.left;
-
     const colorMapping = {
         Advocate: "#4FB477",
         Neutral: "#7D82B8",
         Oppose: "#404E4D"
     };
-    $: positionColor = (position) => colorMapping[position] || "#000000";
   
     $: {
       // Group data points by position and calculate the sum of radius for each position
@@ -45,8 +42,8 @@
     }
   </script>
   
-  <svg width={width} height={height}>
-    <g transform={`translate(${innerWidth / 2}, ${height / 2})`}>
+  <svg width={$viewport.width} height={$viewport.height}>
+    <g>
       {#each pie(pieData) as d, i}
         <g class="arc">
           <path d={arc(d)} fill={colorMapping[d.data.position]} />
@@ -73,12 +70,12 @@
       fill: #ffffff;
     }
     .tooltip {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #ffffff;
-    padding: 5px;
-    border-radius: 4px;
-    font-size: 12px;
-    pointer-events: none;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      padding: 5px;
+      border-radius: 4px;
+      font-size: 12px;
+      pointer-events: none;
   }
   </style>

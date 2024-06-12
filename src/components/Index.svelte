@@ -31,9 +31,14 @@
     let commentsAttachment = data.comments.filter(d => d.category === "attachment");
     let commentsLazy = data.comments.filter(d => d.category === "lazy");
 
+    // TITLE ANIMATION
+    let loaded = false
+    setTimeout(() => {
+      loaded = true;
+    }, 4000)
+
     // STEP LOGIC
     function SectionIntro(step) {
-      console.log(step);
       switch (true) {
         case step >= 0 && step < 1:
             return {
@@ -130,11 +135,10 @@
 </script>
 
 <div id="article">
-  <!-- <ForceBubbles /> -->
   <HeroComments notifications={commentsDivided} />
   <div class="spacer"></div>
-  <h1>{copy.title}</h1>
-  <h2>{copy.description}</h2>
+  <h1 class="title" class:loaded>{copy.title}</h1>
+  <h2 class="title" class:loaded style="--delay:0.5s;">{copy.description}</h2>
   <div class="editorial-container">
     <Editorial copy={copy.editorial_intro} />
   </div>    
@@ -143,8 +147,7 @@
   </section>
   <div class="editorial-container">
     <Editorial copy={copy.editorial_advocate} spacer="none" />
-    <h3 class="sub-title">Reddit data</h3>
-    <Editorial copy={copy.viz_reddit} spacer="none" />
+    <Editorial copy={copy.viz_reddit} spacer="none" title="Reddit data" />
   </div>
   <section>
     <Section stepHandler={SectionReddit} switcher="bubbles-fixed" />
@@ -153,8 +156,7 @@
     <Editorial copy={copy.viz_reddit_comments} notifications={commentsConfused} />
   </div>
   <div class="editorial-container">
-    <h3 class="sub-title">News data</h3>
-    <Editorial copy={copy.viz_articles} spacer="none" />
+    <Editorial copy={copy.viz_articles} spacer="none" title="News data"/>
   </div>
   <section>
     <Section stepHandler={SectionArticles} switcher="bubbles-fixed" />
@@ -164,9 +166,8 @@
     <div class="editorial-container">
       <Editorial copy={copy.editorial_against} />
     </div>
-  <div class="editorial-container">
-    <h3 class="sub-title">Medical data</h3>
-    <Editorial copy={copy.editorial_medical} />
+  <div class="editorial-container">    
+    <Editorial copy={copy.editorial_medical} title="Medical data" />
   </div>
   <section>
     <Section copy={copy.viz_studies} stepHandler={SectionStudies} switcher="bubbles" />
@@ -177,8 +178,7 @@
   </div> 
   <Mosaic album="debunk" height=25 />
   <div class="editorial-container">
-    <Editorial copy={copy.debunk_sears} spacer="none" />
-    <Debunk target="sears" />
+    <Editorial copy={copy.debunk_sears} spacer="none" debunk="sears" />
   </div>
   <div class="editorial-container">
     <Editorial copy={copy.editorial_brain_damage} notifications={commentsCortisol} />
@@ -196,8 +196,7 @@
     <Video video="cbum" />
   </div>
   <div class="editorial-container">
-    <Editorial copy={copy.debunk_narvaez_2} spacer="none" />
-    <Debunk target="narvaez" />
+    <Editorial copy={copy.debunk_narvaez_2} spacer="none" debunk="narvaez" />
   </div>
   <section>
     <Section copy={copy.viz_studies_conclude} stepHandler={SectionPrice} switcher="bubbles" />
@@ -257,8 +256,14 @@
   .spacer {
 		height: 5vh;
 	}
-  .sub-title {
-    font-size: 28px;
-    margin-top: 6vh;
+  .title {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) var(--delay, 0s), transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) var(--delay, 0s);
+  }
+
+  .title.loaded {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>

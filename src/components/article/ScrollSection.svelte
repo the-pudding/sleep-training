@@ -23,8 +23,6 @@
         renderedData = newValues.renderedData;
         focusHover = newValues.focusHover;
     }
-
-    $: console.log("new values", newValues);
 </script>
 
 {#if copy}
@@ -39,11 +37,11 @@
                     {#if value == undefined || value < 2}
                         <Timeline width={500} height={800} />
                     {:else if value >= 2 && value <= 3 }    
-                        <Map bind:data={dataMap} width={700} height={600} />
+                        <Map bind:data={dataMap} />
                     {/if}
                 {:else if switcher === "instagram"}
                     {#if value == undefined || value < 2}
-                        <Bubbles {switcher} {focusHover} bind:data={renderedData} width={800} height={400}/>
+                        <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} step={value} />
                     {:else if value >= 2 && value <= 3 }
                         <Pie data={renderedData} width={800} />
                     {/if}
@@ -80,12 +78,6 @@
         z-index: 2;
 		pointer-events: none;
     }
-    .current-step {
-		position: fixed;
-		bottom: 0;
-		right: 0;
-	}
-
     .step {
 		height: 60vh;
 		opacity: .3;

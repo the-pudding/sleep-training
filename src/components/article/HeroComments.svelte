@@ -1,6 +1,5 @@
 <script>
     import Notification from "$components/article/Notification.svelte";
-    import { fade } from 'svelte/transition';
     import Scrolly from "$components/helpers/Scrolly.svelte";
     export let notifications;
 
@@ -16,17 +15,16 @@
             }, 1000)
         }
     }
-    $: console.log("step", step)
 </script>
 
 <section id="scrolly" class="scrolly-editorial">
 	<Scrolly bind:value={step} >
         <div class="hero-comments-container">
-                {#each notifications as comment, index}
-                    <div class="notification-wrapper">
-                        <Notification {comment} {animationStarted} {index} />
-                    </div>
-                {/each} 
+            {#each notifications as comment, index}
+                <div class="notification-wrapper">
+                    <Notification {comment} {animationStarted} {index} />
+                </div>
+            {/each} 
         </div>
     </Scrolly>
 </section>
