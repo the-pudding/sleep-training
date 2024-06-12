@@ -26,7 +26,7 @@
 {#if animatedIn}
     {#each data as position}
         {@const center = centroid(position[1])}
-        <rect x={center.x - 3} y={center.y - 17} width={position[0].length * 10} height={25} fill="white"/>
+        <rect x={center.x - 3} y={center.y - 17} width={position[0].length * 10} height={25} fill="white" rx="5" ry="5" />
         <text x={center.x} y={center.y} class="cluster-label">{position[0]}</text>
     {/each}
 {/if}

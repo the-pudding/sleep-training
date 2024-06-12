@@ -3,22 +3,16 @@
   import worldMap from "$data/world-geojson2.json";
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
-  import Tooltip from "$components/article/Tooltip.svelte";
   import viewport from "$stores/viewport.js";
 
-  export let width;
   export let data;
 
   const margin = { top: 0, right: 0, bottom: 20, left: -2 };
   $: innerWidth = $viewport.width - margin.right - margin.left;
   $: innerHeight = $viewport.height - margin.top - margin.bottom;
   let nodes = [];
-  let hoveredPosition;
-  let hovered;
   let pathGenerator;
   let projection;
-
-  $: console.log("map height", innerHeight)
 
   const colorMapping = {
         Advocate: "#4FB477",
@@ -65,12 +59,11 @@
     })
 </script>
 
-<div class="map-container" style="width: 100%; height: {$viewport.height}px;">
+<div class="map-container" style="width: {$viewport.width}; height: {$viewport.height}px;">
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <svg 
     width={$viewport.width}
-    height={$viewport.height} 
-    on:mouseleave={() => (hovered = null)}
+    height={$viewport.height}
   >
     <g>
       {#if pathGenerator}
@@ -86,23 +79,14 @@
             r="5"
             cx={node.x}
             cy={node.y}
-            fill={hovered === node ? "#81A0DD" : positionColor(node.position)}
-            opacity={hovered || hoveredPosition
-                ? hovered === node || hoveredPosition === node.position
-                    ? 1
-                    : 0.3
-                : 1}
-            on:mouseover={() => (hovered = node)}
-            on:focus={() => (hovered = node)}
+            fill={positionColor(node.position)}
+            opacity=1
             in:fade={{ delay: index * 10 }}
           />
         {/each}
       {/if}
     </g>
   </svg>
-  {#if hovered}
-    <Tooltip data={hovered} {width} />
-  {/if}
 </div>
 
 <style>
@@ -120,6 +104,6 @@
   }
   circle {
     transition: stroke 300ms ease, opacity 300ms ease, cx 100ms ease, cy 100ms ease;
-    cursor: pointer;
+    pointer-events: none;
   }
 </style>

@@ -42,29 +42,36 @@
     }
   </script>
   
-  <svg width={$viewport.width} height={$viewport.height}>
-    <g>
-      {#each pie(pieData) as d, i}
-        <g class="arc">
-          <path d={arc(d)} fill={colorMapping[d.data.position]} />
-        </g>
-      {/each}
-      {#each pie(pieData) as d, i}
-        <g class="arc">
-          <!-- svelte-ignore a11y-no-static-element-interactions -->
-          <!-- svelte-ignore a11y-mouse-events-have-key-events -->
-          <text class="label" transform={`translate(${arc.centroid(d)})`}
-                dy=".35em" text-anchor="middle"
-                dx={d.data.position === 'Neutral' ? '-1.5em' : '1.5em'}
-                >
-            {d.data.position}
-          </text>
-        </g>
-      {/each}
-    </g>
-  </svg>
+  <div class="pie">
+    <svg width={$viewport.width} height={$viewport.height}>
+      <g>
+        {#each pie(pieData) as d, i}
+          <g class="arc">
+            <path d={arc(d)} fill={colorMapping[d.data.position]} />
+          </g>
+        {/each}
+        {#each pie(pieData) as d, i}
+          <g class="arc">
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <!-- svelte-ignore a11y-mouse-events-have-key-events -->
+            <text class="label" transform={`translate(${arc.centroid(d)})`}
+                  dy=".35em" text-anchor="middle"
+                  dx={d.data.position === 'Neutral' ? '-1.5em' : '1.5em'}
+                  >
+              {d.data.position}
+            </text>
+          </g>
+        {/each}
+      </g>
+    </svg>
+  </div>
 
   <style>
+    .pie {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
     .label {
       font-family: "Atlas Grotesk";
       fill: #ffffff;

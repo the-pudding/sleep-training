@@ -14,6 +14,10 @@
         if (focusHover) {
             if (point.data.info.url == focusHover.url) {
                 $hoveredCircle = point
+                hovered = $hoveredCircle === point;
+            }
+            else {
+                hovered = null;
             }
         }
     }
@@ -46,7 +50,14 @@
     cx={point.x}
     cy={point.y}
     r={$radiusTween}
-    fill={hovered === true ? "#81A0DD" : color}
+    fill={hovered ? "#81A0DD" : color}
     on:mouseover={() => handleMouseEnter()}
+    class="circle-element"
 >
 </circle>
+
+<style>
+    .circle-element {
+        cursor: pointer;
+    }
+</style>

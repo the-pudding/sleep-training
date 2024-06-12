@@ -35,7 +35,7 @@
                     <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} step={value} />                
                 {:else if switcher === "transitions"}
                     {#if value == undefined || value < 2}
-                        <Timeline width={500} height={800} />
+                        <Timeline />
                     {:else if value >= 2 && value <= 3 }    
                         <Map bind:data={dataMap} />
                     {/if}
