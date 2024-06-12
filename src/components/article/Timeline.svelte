@@ -19,7 +19,7 @@
     // $: innerWidth = $viewport.width - margin.left - margin.right;
 
     let yScale = scaleLinear()
-      .domain(extent(data, d => d.year))
+      .domain(extent(data.filter(d => d.year > 1990), d => d.year))
       .range([$viewport.height, 0]);
 
     const colorMapping = {

@@ -44,7 +44,7 @@
   
   <div class="pie">
     <svg width={$viewport.width} height={$viewport.height}>
-      <g>
+      <g transform="translate({$viewport.width/2}, {$viewport.height/2})">
         {#each pie(pieData) as d, i}
           <g class="arc">
             <path d={arc(d)} fill={colorMapping[d.data.position]} />
