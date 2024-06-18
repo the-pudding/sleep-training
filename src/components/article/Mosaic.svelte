@@ -3,6 +3,7 @@
   import { fade } from 'svelte/transition';
   import { cubicInOut } from 'svelte/easing';
 	import Scrolly from "$components/helpers/Scrolly.svelte";
+  import viewport from "$stores/viewport.js";
 
   export let album = 'articles';
   export let height;
@@ -64,6 +65,7 @@
     <div class="image-mosaic" style="min-height: {height}vh;">
       {#each images as image, i}
         {#if animationStarted && isSocial === false}
+          {#if $viewport.width > 600}
             <div
               class="image-container"
               style="z-index: {i}; transform: translate({i % 2 === 0 ? '0%' : '35%'}, {i * 9}vh); max-width: 75%;"
@@ -71,14 +73,31 @@
             >
               <img src={image.url} alt="Image {i}" />
             </div>
-            {:else if animationStarted && isSocial === true}
+          {:else}
             <div
             class="image-container"
-            style="z-index: {i}; transform: translate({i % 2 === 0 ? '5%' : '80%'}, {i * 16}vh); max-width: 50%;"
             in:fade={{ duration: 1000, delay: (i*300), easing: cubicInOut }}
           >
             <img src={image.url} alt="Image {i}" />
           </div>
+          {/if}
+        {:else if animationStarted && isSocial === true}
+          {#if $viewport.width > 600}
+            <div
+              class="image-container"
+              style="z-index: {i}; transform: translate({i % 2 === 0 ? '10%' : '90%'}, {i * 14}vh); max-width: 50%;"
+              in:fade={{ duration: 1000, delay: (i*300), easing: cubicInOut }}
+            >
+              <img src={image.url} alt="Image {i}" />
+            </div>
+          {:else}
+            <div
+              class="image-container"
+              in:fade={{ duration: 1000, delay: (i*300), easing: cubicInOut }}
+            >
+              <img src={image.url} alt="Image {i}" />
+            </div>
+          {/if}
         {/if}
       {/each}
     </div>
@@ -108,5 +127,18 @@
     display: block;
     width: 100%;
     height: auto;
+    border-radius: 10px;
   }
+
+  @media only screen and (max-width: 600px) {
+    .image-mosaic {
+      position: relative;
+      width: 90%;
+      margin: 0 auto;
+    }
+      .image-container {
+        padding-top: 10px;
+        position: initial;
+      }
+    }
 </style>
