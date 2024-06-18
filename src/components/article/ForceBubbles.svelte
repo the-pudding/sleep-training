@@ -30,7 +30,7 @@
     let color = scaleOrdinal(range(Object.keys(ordinalGroup).length), ["#A34131", "#4FB477","#D69C2B"]);
 
     //your bubbles were really big, so tried to tone it down here, keeping them between 3 and 10px;
-    let radiusScale = scaleLinear().domain([1,20]).range([3,10]).clamp(true)
+    let radiusScale = scaleLinear().domain([1,18]).range([3,10]).clamp(true)
     $: if (radiusScale) {
         scaleValues = {
             largest: radiusScale.range()[1],
@@ -159,6 +159,9 @@
 
         return force;
     }
+
+    // let yNudge;
+    // $: yNudge = $viewport.height * 0.95
 </script>
 <div class="bubbles">
 <svg
@@ -186,5 +189,8 @@
         width: 100vw;
         height: 100vh;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 </style>

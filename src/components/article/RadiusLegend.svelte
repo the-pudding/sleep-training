@@ -41,9 +41,9 @@
    
    <style>
     .radius-scale {
-      position: absolute;
+      /* position: absolute;
       bottom: 10px;
-      left: 30%;
+      left: 30%; */
       display: flex;
       justify-content: center;
       align-items: center;
