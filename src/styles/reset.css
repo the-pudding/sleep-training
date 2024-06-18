@@ -1,8 +1,8 @@
 
 body {
 	/* background-color: var(--color-bg, white); */
-	background-color: #F4F4F9;
-	color: var(--color-fg, black);
+	background-color: #1A2127;
+	color: #FFFFFF;
 	line-height: 1.4;
 	/* font-family: var(--font-body, serif); */
 	font-feature-settings: 'kern' 1, 'onum' 0, 'liga' 0, 'tnum' 1;
@@ -12,7 +12,6 @@ body {
 }
 
 h1,
-h2,
 h3,
 h4,
 h5,
@@ -29,8 +28,9 @@ mark {
 }
 
 a {
-	color: var(--color-link, blue);
+	color: #9A9DFA;
 	text-decoration: none;
+	font-weight: bold;
 	border-bottom: 1px solid currentColor;
 }
 

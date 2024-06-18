@@ -30,10 +30,10 @@
             cy="0"
             r={scale.value}
             fill="none"
-            stroke="black"
+            stroke="white"
             stroke-width="1"
           />
-          <text x="0" y="40" text-anchor="middle">{scale.value}</text>
+          <text x="0" y="40" fill="white" text-anchor="middle">{scale.value}</text>
         </g>
       {/each}
     </svg>
@@ -41,6 +41,9 @@
    
    <style>
     .radius-scale {
+      position: absolute;
+      bottom: 10px;
+      left: 30%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -50,5 +53,9 @@
       margin: none !important;
       font-size: 14px;
     }
-    /* @media only screen and (max-width: 600px) { */
+    @media only screen and (max-width: 600px) {
+      .radius-scale {
+        left: 0px;
+      }
+    }
    </style>

@@ -16,8 +16,8 @@
 
   const colorMapping = {
         Advocate: "#4FB477",
-        Neutral: "#7D82B8",
-        Oppose: "#404E4D"
+        Neutral: "#D69C2B",
+        Oppose: "#A34131"
     };
 
   $: positionColor = (position) => colorMapping[position] || "#000000";
@@ -91,14 +91,14 @@
 
 <style>
   .map-container {
-    background-color: #F4F4F9;
+    background-color: #1A2127;
   }
   .earth {
-    fill: #F4F4F9;
+    fill: #1A2127;
   }
   .country {
-    fill: #F4F4F9;
-    stroke: black;
+    fill: #1A2127;
+    stroke: white;
     stroke-width: 0.5px;
     pointer-events: none;
   }

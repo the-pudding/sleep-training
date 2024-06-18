@@ -246,12 +246,13 @@
     font-family: "Tiempos Text Web";
     font-weight: 700;
     font-size: var(--44px);
-    color: #4FB477;
+    color: #82BCBE;
   }
   h2 {
     font-family: "Tiempos Text Web";
     font-weight: 700;
-    font-size: 14px;
+    font-size: 18px;
+    color: white;
   }
   .spacer {
 		height: 5vh;

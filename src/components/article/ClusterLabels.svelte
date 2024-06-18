@@ -21,13 +21,21 @@
         }
         return {x: x / z, y: y / z};
     }
+
+    function getTextWidth(text) {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    const metrics = context.measureText(text);
+    return metrics.width;
+  }
 </script>
 
 {#if animatedIn}
     {#each data as position}
         {@const center = centroid(position[1])}
-        <rect x={center.x - 3} y={center.y - 17} width={position[0].length * 10} height={25} fill="white" rx="5" ry="5" />
-        <text x={center.x} y={center.y} class="cluster-label">{position[0]}</text>
+        {@const textWidth = getTextWidth(position[0])}
+        <rect x={center.x - 6} y={center.y - 17} width={textWidth + 30} height={25} fill="#1C3A4E" rx="5" ry="5" />
+        <text x={center.x} y={center.y} class="cluster-label" fill="white">{position[0]}</text>
     {/each}
 {/if}
 
@@ -36,6 +44,6 @@
     color: white;
     font-size: 0.8rem;
     font-family: "Atlas Grotesk";
-    text-transform: uppercase;
+    font-weight: bold;
 }
 </style>

@@ -79,7 +79,7 @@
     class="tooltip" 
     in:fly={{ y: 10, duration: 200, delay: 200 }}
     out:fade
-    style="left:{xPosition}px; top:{yPosition - 100}px; width:{tooltipWidth}px;"
+    style="left:{xPosition}px; top:{yPosition - 150}px; width:{tooltipWidth}px;"
 >
     <p class="tooltip-title">
     {title}
@@ -99,7 +99,8 @@
       position: absolute;
       pointer-events: none;
       padding: 1rem 1rem;
-      background: #81A0DD;
+      background: #1C3A4E;
+      color: white;
       box-shadow: rgba(0, 0, 0, 0.15) 2px 3px 8px;
       border-radius: 4px;
       transition: top 300ms ease, left 300ms ease;

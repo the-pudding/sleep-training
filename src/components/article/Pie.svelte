@@ -15,8 +15,8 @@
 
     const colorMapping = {
         Advocate: "#4FB477",
-        Neutral: "#7D82B8",
-        Oppose: "#404E4D"
+        Neutral: "#D69C2B",
+        Oppose: "#A34131"
     };
   
     $: {

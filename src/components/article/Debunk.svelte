@@ -52,10 +52,9 @@
   .references-header {
     padding: 10px;
     border-radius: 4px;
-    background-color: #ECE3DA;
-    border: 0.5px solid black;
+    background-color: #1C3A4E;
     cursor: pointer;
-    color: black;
+    color: white;
     font-family: "Atlas Grotesk";
     font-size: 16px;
   }
@@ -72,11 +71,6 @@
   th, td {
     padding: 8px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #ECE3DA;
   }
 
   @media only screen and (max-width: 600px) {

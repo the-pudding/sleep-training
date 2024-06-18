@@ -24,15 +24,17 @@
 		display: flex;
 		place-items: center;
 		justify-content: center;
+		background-color: #1C3A4E;
 	}
 
 	.step-content {
-		background-color: #ECE3DA;
+		background-color: #1C3A4E;
 		border-radius: 5px;
 	}
 
 	.step p {
 		padding: 1.5rem 1rem;
+		color: white;
 	}
 
 	.step.active {

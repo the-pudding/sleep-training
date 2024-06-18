@@ -79,7 +79,11 @@
         margin-top: 0px !important;
     }
     .sub-title {
-    font-size: 28px;
-    margin-top: 6vh;
-  }
+        font-size: 28px;
+        margin-top: 6vh;
+        border-bottom: 1px solid currentColor;
+        font-family: "Tiempos Text Web";
+        font-weight: 700;
+        color: #82BCBE;
+    }
 </style>

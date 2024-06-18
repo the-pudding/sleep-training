@@ -50,7 +50,7 @@
     cx={point.x}
     cy={point.y}
     r={$radiusTween}
-    fill={hovered ? "#81A0DD" : color}
+    fill={hovered ? "#FFF" : color}
     on:mouseover={() => handleMouseEnter()}
     class="circle-element"
 >

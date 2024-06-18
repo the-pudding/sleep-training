@@ -32,7 +32,7 @@
   .notification {
     font-family: "Atlas Grotesk";
     display: flex-column;
-    background-color: #404E4D;
+    background-color: #1C3A4E;
     padding: 10px;
     color: white;
     border-radius: 5px;

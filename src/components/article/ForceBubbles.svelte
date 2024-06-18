@@ -27,7 +27,7 @@
         "Neutral":2
     }
 
-    let color = scaleOrdinal(range(Object.keys(ordinalGroup).length), ["#4FB477","#7D82B8","#404E4D"]);
+    let color = scaleOrdinal(range(Object.keys(ordinalGroup).length), ["#A34131", "#4FB477","#D69C2B"]);
 
     //your bubbles were really big, so tried to tone it down here, keeping them between 3 and 10px;
     let radiusScale = scaleLinear().domain([1,20]).range([3,10]).clamp(true)
@@ -163,8 +163,8 @@
 <div class="bubbles">
 <svg
     width={$viewport.width}
-    height={$viewport.height * 0.85}>
-    <g style="transform: translate(0, -10vh);">
+    height={$viewport.height}>
+    <g style="transform: translate(0, -5vh);">
         {#if nodes}
             {#each nodes as point,i}
                 <Circle {point} {i} color={color(point.data.group)} {animatedIn} {focusHover} />

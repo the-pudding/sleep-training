@@ -36,7 +36,7 @@
                 {:else if switcher === "transitions"}
                     {#if value == undefined || value < 2}
                         <Timeline />
-                    {:else if value >= 2 && value <= 4 }    
+                    {:else if value == undefined || value >= 2 && value <= 4 }    
                         <Map bind:data={dataMap} />
                     {/if}
                 {:else if switcher === "instagram"}
@@ -88,7 +88,7 @@
 	}
 
 	.step-content {
-		background-color: #ECE3DA;
+		background-color: #1C3A4E;
 		border-radius: 5px;
 	}
 
@@ -99,4 +99,10 @@
 	.step.active {
 		opacity: 1;
 	}
+
+    @media only screen and (max-width: 600px) {
+		.step-content {
+			font-size: 14px !important;
+		}
+    }
 </style>

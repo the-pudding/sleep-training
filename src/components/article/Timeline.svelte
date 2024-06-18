@@ -24,8 +24,8 @@
 
     const colorMapping = {
         Advocate: "#4FB477",
-        Neutral: "#7D82B8",
-        Oppose: "#404E4D"
+        Neutral: "#D69C2B",
+        Oppose: "#A34131"
     };
     $: positionColor = (position) => colorMapping[position] || "#000000";
 
@@ -53,8 +53,8 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="timeline-container" style="width: {$viewport.width}; height: {$viewport.height}px;">
   <svg height={$viewport.height} width={$viewport.width} >
-    <g>
-      <line x1={$viewport.width / 2} y1="0" x2={$viewport.width / 2} y2={$viewport.height} stroke="black" />
+    <g  style="margin-top: 20px;">
+      <line x1={$viewport.width / 2} y1="0" x2={$viewport.width / 2} y2={$viewport.height} stroke="white" />
       {#if nodes.length > 80}
         {#each nodes as node, index}
           <circle
@@ -68,8 +68,8 @@
         {/each}
         {#each yearsToShow as year}
           <g class="tick" transform="translate({$viewport.width / 2},{yScale(year)})">
-            <line x1="-8" y1="0" x2="8" y2="0" stroke="black" stroke-width="2px" />
-            <text x="0" y="15" text-anchor="middle">{year}</text>
+            <line x1="-8" y1="0" x2="8" y2="0" stroke="white" stroke-width="2px" />
+            <text x="40" y="5" fill="white" text-anchor="middle">{year}</text>
           </g>
         {/each}
       {/if}
