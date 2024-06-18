@@ -7,6 +7,7 @@
     import Tooltip from "$components/article/Tooltip.svelte";
     import Circle from "$components/article/Circle.svelte";
     import ClusterLabels from "$components/article/ClusterLabels.svelte";
+    import RadiusLegend from "$components/article/RadiusLegend.svelte";
     import viewport from "$stores/viewport.js";
 
     export let renderedData;
@@ -16,6 +17,7 @@
 
     let dataToSimulate;
     let nodes = [];
+    let scaleValues;
 
     let animatedIn = false;
 
@@ -29,6 +31,13 @@
 
     //your bubbles were really big, so tried to tone it down here, keeping them between 3 and 10px;
     let radiusScale = scaleLinear().domain([1,20]).range([3,10]).clamp(true)
+    $: if (radiusScale) {
+        scaleValues = {
+            largest: radiusScale.range()[1],
+            smallest: radiusScale.range()[0],
+            median: (radiusScale.range()[1] + radiusScale.range()[0]) / 2
+        };
+    }
 
     $: step, doStuff();
 
@@ -154,8 +163,8 @@
 <div class="bubbles">
 <svg
     width={$viewport.width}
-    height={$viewport.height}>
-    <g>
+    height={$viewport.height * 0.85}>
+    <g style="transform: translate(0, -10vh);">
         {#if nodes}
             {#each nodes as point,i}
                 <Circle {point} {i} color={color(point.data.group)} {animatedIn} {focusHover} />
@@ -167,6 +176,9 @@
 {#if $hoveredCircle != undefined}
     <Tooltip data={$hoveredCircle.data.info} x={$hoveredCircle.x} y={$hoveredCircle.y} width={200} />
 {/if}
+<div class="radius-legend">
+    <RadiusLegend {scaleValues} data={renderedData} />
+</div>
 </div>
 
 <style>

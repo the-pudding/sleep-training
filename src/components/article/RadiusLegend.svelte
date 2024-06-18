@@ -24,7 +24,7 @@
     {/if}
     <svg width="300" height="100">
       {#each radiusScaleValues as scale, index}
-        <g transform="translate({50 + index * 100}, 50)">
+        <g transform="translate({50 + index * 100}, 40)">
           <circle
             cx="0"
             cy="0"
@@ -33,7 +33,7 @@
             stroke="black"
             stroke-width="1"
           />
-          <text x="0" y="50" text-anchor="middle">{scale.value}</text>
+          <text x="0" y="40" text-anchor="middle">{scale.value}</text>
         </g>
       {/each}
     </svg>
@@ -41,7 +41,14 @@
    
    <style>
     .radius-scale {
-      margin-top: 20px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
     }
+    .radius-scale p {
+      margin: none !important;
+      font-size: 14px;
+    }
+    /* @media only screen and (max-width: 600px) { */
    </style>

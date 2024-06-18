@@ -79,7 +79,7 @@
     class="tooltip" 
     in:fly={{ y: 10, duration: 200, delay: 200 }}
     out:fade
-    style="left:{xPosition}px; top:{yPosition}px; width:{tooltipWidth}px;"
+    style="left:{xPosition}px; top:{yPosition - 100}px; width:{tooltipWidth}px;"
 >
     <p class="tooltip-title">
     {title}

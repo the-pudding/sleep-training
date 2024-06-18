@@ -57,6 +57,7 @@
     cursor: pointer;
     color: black;
     font-family: "Atlas Grotesk";
+    font-size: 16px;
   }
   
   .table-container {
@@ -76,5 +77,11 @@
   
   th {
     background-color: #ECE3DA;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .references-header {
+      font-size: 14px;
+    }
   }
 </style>

@@ -137,7 +137,7 @@
 <div id="article">
   <HeroComments notifications={commentsDivided} />
   <div class="spacer"></div>
-  <h1 class="title" class:loaded>{copy.title}</h1>
+  <h1 class="title title-large" class:loaded>{copy.title}</h1>
   <h2 class="title" class:loaded style="--delay:0.5s;">{copy.description}</h2>
   <div class="editorial-container">
     <Editorial copy={copy.editorial_intro} />
@@ -266,4 +266,18 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  @media only screen and (max-width: 600px) {
+    .title-large {
+      font-size: 36px;
+    }
+    p {
+      font-size: 16px !important;
+    }
+    h3 {
+      font-size: 24px;
+    }
+  }
 </style>
+
+

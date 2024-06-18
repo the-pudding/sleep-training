@@ -72,4 +72,9 @@
   .notification-source a {
     color: white;
   }
+  @media only screen and (max-width: 600px) {
+    .notification p {
+    font-size: 12px;
+  }
+  }
 </style>
