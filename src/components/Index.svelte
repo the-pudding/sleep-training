@@ -47,7 +47,7 @@
             }
         case step >= 1 && step < 2:
             return {
-              renderedData: dataAll,
+              renderedData: data.reddit,
               focusHover: focusNarvaez,
             }
         default:
@@ -226,7 +226,7 @@
 
 <style>
 	#article {
-		max-width: 40rem;
+		/* max-width: 40rem; */
 		padding: 16px;
 		margin: 0 auto;
 	}

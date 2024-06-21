@@ -1,6 +1,6 @@
 <script>
 
-    import { max, scaleOrdinal, range, group, hierarchy, pack, rollup, quadtree, forceSimulation, scaleLinear } from "d3";
+    import { extent, max, scaleOrdinal, range, group, hierarchy, pack, rollup, quadtree, forceSimulation, scaleLinear } from "d3";
     import { onMount } from "svelte";
     import { hoveredCircle } from '$stores/misc.js';
 
@@ -30,7 +30,11 @@
     let color = scaleOrdinal(range(Object.keys(ordinalGroup).length), ["#A34131", "#4FB477","#D69C2B"]);
 
     //your bubbles were really big, so tried to tone it down here, keeping them between 3 and 10px;
-    let radiusScale = scaleLinear().domain([1,18]).range([3,10]).clamp(true)
+    let radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([1,10]).clamp(true)
+
+
+
+    
     $: if (radiusScale) {
         scaleValues = {
             largest: radiusScale.range()[1],
@@ -40,8 +44,10 @@
     }
 
     $: step, doStuff();
+    $: renderedData, runSimulation();
 
     function doStuff(){
+
         if(step >= 0){
             showBubbles();
         }
@@ -54,7 +60,10 @@
         animatedIn = true;
     }
 
-    onMount(() => {
+
+    function runSimulation(){
+        radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([3,10]).clamp(true)
+
         let data = ({
             children: Array.from(
                 group(renderedData.map(d => {
@@ -78,7 +87,12 @@
         dataToSimulate = packing().leaves();
 
         nodes = dataToSimulate;
+    }
 
+
+    onMount(() => {
+        
+        runSimulation();
         // YOU ACTUALLY DON'T NEED THE SIMULATION TO RUN, but it's here if you do!
 
         // const simulation = forceSimulation(dataToSimulate)
