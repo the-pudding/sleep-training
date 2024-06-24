@@ -20,7 +20,7 @@
         if(step == 0) {
             setTimeout(() => {
                 animationStarted = true;
-            }, 1000)
+            }, 200)
         }
     }
 
