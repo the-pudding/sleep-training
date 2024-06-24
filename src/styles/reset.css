@@ -208,6 +208,10 @@ ol, ul {
 	margin-bottom: 16px;
 }
 
+.notification .bold {
+	font-weight: 700;
+}
+
 .skip-to-main {
 	border: none;
 	width: 1px;
