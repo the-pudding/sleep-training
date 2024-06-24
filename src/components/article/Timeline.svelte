@@ -18,9 +18,11 @@
     // $: innerHeight = $viewport.height - margin.top - margin.bottom;
     // $: innerWidth = $viewport.width - margin.left - margin.right;
 
+    let paddingY = 100;
+
     let yScale = scaleLinear()
       .domain(extent(data.filter(d => d.year > 1990), d => d.year))
-      .range([$viewport.height, 0]);
+      .range([$viewport.height - (paddingY*2), 0]).clamp(true);
 
     const colorMapping = {
         Advocate: "#4FB477",
@@ -51,10 +53,10 @@
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="timeline-container" style="width: {$viewport.width}; height: {$viewport.height}px;">
-  <svg height={$viewport.height} width={$viewport.width} >
+<div class="timeline-container" style="width: {$viewport.width}px; height: {$viewport.height}px;">
+  <svg height={$viewport.height - (paddingY*2)} width={$viewport.width} >
     <g  style="margin-top: 20px;">
-      <line x1={$viewport.width / 2} y1="0" x2={$viewport.width / 2} y2={$viewport.height} stroke="white" />
+      <line x1={$viewport.width / 2} y1="0" x2={$viewport.width / 2} y2={$viewport.height - (paddingY*2)} stroke="white" />
       {#if nodes.length > 80}
         {#each nodes as node, index}
           <circle
@@ -78,6 +80,17 @@
 </div>
 
 <style>
+
+    svg {
+      position: absolute;
+      top: 50%;
+      transform: translate(0,-50%);
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      overflow: visible;
+    }
+
     circle {
       transition: stroke 300ms ease, opacity 300ms ease, cx 100ms ease, cy 100ms ease;
       pointer-events: none;
@@ -86,5 +99,9 @@
       font-family: "Atlas Grotesk";
       font-weight: 400;
       font-size: 12px;
+    }
+
+    .timeline-container {
+      position: relative;
     }
 </style>

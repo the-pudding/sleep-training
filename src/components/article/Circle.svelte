@@ -49,6 +49,7 @@
 <circle  on:mouseleave={() => handleMouseLeave()}
     cx={point.x}
     cy={point.y}
+    data-r={point.data.info.radius}
     r={$radiusTween}
     fill={hovered ? "#FFF" : color}
     on:mouseover={() => handleMouseEnter()}
