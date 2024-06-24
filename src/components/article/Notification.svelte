@@ -53,6 +53,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
   }
   .notification-content {
     display: flex;

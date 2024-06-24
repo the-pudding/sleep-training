@@ -12,19 +12,19 @@
 
 <div class="radius-scale">
     {#if data[0].type == "study"}
-    <p>Influence: total citations</p>
+    <p>Total citations</p>
     {:else if data[0].type == "article"}
-    <p>Influence: total links referencing the work</p>
+    <p>Total links referencing the work</p>
     {:else if data[0].type == "reddit"}
-    <p>Influence: total upvotes</p>
+    <p>Total upvotes</p>
     {:else if data[0].type == "instagram"}
-    <p>Influence: total followers</p>
+    <p>Total followers</p>
     {:else}
     <p>Influence</p>
     {/if}
     <svg width="300" height="100">
       {#each radiusScaleValues as scale, index}
-        <g transform="translate({50 + index * 100}, 40)">
+        <g transform="translate({30 + index * 50}, 40)">
           <circle
             cx="0"
             cy="0"
@@ -56,6 +56,7 @@
 
     text {
       font-family: var(--sans);
+      font-size: 14px;
     }
     @media only screen and (max-width: 600px) {
       .radius-scale {

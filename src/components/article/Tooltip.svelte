@@ -73,20 +73,21 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div 
     class="tooltip" 
-    in:fly={{ y: 10, duration: 200, delay: 200 }}
+    in:fade={{ duration: 200, delay: 0 }}
     out:fade
     style="left:{xPosition}px; top:{yPosition - 150}px; width:{tooltipWidth}px;"
 >
     <p class="tooltip-title">
     {title}
+    <span class='info'>
+      {#if data.type != "instagram"}
+        <span class='info-element'>Published in <span class="bold">{textOne}</span></span>
+        <span class='info-element'>in {textTwo}</span>
+      {/if}
+    </span>
     </p>
     <!-- Additional info under the country name -->
-    <div class='info'>
-        {#if data.type != "instagram"}
-          <p class='info-element'>{textOne}</p>
-          <p class='info-element'>{textTwo}</p>
-        {/if}
-    </div>
+    
 </div>
 
 
@@ -104,14 +105,17 @@
     .tooltip-title {
       margin: 0;
       font-size: 12px;
-      font-weight: 700;
+      line-height: 1.4;
+      font-weight: 600;
     }
     .info {
-      font-size: 14px;
-      display: inline-block;
+      font-size: 12px;
+      display: inline;
+
     }
     .info-element {
       font-size: 12px;
+      font-weight: 400;
       margin-bottom: 0px;
       padding-bottom: 0px;
     }

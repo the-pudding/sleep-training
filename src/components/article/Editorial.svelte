@@ -40,13 +40,13 @@
             {#if copy[0].subtitle}
                 <h3>{copy[0].subtitle}</h3>
             {/if}
-            <div class="editorial" in:fade={{ duration: 1000, delay: 200 }}>
-                    {#each copy as p}
-                        <p class="editorial-paragraph">{@html p.text}</p>
-                    {/each}
-                <div class="spacer" style="height: {noSpacer ? '0vh' : '3vh'}"/>
-            </div>
         {/if}
+            <div class="editorial">
+                {#each copy as p}
+                    <p class:animationStarted class="editorial-paragraph">{@html p.text}</p>
+                {/each}
+            <div class="spacer" style="height: {noSpacer ? '0vh' : '3vh'}"/>
+        </div>
         </div>
     </Scrolly>
 </section>
@@ -76,7 +76,15 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
-        line-height: 1.4;
+        line-height: 1.5;
+        margin-top: 0;
+        margin-bottom: 25px;
+        letter-spacing: -.2px;
+        opacity: 0;
+        transition: opacity .5s;
+    }
+    .editorial-paragraph.animationStarted {
+        opacity: 1;
     }
     .editorial {
         max-width: 40rem;

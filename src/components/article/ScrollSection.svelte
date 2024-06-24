@@ -54,7 +54,10 @@
                 <Scrolly bind:value>
                     {#each Object.values(copy) as p, i}
                         {@const active = value === i}
-                        <div class="step" class:active>
+                        {@const last = i == Object.values(copy).length - 1 ? true : false}
+                        {@const first = i == 0 ? true : false}
+
+                        <div class="step" class:active class:last class:first>
                             <p class="step-content">{@html p.text}</p>
                         </div>
                     {/each}
@@ -90,10 +93,26 @@
 		justify-content: center;
 	}
 
+    .first {
+        margin-top: -50vh;
+    }
+
 	.step-content {
 		background-color: #1C3A4E;
 		border-radius: 5px;
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        line-height: 1.5;
+        letter-spacing: -.2px;
+        margin-top: 0;
+        margin-bottom: 25px;
 	}
+
+    .last {
+        margin-bottom: 50vh;
+    }
 
 	.step p {
 		padding: 1.5rem 1rem;
