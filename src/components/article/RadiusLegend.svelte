@@ -53,6 +53,10 @@
       margin: none !important;
       font-size: 14px;
     }
+
+    text {
+      font-family: var(--sans);
+    }
     @media only screen and (max-width: 600px) {
       .radius-scale {
         left: 0px;

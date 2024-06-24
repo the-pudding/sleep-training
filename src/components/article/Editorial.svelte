@@ -71,8 +71,14 @@
 
 
 <style>
+    .editorial-paragraph {
+        font-size: 20px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        line-height: 1.4;
+    }
     .editorial {
-        margin-top: 4vh;
         max-width: 40rem;
 		padding: 16px;
 		margin: 0 auto;

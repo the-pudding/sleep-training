@@ -200,6 +200,14 @@ ol, ul {
 	padding-left: 16px;
 }
 
+.editorial-paragraph ol {
+	padding-left: 48px;
+}
+
+.editorial-paragraph ol li {
+	margin-bottom: 16px;
+}
+
 .skip-to-main {
 	border: none;
 	width: 1px;
