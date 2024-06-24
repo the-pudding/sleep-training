@@ -74,8 +74,12 @@
     color: white;
   }
   @media only screen and (max-width: 600px) {
-    .notification p {
-    font-size: 12px;
-  }
+      .notification p {
+      font-size: 12px;
+    }
+    .notification {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
   }
 </style>

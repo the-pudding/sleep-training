@@ -152,6 +152,7 @@
   </section>
   <div class="editorial-container">
     <Editorial copy={copy.intro_end} spacer="none" />
+    <Mosaic album="articles" height=75 /> 
     <Editorial copy={copy.viz_reddit} spacer="none" title="Research analysis" notifications={commentsConfused} />
   </div>
   <section>
@@ -195,11 +196,11 @@
   <div class="editorial-container">
     <Editorial copy={copy.editorial_influencerPackages} spacer="none" />
   </div>
-  <ProductList />
+  <Mosaic album="products" height=80 />
   <div class="editorial-container">
     <Editorial copy={copy.editorial_conclusion} />
+    <Editorial copy={copy.methodologies} title="Methodology" />
   </div>
-	<!-- <Footer /> -->
 </div>
 
 <style>

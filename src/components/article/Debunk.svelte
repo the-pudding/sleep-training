@@ -79,5 +79,9 @@
     .references-header {
       font-size: 14px;
     }
+    .references-dropdown {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
   }
 </style>
