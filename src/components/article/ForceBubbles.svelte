@@ -37,9 +37,9 @@
     
     $: if (radiusScale) {
         scaleValues = {
-            largest: radiusScale.domain()[1],
-            smallest: radiusScale.domain()[0],
-            median: (radiusScale.domain()[1] + radiusScale.domain()[0]) / 2
+            largest: radiusScale.range()[1],
+            smallest: radiusScale.range()[0],
+            median: (radiusScale.range()[1] + radiusScale.range()[0]) / 2
         };
     }
 

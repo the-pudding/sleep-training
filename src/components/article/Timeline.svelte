@@ -31,6 +31,8 @@
     };
     $: positionColor = (position) => colorMapping[position] || "#000000";
 
+    $: console.log(nodes)
+
     onMount(() => {
         if (data) {
           let simulation = forceSimulation(data)
@@ -57,7 +59,7 @@
   <svg height={$viewport.height - (paddingY*2)} width={$viewport.width} >
     <g  style="margin-top: 20px;">
       <line x1={$viewport.width / 2} y1="0" x2={$viewport.width / 2} y2={$viewport.height - (paddingY*2)} stroke="white" />
-      {#if nodes.length > 80}
+      {#if nodes.length > 0}
         {#each nodes as node, index}
           <circle
             cx={node.x}
