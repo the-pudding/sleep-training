@@ -41,6 +41,16 @@
 		opacity: 1;
 	}
 
+	.legend-advocate {
+        color: green;
+    }
+    .legend-neutral {
+		color: black;
+	}
+	.legend-oppose {
+		color: red;
+	}
+
 	@media only screen and (max-width: 600px) {
 		.step-content p {
 			font-size: 14px !important;

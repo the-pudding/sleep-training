@@ -12,9 +12,10 @@
     import copy from '$data/copy.json';
     setContext("copy", copy);
 
+
     // DATA IMPORT
     let data = getContext("data");
-    const dataAll = [...data.articles, ...data.reddit];
+    const dataAll = [...data.articles, ...data.studies, ...data.books];
 
     // FOCUSED TOOLTIPS
     const focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];
@@ -37,6 +38,7 @@
       loaded = true;
     }, 4000)
 
+    console.log("alldata", dataAll);
     // STEP LOGIC
     function SectionIntro(step) {
       switch (true) {

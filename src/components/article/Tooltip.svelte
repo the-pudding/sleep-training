@@ -66,6 +66,13 @@
         textTwo = '';
         title = truncateText(data.username.toUpperCase(), 40);
         break;
+      case 'book':
+        labelOne = 'AUTHORS';
+        textOne = truncateText(data.authors, 60);
+        labelTwo = 'SALES';
+        textTwo = data.radius;
+        title = truncateText(data.title.toUpperCase(), 40);
+        break;
       default:
         textTwo = '';
         labelTwo = '';
