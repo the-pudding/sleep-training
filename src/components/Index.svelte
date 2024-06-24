@@ -12,17 +12,19 @@
     import copy from '$data/copy.json';
     setContext("copy", copy);
 
+
     // DATA IMPORT
     let data = getContext("data");
-    const dataAll = [...data.articles, ...data.reddit];
+    const dataAll = [...data.articles, ...data.studies, ...data.books];
 
     // FOCUSED TOOLTIPS
     const focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];
     const focusNarvaez = data.articles.filter(d => d.url === "https://www.psychologytoday.com/intl/blog/moral-landscapes/201112/dangers-crying-it-out")[0];
-    // const focusRedditResearch = data.reddit.filter(d => d.username === "leftpantleg420")[0];
+    const focusRedditResearch = data.reddit.filter(d => d.username === "leftpantleg420")[0];
     const focusUmbrellaReview = data.studies.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/35778903/")[0];
     const focusPrice = data.studies.filter(d => d.url === "https://publications.aap.org/pediatrics/article-abstract/130/4/643/30241/Five-Year-Follow-up-of-Harms-and-Benefits-of?redirectedFrom=fulltext")[0];
     const focusReview = data.studies.filter(d => d.url === "https://aasm.org/resources/practiceparameters/review_nightwakingschildren.pdf")[0];
+    const focusBrainDamage = data.articles.filter(d => d.url === "https://raisedgood.com/nurture-babies-recover-sleep-training/")[0]
 
     // NOTIFICATION LOADING
     let commentsConfused = data.comments.filter(d => d.category === "confused");
@@ -30,6 +32,7 @@
     let commentsCortisol = data.comments.filter(d => d.category === "brain damage");
     let commentsAttachment = data.comments.filter(d => d.category === "attachment");
     let commentsLazy = data.comments.filter(d => d.category === "lazy");
+    let commentsInstagram = data.comments.filter(d => d.category === "instagram");
 
     // TITLE ANIMATION
     let loaded = false
@@ -57,33 +60,27 @@
             }
       }
     }
-    function SectionReddit(step) {
-      return {
-        renderedData: data.reddit,
-        focusHover: null
-      }
-    }
-    function SectionArticles(step) {
-      return {
-        renderedData: data.articles,
-        focusHover: null
-      }
-    }
-    function SectionStudies(step) {
+    function SectionMain(step) {
         switch (true) {
-        case step >= 0 && step < 1:
+        case step >= 0 && step < 3:
             return {
-              renderedData: data.studies,
+              renderedData: data.reddit,
+              focusHover: focusRedditResearch,
             }
-        case step >= 1 && step < 2:
+        case step >= 3 && step < 7:
+            return {
+              renderedData: data.articles,
+              focusHover: null
+            }
+        case step >= 7 && step < 9:
             return {
               renderedData: data.studies,
               focusHover: focusReview,
             }
-        case step >= 2 && step < 3:
+        case step >= 9 && step < 11:
             return {
               renderedData: data.studies,
-              focusHover: focusUmbrellaReview,
+              focusHover: null
             }
         default:
             return {
@@ -92,34 +89,39 @@
             }
       }
     }
-    function SectionMiddlemiss(step) {
-        switch (true) {
-        case step >= 1 && step < 2:
-            return {
-              renderedData: data.studies,
-              focusHover: focusMiddlemiss,
-            }
-        default:
-            return {
-              renderedData: data.studies,
-              focusHover: null
-            }
-      }
-    }
-    function SectionPrice(step) {
-        switch (true) {
-        case step >= 1 && step < 3:
-            return {
-              renderedData: data.studies,
-              focusHover: focusPrice,
-            }
-        default:
-            return {
-              renderedData: data.studies,
-              focusHover: null
-            }
-      }
-    }
+    // function SectionMiddlemiss(step) {
+    //     switch (true) {
+    //     case step >= 0 && step < 2:
+    //         return {
+    //           renderedData: data.studies,
+    //           focusHover: focusMiddlemiss,
+    //         }
+    //     case step >= 2 && step < 3:
+    //         return {
+    //           renderedData: data.articles,
+    //           focusHover: focusBrainDamage,
+    //         }
+    //     default:
+    //         return {
+    //           renderedData: data.studies,
+    //           focusHover: null
+    //         }
+    //   }
+    // }
+    // function SectionPrice(step) {
+    //     switch (true) {
+    //     case step >= 1 && step < 3:
+    //         return {
+    //           renderedData: data.studies,
+    //           focusHover: focusPrice,
+    //         }
+    //     default:
+    //         return {
+    //           renderedData: data.studies,
+    //           focusHover: null
+    //         }
+    //   }
+    // }
     function SectionTransitions(step) {
       return {
         renderedData: data.studies,
@@ -137,79 +139,56 @@
 <div id="article">
   <HeroComments notifications={commentsDivided} />
   <div class="spacer"></div>
-  <h1 class="title title-large" class:loaded>{copy.title}</h1>
-  <h2 class="title" class:loaded style="--delay:0.5s;">{copy.description}</h2>
+  <div class="title-section">
+    <h1 class="title title-large" class:loaded>{copy.title}</h1>
+    <h2 class="title" class:loaded style="--delay:0.5s;">{copy.description}</h2>
+    <h4 class="title byline" class:loaded>by <a href="https://pudding.cool/author/tom-vaillant">Tom Vaillant</a></h4>
+  </div>
   <div class="editorial-container">
-    <Editorial copy={copy.editorial_intro} />
+    <Editorial copy={copy.intro_article} />
   </div>    
   <section>
     <Section copy={copy.viz_all} stepHandler={SectionIntro} switcher="bubbles" />
   </section>
   <div class="editorial-container">
-    <Editorial copy={copy.editorial_advocate} spacer="none" />
-    <Editorial copy={copy.viz_reddit} spacer="none" title="Public opinion analysis" />
+    <Editorial copy={copy.intro_end} spacer="none" />
+    <Mosaic album="articles" height=75 /> 
+    <Editorial copy={copy.viz_reddit} spacer="none" title="Research analysis" notifications={commentsConfused} />
   </div>
   <section>
-    <Section stepHandler={SectionReddit} switcher="bubbles-fixed" />
-  </section>
-  <div class="editorial-container" spacer="none" >
-    <Editorial copy={copy.viz_reddit_comments} notifications={commentsConfused} />
-  </div>
-  <div class="editorial-container">
-    <Editorial copy={copy.viz_articles} spacer="none" title="Media discourse analysis"/>
-  </div>
-  <section>
-    <Section stepHandler={SectionArticles} switcher="bubbles-fixed" />
-  </section>
-  <Editorial copy={copy.editorial_clickbait} />
-    <Mosaic album="articles" height=70 />
-    <div class="editorial-container">
-      <Editorial copy={copy.editorial_against} />
-    </div>
-  <div class="editorial-container">    
-    <Editorial copy={copy.editorial_medical} title="Academic data analysis" />
-  </div>
-  <section>
-    <Section copy={copy.viz_studies} stepHandler={SectionStudies} switcher="bubbles" />
-    <!-- FOOTNOTE COMPONENT copy.footnote_1 -->
+    <Section copy={copy.viz_main} stepHandler={SectionMain} switcher="bubbles" />
   </section>
   <div class="editorial-container">
-    <Editorial copy={copy.editorial_articles_debunk_1} />
-  </div> 
-  <Mosaic album="debunk" height=25 />
-  <div class="editorial-container">
-    <Editorial copy={copy.debunk_sears} spacer="none" debunk="sears" />
+    <Editorial copy={copy.debunk_intro} />
   </div>
+  <Mosaic album="debunk" height=35 /> 
   <div class="editorial-container">
-    <Editorial copy={copy.editorial_brain_damage} notifications={commentsCortisol} />
+    <Editorial copy={copy.debunk_transition} spacer="none" />
+    <Editorial copy={copy.sears_intro} spacer="none" debunk="sears" title="Dr. Sears" notifications={commentsCortisol} />
   </div>
   <div class="spacer"></div>
   <Mosaic album="posts" height=75 isSocial={true} />
   <div class="editorial-container">
-    <Editorial copy={copy.mosaic_cortisol} />
+    <Editorial copy={copy.debunk_sears} />
   </div>
-  <section>
+  <!-- <section>
     <Section copy={copy.viz_studies_middlemiss} stepHandler={SectionMiddlemiss} switcher="bubbles" />
-  </section>
+  </section> -->
   <div class="editorial-container">
-    <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} />
+    <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} title="Dr. Narvaez" />
     <Video video="cbum" />
-  </div>
-  <div class="editorial-container">
-    <Editorial copy={copy.debunk_narvaez_2} spacer="none" debunk="narvaez" />
-  </div>
-  <section>
-    <Section copy={copy.viz_studies_conclude} stepHandler={SectionPrice} switcher="bubbles" />
-  </section>
-  <div class="editorial-container">
-    <Editorial copy={copy.mosaic_thecut} title="Analysis of Instagram discourse" />
+    <Editorial copy={copy.debunk_narvaez_2} debunk="narvaez" />
+    <Editorial copy={copy.viz_studies_conclude} />
+    <Editorial copy={copy.instagram_1} title="Analysis of Instagram discourse" notifications={commentsInstagram} />
+    <Editorial copy={copy.instagram_2} />
   </div>
   <Mosaic album="social" height=35 />
   <section>
-    <Section copy={copy.chart_instagram} stepHandler={SectionInstagram} switcher="instagram" />
+    <Section copy={copy.viz_instagram} stepHandler={SectionInstagram} switcher="instagram" />
   </section>
   <div class="editorial-container">
     <Editorial copy={copy.lazy_parenting} notifications={commentsLazy} />
+    <Editorial copy={copy.other_arguments}  />
   </div> 
   <section>
     <Section copy={copy.viz_transitions} stepHandler={SectionTransitions} switcher="transitions" />
@@ -217,11 +196,11 @@
   <div class="editorial-container">
     <Editorial copy={copy.editorial_influencerPackages} spacer="none" />
   </div>
-  <ProductList />
+  <Mosaic album="products" height=80 />
   <div class="editorial-container">
     <Editorial copy={copy.editorial_conclusion} />
+    <Editorial copy={copy.methodologies} title="Methodology" />
   </div>
-	<!-- <Footer /> -->
 </div>
 
 <style>
@@ -230,10 +209,7 @@
 		padding: 16px;
 		margin: 0 auto;
 	}
-	/* :global(#article section) {
-		margin: 32px auto;
-		padding-top: 32px;
-	} */
+
 	:global(#article h2 span) {
 		padding: 0 8px;
 	}
@@ -257,15 +233,22 @@
   .spacer {
 		height: 5vh;
 	}
+  .title-section {
+    margin: 0 auto;
+    max-width: 40rem;
+		padding: 16px;
+  }
   .title {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) var(--delay, 0s), transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) var(--delay, 0s);
   }
-
   .title.loaded {
     opacity: 1;
     transform: translateY(0);
+  }
+  .byline {
+    font-size: 14px;
   }
 
   @media only screen and (max-width: 600px) {

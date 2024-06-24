@@ -14,6 +14,7 @@
 			</div>
 		{/each}
 	</Scrolly>
+	<div class="step-marker">{step}</div>
 </section>
 
 <style>
@@ -39,6 +40,12 @@
 
 	.step.active {
 		opacity: 1;
+	}
+
+	.step-marker {
+		position: absolute;
+		bottom: 0;
+		right: 0;
 	}
 
 	@media only screen and (max-width: 600px) {

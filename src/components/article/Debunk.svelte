@@ -47,6 +47,8 @@
     border-radius: 4px;
     margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 40rem;
+		margin: 0 auto;
   }
   
   .references-header {
@@ -76,6 +78,10 @@
   @media only screen and (max-width: 600px) {
     .references-header {
       font-size: 14px;
+    }
+    .references-dropdown {
+      margin-left: 10px;
+      margin-right: 10px;
     }
   }
 </style>

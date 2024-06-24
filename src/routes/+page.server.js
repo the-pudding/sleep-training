@@ -1,5 +1,7 @@
 import { csvParse } from 'd3';
 import studies from "$data/studies.csv"
+import books from "$data/books.csv"
+import literature_reviews from "$data/literature_reviews.csv"
 import response_articles from "$data/articles.csv"
 import response_comments from "$data/comments.csv"
 import response_references from "$data/references.csv"
@@ -8,10 +10,21 @@ import response_instagram from "$data/instagram.csv"
 
 
 export async function load({fetch}) {
-	let data = { studies: [], articles: [], comments: [], references: [], reddit: [], instagram: [] };
+	let data = { studies: [], literature_reviews: [], articles: [], comments: [], references: [], reddit: [], instagram: [], books: [] };
 
-	// const response = studies;
-	// const csvStudies = studies//await response.text();
+	data.literature_reviews = literature_reviews.map(d => {
+		return {
+			title: d.title,
+			authors: d.authors, 
+			position: d.position,
+			url: d.url,
+			country: d.country,
+			type: d.type,
+			year: +d.year,
+			radius: +d.participants || 0,
+			citations: +d.citations || 0
+		}
+	});
 	data.studies = studies.map(d => {
 		return {
 			title: d.title,
@@ -25,8 +38,6 @@ export async function load({fetch}) {
 			citations: +d.citations || 0
 		}
 	});
-	// const response_articles = await fetch('src/data/articles.csv');
-	// const csvArticles = await response_articles.text();
 	data.articles = response_articles.map(d => {
 		return  {
 			title: d.title,
@@ -40,8 +51,6 @@ export async function load({fetch}) {
 			radius: +d.backlinks || 0
 		}
 	});
-	// // const response_comments = await fetch('src/data/comments.csv');
-	// const csvComments = await response_comments.text();
 	data.comments = response_comments.map(d => {
 		return {
 			comment: d.comment,
@@ -51,20 +60,14 @@ export async function load({fetch}) {
 			likes: d.likes,	
 		}
 	})
-	// // const response_references = await fetch('src/data/references.csv');
-	// const csvReferences = await response_references.text();
 	data.references = response_references.map(d => {
-
 		return {
 			target: d.article,
 			authors: d.authors,
 			title: d.title,
 			date: d.date,
-		}
-		
+		}		
 	})
-	// // const response_reddit = await fetch('src/data/reddit.csv');
-	// const csvReddit = await response_reddit.text();
 	data.reddit = response_reddit.map(d => {
 		return {
 			comment: d.comments,
@@ -76,8 +79,6 @@ export async function load({fetch}) {
 		}
 	
 	})
-	// // const response_instagram = await fetch('src/data/instagram.csv');
-	// const csvInstagram = await response_instagram.text();
 	data.instagram = response_instagram.map(d => {
 		return {
 			position: d.position,
@@ -85,6 +86,18 @@ export async function load({fetch}) {
 			url: d.url,
 			username: d.username,
 			type: d.type,
+		}
+	})
+	data.books = books.map(d => {
+		return {
+			position: d.position,
+			radius: +d.sales,
+			title: d.title,
+			authors: d.authors,
+			url: d.url,
+			username: d.username,
+			type: d.type,
+			year: d.year,
 		}
 	})
 

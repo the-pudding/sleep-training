@@ -73,6 +73,9 @@
 <style>
     .editorial {
         margin-top: 4vh;
+        max-width: 40rem;
+		padding: 16px;
+		margin: 0 auto;
     }
     .scrolly-editorial {
         padding-top: 0px !important;
@@ -85,5 +88,8 @@
         font-family: "Tiempos Text Web";
         font-weight: 700;
         color: #82BCBE;
+        max-width: 40rem;
+		padding: 16px;
+		margin: 0 auto;
     }
 </style>

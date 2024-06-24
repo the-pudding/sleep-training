@@ -7,7 +7,6 @@
 
   export let album = 'articles';
   export let height;
-  export let isSocial = false;
   let step;
 
   let animationStarted = false;
@@ -50,6 +49,12 @@
         { url: 'assets/images/debunk/narvaez.jpg' },
         { url: 'assets/images/debunk/sears.jpg' },
       ];
+    } else if (album === 'products') {
+      return [
+        { url: 'assets/images/products/products_1.jpg' },
+        { url: 'assets/images/products/products_2.jpg' },
+        { url: 'assets/images/products/products_4.jpg' },
+      ];
     }
     return [];
   };
@@ -64,25 +69,15 @@
 	<Scrolly bind:value={step} >
     <div class="image-mosaic" style="min-height: {height}vh;">
       {#each images as image, i}
-        {#if animationStarted && isSocial === false}
-          {#if $viewport.width > 600}
-            <div
-              class="image-container"
-              style="z-index: {i}; transform: translate({i % 2 === 0 ? '0%' : '35%'}, {i * 9}vh); max-width: 75%;"
-              in:fade={{ duration: 1000, delay: (i*300), easing: cubicInOut }}
-            >
-              <img src={image.url} alt="Image {i}" />
-            </div>
-          {:else}
-            <div
-            class="image-container"
-            in:fade={{ duration: 1000, delay: (i*300), easing: cubicInOut }}
-          >
-            <img src={image.url} alt="Image {i}" />
-          </div>
-          {/if}
-        {:else if animationStarted && isSocial === true}
-          {#if $viewport.width > 600}
+        {#if $viewport.width < 600}
+          <div
+          class="image-container"
+          in:fade={{ duration: 1000, delay: (i*300), easing: cubicInOut }}
+        >
+          <img src={image.url} alt="Image {i}" />
+        </div>
+        {:else}
+          {#if animationStarted && album === "social"}
             <div
               class="image-container"
               style="z-index: {i}; transform: translate({i % 2 === 0 ? '10%' : '90%'}, {i * 14}vh); max-width: 50%;"
@@ -90,9 +85,18 @@
             >
               <img src={image.url} alt="Image {i}" />
             </div>
+          {:else if animationStarted && album === "products"}
+            <div
+            class="image-container"
+            style="z-index: {i}; transform: translate({i % 2 === 0 ? '40%' : '130%'}, {i * 14}vh); max-width: 30%;"
+            in:fade={{ duration: 1000, delay: (i*300), easing: cubicInOut }}
+            >
+              <img src={image.url} alt="Image {i}" />
+            </div>
           {:else}
             <div
               class="image-container"
+              style="z-index: {i}; transform: translate({i % 2 === 0 ? '0%' : '30%'}, {i * 9}vh); max-width: 75%;"
               in:fade={{ duration: 1000, delay: (i*300), easing: cubicInOut }}
             >
               <img src={image.url} alt="Image {i}" />
@@ -111,7 +115,9 @@
   .image-mosaic {
     position: relative;
     width: 80%;
-    margin: 0 auto;
+    max-width: 40rem;
+		padding: 16px;
+		margin: 0 auto;
   }
 
   .image-container {

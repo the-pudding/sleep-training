@@ -77,6 +77,9 @@
         position: relative;
         z-index: 2;
 		pointer-events: none;
+        max-width: 40rem;
+		padding: 16px;
+		margin: 0 auto;
     }
     .step {
 		height: 60vh;

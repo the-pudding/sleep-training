@@ -39,32 +39,28 @@
   $: {
     switch (data.type) {
       case 'study':
-        labelOne = 'AUTHORS';
         textOne = truncateText(data.authors, 60);
-        labelTwo = 'PARTICIPANTS';
-        textTwo = data.radius;
+        textTwo = data.year;
         title = truncateText(data.title.toUpperCase(), 70);
         break;
       case 'article':
-        labelOne = 'PUBLISHER';
         textOne = data.publisher;
-        labelTwo = 'BACKLINKS';
-        textTwo = data.radius;
+        textTwo = data.year;
         title = truncateText(data.title.toUpperCase(), 70);
         break;
       case 'reddit':
-        labelOne = 'UPVOTES';
         textOne = data.radius;
-        labelTwo = 'COMMENT';
         textTwo = truncateText(data.comment, 140);
         title = truncateText(data.username.toUpperCase(), 40);
         break;
       case 'instagram':
-        labelOne = 'FOLLOWERS';
         textOne = data.radius;
-        labelTwo = '';
-        textTwo = '';
         title = truncateText(data.username.toUpperCase(), 40);
+        break;
+      case 'book':
+        textOne = truncateText(data.authors, 60);
+        textTwo = data.year;
+        title = truncateText(data.title.toUpperCase(), 40);
         break;
       default:
         textTwo = '';
@@ -86,9 +82,9 @@
     </p>
     <!-- Additional info under the country name -->
     <div class='info'>
-        <p class='info-element'>{labelOne}: {textOne}</p>
         {#if data.type != "instagram"}
-        <p class='info-element'>{labelTwo}: {textTwo}</p>
+          <p class='info-element'>{textOne}</p>
+          <p class='info-element'>{textTwo}</p>
         {/if}
     </div>
 </div>
@@ -99,7 +95,7 @@
       position: absolute;
       pointer-events: none;
       padding: 1rem 1rem;
-      background: #1C3A4E;
+      background: #1A2E3C;
       color: white;
       box-shadow: rgba(0, 0, 0, 0.15) 2px 3px 8px;
       border-radius: 4px;
