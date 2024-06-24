@@ -33,10 +33,11 @@
     font-family: "Atlas Grotesk";
     display: flex-column;
     background-color: #1C3A4E;
-    padding: 10px;
+    max-width: 40rem;
+		margin: 0 auto 10px auto;
+    padding: 15px;
     color: white;
     border-radius: 5px;
-    margin-bottom: 10px;
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) calc(var(--delay) * 0.2s), transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) calc(var(--delay) * 0.2s);

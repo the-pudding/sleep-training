@@ -1,6 +1,6 @@
 <script>
 
-    import { max, scaleOrdinal, range, group, hierarchy, pack, rollup, quadtree, forceSimulation, scaleLinear } from "d3";
+    import { max, scaleOrdinal, range, group, hierarchy, pack, rollup, quadtree, scaleLinear, scaleSqrt } from "d3";
     import { onMount } from "svelte";
     import { hoveredCircle } from '$stores/misc.js';
 

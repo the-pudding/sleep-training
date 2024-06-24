@@ -89,39 +89,39 @@
             }
       }
     }
-    function SectionMiddlemiss(step) {
-        switch (true) {
-        case step >= 0 && step < 2:
-            return {
-              renderedData: data.studies,
-              focusHover: focusMiddlemiss,
-            }
-        case step >= 2 && step < 3:
-            return {
-              renderedData: data.articles,
-              focusHover: focusBrainDamage,
-            }
-        default:
-            return {
-              renderedData: data.studies,
-              focusHover: null
-            }
-      }
-    }
-    function SectionPrice(step) {
-        switch (true) {
-        case step >= 1 && step < 3:
-            return {
-              renderedData: data.studies,
-              focusHover: focusPrice,
-            }
-        default:
-            return {
-              renderedData: data.studies,
-              focusHover: null
-            }
-      }
-    }
+    // function SectionMiddlemiss(step) {
+    //     switch (true) {
+    //     case step >= 0 && step < 2:
+    //         return {
+    //           renderedData: data.studies,
+    //           focusHover: focusMiddlemiss,
+    //         }
+    //     case step >= 2 && step < 3:
+    //         return {
+    //           renderedData: data.articles,
+    //           focusHover: focusBrainDamage,
+    //         }
+    //     default:
+    //         return {
+    //           renderedData: data.studies,
+    //           focusHover: null
+    //         }
+    //   }
+    // }
+    // function SectionPrice(step) {
+    //     switch (true) {
+    //     case step >= 1 && step < 3:
+    //         return {
+    //           renderedData: data.studies,
+    //           focusHover: focusPrice,
+    //         }
+    //     default:
+    //         return {
+    //           renderedData: data.studies,
+    //           focusHover: null
+    //         }
+    //   }
+    // }
     function SectionTransitions(step) {
       return {
         renderedData: data.studies,
@@ -139,8 +139,11 @@
 <div id="article">
   <HeroComments notifications={commentsDivided} />
   <div class="spacer"></div>
-  <h1 class="title title-large" class:loaded>{copy.title}</h1>
-  <h2 class="title" class:loaded style="--delay:0.5s;">{copy.description}</h2>
+  <div class="title-section">
+    <h1 class="title title-large" class:loaded>{copy.title}</h1>
+    <h2 class="title" class:loaded style="--delay:0.5s;">{copy.description}</h2>
+    <h4 class="title byline" class:loaded>by <a href="https://pudding.cool/author/tom-vaillant">Tom Vaillant</a></h4>
+  </div>
   <div class="editorial-container">
     <Editorial copy={copy.intro_article} />
   </div>    
@@ -157,7 +160,7 @@
   <div class="editorial-container">
     <Editorial copy={copy.debunk_intro} />
   </div>
-  <Mosaic album="debunk" height=25 /> 
+  <Mosaic album="debunk" height=35 /> 
   <div class="editorial-container">
     <Editorial copy={copy.debunk_transition} spacer="none" />
     <Editorial copy={copy.sears_intro} spacer="none" debunk="sears" title="Dr. Sears" notifications={commentsCortisol} />
@@ -200,15 +203,6 @@
 </div>
 
 <style>
-	#article {
-		max-width: 40rem;
-		padding: 16px;
-		margin: 0 auto;
-	}
-	/* :global(#article section) {
-		margin: 32px auto;
-		padding-top: 32px;
-	} */
 	:global(#article h2 span) {
 		padding: 0 8px;
 	}
@@ -232,15 +226,22 @@
   .spacer {
 		height: 5vh;
 	}
+  .title-section {
+    margin: 0 auto;
+    max-width: 40rem;
+		padding: 16px;
+  }
   .title {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) var(--delay, 0s), transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) var(--delay, 0s);
   }
-
   .title.loaded {
     opacity: 1;
     transform: translateY(0);
+  }
+  .byline {
+    font-size: 14px;
   }
 
   @media only screen and (max-width: 600px) {

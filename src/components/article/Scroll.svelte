@@ -42,16 +42,6 @@
 		opacity: 1;
 	}
 
-	.legend-advocate {
-        color: green;
-    }
-    .legend-neutral {
-		color: black;
-	}
-	.legend-oppose {
-		color: red;
-	}
-
 	.step-marker {
 		position: absolute;
 		bottom: 0;
