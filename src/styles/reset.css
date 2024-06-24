@@ -200,6 +200,22 @@ ol, ul {
 	padding-left: 16px;
 }
 
+.editorial-paragraph ol {
+	padding-left: 48px;
+}
+
+.editorial-paragraph ol li {
+	margin-bottom: 16px;
+}
+
+.notification .bold {
+	border-radius: 3px;
+    background: rgba(255,255,255,.16);
+    color: white;
+    padding: 1px 5px;
+    font-weight: 600;
+}
+
 .skip-to-main {
 	border: none;
 	width: 1px;

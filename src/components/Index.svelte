@@ -1,5 +1,5 @@
 <script>
-    import { setContext, getContext } from 'svelte';
+    import { setContext, getContext, onMount } from 'svelte';
     import Section from "$components/article/Section.svelte";
     import Debunk from "$components/article/Debunk.svelte";
     import ProductList from "$components/article/ProductList.svelte";
@@ -36,9 +36,7 @@
 
     // TITLE ANIMATION
     let loaded = false
-    setTimeout(() => {
-      loaded = true;
-    }, 4000)
+
 
     // STEP LOGIC
     function SectionIntro(step) {
@@ -239,7 +237,7 @@
 		padding: 16px;
   }
   .title {
-    opacity: 0;
+    opacity: 1;
     transform: translateY(20px);
     transition: opacity 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) var(--delay, 0s), transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) var(--delay, 0s);
   }

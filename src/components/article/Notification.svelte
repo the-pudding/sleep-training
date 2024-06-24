@@ -21,10 +21,10 @@
       <img class="icon" src="{getPlatformDetails(comment.platform).icon}" alt="reddit or instagram icon" />
       {comment.likes} Likes
     </div>
-    <p>{comment.comment}</p>
+    <p>{@html comment.comment}</p>
   </div>
   <div class="notification-source">
-    <a href="{comment.url}">SOURCE</a>
+    <a href="{comment.url}">Source</a>
   </div>
 </div>
 
@@ -34,7 +34,7 @@
     display: flex-column;
     background-color: #1C3A4E;
     max-width: 40rem;
-		margin: 0 auto 10px auto;
+		margin: 0 auto 20px auto;
     padding: 15px;
     color: white;
     border-radius: 5px;
@@ -48,7 +48,14 @@
   }
 
   .notification p {
-    font-size: 14px;
+    font-size: 16px;
+    letter-spacing: -.2px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
   }
   .notification-content {
     display: flex;
@@ -59,7 +66,10 @@
     display: flex;
     align-items: center;
     font-size: 12px;
-    font-weight: lighter;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   .icon {
     height: 15px;
@@ -75,7 +85,7 @@
   }
   @media only screen and (max-width: 600px) {
       .notification p {
-      font-size: 12px;
+      font-size: 16px;
     }
     .notification {
       margin-left: 10px;
