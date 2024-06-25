@@ -18,13 +18,12 @@
     const dataAll = [...data.articles, ...data.studies, ...data.books];
 
     // FOCUSED TOOLTIPS
-    const focusMiddlemiss = data.studies.filter(d => d.authors === "Middlemiss")[0];
     const focusNarvaez = data.articles.filter(d => d.url === "https://www.psychologytoday.com/intl/blog/moral-landscapes/201112/dangers-crying-it-out")[0];
-    const focusRedditResearch = data.reddit.filter(d => d.username === "leftpantleg420")[0];
-    const focusUmbrellaReview = data.studies.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/35778903/")[0];
-    const focusPrice = data.studies.filter(d => d.url === "https://publications.aap.org/pediatrics/article-abstract/130/4/643/30241/Five-Year-Follow-up-of-Harms-and-Benefits-of?redirectedFrom=fulltext")[0];
-    const focusReview = data.studies.filter(d => d.url === "https://aasm.org/resources/practiceparameters/review_nightwakingschildren.pdf")[0];
-    const focusBrainDamage = data.articles.filter(d => d.url === "https://raisedgood.com/nurture-babies-recover-sleep-training/")[0]
+    // const focusRedditResearch = data.reddit.filter(d => d.username === "leftpantleg420")[0];
+    const focusUmbrellaReview = data.literature_reviews.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/35778903/")[0];
+    // const focusPrice = data.studies.filter(d => d.url === "https://publications.aap.org/pediatrics/article-abstract/130/4/643/30241/Five-Year-Follow-up-of-Harms-and-Benefits-of?redirectedFrom=fulltext")[0];
+    const focusReview = data.literature_reviews.filter(d => d.url === "https://aasm.org/resources/practiceparameters/review_nightwakingschildren.pdf")[0];
+    // const focusBrainDamage = data.articles.filter(d => d.url === "https://raisedgood.com/nurture-babies-recover-sleep-training/")[0]
 
     // NOTIFICATION LOADING
     let commentsConfused = data.comments.filter(d => d.category === "confused");
@@ -43,13 +42,13 @@
       switch (true) {
         case step >= 0 && step < 1:
             return {
-              renderedData: dataAll,
+              renderedData: data.articles,
               focusHover: null,
             }
         case step >= 1 && step < 2:
             return {
-              renderedData: data.reddit,
-              focusHover: focusNarvaez,
+              renderedData: dataAll,
+              focusHover: null,
             }
         default:
             return {
@@ -60,22 +59,47 @@
     }
     function SectionMain(step) {
         switch (true) {
-        case step >= 0 && step < 3:
+        case step >= 0 && step < 1:
             return {
               renderedData: data.reddit,
-              focusHover: focusRedditResearch,
+              focusHover: null,
             }
-        case step >= 3 && step < 7:
+        case step >= 1 && step < 2:
             return {
               renderedData: data.articles,
               focusHover: null
             }
-        case step >= 7 && step < 9:
+        case step >= 2 && step < 3:
+            return {
+              renderedData: data.articles,
+              focusHover: focusNarvaez,
+            }
+        case step >= 3 && step < 4:
+            return {
+              renderedData: data.articles,
+              focusHover: null,
+            }
+        case step >= 4 && step < 5:
             return {
               renderedData: data.studies,
+              focusHover: null
+            }
+        case step >= 5 && step < 6:
+            return {
+              renderedData: data.literature_reviews,
+              focusHover: null
+            }
+        case step >= 6 && step < 7:
+            return {
+              renderedData: data.literature_reviews,
               focusHover: focusReview,
             }
-        case step >= 9 && step < 11:
+        case step >= 7 && step < 8:
+            return {
+              renderedData: data.literature_reviews,
+              focusHover: focusUmbrellaReview,
+            }
+        case step >= 8 && step < 9:
             return {
               renderedData: data.studies,
               focusHover: null
@@ -87,39 +111,6 @@
             }
       }
     }
-    // function SectionMiddlemiss(step) {
-    //     switch (true) {
-    //     case step >= 0 && step < 2:
-    //         return {
-    //           renderedData: data.studies,
-    //           focusHover: focusMiddlemiss,
-    //         }
-    //     case step >= 2 && step < 3:
-    //         return {
-    //           renderedData: data.articles,
-    //           focusHover: focusBrainDamage,
-    //         }
-    //     default:
-    //         return {
-    //           renderedData: data.studies,
-    //           focusHover: null
-    //         }
-    //   }
-    // }
-    // function SectionPrice(step) {
-    //     switch (true) {
-    //     case step >= 1 && step < 3:
-    //         return {
-    //           renderedData: data.studies,
-    //           focusHover: focusPrice,
-    //         }
-    //     default:
-    //         return {
-    //           renderedData: data.studies,
-    //           focusHover: null
-    //         }
-    //   }
-    // }
     function SectionTransitions(step) {
       return {
         renderedData: data.studies,
@@ -151,13 +142,19 @@
   <div class="editorial-container">
     <Editorial copy={copy.intro_end} spacer="none" />
     <Mosaic album="articles" height=75 /> 
-    <Editorial copy={copy.viz_reddit} spacer="none" title="Research analysis" notifications={commentsConfused} />
+    <Editorial copy={copy.viz_reddit} spacer="none" title="Popular vs medical opinions" notifications={commentsConfused} />
   </div>
   <section>
     <Section copy={copy.viz_main} stepHandler={SectionMain} switcher="bubbles" />
   </section>
   <div class="editorial-container">
-    <Editorial copy={copy.debunk_intro} />
+    <Editorial copy={copy.medical_concerns} title="Popular concerns on the science" />
+  </div>
+  <section>
+    <Section copy={copy.viz_transitions} stepHandler={SectionTransitions} switcher="transitions" />
+  </section>
+  <div class="editorial-container">
+    <Editorial copy={copy.debunk_intro} title="Medical misinformation" />
   </div>
   <Mosaic album="debunk" height=35 /> 
   <div class="editorial-container">
@@ -169,15 +166,12 @@
   <div class="editorial-container">
     <Editorial copy={copy.debunk_sears} />
   </div>
-  <!-- <section>
-    <Section copy={copy.viz_studies_middlemiss} stepHandler={SectionMiddlemiss} switcher="bubbles" />
-  </section> -->
   <div class="editorial-container">
     <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} title="Dr. Narvaez" />
     <Video video="cbum" />
-    <Editorial copy={copy.debunk_narvaez_2} debunk="narvaez" />
-    <Editorial copy={copy.viz_studies_conclude} />
-    <Editorial copy={copy.instagram_1} title="Analysis of Instagram discourse" notifications={commentsInstagram} />
+    <Editorial copy={copy.debunk_narvaez_2} spacer="none" debunk="narvaez" />
+    <Editorial copy={copy.debunk_narvaez_3} />
+    <Editorial copy={copy.instagram_1} title="Instagram chaos" spacer="none" notifications={commentsInstagram} />
     <Editorial copy={copy.instagram_2} />
   </div>
   <Mosaic album="social" height=35 />
@@ -185,18 +179,12 @@
     <Section copy={copy.viz_instagram} stepHandler={SectionInstagram} switcher="instagram" />
   </section>
   <div class="editorial-container">
-    <Editorial copy={copy.lazy_parenting} notifications={commentsLazy} />
-    <Editorial copy={copy.other_arguments}  />
-  </div> 
-  <section>
-    <Section copy={copy.viz_transitions} stepHandler={SectionTransitions} switcher="transitions" />
-  </section>
-  <div class="editorial-container">
     <Editorial copy={copy.editorial_influencerPackages} spacer="none" />
+    <Mosaic album="products" height=65 />
+    <Editorial copy={copy.lazy_parenting} notifications={commentsLazy} spacer="none" />
   </div>
-  <Mosaic album="products" height=80 />
   <div class="editorial-container">
-    <Editorial copy={copy.editorial_conclusion} />
+    <Editorial copy={copy.editorial_conclusion} title="Conclusion" />
     <Editorial copy={copy.methodologies} title="Methodology" />
   </div>
 </div>

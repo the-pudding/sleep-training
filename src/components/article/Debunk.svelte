@@ -32,8 +32,8 @@
         <tbody>
           {#each data.filter(d => d.target === target) as d}
             <tr>
-              <td>{d.date}</td>
-              <td>{d.title}</td>
+              <td style="width: 20%;">{d.date}</td>
+              <td style="width: 80%;">{d.title}</td>
             </tr>
           {/each}
         </tbody>

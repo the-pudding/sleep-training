@@ -216,6 +216,36 @@ ol, ul {
     font-weight: 600;
 }
 
+.step-content .bold {
+	border-radius: 3px;
+    background: rgba(255,255,255,.16);
+    color: white;
+    padding: 1px 5px;
+    font-weight: 600;
+}
+
+.legend-advocate {
+	border-radius: 3px;
+    background: #4FB477;
+    color: white;
+    padding: 1px 5px;
+    font-weight: 600;
+}
+.legend-neutral {
+	border-radius: 3px;
+    background: #D69C2B;
+    color: white;
+    padding: 1px 5px;
+    font-weight: 600;
+}
+.legend-oppose {
+	border-radius: 3px;
+    background: #A34131;
+    color: white;
+    padding: 1px 5px;
+    font-weight: 600;
+}
+
 .skip-to-main {
 	border: none;
 	width: 1px;

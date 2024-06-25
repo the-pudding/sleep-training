@@ -31,8 +31,6 @@
     };
     $: positionColor = (position) => colorMapping[position] || "#000000";
 
-    $: console.log(nodes)
-
     onMount(() => {
         if (data) {
           let simulation = forceSimulation(data)

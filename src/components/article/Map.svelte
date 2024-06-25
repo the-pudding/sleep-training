@@ -7,9 +7,6 @@
 
   export let data;
 
-  const margin = { top: 0, right: 0, bottom: 20, left: -2 };
-  $: innerWidth = $viewport.width - margin.right - margin.left;
-  $: innerHeight = $viewport.height - margin.top - margin.bottom;
   let nodes = [];
   let pathGenerator;
   let projection;
@@ -30,7 +27,7 @@
 
   onMount(() => {
     projection = d3.geoMercator()
-      .fitSize([innerWidth, innerHeight], worldMap);
+      .fitSize([($viewport.width - 10), $viewport.height], worldMap);
 
     pathGenerator = d3.geoPath().projection(projection);
 

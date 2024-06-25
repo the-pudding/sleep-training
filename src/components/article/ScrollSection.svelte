@@ -1,7 +1,6 @@
 <script>
     import ForceBubbles from '$components/article/ForceBubbles.svelte';
 	import Scrolly from "$components/helpers/Scrolly.svelte";
-    import Bubbles from "$components/article/Bubbles.svelte";
     import Timeline from "$components/article/Timeline.svelte";
     import Map from "$components/article/Map.svelte";
     import Pie from "$components/article/Pie.svelte";
@@ -36,7 +35,7 @@
                 {:else if switcher === "transitions"}
                     {#if value == undefined || value < 2}
                         <Timeline />
-                    {:else if value == undefined || value >= 2 && value <= 4 }    
+                    {:else if value == undefined || value >= 2 }    
                         <Map bind:data={dataMap} />
                     {/if}
                 {:else if switcher === "instagram"}
@@ -47,6 +46,9 @@
                     {/if}
                 {/if}
             {/if}
+            <div class="step-marker">
+                <p>{value}</p>
+            </div>
         </div>
 
         <div class="steps">
@@ -92,7 +94,11 @@
 		place-items: center;
 		justify-content: center;
 	}
-
+    .step-marker {
+        position: absolute;
+        bottom: 0px;
+        left: 10px;
+    }
     .first {
         margin-top: -50vh;
     }

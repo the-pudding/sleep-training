@@ -5,7 +5,7 @@
 
   export let x;
   export let y;
-  import { fly, fade } from "svelte/transition";
+  import { fade } from "svelte/transition";
 
   let tooltipWidth = width;
 
@@ -49,7 +49,6 @@
         title = truncateText(data.title.toUpperCase(), 70);
         break;
       case 'reddit':
-        textOne = data.radius;
         textTwo = truncateText(data.comment, 140);
         title = truncateText(data.username.toUpperCase(), 40);
         break;
@@ -77,16 +76,26 @@
     out:fade
     style="left:{xPosition}px; top:{yPosition - 150}px; width:{tooltipWidth}px;"
 >
-    <p class="tooltip-title">
+  {#if data.type === "instagram"}
+    <div class="tooltip-title">
+      {title}
+    </div>
+  {:else if data.type === "reddit"}
+    <div class="tooltip-title">
+      {title}
+      <div class='info'>
+        <span class='info-element'>{textTwo}</span>
+      </div>
+    </div>
+  {:else}
+  <div class="tooltip-title">
     {title}
-    <span class='info'>
-      {#if data.type != "instagram"}
-        <span class='info-element'>Published in <span class="bold">{textOne}</span></span>
-        <span class='info-element'>in {textTwo}</span>
-      {/if}
-    </span>
-    </p>
-    <!-- Additional info under the country name -->
+    <div class='info'>
+      <span class='info-element'>Published in <span class="bold">{textOne}</span>, {textTwo}</span>
+    </div>
+  </div>
+  {/if}
+<!-- Additional info under the country name -->
     
 </div>
 
@@ -110,7 +119,8 @@
     }
     .info {
       font-size: 12px;
-      display: inline;
+      display: flex;
+      flex-direction: column;
 
     }
     .info-element {
