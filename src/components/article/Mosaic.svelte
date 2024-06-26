@@ -1,27 +1,37 @@
 <script>
   import { onMount } from 'svelte';
-  import { fade } from 'svelte/transition';
+  import { fly } from 'svelte/transition';
   import { cubicInOut } from 'svelte/easing';
 	import Scrolly from "$components/helpers/Scrolly.svelte";
-  import viewport from "$stores/viewport.js";
 
   export let album = 'articles';
-  export let height;
-  let step;
+  export let viewportHeight;
+  // let step;
+  let value;
+
+  $: console.log(viewportHeight)
 
   let animationStarted = false;
 
-  $: step, changeAnimationStarted();
+  // $: step, changeAnimationStarted();
 
-  function changeAnimationStarted(){
-    if(step == 0){
-      animationStarted = true;
-    }
-    
-  }
+  $: console.log(value)
+
+  $: album, images = getImageUrls(album);
 
   let images = [];
 
+  function getPos(count){
+    if(count == 0){
+      return ["40%","40%","-2"]
+    }
+    let deg = count % 2 == 0 ? Math.random()*3 : Math.random()*5*-1;
+    let sign = count % 2 == 0 ? -1 : 1;
+
+    let left = Math.random()*20*sign;
+    let bottom = Math.random()*20*sign;
+    return [JSON.stringify(50+left).concat("%"),JSON.stringify(50+bottom).concat("%"),deg];
+  }
   const getImageUrls = (album) => {
     if (album === 'articles') {
       return [
@@ -58,93 +68,92 @@
     }
     return [];
   };
-
-  onMount(() => {
-    images = getImageUrls(album);
-  });
 </script>
 
 
-<section id="scrolly">
-	<Scrolly bind:value={step} >
-    <div class="image-mosaic" style="min-height: {height}vh;">
+<section id="">
+    <div class="image-mosaic" style="height:{viewportHeight}px;">
       {#each images as image, i}
-        {#if $viewport.width < 600}
+        {@const pos = getPos(i)}
+        {#if i <= value}
           <div
-          class="image-container"
-          in:fade={{ duration: 1000, delay: (i*300), easing: cubicInOut }}
-        >
-          <img src={image.url} alt="Image {i}" />
-        </div>
-        {:else}
-          {#if animationStarted && album === "social"}
-            <div
-              class="image-container"
-              style="z-index: {i}; transform: translate({i % 2 === 0 ? '10%' : '90%'}, {i * 14}vh); max-width: 50%;"
-              in:fade={{ duration: 1000, delay: (i*300), easing: cubicInOut }}
-            >
-              <img src={image.url} alt="Image {i}" />
-            </div>
-          {:else if animationStarted && album === "products"}
-            <div
             class="image-container"
-            style="z-index: {i}; transform: translate({i % 2 === 0 ? '40%' : '130%'}, {i * 14}vh); max-width: 30%;"
-            in:fade={{ duration: 1000, delay: (i*300), easing: cubicInOut }}
-            >
-              <img src={image.url} alt="Image {i}" />
-            </div>
-          {:else}
-            <div
-              class="image-container"
-              style="z-index: {i}; transform: translate({i % 2 === 0 ? '0%' : '30%'}, {i * 9}vh); max-width: 75%;"
-              in:fade={{ duration: 1000, delay: (i*300), easing: cubicInOut }}
-            >
-              <img src={image.url} alt="Image {i}" />
-            </div>
-          {/if}
+            style="
+              transform: translate(-50%, 50%) rotate({pos[2]}deg);
+              transform-origin: 50% 100%;
+              left:{pos[0]};
+              bottom:{pos[1]};
+              max-width: 60vw;
+            "
+          >
+            <img
+              transition:fly={{ duration: 500, easing: cubicInOut, y:20 }}
+               src={image.url} alt="Image {i}" />
+          </div>
         {/if}
       {/each}
     </div>
-	</Scrolly>
+
+    <section id="scrolly" style="margin-top:{-viewportHeight*.5}px;">
+      <Scrolly bind:value>
+        {#each images as text, i}
+          {@const active = value === i}
+          {@const last = i === images.length - 1}
+          <div class="step" class:last style="{viewportHeight*.5}px;" class:active>
+          </div>
+        {/each}
+      </Scrolly>
+    </section>
 </section>
 
 
-
-
 <style>
-  .image-mosaic {
+
+  h1 {
+    color: black;
+  }
+
+.steps {
     position: relative;
-    width: 80%;
+    z-index: 100;
+		pointer-events: none;
     max-width: 40rem;
 		padding: 16px;
 		margin: 0 auto;
+    
+}
+.step {
+		height: 50vh;
+    background-color: white;
+		opacity: 0;
+    margin-bottom: 100px;
+    z-index: 100;
+		transition: opacity 300ms ease;
+		display: flex;
+		place-items: center;
+		justify-content: center;
+}
+
+.last {
+  margin-bottom: 0;
+}
+
+  .image-mosaic {
+    position: sticky;
+    top: 0;
+    z-index: 1;
   }
 
   .image-container {
     position: absolute;
-    top: 0;
-    transform-origin: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    overflow: hidden;
+    top: auto;
+    box-shadow: 0px 1px 2px rgba(117, 117, 117, 0.10), -2px 3px 3px rgba(117, 117, 117, 0.09), -3px 6px 4px rgba(117, 117, 117, 0.05), -6px 10px 5px rgba(117, 117, 117, 0.01), -10px 16px 5px rgba(117, 117, 117, 0.00);
   }
 
   img {
     display: block;
     width: 100%;
     height: auto;
-    border-radius: 10px;
   }
 
-  @media only screen and (max-width: 600px) {
-    .image-mosaic {
-      position: relative;
-      width: 90%;
-      margin: 0 auto;
-    }
-      .image-container {
-        padding-top: 10px;
-        position: initial;
-      }
-    }
 </style>

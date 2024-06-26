@@ -7,11 +7,14 @@
     import HeroComments from "$components/article/HeroComments.svelte";
     import Mosaic from "$components/article/Mosaic.svelte";
     import Video from "$components/article/Video.svelte";
+    import viewport from "$stores/viewport.js";
 
     // COPY CONTEXT SETTING
     import copy from '$data/copy.json';
     setContext("copy", copy);
 
+    let viewportHeight;
+    let mounted;
 
     // DATA IMPORT
     let data = getContext("data");
@@ -110,67 +113,74 @@
         focusHover: null
       }
     }
+
+    onMount(() => {
+      viewportHeight = $viewport.height;
+      mounted = true;
+    })
 </script>
 
-<div id="article">
-  <HeroComments notifications={commentsDivided} />
-  <div class="spacer"></div>
-  <div class="title-section">
-    <h1 class="title title-large" class:loaded>{copy.title}</h1>
-    <h2 class="title" class:loaded style="--delay:0.5s;">{copy.description}</h2>
-    <h4 class="title byline" class:loaded>by <a href="https://pudding.cool/author/tom-vaillant">Tom Vaillant</a></h4>
+{#if mounted}
+  <div id="article">
+    <HeroComments notifications={commentsDivided} />
+    <div class="spacer"></div>
+    <div class="title-section">
+      <h1 class="title title-large" class:loaded>{copy.title}</h1>
+      <h2 class="title" class:loaded style="--delay:0.5s;">{copy.description}</h2>
+      <h4 class="title byline" class:loaded>by <a href="https://pudding.cool/author/tom-vaillant">Tom Vaillant</a></h4>
+    </div>
+    <div class="editorial-container">
+      <Editorial copy={copy.intro_article} />
+    </div>    
+    <Mosaic {viewportHeight} album="articles" height=75 /> 
+    <div class="editorial-container">
+      <Editorial copy={copy.intro_article_2} />
+    </div>  
+    <section>
+      <Section copy={copy.viz_main} stepHandler={SectionMain} switcher="bubbles" />
+    </section>
+    <div class="editorial-container">
+      <Editorial copy={copy.medical_concerns} title="Popular concerns on the science" />
+    </div>
+    <section>
+      <Section copy={copy.viz_transitions} stepHandler={SectionTransitions} switcher="transitions" />
+    </section>
+    <div class="editorial-container">
+      <Editorial copy={copy.debunk_intro} title="Medical misinformation" />
+    </div>
+    <Mosaic {viewportHeight} album="debunk" height=35 /> 
+    <div class="editorial-container">
+      <Editorial copy={copy.debunk_transition} spacer="none" />
+      <Editorial copy={copy.sears_intro} spacer="none" debunk="sears" title="Dr. Sears" notifications={commentsCortisol} />
+    </div>
+    <div class="spacer"></div>
+    <Mosaic {viewportHeight} album="posts" height=75 isSocial={true} />
+    <div class="editorial-container">
+      <Editorial copy={copy.debunk_sears} />
+    </div>
+    <div class="editorial-container">
+      <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} title="Dr. Narvaez" />
+      <Video video="cbum" />
+      <Editorial copy={copy.debunk_narvaez_2} spacer="none" debunk="narvaez" />
+      <Editorial copy={copy.debunk_narvaez_3} />
+      <Editorial copy={copy.instagram_1} title="Instagram chaos" spacer="none" notifications={commentsInstagram} />
+      <Editorial copy={copy.instagram_2} />
+    </div>
+    <Mosaic {viewportHeight} album="social" height=35 />
+    <section>
+      <Section copy={copy.viz_instagram} stepHandler={SectionInstagram} switcher="instagram" />
+    </section>
+    <div class="editorial-container">
+      <Editorial copy={copy.editorial_influencerPackages} spacer="none" />
+      <Mosaic {viewportHeight} album="products" height=65 />
+      <Editorial copy={copy.lazy_parenting} notifications={commentsLazy} spacer="none" />
+    </div>
+    <div class="editorial-container">
+      <Editorial copy={copy.editorial_conclusion} title="Conclusion" />
+      <Editorial copy={copy.methodologies} title="Methodology" />
+    </div>
   </div>
-  <div class="editorial-container">
-    <Editorial copy={copy.intro_article} />
-  </div>    
-  <Mosaic album="articles" height=75 /> 
-  <div class="editorial-container">
-    <Editorial copy={copy.intro_article_2} />
-  </div>  
-  <section>
-    <Section copy={copy.viz_main} stepHandler={SectionMain} switcher="bubbles" />
-  </section>
-  <div class="editorial-container">
-    <Editorial copy={copy.medical_concerns} title="Popular concerns on the science" />
-  </div>
-  <section>
-    <Section copy={copy.viz_transitions} stepHandler={SectionTransitions} switcher="transitions" />
-  </section>
-  <div class="editorial-container">
-    <Editorial copy={copy.debunk_intro} title="Medical misinformation" />
-  </div>
-  <Mosaic album="debunk" height=35 /> 
-  <div class="editorial-container">
-    <Editorial copy={copy.debunk_transition} spacer="none" />
-    <Editorial copy={copy.sears_intro} spacer="none" debunk="sears" title="Dr. Sears" notifications={commentsCortisol} />
-  </div>
-  <div class="spacer"></div>
-  <Mosaic album="posts" height=75 isSocial={true} />
-  <div class="editorial-container">
-    <Editorial copy={copy.debunk_sears} />
-  </div>
-  <div class="editorial-container">
-    <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} title="Dr. Narvaez" />
-    <Video video="cbum" />
-    <Editorial copy={copy.debunk_narvaez_2} spacer="none" debunk="narvaez" />
-    <Editorial copy={copy.debunk_narvaez_3} />
-    <Editorial copy={copy.instagram_1} title="Instagram chaos" spacer="none" notifications={commentsInstagram} />
-    <Editorial copy={copy.instagram_2} />
-  </div>
-  <Mosaic album="social" height=35 />
-  <section>
-    <Section copy={copy.viz_instagram} stepHandler={SectionInstagram} switcher="instagram" />
-  </section>
-  <div class="editorial-container">
-    <Editorial copy={copy.editorial_influencerPackages} spacer="none" />
-    <Mosaic album="products" height=65 />
-    <Editorial copy={copy.lazy_parenting} notifications={commentsLazy} spacer="none" />
-  </div>
-  <div class="editorial-container">
-    <Editorial copy={copy.editorial_conclusion} title="Conclusion" />
-    <Editorial copy={copy.methodologies} title="Methodology" />
-  </div>
-</div>
+{/if}
 
 <style>
 	#article {
