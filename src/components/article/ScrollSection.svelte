@@ -14,6 +14,7 @@
     let focusHover = null;
     let value;
     let newValues;
+    let step;
 
     $: value, handleStepChange()
 
@@ -21,7 +22,13 @@
         newValues = stepHandler(value);
         renderedData = newValues.renderedData;
         focusHover = newValues.focusHover;
+        if ((step === Object.values(copy).length - 1) && value === undefined) {
+            step = Object.values(copy).length - 1;
+        } else {
+            step = value;
+        }
     }
+    $: console.log("step", step)
 </script>
 
 {#if copy}
@@ -33,9 +40,9 @@
                 {#if switcher == "bubbles"}
                     <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} step={value} />                
                 {:else if switcher === "transitions"}
-                    {#if value == undefined || value < 2}
+                    {#if step == undefined || step < 2}
                         <Timeline />
-                    {:else if value == undefined || value >= 2 }    
+                    {:else if step >= 2 }    
                         <Map bind:data={dataMap} />
                     {/if}
                 {:else if switcher === "instagram"}
