@@ -19,7 +19,7 @@
 
     // FOCUSED TOOLTIPS
     const focusNarvaez = data.articles.filter(d => d.url === "https://www.psychologytoday.com/intl/blog/moral-landscapes/201112/dangers-crying-it-out")[0];
-    // const focusRedditResearch = data.reddit.filter(d => d.username === "leftpantleg420")[0];
+    const focusRedditResearch = data.reddit.filter(d => d.username === "leftpantleg420")[0];
     const focusUmbrellaReview = data.literature_reviews.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/35778903/")[0];
     // const focusPrice = data.studies.filter(d => d.url === "https://publications.aap.org/pediatrics/article-abstract/130/4/643/30241/Five-Year-Follow-up-of-Harms-and-Benefits-of?redirectedFrom=fulltext")[0];
     const focusReview = data.literature_reviews.filter(d => d.url === "https://aasm.org/resources/practiceparameters/review_nightwakingschildren.pdf")[0];
@@ -38,25 +38,7 @@
 
 
     // STEP LOGIC
-    function SectionIntro(step) {
-      switch (true) {
-        case step >= 0 && step < 1:
-            return {
-              renderedData: data.articles,
-              focusHover: null,
-            }
-        case step >= 1 && step < 2:
-            return {
-              renderedData: dataAll,
-              focusHover: null,
-            }
-        default:
-            return {
-              renderedData: dataAll,
-              focusHover: null
-            }
-      }
-    }
+ 
     function SectionMain(step) {
         switch (true) {
         case step >= 0 && step < 1:
@@ -66,40 +48,45 @@
             }
         case step >= 1 && step < 2:
             return {
-              renderedData: data.articles,
-              focusHover: null
+              renderedData: data.reddit,
+              focusHover: focusRedditResearch,
             }
         case step >= 2 && step < 3:
             return {
               renderedData: data.articles,
-              focusHover: focusNarvaez,
+              focusHover: null
             }
         case step >= 3 && step < 4:
             return {
               renderedData: data.articles,
+              focusHover: focusNarvaez,
+            }
+        case step >= 4 && step < 6:
+            return {
+              renderedData: data.books,
               focusHover: null,
             }
-        case step >= 4 && step < 5:
+        case step >= 6 && step < 7:
             return {
               renderedData: data.studies,
               focusHover: null
             }
-        case step >= 5 && step < 6:
+        case step >= 7 && step < 8:
             return {
               renderedData: data.literature_reviews,
               focusHover: null
             }
-        case step >= 6 && step < 7:
+        case step >= 8 && step < 9:
             return {
               renderedData: data.literature_reviews,
               focusHover: focusReview,
             }
-        case step >= 7 && step < 8:
+        case step >= 9 && step < 10:
             return {
               renderedData: data.literature_reviews,
               focusHover: focusUmbrellaReview,
             }
-        case step >= 8 && step < 9:
+        case step >= 10 && step < 11:
             return {
               renderedData: data.studies,
               focusHover: null
@@ -136,14 +123,10 @@
   <div class="editorial-container">
     <Editorial copy={copy.intro_article} />
   </div>    
-  <section>
-    <Section copy={copy.viz_all} stepHandler={SectionIntro} switcher="bubbles" />
-  </section>
+  <Mosaic album="articles" height=75 /> 
   <div class="editorial-container">
-    <Editorial copy={copy.intro_end} spacer="none" />
-    <Mosaic album="articles" height=75 /> 
-    <Editorial copy={copy.viz_reddit} spacer="none" title="Popular vs medical opinions" notifications={commentsConfused} />
-  </div>
+    <Editorial copy={copy.intro_article_2} />
+  </div>  
   <section>
     <Section copy={copy.viz_main} stepHandler={SectionMain} switcher="bubbles" />
   </section>
