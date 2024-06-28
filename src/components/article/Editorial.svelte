@@ -72,7 +72,7 @@
 
 <style>
     .editorial-paragraph {
-        font-size: 20px;
+        font-size: 18px;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
@@ -80,10 +80,6 @@
         margin-top: 0;
         margin-bottom: 25px;
         letter-spacing: -.2px;
-        opacity: 0;
-        transition: opacity .5s;
-    }
-    .editorial-paragraph.animationStarted {
         opacity: 1;
     }
     .editorial {
@@ -103,6 +99,6 @@
         color: #82BCBE;
         max-width: 40rem;
 		padding: 16px;
-		margin: 6vh auto 0vh auto;
+		margin: 48px auto 0 auto;
     }
 </style>

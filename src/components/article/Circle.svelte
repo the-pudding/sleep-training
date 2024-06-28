@@ -7,6 +7,8 @@
     export let focusHover;
     export let color;
     export let animatedIn;
+    export let i;
+    export let nodesLength;
 
     let hovered;
 
@@ -24,11 +26,24 @@
 
     const radiusTween = tweened(0, {
 		duration: 400,
-		easing: cubicOut
+		easing: cubicOut,
+        delay:1000+(i/nodesLength)*400
+	});
+
+    const opacityTween = tweened(0, {
+		duration: 400,
+		easing: cubicOut,
+        delay:1000+(i/nodesLength)*400
 	});
 
     $: if(animatedIn == true) {
-        radiusTween.set(point.r)
+        radiusTween.set(point.r, {duration:400,delay:400+(i/nodesLength)*1000})
+        opacityTween.set(1, {duration:400,delay:400+(i/nodesLength)*1000})
+
+    } else {
+        radiusTween.set(0, {duration:500, easing: cubicOut, delay: 0});
+        opacityTween.set(0, {duration:400,delay:0})
+
     }
 
     function handleMouseEnter() {
@@ -52,6 +67,7 @@
     data-r={point.data.info.radius}
     r={$radiusTween}
     fill={hovered ? "#FFF" : color}
+    fill-opacity={$opacityTween}
     on:mouseover={() => handleMouseEnter()}
     class="circle-element"
 >
@@ -60,5 +76,7 @@
 <style>
     .circle-element {
         cursor: pointer;
+        stroke: #192127;
+        stroke-width: 3px;
     }
 </style>

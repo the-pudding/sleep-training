@@ -1,5 +1,5 @@
 <script>
-  import { fly } from 'svelte/transition';
+  import { fly, fade } from 'svelte/transition';
   import { cubicInOut } from 'svelte/easing';
 	import Scrolly from "$components/helpers/Scrolly.svelte";
 
@@ -68,37 +68,8 @@
       {#each images as image, i}
         {@const pos = getPos(i)}
         {#if i <= value}
-          {#if album === 'posts'}
             <div
-              class="image-container-posts"
-              style="
-                transform: translate(-50%, 50%) rotate({pos[2]}deg);
-                transform-origin: 50% 100%;
-                left:{pos[0]};
-                bottom:{pos[1]};
-              "
-            >
-              <img
-                transition:fly={{ duration: 500, easing: cubicInOut, y:20 }}
-                src={image.url} alt="Image {i}" style="border-radius: 5px;"/>
-            </div>
-          {:else if album === "products"}
-            <div
-              class="image-container-posts"
-              style="
-                transform: translate(-50%, 50%) rotate({pos[2]}deg);
-                transform-origin: 50% 100%;
-                left:{pos[0]};
-                bottom:{pos[1]};
-              "
-            >
-              <img
-                transition:fly={{ duration: 500, easing: cubicInOut, y:20 }}
-                src={image.url} alt="Image {i}" style="border-radius: 5px;"/>
-            </div>
-          {:else}
-            <div
-              class="image-container"
+              class="image-container fading {album === 'posts' ? 'image-container-posts' : ''}"
               style="
                 transform: translate(-50%, 50%) rotate({pos[2]}deg);
                 transform-origin: 50% 100%;
@@ -108,10 +79,9 @@
               "
             >
               <img
-                transition:fly={{ duration: 500, easing: cubicInOut, y:20 }}
+                transition:fly={{y:50, duration:500}}
                 src={image.url} alt="Image {i}" style="border-radius: 5px;" />
             </div>
-          {/if}
         {/if}
       {/each}
     </div>

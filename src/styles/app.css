@@ -91,3 +91,7 @@ h5 {
 h6 {
 	font-size: var(--20px, 20px);
 }
+
+.step-content a {
+	color: white;
+}

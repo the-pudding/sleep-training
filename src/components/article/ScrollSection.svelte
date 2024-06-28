@@ -9,6 +9,7 @@
     export let switcher;
     export let dataMap;
     export let stepHandler;
+    export let viewportHeight;
 
     let renderedData;
     let focusHover = null;
@@ -65,7 +66,12 @@
                         {@const last = i == Object.values(copy).length - 1 ? true : false}
                         {@const first = i == 0 ? true : false}
 
-                        <div class="step" class:active class:last class:first>
+                        <div class="step" class:active class:last class:first
+                            style="
+                                height: {viewportHeight}px;
+                                margin-top:{first ? -viewportHeight*.5 : 0}px;
+                            "
+                        >
                             <p class="step-content">{@html p.text}</p>
                         </div>
                     {/each}

@@ -136,13 +136,13 @@
       <Editorial copy={copy.intro_article_3} />
     </div>  
     <section>
-      <Section copy={copy.viz_main} stepHandler={SectionMain} switcher="bubbles" />
+      <Section {viewportHeight} copy={copy.viz_main} stepHandler={SectionMain} switcher="bubbles" />
     </section>
     <div class="editorial-container">
       <Editorial copy={copy.medical_concerns} title="Popular concerns on the science" />
     </div>
     <section>
-      <Section copy={copy.viz_transitions} stepHandler={SectionTransitions} switcher="transitions" />
+      <Section {viewportHeight} copy={copy.viz_transitions} stepHandler={SectionTransitions} switcher="transitions" />
     </section>
     <div class="editorial-container">
       <Editorial copy={copy.debunk_intro} title="Medical misinformation" />
@@ -167,7 +167,7 @@
     </div>
     <Mosaic {viewportHeight} album="social" height=35 />
     <section>
-      <Section copy={copy.viz_instagram} stepHandler={SectionInstagram} switcher="instagram" />
+      <Section {viewportHeight} copy={copy.viz_instagram} stepHandler={SectionInstagram} switcher="instagram" />
     </section>
     <div class="editorial-container">
       <Editorial copy={copy.editorial_influencerPackages} spacer="none" />
