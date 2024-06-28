@@ -57,11 +57,13 @@
     }
 
     function showBubbles(){
-        animatedIn = true;
+
     }
 
 
     function runSimulation(){
+        animatedIn = false;
+
         radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([3,10]).clamp(true)
 
         let data = ({
@@ -87,6 +89,10 @@
         dataToSimulate = packing().leaves();
 
         nodes = dataToSimulate;
+
+        setTimeout(() => {
+            animatedIn = true;
+        }, 500)
     }
 
 
@@ -184,7 +190,7 @@
     <g style="transform: translate(0, -5vh);">
         {#if nodes}
             {#each nodes as point,i}
-                <Circle {point} {i} color={color(point.data.group)} {animatedIn} {focusHover} />
+                <Circle {point} nodesLength={nodes.length} {i} color={color(point.data.group)} {animatedIn} {focusHover} />
             {/each}
             <ClusterLabels {nodes} {animatedIn} />
         {/if}

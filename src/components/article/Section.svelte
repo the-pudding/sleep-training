@@ -5,6 +5,7 @@
     export let copy;
     export let stepHandler;
     export let switcher;
+    export let viewportHeight;
 
     let mounted = false;
 
@@ -20,5 +21,5 @@
 
 {#if mounted && stepHandler}
     <!-- THIS FEELS CLEANER TO ME -->
-    <ScrollSection {switcher} {stepHandler} {copy} {dataMap} />
+    <ScrollSection {viewportHeight} {switcher} {stepHandler} {copy} {dataMap} />
 {/if}
