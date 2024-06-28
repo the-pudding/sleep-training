@@ -27,6 +27,8 @@
         "Neutral":2
     }
 
+    $: console.log($hoveredCircle)
+
     let color = scaleOrdinal(range(Object.keys(ordinalGroup).length), ["#A34131", "#4FB477","#D69C2B"]);
 
     //your bubbles were really big, so tried to tone it down here, keeping them between 3 and 10px;
@@ -60,6 +62,8 @@
 
 
     function runSimulation(){
+        $hoveredCircle = null;
+
         if(nodes.length !== renderedData.length){
             console.log("runningSimulation",step,renderedData.length)
             animatedIn = false;
@@ -88,13 +92,12 @@
 
             dataToSimulate = packing().leaves();
 
-            nodes = dataToSimulate;
 
             setTimeout(() => {
+                nodes = dataToSimulate;
                 animatedIn = true;
             }, 500)
         }
-
     }
 
 
@@ -189,7 +192,7 @@
 <svg
     width={$viewport.width}
     height={$viewport.height}>
-    <g style="transform: translate(0, -5vh);">
+    <g style="transform: translate(0,0);">
         {#if nodes}
             {#each nodes as point,i}
                 <Circle {point} nodesLength={nodes.length} {i} color={color(point.data.group)} {animatedIn} {focusHover} />
@@ -198,9 +201,11 @@
         {/if}
     </g>
 </svg>
-{#if $hoveredCircle != undefined && focusHover}
+
+{#if $hoveredCircle}
     <Tooltip data={$hoveredCircle.data.info} x={$hoveredCircle.x} y={$hoveredCircle.y} width={200} />
 {/if}
+
 <div class="radius-legend">
     <RadiusLegend {scaleValues} data={renderedData} />
 </div>

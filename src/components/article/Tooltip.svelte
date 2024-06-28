@@ -10,15 +10,17 @@
   let tooltipWidth = width;
 
   // TOOLTIP POSITIONING
-  let xNudge = 0;
+  let xNudge = 10;
   $: {
       if ((x + width) > $viewport.width) {
       xNudge = -width;
     } else {
-      xNudge = 0;
+      xNudge = 10;
     }
   }
   const yNudge = 15;
+
+  // $: console.log(x,y,data)
 
   $: xPosition = x + xNudge;
   $: yPosition = y + yNudge;

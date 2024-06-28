@@ -102,7 +102,7 @@
   .country {
     stroke: #1A2127;
     fill: white;
-    stroke-width: .5px;
+    stroke-width: 0px;
     fill-opacity: .2;
     pointer-events: none;
   }

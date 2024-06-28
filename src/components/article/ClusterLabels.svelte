@@ -9,6 +9,13 @@
         data = groups(nodes, d => d.data.info.position)
     }
 
+
+    let outlineColor = {
+        "Advocate": "#0d381f",
+        "Neutral":"#4f3a0f",
+        "Oppose":"#54241c"
+    }   
+
     function centroid(nodes) {
         let x = 0;
         let y = 0;
@@ -23,27 +30,42 @@
     }
 
     function getTextWidth(text) {
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    const metrics = context.measureText(text);
-    return metrics.width;
-  }
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        const metrics = context.measureText(text);
+        return metrics.width;
+    }
 </script>
 
 {#if animatedIn}
     {#each data as position}
         {@const center = centroid(position[1])}
         {@const textWidth = getTextWidth(position[0])}
-        <rect x={center.x - 6} y={center.y - 17} width={textWidth + 30} height={25} fill="#1C3A4E" rx="5" ry="5" />
-        <text x={center.x} y={center.y} class="cluster-label" fill="white">{position[0]}</text>
+        <!-- <rect x={center.x - ((textWidth + 30)/2)} y={center.y - 17} width={textWidth} height={25} fill="#1C3A4E" rx="5" ry="5" /> -->
+        <text data-w = {textWidth} x={center.x} y={center.y+5} class="cluster-label cluster-label-stroke" fill="white" style="stroke:{outlineColor[position[0]]};">{position[0]}</text>
+        <text data-w = {textWidth} x={center.x} y={center.y+5} class="cluster-label" fill="white">{position[0]}</text>
+        
+
     {/each}
 {/if}
 
 <style>
 .cluster-label {
     color: white;
-    font-size: 0.8rem;
+    font-size: 17px;
     font-family: "Atlas Grotesk";
-    font-weight: bold;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-anchor: middle;
+}
+
+.cluster-label-stroke {
+    stroke-width: 5px;
+    stroke-linecap: round;
+    stroke-opacity: .8;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 </style>

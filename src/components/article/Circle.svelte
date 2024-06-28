@@ -11,21 +11,37 @@
     export let nodesLength;
 
     let hovered;
+    let focusHoverPoint;
 
     $: {
         if (focusHover) {
             if (point.data.info.url == focusHover.url) {
-                $hoveredCircle = point
-                hovered = $hoveredCircle === point;
-            }
-            else {
-                hovered = null;
+                focusHoverPoint = point;
+                $hoveredCircle = focusHoverPoint;
+                
+                // hovered = $hoveredCircle === point;
             }
         }
         else {
-            hovered = null;
+            hovered = false;
         }
     }
+
+    $: {
+        if(focusHoverPoint && $hoveredCircle){
+            if (point.data.info.url == $hoveredCircle.data.info.url) {
+                console.log("make white")
+                hovered = true;
+            }
+            else {
+                hovered = false;
+            }
+        }
+    }
+
+    
+
+
 
     const radiusTween = tweened(0, {
 		duration: 400,
@@ -41,7 +57,7 @@
 
     $: if(animatedIn == true) {
         radiusTween.set(point.r, {duration:400,delay:400+(i/nodesLength)*1000})
-        opacityTween.set(1, {duration:400,delay:400+(i/nodesLength)*1000})
+        opacityTween.set(.8, {duration:400,delay:400+(i/nodesLength)*1000})
 
     } else {
         radiusTween.set(0, {duration:500, easing: cubicOut, delay: 0});
@@ -50,12 +66,19 @@
     }
 
     function handleMouseEnter() {
+        // console.log(point)
+        focusHoverPoint = point;
         $hoveredCircle = point
         hovered = true
     }
 
     function handleMouseLeave() {
-        $hoveredCircle = null
+        if(focusHover){
+            $hoveredCircle = focusHoverPoint;
+        } else {
+            $hoveredCircle = null
+        }
+        
         hovered = false
     }
 

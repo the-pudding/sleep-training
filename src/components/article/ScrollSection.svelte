@@ -100,7 +100,7 @@
     .steps {
         position: relative;
         z-index: 2;
-        max-width: 40rem;
+        max-width: 2000px;
 		padding: 16px;
 		margin: 0 auto;
         pointer-events: none;
@@ -112,6 +112,7 @@
 		display: flex;
 		place-items: center;
 		justify-content: center;
+        max-width: 400px;
 	}
     .step-marker {
         position: absolute;
