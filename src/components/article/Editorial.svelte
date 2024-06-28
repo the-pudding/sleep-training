@@ -97,13 +97,12 @@
     }
     .sub-title {
         font-size: 28px;
-        margin-top: 6vh;
         border-bottom: 1px solid currentColor;
         font-family: "Tiempos Text Web";
         font-weight: 700;
         color: #82BCBE;
         max-width: 40rem;
 		padding: 16px;
-		margin: 0 auto;
+		margin: 6vh auto 0vh auto;
     }
 </style>

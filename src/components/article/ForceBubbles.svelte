@@ -207,4 +207,11 @@
         flex-direction: column;
         align-items: center;
     }
+    .radius-legend {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
 </style>

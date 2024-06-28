@@ -1,21 +1,13 @@
 <script>
-  import { onMount } from 'svelte';
   import { fly } from 'svelte/transition';
   import { cubicInOut } from 'svelte/easing';
 	import Scrolly from "$components/helpers/Scrolly.svelte";
 
   export let album = 'articles';
   export let viewportHeight;
-  // let step;
   let value;
 
-  $: console.log(viewportHeight)
-
-  let animationStarted = false;
-
-  // $: step, changeAnimationStarted();
-
-  $: console.log(value)
+  // let animationStarted = false;
 
   $: album, images = getImageUrls(album);
 
@@ -76,20 +68,50 @@
       {#each images as image, i}
         {@const pos = getPos(i)}
         {#if i <= value}
-          <div
-            class="image-container"
-            style="
-              transform: translate(-50%, 50%) rotate({pos[2]}deg);
-              transform-origin: 50% 100%;
-              left:{pos[0]};
-              bottom:{pos[1]};
-              max-width: 60vw;
-            "
-          >
-            <img
-              transition:fly={{ duration: 500, easing: cubicInOut, y:20 }}
-               src={image.url} alt="Image {i}" />
-          </div>
+          {#if album === 'posts'}
+            <div
+              class="image-container-posts"
+              style="
+                transform: translate(-50%, 50%) rotate({pos[2]}deg);
+                transform-origin: 50% 100%;
+                left:{pos[0]};
+                bottom:{pos[1]};
+              "
+            >
+              <img
+                transition:fly={{ duration: 500, easing: cubicInOut, y:20 }}
+                src={image.url} alt="Image {i}" style="border-radius: 5px;"/>
+            </div>
+          {:else if album === "products"}
+            <div
+              class="image-container-posts"
+              style="
+                transform: translate(-50%, 50%) rotate({pos[2]}deg);
+                transform-origin: 50% 100%;
+                left:{pos[0]};
+                bottom:{pos[1]};
+              "
+            >
+              <img
+                transition:fly={{ duration: 500, easing: cubicInOut, y:20 }}
+                src={image.url} alt="Image {i}" style="border-radius: 5px;"/>
+            </div>
+          {:else}
+            <div
+              class="image-container"
+              style="
+                transform: translate(-50%, 50%) rotate({pos[2]}deg);
+                transform-origin: 50% 100%;
+                left:{pos[0]};
+                bottom:{pos[1]};
+                border-radius: 5px;
+              "
+            >
+              <img
+                transition:fly={{ duration: 500, easing: cubicInOut, y:20 }}
+                src={image.url} alt="Image {i}" style="border-radius: 5px;" />
+            </div>
+          {/if}
         {/if}
       {/each}
     </div>
@@ -147,6 +169,13 @@
   .image-container {
     position: absolute;
     top: auto;
+    max-width: 60vw;
+    box-shadow: 0px 1px 2px rgba(117, 117, 117, 0.10), -2px 3px 3px rgba(117, 117, 117, 0.09), -3px 6px 4px rgba(117, 117, 117, 0.05), -6px 10px 5px rgba(117, 117, 117, 0.01), -10px 16px 5px rgba(117, 117, 117, 0.00);
+  }
+  .image-container-posts {
+    position: absolute;
+    top: auto;
+    max-width: 20vw;
     box-shadow: 0px 1px 2px rgba(117, 117, 117, 0.10), -2px 3px 3px rgba(117, 117, 117, 0.09), -3px 6px 4px rgba(117, 117, 117, 0.05), -6px 10px 5px rgba(117, 117, 117, 0.01), -10px 16px 5px rgba(117, 117, 117, 0.00);
   }
 
@@ -156,4 +185,14 @@
     height: auto;
   }
 
+  @media only screen and (max-width: 600px) {
+		.image-container {
+      width: 75vw;
+      max-width: 80vw;
+		}
+		.image-container-posts {
+      width: 50vw;
+      max-width: 80vw;
+		}
+  }
 </style>

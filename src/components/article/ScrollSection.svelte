@@ -28,7 +28,6 @@
             step = value;
         }
     }
-    $: console.log("step", step)
 </script>
 
 {#if copy}
@@ -53,9 +52,9 @@
                     {/if}
                 {/if}
             {/if}
-            <div class="step-marker">
+            <!-- <div class="step-marker">
                 <p>{value}</p>
-            </div>
+            </div> -->
         </div>
 
         <div class="steps">
@@ -88,7 +87,6 @@
     .steps {
         position: relative;
         z-index: 2;
-		pointer-events: none;
         max-width: 40rem;
 		padding: 16px;
 		margin: 0 auto;

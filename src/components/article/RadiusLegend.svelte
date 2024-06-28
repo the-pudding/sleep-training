@@ -1,13 +1,12 @@
 <script>
-    export let scaleValues;
-    export let data;
+  export let scaleValues;
+  export let data;
 
-    const radiusScaleValues = [
-        { label: 'Smallest', value: scaleValues.smallest },
-        { label: 'Median', value: scaleValues.median },
-        { label: 'Largest', value: scaleValues.largest }
-    ];
-
+  const radiusScaleValues = [
+      { label: 'Smallest', value: scaleValues.smallest },
+      { label: 'Median', value: scaleValues.median },
+      { label: 'Largest', value: scaleValues.largest }
+  ];
 </script>
 
 <div class="radius-scale">
@@ -20,9 +19,9 @@
     {:else if data[0].type == "instagram"}
     <p>Total followers</p>
     {:else}
-    <p>Influence</p>
+    <p>Total citations</p>
     {/if}
-    <svg width="300" height="100">
+    <svg width="180" height="100">
       {#each radiusScaleValues as scale, index}
         <g transform="translate({30 + index * 50}, 40)">
           <circle
@@ -41,13 +40,8 @@
    
    <style>
     .radius-scale {
-      /* position: absolute;
-      bottom: 10px;
-      left: 30%; */
       display: flex;
-      justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
     }
     .radius-scale p {
       margin: none !important;
@@ -57,10 +51,5 @@
     text {
       font-family: var(--sans);
       font-size: 14px;
-    }
-    @media only screen and (max-width: 600px) {
-      .radius-scale {
-        left: 0px;
-      }
     }
    </style>

@@ -25,7 +25,7 @@
       <table>
         <thead>
           <tr>
-            <th>Authors</th>
+            <th style="width: 80px;">Year</th>
             <th>Title</th>
           </tr>
         </thead>

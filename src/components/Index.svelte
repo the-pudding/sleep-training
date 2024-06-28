@@ -1,8 +1,6 @@
 <script>
     import { setContext, getContext, onMount } from 'svelte';
     import Section from "$components/article/Section.svelte";
-    import Debunk from "$components/article/Debunk.svelte";
-    import ProductList from "$components/article/ProductList.svelte";
     import Editorial from "$components/article/Editorial.svelte";
     import HeroComments from "$components/article/HeroComments.svelte";
     import Mosaic from "$components/article/Mosaic.svelte";
@@ -29,7 +27,7 @@
     // const focusBrainDamage = data.articles.filter(d => d.url === "https://raisedgood.com/nurture-babies-recover-sleep-training/")[0]
 
     // NOTIFICATION LOADING
-    let commentsConfused = data.comments.filter(d => d.category === "confused");
+    // let commentsConfused = data.comments.filter(d => d.category === "confused");
     let commentsDivided = data.comments.filter(d => d.category === "divided");
     let commentsCortisol = data.comments.filter(d => d.category === "brain damage");
     let commentsAttachment = data.comments.filter(d => d.category === "attachment");
@@ -41,7 +39,6 @@
 
 
     // STEP LOGIC
- 
     function SectionMain(step) {
         switch (true) {
         case step >= 0 && step < 1:

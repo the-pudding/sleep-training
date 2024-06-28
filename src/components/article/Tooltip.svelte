@@ -30,7 +30,7 @@
       }
       return text;
   }
-  let labelOne = '';
+  let type = '';
   let textOne = '';
   let labelTwo = '';
   let textTwo = '';
@@ -39,27 +39,32 @@
   $: {
     switch (data.type) {
       case 'study':
+        title = truncateText(data.title.toUpperCase(), 70);
+        type = "Study";
         textOne = truncateText(data.authors, 60);
         textTwo = data.year;
-        title = truncateText(data.title.toUpperCase(), 70);
         break;
       case 'article':
+        title = truncateText(data.title.toUpperCase(), 70);
+        type = "Article";
         textOne = data.publisher;
         textTwo = data.year;
-        title = truncateText(data.title.toUpperCase(), 70);
         break;
       case 'reddit':
-        textTwo = truncateText(data.comment, 140);
         title = truncateText(data.username.toUpperCase(), 40);
+        type = "Reddit comment";
+        textTwo = truncateText(data.comment, 140);
         break;
       case 'instagram':
-        textOne = data.radius;
         title = truncateText(data.username.toUpperCase(), 40);
+        type = "Instagram profile";
+        textOne = data.radius;
         break;
       case 'book':
+        title = truncateText(data.title.toUpperCase(), 40);
+        type = "Book";
         textOne = truncateText(data.authors, 60);
         textTwo = data.year;
-        title = truncateText(data.title.toUpperCase(), 40);
         break;
       default:
         textTwo = '';
@@ -77,23 +82,26 @@
     style="left:{xPosition}px; top:{yPosition - 150}px; width:{tooltipWidth}px;"
 >
   {#if data.type === "instagram"}
+    <div style="margin-top: 0px; margin-bottom: 10px; padding-top: 0px;"><span class="tooltip-type">{type}</span></div>
     <div class="tooltip-title">
       {title}
     </div>
   {:else if data.type === "reddit"}
+    <div style="margin-top: 0px; margin-bottom: 10px; padding-top: 0px;"><span class="tooltip-type">{type}</span></div>
     <div class="tooltip-title">
       {title}
-      <div class='info'>
-        <span class='info-element'>{textTwo}</span>
-      </div>
+    </div>
+    <div class='info'>
+      <span class='info-element'>{textTwo}</span>
     </div>
   {:else}
-  <div class="tooltip-title">
-    {title}
+    <div style="margin-top: 0px; margin-bottom: 10px; padding-top: 0px;"><span class="tooltip-type">{type}</span></div>
+    <div class="tooltip-title">
+      {title}
+    </div>
     <div class='info'>
       <span class='info-element'>Published in <span class="bold">{textOne}</span>, {textTwo}</span>
     </div>
-  </div>
   {/if}
 <!-- Additional info under the country name -->
     
@@ -129,4 +137,14 @@
       margin-bottom: 0px;
       padding-bottom: 0px;
     }
+    .tooltip-type {
+      border-radius: 3px;
+      background: rgba(255,255,255,.16);
+      color: white;
+      padding: 1px 5px;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 2px;
+      margin-bottom: 10px;
+   }
   </style>
