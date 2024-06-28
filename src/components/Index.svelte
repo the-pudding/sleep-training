@@ -41,7 +41,7 @@
     // STEP LOGIC
     function SectionMain(step) {
         switch (true) {
-        case step >= 0 && step < 1:
+        case step < 1 || !step:
             return {
               renderedData: data.reddit,
               focusHover: null,
@@ -124,7 +124,7 @@
     <div class="title-section">
       <h1 class="title title-large" class:loaded>{copy.title}</h1>
       <h2 class="title" class:loaded style="--delay:0.5s;">{copy.description}</h2>
-      <h4 class="title byline" class:loaded>by <a href="https://pudding.cool/author/tom-vaillant">Tom Vaillant</a></h4>
+      <h4 class="title byline" class:loaded>by <a href="https://pudding.cool/author/tom-vaillant">Tom Vaillant</a>, July 14, 2024</h4>
     </div>
     <div class="editorial-container">
       <Editorial copy={copy.intro_article} />
@@ -197,29 +197,48 @@
     margin-bottom: 1.5vh;
   }
   h1 {
-    font-family: "Tiempos Text Web";
     font-weight: 700;
     font-size: var(--44px);
     color: #82BCBE;
+    color: #aee1f2;
+    font-weight: 300;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    text-transform: capitalize;
+    font-size: 100px;
+    line-height: 1.2;
+    margin-top: 100px;
   }
   h2 {
-    font-family: "Tiempos Text Web";
-    font-weight: 700;
+    font-weight: 300;
     font-size: 18px;
     color: white;
+    font-family: var(--sans);
+    font-size: 24px;
+    line-height: 1.4;
+    opacity: 1;
+    max-width: 600px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+
+    
   }
   .spacer {
 		height: 5vh;
 	}
   .title-section {
     margin: 0 auto;
-    max-width: 40rem;
+    max-width: 1500px;
 		padding: 16px;
+    width: calc(100% - 20px);
+    text-align: center;
+    margin-bottom: 100px;
   }
   .title {
-    opacity: 1;
-    transform: translateY(20px);
-    transition: opacity 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) var(--delay, 0s), transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) var(--delay, 0s);
   }
   .title.loaded {
     opacity: 1;
@@ -227,6 +246,10 @@
   }
   .byline {
     font-size: 14px;
+    color: white;
+  }
+  .byline a {
+    color: white;
   }
 
   @media only screen and (max-width: 600px) {

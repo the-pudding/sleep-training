@@ -33,14 +33,12 @@
 <section id="scrolly" class="scrolly-editorial">
 	<Scrolly bind:value={step} >
         <div class="editorial-wrapper">
-        {#if animationStarted}
             {#if title}
                 <h3 class="sub-title">{title}</h3>
             {/if}
             {#if copy[0].subtitle}
                 <h3>{copy[0].subtitle}</h3>
             {/if}
-        {/if}
             <div class="editorial">
                 {#each copy as p}
                     <p class:animationStarted class="editorial-paragraph">{@html p.text}</p>
@@ -71,6 +69,9 @@
 
 
 <style>
+    .editorial-comments {
+        margin: 100px auto;
+    }
     .editorial-paragraph {
         font-size: 18px;
         -webkit-font-smoothing: antialiased;
@@ -81,6 +82,7 @@
         margin-bottom: 25px;
         letter-spacing: -.2px;
         opacity: 1;
+        font-family: var(--serif);
     }
     .editorial {
         max-width: 40rem;
@@ -99,6 +101,15 @@
         color: #82BCBE;
         max-width: 40rem;
 		padding: 16px;
-		margin: 48px auto 0 auto;
+		margin: 100px auto 0 auto;
+        font-family: 'Atlas Grotesk';
+        font-weight: 300;
+        font-size: 24px;
+        text-align: center;
+        text-transform: uppercase;
+        color: #c6f1f3;
+        letter-spacing: 2px;
+        border: none;
+        margin-bottom: 20px;
     }
 </style>

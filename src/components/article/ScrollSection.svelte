@@ -20,14 +20,21 @@
     $: value, handleStepChange()
 
     function handleStepChange() {
-        newValues = stepHandler(value);
-        renderedData = newValues.renderedData;
-        focusHover = newValues.focusHover;
+
         if ((step === Object.values(copy).length - 1) && value === undefined) {
             step = Object.values(copy).length - 1;
         } else {
             step = value;
         }
+
+        newValues = stepHandler(step);
+        renderedData = newValues.renderedData;
+        focusHover = newValues.focusHover;
+
+        console.log(step)
+
+
+
     }
 </script>
 
@@ -38,7 +45,7 @@
         <div class="sticky" class:switcher style="">
             {#if renderedData}
                 {#if switcher == "bubbles"}
-                    <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} step={value} />                
+                    <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} {step} />                
                 {:else if switcher === "transitions"}
                     {#if step == undefined || step < 2}
                         <Timeline />
@@ -47,7 +54,7 @@
                     {/if}
                 {:else if switcher === "instagram"}
                     {#if value == undefined || value < 2}
-                        <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} step={value} />
+                        <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} {step} />
                     {:else if value >= 2 && value <= 3 }
                         <Pie data={renderedData} width={800} />
                     {/if}
@@ -134,7 +141,7 @@
     }
 
 	.step p {
-		padding: 1.5rem 1rem;
+        padding: 15px 20px;
 	}
 
 	.step.active {

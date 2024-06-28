@@ -1,6 +1,7 @@
 <script>
   import * as d3 from 'd3';
   import rawWorldMap from "$data/world-geojson2.json";
+  // import rawWorldMap from "$data/land.json";
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
   import viewport from "$stores/viewport.js";
@@ -26,7 +27,7 @@
   };
 
   onMount(() => {
-    projection = d3.geoMercator()
+    projection = d3.geoEqualEarth()
       .fitSize([($viewport.width - 10), $viewport.height], worldMap);
 
     pathGenerator = d3.geoPath().projection(projection);
@@ -99,9 +100,10 @@
     fill: #1A2127;
   }
   .country {
-    fill: #1A2127;
-    stroke: white;
-    stroke-width: 0.5px;
+    stroke: #1A2127;
+    fill: white;
+    stroke-width: .5px;
+    fill-opacity: .2;
     pointer-events: none;
   }
   circle {

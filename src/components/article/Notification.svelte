@@ -33,9 +33,9 @@
     font-family: "Atlas Grotesk";
     display: flex-column;
     background-color: #1C3A4E;
-    max-width: 40rem;
+    max-width: 400px;
 		margin: 0 auto 20px auto;
-    padding: 15px;
+    padding: 10px;
     color: white;
     border-radius: 5px;
     opacity: 0;
@@ -54,8 +54,8 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     margin: 0;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
   .notification-content {
     display: flex;
@@ -82,6 +82,8 @@
   }
   .notification-source a {
     color: white;
+    font-weight: 400;
+    opacity: .7;
   }
   @media only screen and (max-width: 600px) {
       .notification p {

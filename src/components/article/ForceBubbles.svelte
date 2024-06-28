@@ -33,8 +33,6 @@
     let radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([1,10]).clamp(true)
 
 
-
-    
     $: if (radiusScale) {
         scaleValues = {
             largest: radiusScale.range()[1],
@@ -62,37 +60,41 @@
 
 
     function runSimulation(){
-        animatedIn = false;
+        if(nodes.length !== renderedData.length){
+            console.log("runningSimulation",step,renderedData.length)
+            animatedIn = false;
 
-        radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([3,10]).clamp(true)
+            radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([3,10]).clamp(true)
 
-        let data = ({
-            children: Array.from(
-                group(renderedData.map(d => {
-                    return {
-                        value:radiusScale(d.radius),
-                        
-                        // YOU NEED THE GROUP TO HAVE A #, SO THAT'S WHY I MAP EACH POSITION TO 0,1,2
-                        group:ordinalGroup[d[groupedBy]], info:d}
-                }), d => d["group"]),
-                ([, children]) => ({children})
-            )
-        })
+            let data = ({
+                children: Array.from(
+                    group(renderedData.map(d => {
+                        return {
+                            value:radiusScale(d.radius),
+                            
+                            // YOU NEED THE GROUP TO HAVE A #, SO THAT'S WHY I MAP EACH POSITION TO 0,1,2
+                            group:ordinalGroup[d[groupedBy]], info:d}
+                    }), d => d["group"]),
+                    ([, children]) => ({children})
+                )
+            })
 
-        let packing = () => pack()
-            .size([$viewport.width, $viewport.height])
-            .padding(1)
-            (hierarchy(data)
-            .sum(d => d.value)
-            )
+            let packing = () => pack()
+                .size([$viewport.width, $viewport.height])
+                .padding(1)
+                (hierarchy(data)
+                .sum(d => d.value)
+                )
 
-        dataToSimulate = packing().leaves();
+            dataToSimulate = packing().leaves();
 
-        nodes = dataToSimulate;
+            nodes = dataToSimulate;
 
-        setTimeout(() => {
-            animatedIn = true;
-        }, 500)
+            setTimeout(() => {
+                animatedIn = true;
+            }, 500)
+        }
+
     }
 
 
@@ -196,7 +198,7 @@
         {/if}
     </g>
 </svg>
-{#if $hoveredCircle != undefined}
+{#if $hoveredCircle != undefined && focusHover}
     <Tooltip data={$hoveredCircle.data.info} x={$hoveredCircle.x} y={$hoveredCircle.y} width={200} />
 {/if}
 <div class="radius-legend">

@@ -22,6 +22,9 @@
                 hovered = null;
             }
         }
+        else {
+            hovered = null;
+        }
     }
 
     const radiusTween = tweened(0, {
