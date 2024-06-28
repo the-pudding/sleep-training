@@ -7,8 +7,8 @@
     const getVideoUrl = (video) => {
       if (video === 'cbum') {
         return 'assets/videos/cbum.mp4';
-      }
-      return '';
+      } 
+      return 'assets/videos/sleep.mp4';
     };
   
     const togglePlayPause = () => {

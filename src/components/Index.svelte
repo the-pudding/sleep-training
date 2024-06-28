@@ -54,14 +54,14 @@
         case step >= 2 && step < 3:
             return {
               renderedData: data.articles,
-              focusHover: null
+              focusHover: focusNarvaez
             }
         case step >= 3 && step < 4:
             return {
               renderedData: data.articles,
-              focusHover: focusNarvaez,
+              focusHover: null,
             }
-        case step >= 4 && step < 6:
+        case step >= 3 && step < 6:
             return {
               renderedData: data.books,
               focusHover: null,
@@ -128,10 +128,12 @@
     </div>
     <div class="editorial-container">
       <Editorial copy={copy.intro_article} />
+      <Video video="sleep" />
+      <Editorial copy={copy.intro_article_2} />
     </div>    
     <Mosaic {viewportHeight} album="articles" height=75 /> 
     <div class="editorial-container">
-      <Editorial copy={copy.intro_article_2} />
+      <Editorial copy={copy.intro_article_3} />
     </div>  
     <section>
       <Section copy={copy.viz_main} stepHandler={SectionMain} switcher="bubbles" />
