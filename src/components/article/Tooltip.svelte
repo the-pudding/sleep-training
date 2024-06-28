@@ -112,6 +112,7 @@
     .tooltip {
       position: absolute;
       pointer-events: none;
+      font-family: "Atlas Grotesk";
       padding: 1rem 1rem;
       background: #1A2E3C;
       color: white;
@@ -120,7 +121,7 @@
       transition: top 300ms ease, left 300ms ease;
     }
     .tooltip-title {
-      margin: 0;
+      margin-bottom: 10px;
       font-size: 12px;
       line-height: 1.4;
       font-weight: 600;

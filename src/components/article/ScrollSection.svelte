@@ -90,6 +90,7 @@
         max-width: 40rem;
 		padding: 16px;
 		margin: 0 auto;
+        pointer-events: none;
     }
     .step {
 		height: 60vh;
@@ -119,6 +120,7 @@
         letter-spacing: -.2px;
         margin-top: 0;
         margin-bottom: 25px;
+        pointer-events: auto;
 	}
 
     .last {
