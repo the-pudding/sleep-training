@@ -1,5 +1,5 @@
 <script>
-	import wordmark from "$svg/wordmark.svg";
+	import wordmark from "$svg/bubble.svg";
 </script>
 
 <header>
@@ -8,11 +8,23 @@
 			>{@html wordmark}</a
 		>
 	</div>
+
+	<div class="stickers">
+		<img src="assets/header.png" alt="">
+	</div>
 </header>
 
 <style>
+	.stickers {
+		position: absolute;
+		top: 0;
+		max-width: 800px;
+		margin: 0 auto;
+		left: 0;
+		right: 0;
+	}
 	.wordmark {
-		max-width: 10em;
+		max-width: 200px;
 		margin: 0 auto;
 		padding: 1em 0;
 	}
@@ -28,6 +40,7 @@
 	}
 
 	:global(.wordmark svg path) {
-		fill: currentColor;
+		fill: #d4e0ee;
+		fill: #fff;
 	}
 </style>

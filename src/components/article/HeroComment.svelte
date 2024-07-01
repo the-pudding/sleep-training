@@ -5,6 +5,7 @@
 
     let step;
     let animationStarted = false;
+    export let viewportHeight;
 
     $: step, changeAnimationStarted();
 
@@ -19,7 +20,7 @@
 
 <section id="scrolly" class="scrolly-editorial">
 	<Scrolly bind:value={step} >
-        <div class="hero-comments-container">
+        <div data="hi" class="hero-comments-container" style="margin-top:{viewportHeight/4}px;">
             {#each notifications as comment, index}
                 <div class="notification-wrapper">
                     <Notification {comment} {animationStarted} {index} />

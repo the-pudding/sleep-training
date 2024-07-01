@@ -106,7 +106,7 @@
 <style>
     .circle-element {
         cursor: pointer;
-        stroke: #192127;
+        stroke: var(--color-bg);
         stroke-width: 3px;
     }
 </style>
