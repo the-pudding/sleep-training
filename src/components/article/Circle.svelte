@@ -41,7 +41,11 @@
 
     
 
-
+    let outlineColor = {
+        "Advocate": "#0d381f",
+        "Neutral":"#4f3a0f",
+        "Oppose":"#54241c"
+    }   
 
     const radiusTween = tweened(0, {
 		duration: 400,
