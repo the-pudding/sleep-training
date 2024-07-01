@@ -1,5 +1,7 @@
 <script>
 	import wordmark from "$svg/bubble.svg";
+	import { base } from "$app/paths";
+
 </script>
 
 <header>
@@ -10,7 +12,7 @@
 	</div>
 
 	<div class="stickers">
-		<img src="assets/header.png" alt="">
+		<img src="{base}/assets/header.png" alt="">
 	</div>
 </header>
 
