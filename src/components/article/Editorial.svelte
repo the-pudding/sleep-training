@@ -94,22 +94,23 @@
         margin-top: 0px !important;
     }
     .sub-title {
-        font-size: 28px;
-        border-bottom: 1px solid currentColor;
+        font-size: 24px;
         font-family: "Tiempos Text Web";
-        font-weight: 700;
-        color: #82BCBE;
         max-width: 40rem;
 		padding: 16px;
-		margin: 100px auto 0 auto;
-        font-family: 'Atlas Grotesk';
+		margin: 200px auto 0 auto;
         font-weight: 300;
         font-size: 24px;
         text-align: center;
         text-transform: uppercase;
-        color: #c6f1f3;
-        letter-spacing: 2px;
         border: none;
         margin-bottom: 20px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        text-transform: capitalize;
+        text-transform: uppercase;
+        color: white;
+        letter-spacing: 3px;
     }
 </style>

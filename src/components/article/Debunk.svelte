@@ -54,7 +54,7 @@
   .references-header {
     padding: 10px;
     border-radius: 4px;
-    background-color: #1C3A4E;
+    background-color: #000;
     cursor: pointer;
     color: white;
     font-family: "Atlas Grotesk";

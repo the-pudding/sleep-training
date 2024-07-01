@@ -2,10 +2,11 @@
     import { setContext, getContext, onMount } from 'svelte';
     import Section from "$components/article/Section.svelte";
     import Editorial from "$components/article/Editorial.svelte";
-    import HeroComments from "$components/article/HeroComments.svelte";
+    import HeroComments from "$components/article/HeroComment.svelte";
     import Mosaic from "$components/article/Mosaic.svelte";
     import Video from "$components/article/Video.svelte";
     import viewport from "$stores/viewport.js";
+    import arrow from "$svg/arrow.svg"
 
     // COPY CONTEXT SETTING
     import copy from '$data/copy.json';
@@ -119,12 +120,13 @@
 
 {#if mounted}
   <div id="article">
-    <HeroComments notifications={commentsDivided} />
+    <HeroComments {viewportHeight} notifications={commentsDivided} />
     <div class="spacer"></div>
     <div class="title-section">
-      <h1 class="title title-large" class:loaded>{copy.title}</h1>
-      <h2 class="title" class:loaded style="--delay:0.5s;">{copy.description}</h2>
+      <h1 class="title title-large" class:loaded>{@html copy.title}</h1>
       <h4 class="title byline" class:loaded>by <a href="https://pudding.cool/author/tom-vaillant">Tom Vaillant</a>, July 14, 2024</h4>
+      <h2 class="title dek" class:loaded style="--delay:0.5s;">{copy.description}</h2>
+      {@html arrow}
     </div>
     <div class="editorial-container">
       <Editorial copy={copy.intro_article} />
@@ -210,22 +212,25 @@
     font-size: 100px;
     line-height: 1.2;
     margin-top: 100px;
+    font-family: 'Tiempos Text Web';
+    font-size: 36px;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 3px;
+    margin-bottom: 100px;
+    line-height: 2.2;
   }
-  h2 {
+  .dek {
     font-weight: 300;
     font-size: 18px;
     color: white;
     font-family: var(--sans);
-    font-size: 24px;
     line-height: 1.4;
     opacity: 1;
-    max-width: 600px;
+    letter-spacing: -.3px;
+    max-width: 360px;
     margin: 0 auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-
-    
+    margin-bottom: 50px;
   }
   .spacer {
 		height: 5vh;
@@ -238,8 +243,7 @@
     text-align: center;
     margin-bottom: 100px;
   }
-  .title {
-  }
+  
   .title.loaded {
     opacity: 1;
     transform: translateY(0);
@@ -247,6 +251,15 @@
   .byline {
     font-size: 14px;
     color: white;
+    opacity: .8;
+    font-weight: 300;
+    color: white;
+    font-family: var(--sans);
+    line-height: 1.4;
+    letter-spacing: -.3px;
+    max-width: 360px;
+    margin: 0 auto;
+    margin-bottom: 10px;
   }
   .byline a {
     color: white;

@@ -94,10 +94,10 @@
 
 <style>
   .map-container {
-    background-color: #1A2127;
+    background-color: var(--color-bg);
   }
   .earth {
-    fill: #1A2127;
+    fill: var(--color-bg);
   }
   .country {
     stroke: #1A2127;

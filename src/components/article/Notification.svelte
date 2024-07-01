@@ -19,21 +19,23 @@
   <div class="notification-content">
     <div class="notification-likes">
       <img class="icon" src="{getPlatformDetails(comment.platform).icon}" alt="reddit or instagram icon" />
-      {comment.likes} Likes
     </div>
-    <p>{@html comment.comment}</p>
+    <p class="notification-text">{@html comment.comment}</p>
   </div>
   <div class="notification-source">
-    <a href="{comment.url}">Source</a>
+    {comment.likes} Likes / <a href="{comment.url}">Source</a>
   </div>
 </div>
 
 <style>
+  .notification-content {
+    display: flex;
+  }
   .notification {
     font-family: "Atlas Grotesk";
     display: flex-column;
-    background-color: #1C3A4E;
-    max-width: 400px;
+    background: linear-gradient(5deg, rgba(185,177,219,.10), rgba(226,226,226,.14));
+    max-width: 550px;
 		margin: 0 auto 20px auto;
     padding: 10px;
     color: white;
@@ -54,31 +56,25 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     margin: 0;
-    margin-top: 5px;
     margin-bottom: 5px;
   }
-  .notification-content {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-  }
   .notification-likes {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    min-width: 20px;
+    max-width: 20px;
+    margin-right: 10px;
+
   }
   .icon {
-    height: 15px;
-    margin-right: 10px;
+    width: 100%;
+    width: 20px;
+    margin-top: 3px;
   }
   .notification-source {
-    text-align: right;
+    text-align: left;
     font-size: 10px;
     font-weight: lighter;
+    margin-top: 5px;
+    margin-left: 30px;
   }
   .notification-source a {
     color: white;

@@ -20,7 +20,7 @@
 	--border-radius: 2px;
 	--font-body: var(--serif);
 	--font-form: var(--sans);
-	--color-bg: var(--color-white);
+	--color-bg: #222;
 	--color-fg: var(--color-gray-900);
 	--color-primary: var(--color-black);
 	--color-link: var(--color-black);
@@ -70,6 +70,10 @@
 
 h1 {
 	font-size: var(--48px, 48px);
+}
+
+.title-large span {
+	display: block;
 }
 
 h2 {

@@ -1,7 +1,8 @@
 
 body {
 	/* background-color: var(--color-bg, white); */
-	background-color: #1A2127;
+	background: linear-gradient(180deg, #353643 0px, var(--color-bg) 300px);
+	background: linear-gradient(180deg, #424242 0px, var(--color-bg) 300px);
 	color: #FFFFFF;
 	line-height: 1.4;
 	/* font-family: var(--font-body, serif); */
@@ -28,7 +29,7 @@ mark {
 }
 
 a {
-	color: #b5b7f9;
+	color: #caccf3;
 	text-decoration: none;
 	border-bottom: 1px solid currentColor;
 }
@@ -209,9 +210,9 @@ ol, ul {
 
 .notification .bold {
 	border-radius: 3px;
-    background: rgba(255,255,255,.16);
+    background: rgba(255,255,255,.09);
     color: white;
-    padding: 1px 5px;
+    padding: 2px 8px;
     font-weight: 600;
 }
 

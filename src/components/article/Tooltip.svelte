@@ -116,7 +116,7 @@
       pointer-events: none;
       font-family: "Atlas Grotesk";
       padding: 1rem 1rem;
-      background: #1A2E3C;
+      background: #2a2a2a;
       color: white;
       box-shadow: rgba(0, 0, 0, 0.15) 2px 3px 8px;
       border-radius: 4px;
