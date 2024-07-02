@@ -7,7 +7,7 @@
     export let notifications;
     export let spacer = null;
     export let title = null;
-    export let debunk = null;
+    // export let debunk = null;
 
     let step;
     let comments;
@@ -49,28 +49,29 @@
     </Scrolly>
 </section>
 
-<div class="editorial-comments">
-    {#if comments}
-        {#each comments as comment, index}
-            <div class="notification-wrapper">
-                <Notification {comment} {index} {animationStarted} />
-            </div>
-        {/each}
-    {/if}
-</div>
 
+{#if comments}
+<div class="editorial-comments">
+    {#each comments as comment, index}
+        <div class="notification-wrapper">
+            <Notification {comment} {index} {animationStarted} />
+        </div>
+    {/each}
+</div>
+{/if}
+<!-- 
 <div class="debunk">
     {#if animationStarted}
         {#if debunk}
             <Debunk target={debunk} />
         {/if}
     {/if}
-</div>
+</div> -->
 
 
 <style>
     .editorial-comments {
-        margin: 100px auto;
+        margin: 75px auto;
     }
     .editorial-paragraph {
         font-size: 18px;
@@ -98,7 +99,7 @@
         font-family: "Tiempos Text Web";
         max-width: 40rem;
 		padding: 16px;
-		margin: 200px auto 0 auto;
+		margin: 150px auto 0 auto;
         font-weight: 300;
         font-size: 24px;
         text-align: center;
@@ -112,5 +113,12 @@
         text-transform: uppercase;
         color: white;
         letter-spacing: 3px;
+    }
+    .editorial-paragraph .bold {
+        border-radius: 3px;
+        background: rgba(255,255,255,.16);
+        color: white;
+        padding: 1px 5px;
+        font-weight: 600;
     }
 </style>

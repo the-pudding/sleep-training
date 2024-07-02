@@ -27,7 +27,8 @@
         "Neutral":2
     }
 
-    $: console.log($hoveredCircle)
+
+    // $: console.log($hoveredCircle)
 
     let color = scaleOrdinal(range(Object.keys(ordinalGroup).length), ["#A34131", "#4FB477","#D69C2B"]);
 
@@ -37,14 +38,19 @@
 
     $: if (radiusScale) {
         scaleValues = {
-            largest: radiusScale.range()[1],
-            smallest: radiusScale.range()[0],
-            median: (radiusScale.range()[1] + radiusScale.range()[0]) / 2
+            largest_range: radiusScale.range()[1],
+            smallest_range: radiusScale.range()[0],
+            median_range: (radiusScale.range()[1] + radiusScale.range()[0]) / 2,
+            largest_domain: radiusScale.domain()[1],
+            smallest_domain: radiusScale.domain()[0],
+            median_domain: (radiusScale.domain()[1] + radiusScale.domain()[0]) / 2
         };
     }
 
     $: step, doStuff();
     $: renderedData, runSimulation();
+
+    $: console.log(renderedData[0].type, "rendered data")
 
     function doStuff(){
 
@@ -65,7 +71,7 @@
         $hoveredCircle = null;
 
         if(nodes.length !== renderedData.length){
-            console.log("runningSimulation",step,renderedData.length)
+            // console.log("runningSimulation",step,renderedData.length)
             animatedIn = false;
 
             radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([3,10]).clamp(true)
@@ -203,12 +209,27 @@
 </svg>
 
 {#if $hoveredCircle}
-    <Tooltip data={$hoveredCircle.data.info} x={$hoveredCircle.x} y={$hoveredCircle.y} width={200} />
+    <Tooltip data={$hoveredCircle.data.info} x={$hoveredCircle.x} y={$hoveredCircle.y} width={300} />
 {/if}
 
-<div class="radius-legend">
-    <RadiusLegend {scaleValues} data={renderedData} />
-</div>
+    <div class="legend">
+        <div class="legent-container">
+            {#if renderedData[0].type === "reddit"}
+            <p class="bubbles-title">Reddit comments</p>
+            {:else if renderedData[0].type === "book"}
+                <p class="bubbles-title">Books</p>
+            {:else if renderedData[0].type === "review"}
+                <p class="bubbles-title">Literature reviews</p>
+            {:else if renderedData[0].type === "study"}
+                <p class="bubbles-title">Clinical studies</p>
+            {:else if renderedData[0].type === "instagram"}
+                <p class="bubbles-title">Instagram profiles</p>
+            {:else}
+                <p class="bubbles-title">Articles</p>
+            {/if}
+            <RadiusLegend {scaleValues} data={renderedData} />
+        </div>
+    </div>
 </div>
 
 <style>
@@ -220,11 +241,20 @@
         flex-direction: column;
         align-items: center;
     }
-    .radius-legend {
+    .legend {
         position: absolute;
         bottom: 0px;
         width: 100%;
         display: flex;
+        justify-content: end;
+    }
+    .legend-container {
+        display: flex;
+        flex-direction: column;
+    }
+    @media only screen and (max-width: 600px) {
+        .legend {
         justify-content: center;
     }
+  }
 </style>

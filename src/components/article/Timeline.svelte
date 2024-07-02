@@ -18,10 +18,10 @@
     // $: innerHeight = $viewport.height - margin.top - margin.bottom;
     // $: innerWidth = $viewport.width - margin.left - margin.right;
 
-    let paddingY = 100;
+    let paddingY = 75;
 
     let yScale = scaleLinear()
-      .domain(extent(data.filter(d => d.year > 1990), d => d.year))
+      .domain(extent(data.filter(d => d.year > 1980), d => d.year))
       .range([$viewport.height - (paddingY*2), 0]).clamp(true);
 
     const colorMapping = {
@@ -46,9 +46,17 @@
           .restart();
 
           years = [...new Set(data.map(d => d.year))];
-          yearsToShow = years.filter((year) => year % 2 === 0);
-        }
-    })
+          yearsToShow = years.filter((year, index) => {
+            if (year >= 2000) {
+              return year % 2 === 0;
+            } else if (year >= 1990) {
+              return year % 4 === 0;
+            } else {
+              return year % 10 === 0;
+            }
+          });
+          }
+      })
 
 </script>
 

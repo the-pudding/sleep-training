@@ -5,6 +5,7 @@
     import HeroComments from "$components/article/HeroComment.svelte";
     import Mosaic from "$components/article/Mosaic.svelte";
     import Video from "$components/article/Video.svelte";
+    import Debunk from "$components/article/Debunk.svelte";
     import viewport from "$stores/viewport.js";
     import arrow from "$svg/arrow.svg"
 
@@ -23,9 +24,11 @@
     const focusNarvaez = data.articles.filter(d => d.url === "https://www.psychologytoday.com/intl/blog/moral-landscapes/201112/dangers-crying-it-out")[0];
     const focusRedditResearch = data.reddit.filter(d => d.username === "leftpantleg420")[0];
     const focusUmbrellaReview = data.literature_reviews.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/35778903/")[0];
+    const focusDouglasReview = data.literature_reviews.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/24042081/")[0];
     // const focusPrice = data.studies.filter(d => d.url === "https://publications.aap.org/pediatrics/article-abstract/130/4/643/30241/Five-Year-Follow-up-of-Harms-and-Benefits-of?redirectedFrom=fulltext")[0];
+    const focusMiddleMiss = data.studies.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/21945361/")[0];
     const focusReview = data.literature_reviews.filter(d => d.url === "https://aasm.org/resources/practiceparameters/review_nightwakingschildren.pdf")[0];
-    // const focusBrainDamage = data.articles.filter(d => d.url === "https://raisedgood.com/nurture-babies-recover-sleep-training/")[0]
+
 
     // NOTIFICATION LOADING
     // let commentsConfused = data.comments.filter(d => d.category === "confused");
@@ -55,12 +58,12 @@
         case step >= 2 && step < 3:
             return {
               renderedData: data.articles,
-              focusHover: focusNarvaez
+              focusHover: null
             }
         case step >= 3 && step < 4:
             return {
               renderedData: data.articles,
-              focusHover: null,
+              focusHover: focusNarvaez,
             }
         case step >= 3 && step < 6:
             return {
@@ -69,28 +72,33 @@
             }
         case step >= 6 && step < 7:
             return {
-              renderedData: data.studies,
+              renderedData: data.literature_reviews,
               focusHover: null
             }
         case step >= 7 && step < 8:
             return {
               renderedData: data.literature_reviews,
-              focusHover: null
+              focusHover: focusReview
             }
         case step >= 8 && step < 9:
             return {
               renderedData: data.literature_reviews,
-              focusHover: focusReview,
+              focusHover: focusUmbrellaReview,
             }
         case step >= 9 && step < 10:
             return {
               renderedData: data.literature_reviews,
-              focusHover: focusUmbrellaReview,
+              focusHover: focusDouglasReview,
             }
         case step >= 10 && step < 11:
             return {
               renderedData: data.studies,
               focusHover: null
+            }
+        case step >= 11 && step < 12:
+            return {
+              renderedData: data.studies,
+              focusHover: focusMiddleMiss,
             }
         default:
             return {
@@ -129,7 +137,7 @@
       {@html arrow}
     </div>
     <div class="editorial-container">
-      <Editorial copy={copy.intro_article} />
+      <Editorial copy={copy.intro_article} spacer="none" />
       <Video video="sleep" />
       <Editorial copy={copy.intro_article_2} />
     </div>    
@@ -141,33 +149,37 @@
       <Section {viewportHeight} copy={copy.viz_main} stepHandler={SectionMain} switcher="bubbles" />
     </section>
     <div class="editorial-container">
-      <Editorial copy={copy.medical_concerns} title="Popular concerns on the science" />
+      <Editorial copy={copy.medical_concerns} title="Reasons People are Skeptical of the Science" />
     </div>
     <section>
       <Section {viewportHeight} copy={copy.viz_transitions} stepHandler={SectionTransitions} switcher="transitions" />
     </section>
     <div class="editorial-container">
-      <Editorial copy={copy.debunk_intro} title="Medical misinformation" />
+      <Editorial copy={copy.debunk_intro} title="Common Arguments Against Sleep Training" />
     </div>
     <Mosaic {viewportHeight} album="debunk" height=35 /> 
     <div class="editorial-container">
       <Editorial copy={copy.debunk_transition} spacer="none" />
-      <Editorial copy={copy.sears_intro} spacer="none" debunk="sears" title="Dr. Sears" notifications={commentsCortisol} />
+      <Debunk target="narvaez" />
+      <Debunk target="sears" />
+      <Editorial copy={copy.sears_intro} spacer="none" title="It Damages Babies' Brains" notifications={commentsCortisol} />
     </div>
     <div class="spacer"></div>
     <Mosaic {viewportHeight} album="posts" height=75 isSocial={true} />
     <div class="editorial-container">
-      <Editorial copy={copy.debunk_sears} />
+      <Editorial copy={copy.debunk_sears} spacer="none" />
     </div>
     <div class="editorial-container">
-      <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} title="Dr. Narvaez" />
-      <Video video="cbum" />
-      <Editorial copy={copy.debunk_narvaez_2} spacer="none" debunk="narvaez" />
-      <Editorial copy={copy.debunk_narvaez_3} />
-      <Editorial copy={copy.instagram_1} title="Instagram chaos" spacer="none" notifications={commentsInstagram} />
-      <Editorial copy={copy.instagram_2} />
+      <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} title="It Creates Insecure Attachment" />
+      <Editorial copy={copy.debunk_narvaez_2} spacer="none" />
+      <Editorial copy={copy.instagram_1} title="Instagram Will Confuse You" spacer="none" />
     </div>
     <Mosaic {viewportHeight} album="social" height=35 />
+    <div class="editorial-container">
+      <Editorial copy={copy.instagram_2} notifications={commentsInstagram} spacer="none"/>
+      <Editorial copy={copy.instagram_3} />
+      <Video video="cbum" />
+    </div>
     <section>
       <Section {viewportHeight} copy={copy.viz_instagram} stepHandler={SectionInstagram} switcher="instagram" />
     </section>
@@ -177,7 +189,7 @@
       <Editorial copy={copy.lazy_parenting} notifications={commentsLazy} spacer="none" />
     </div>
     <div class="editorial-container">
-      <Editorial copy={copy.editorial_conclusion} title="Conclusion" />
+      <Editorial copy={copy.editorial_conclusion} title="Conclusion" spacer="none" />
       <Editorial copy={copy.methodologies} title="Methodology" />
     </div>
   </div>

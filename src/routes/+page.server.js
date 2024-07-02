@@ -66,6 +66,8 @@ export async function load({fetch}) {
 			authors: d.authors,
 			title: d.title,
 			date: d.date,
+			theoretical: d.grounding,
+			relevance: d.relevance,
 		}		
 	})
 	data.reddit = response_reddit.map(d => {
@@ -91,7 +93,7 @@ export async function load({fetch}) {
 	data.books = books.map(d => {
 		return {
 			position: d.position,
-			radius: +d.sales,
+			radius: +d.holding,
 			title: d.title,
 			authors: d.authors,
 			url: d.url,

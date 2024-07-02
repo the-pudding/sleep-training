@@ -1,36 +1,51 @@
 <script>
-    export let video = 'cbum';
+  export let video;
+
+  let videoUrl = '';
+  let isPlaying = false;
+  let videoElement;
+
+  const getVideoUrl = (video) => {
+    if (video === 'cbum') {
+      return 'assets/videos/cbum.mp4';
+    } 
+    return 'assets/videos/sleep.mp4';
+  };
   
-    let videoUrl = '';
-    let isPlaying = false;
-  
-    const getVideoUrl = (video) => {
-      if (video === 'cbum') {
-        return 'assets/videos/cbum.mp4';
-      } 
-      return 'assets/videos/sleep.mp4';
-    };
-  
-    const togglePlayPause = () => {
-      const videoElement = document.getElementById('video');
+  const togglePlayPause = () => {
+    if (videoElement) {
       if (isPlaying) {
         videoElement.pause();
       } else {
         videoElement.play();
       }
       isPlaying = !isPlaying;
-    };
+    }
+  };
   
-    $: videoUrl = getVideoUrl(video);
+  $: videoUrl = getVideoUrl(video);
+
+  function handleVideoPlay() {
+    isPlaying = true;
+  }
+
+  function handleVideoPause() {
+    isPlaying = false;
+  }
 </script>
   
 <div class="video-container">
-  <!-- svelte-ignore a11y-media-has-caption -->
-  <!-- autoplay loop -->
-  <video id="video" src={videoUrl} on:click={togglePlayPause}>
-    <p>Your browser does not support the video element.</p>
-  </video>
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
+   <!-- svelte-ignore a11y-media-has-caption -->
+  <video 
+  bind:this={videoElement}
+  src={videoUrl} 
+  on:click={togglePlayPause}
+  on:play={handleVideoPlay}
+  on:pause={handleVideoPause}
+>
+  <p>Your browser does not support the video element.</p>
+</video>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="play-pause-icon" on:click={togglePlayPause}>
     {#if isPlaying}
@@ -40,8 +55,8 @@
       </svg>
     {:else}
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="48px" height="48px">
-          <path d="M0 0h24v24H0z" fill="none"/>
-          <path d="M8 5v14l11-7z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M8 5v14l11-7z"/>
       </svg>
     {/if}
   </div>

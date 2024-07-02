@@ -1,7 +1,6 @@
 <script>
   import * as d3 from 'd3';
   import rawWorldMap from "$data/world-geojson2.json";
-  // import rawWorldMap from "$data/land.json";
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
   import viewport from "$stores/viewport.js";
@@ -94,10 +93,10 @@
 
 <style>
   .map-container {
-    background-color: var(--color-bg);
+    background-color: #1A2E3C;
   }
   .earth {
-    fill: var(--color-bg);
+    fill: #1A2E3C;
   }
   .country {
     stroke: #1A2127;

@@ -3,9 +3,9 @@
   export let data;
 
   const radiusScaleValues = [
-      { label: 'Smallest', value: scaleValues.smallest },
-      { label: 'Median', value: scaleValues.median },
-      { label: 'Largest', value: scaleValues.largest }
+      { label: 'Smallest', label_value: scaleValues.smallest_domain, value: scaleValues.smallest_range },
+      { label: 'Median', label_value: scaleValues.median_domain, value: scaleValues.median_range },
+      { label: 'Largest',label_value: scaleValues.largest_domain, value: scaleValues.largest_range },
   ];
 </script>
 
@@ -18,6 +18,8 @@
     <p>Total upvotes</p>
     {:else if data[0].type == "instagram"}
     <p>Total followers</p>
+    {:else if data[0].type == "book"}
+    <p>Library holdings</p>
     {:else}
     <p>Total citations</p>
     {/if}
@@ -32,7 +34,7 @@
             stroke="white"
             stroke-width="1"
           />
-          <text x="0" y="40" fill="white" text-anchor="middle">{scale.value}+</text>
+          <text x="0" y="40" fill="white" text-anchor="middle">{scale.label_value}+</text>
         </g>
       {/each}
     </svg>
@@ -44,7 +46,7 @@
       align-items: center;
     }
     .radius-scale p {
-      margin: none !important;
+      margin-right: 20px;
       font-size: 14px;
     }
 

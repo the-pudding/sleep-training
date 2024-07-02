@@ -30,7 +30,6 @@
     $: {
         if(focusHoverPoint && $hoveredCircle){
             if (point.data.info.url == $hoveredCircle.data.info.url) {
-                console.log("make white")
                 hovered = true;
             }
             else {
@@ -106,7 +105,7 @@
 <style>
     .circle-element {
         cursor: pointer;
-        stroke: var(--color-bg);
+        stroke: #1A2E3C;
         stroke-width: 3px;
     }
 </style>

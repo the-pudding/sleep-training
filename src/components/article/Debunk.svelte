@@ -25,15 +25,27 @@
       <table>
         <thead>
           <tr>
-            <th style="width: 80px;">Year</th>
-            <th>Title</th>
+            <th style="width: 10%;">Year</th>
+            <th style="width: 50%;">Title</th>
+            <th style="width: 20%;">Grounding</th>
+            <th style="width: 20%;">Relevance</th>
           </tr>
         </thead>
         <tbody>
           {#each data.filter(d => d.target === target) as d}
             <tr>
-              <td style="width: 20%;">{d.date}</td>
-              <td style="width: 80%;">{d.title}</td>
+              <td>{d.date}</td>
+              <td>{d.title}</td>
+              <td>
+                {#if d.theoretical === "TRUE"}
+                  Theoretical
+                {:else}
+                  Clinical
+                {/if}
+              </td>
+              <td>
+                Not Relevant
+              </td>
             </tr>
           {/each}
         </tbody>
@@ -47,8 +59,10 @@
     border-radius: 4px;
     margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: "Atlas Grotesk";
     max-width: 40rem;
-		margin: 0 auto;
+		margin: 0 auto 20px auto;
+    background-color: #000;
   }
   
   .references-header {

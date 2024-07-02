@@ -30,11 +30,6 @@
         newValues = stepHandler(step);
         renderedData = newValues.renderedData;
         focusHover = newValues.focusHover;
-
-        console.log(step)
-
-
-
     }
 </script>
 
@@ -53,11 +48,12 @@
                         <Map bind:data={dataMap} />
                     {/if}
                 {:else if switcher === "instagram"}
-                    {#if value == undefined || value < 2}
+                    <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} {step} />
+                    <!-- {#if value == undefined || value < 2}
                         <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} {step} />
                     {:else if value >= 2 && value <= 3 }
                         <Pie data={renderedData} width={800} />
-                    {/if}
+                    {/if} -->
                 {/if}
             {/if}
             <!-- <div class="step-marker">
@@ -124,7 +120,7 @@
     }
 
 	.step-content {
-		background-color: rgba(17,17,17,.91);
+		background-color: rgba(17,17,17,.95);
 		border-radius: 5px;
         font-size: 16px;
         -webkit-font-smoothing: antialiased;

@@ -1,8 +1,7 @@
 
 body {
 	/* background-color: var(--color-bg, white); */
-	background: linear-gradient(180deg, #353643 0px, var(--color-bg) 300px);
-	background: linear-gradient(180deg, #424242 0px, var(--color-bg) 300px);
+	background: linear-gradient(180deg, #1A2127 0px, #1A2E3C 300px);
 	color: #FFFFFF;
 	line-height: 1.4;
 	/* font-family: var(--font-body, serif); */
@@ -30,7 +29,7 @@ mark {
 }
 
 a {
-	color: #caccf3;
+	color: #9A9DFA;
 	text-decoration: none;
 	border-bottom: 1px solid currentColor;
 }
@@ -273,7 +272,9 @@ ol, ul {
 	white-space: nowrap; 
 	width: 1px;
 }
-
+blockquote {
+	font-style: italic;
+}
 .text-outline {
 	--stroke-width: 1px;
 	--stroke-width-n: calc(var(--stroke-width) * -1);

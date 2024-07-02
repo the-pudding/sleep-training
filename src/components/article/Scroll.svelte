@@ -25,11 +25,6 @@
 		justify-content: center;
 	}
 
-	.step-content {
-		background-color: rgba(17,17,17,.91);
-		border-radius: 5px;
-	}
-
 	.step p {
 		padding: 1.5rem 1rem;
 		color: white;
