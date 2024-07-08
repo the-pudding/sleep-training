@@ -100,17 +100,21 @@
               renderedData: data.studies,
               focusHover: focusMiddleMiss,
             }
+        case step >= 12 && step < 13:
+            return {
+              renderedData: data.instagram,
+              focusHover: null,
+            }
+        case step >= 14:
+            return {
+              renderedData: data.studies,
+              focusHover: null,
+            }
         default:
             return {
               renderedData: data.studies,
               focusHover: null
             }
-      }
-    }
-    function SectionTransitions(step) {
-      return {
-        renderedData: data.studies,
-        focusHover: null
       }
     }
     function SectionInstagram(step) {
@@ -134,7 +138,6 @@
       <h1 class="title title-large" class:loaded>{@html copy.title}</h1>
       <h4 class="title byline" class:loaded>by <a href="https://pudding.cool/author/tom-vaillant">Tom Vaillant</a>, July 14, 2024</h4>
       <h2 class="title dek" class:loaded style="--delay:0.5s;">{copy.description}</h2>
-      {@html arrow}
     </div>
     <div class="editorial-container">
       <Editorial copy={copy.intro_article} spacer="none" />
@@ -149,48 +152,49 @@
       <Section {viewportHeight} copy={copy.viz_main} stepHandler={SectionMain} switcher="bubbles" />
     </section>
     <div class="editorial-container">
-      <Editorial copy={copy.medical_concerns} title="Reasons People are Skeptical of the Science" />
-    </div>
-    <section>
-      <Section {viewportHeight} copy={copy.viz_transitions} stepHandler={SectionTransitions} switcher="transitions" />
-    </section>
-    <div class="editorial-container">
-      <Editorial copy={copy.debunk_intro} title="Common Arguments Against Sleep Training" />
-    </div>
-    <Mosaic {viewportHeight} album="debunk" height=35 /> 
-    <div class="editorial-container">
-      <Editorial copy={copy.debunk_transition} spacer="none" />
+      <h3 class="sub-title">Common narratives that are winning on social media</h3>
+      <Editorial copy={copy.debunk_intro} spacer="none"/>
       <Debunk target="narvaez" />
       <Debunk target="sears" />
-      <Editorial copy={copy.sears_intro} spacer="none" title="It Damages Babies' Brains" notifications={commentsCortisol} />
+      <Editorial copy={copy.debunk_intro_2} />
+    </div>
+    <Mosaic {viewportHeight} album="social" height=35 />
+    <div class="editorial-container">
+      <h3 class="sub-title">Narrative: Sleep Training <span class="oppose">Damages Babies' Brains</span></h3>
+      <Editorial copy={copy.sears_intro} spacer="none" notifications={commentsCortisol} />
     </div>
     <div class="spacer"></div>
     <Mosaic {viewportHeight} album="posts" height=75 isSocial={true} />
     <div class="editorial-container">
+      <h3 class="sub-title">Research: There Is<span class="advocate">No Proof of Harm</span></h3>
       <Editorial copy={copy.debunk_sears} spacer="none" />
     </div>
     <div class="editorial-container">
-      <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} title="It Creates Insecure Attachment" />
+      <h3 class="sub-title">Narrative: It Creates <span class="oppose">Insecure Attachment</span></h3>
+      <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} />
+      <Video video="cbum" />
+      <h3 class="sub-title">Research: There Is<span class="advocate">No Proof of Insecure Attachment</span></h3>
       <Editorial copy={copy.debunk_narvaez_2} spacer="none" />
-      <Editorial copy={copy.instagram_1} title="Instagram Will Confuse You" spacer="none" />
     </div>
-    <Mosaic {viewportHeight} album="social" height=35 />
-    <div class="editorial-container">
+    <!-- <div class="editorial-container">
+      <h3 class="sub-title">Instagram Will Confuse You</h3>
+      <Editorial copy={copy.instagram_1} spacer="none" />
       <Editorial copy={copy.instagram_2} notifications={commentsInstagram} spacer="none"/>
       <Editorial copy={copy.instagram_3} />
-      <Video video="cbum" />
-    </div>
-    <section>
+    </div> -->
+    <!-- <section>
       <Section {viewportHeight} copy={copy.viz_instagram} stepHandler={SectionInstagram} switcher="instagram" />
     </section>
     <div class="editorial-container">
       <Editorial copy={copy.editorial_influencerPackages} spacer="none" />
       <Mosaic {viewportHeight} album="products" height=65 />
       <Editorial copy={copy.lazy_parenting} notifications={commentsLazy} spacer="none" />
-    </div>
+    </div> -->
     <div class="editorial-container">
+      <h3 class="sub-title">Conclusion</h3>
       <Editorial copy={copy.editorial_conclusion} title="Conclusion" spacer="none" />
-      <Editorial copy={copy.methodologies} title="Methodology" />
+      <h3 class="sub-title">Methodology</h3>
+      <Editorial copy={copy.methodologies} />
     </div>
   </div>
 {/if}

@@ -1,13 +1,9 @@
 <script>
     import Notification from "$components/article/Notification.svelte";
     import Scrolly from "$components/helpers/Scrolly.svelte";
-    import Debunk from "$components/article/Debunk.svelte";
-    import { fade } from 'svelte/transition';
     export let copy;
     export let notifications;
     export let spacer = null;
-    export let title = null;
-    // export let debunk = null;
 
     let step;
     let comments;
@@ -33,9 +29,6 @@
 <section id="scrolly" class="scrolly-editorial">
 	<Scrolly bind:value={step} >
         <div class="editorial-wrapper">
-            {#if title}
-                <h3 class="sub-title">{title}</h3>
-            {/if}
             {#if copy[0].subtitle}
                 <h3>{copy[0].subtitle}</h3>
             {/if}
@@ -93,26 +86,6 @@
     .scrolly-editorial {
         padding-top: 0px !important;
         margin-top: 0px !important;
-    }
-    .sub-title {
-        font-size: 24px;
-        font-family: "Tiempos Text Web";
-        max-width: 40rem;
-		padding: 16px;
-		margin: 150px auto 0 auto;
-        font-weight: 300;
-        font-size: 24px;
-        text-align: center;
-        text-transform: uppercase;
-        border: none;
-        margin-bottom: 20px;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
-        text-transform: capitalize;
-        text-transform: uppercase;
-        color: white;
-        letter-spacing: 3px;
     }
     .editorial-paragraph .bold {
         border-radius: 3px;

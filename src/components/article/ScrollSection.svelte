@@ -3,10 +3,8 @@
 	import Scrolly from "$components/helpers/Scrolly.svelte";
     import Timeline from "$components/article/Timeline.svelte";
     import Map from "$components/article/Map.svelte";
-    import Pie from "$components/article/Pie.svelte";
 
     export let copy;
-    export let switcher;
     export let dataMap;
     export let stepHandler;
     export let viewportHeight;
@@ -18,6 +16,8 @@
     let step;
 
     $: value, handleStepChange()
+
+    console.log(Object.values(copy).length - 1)
 
     function handleStepChange() {
 
@@ -37,29 +37,22 @@
     <div class="scroll-section matt-scroll">
 
         <!-- switcher is now a class on sticky--use that to apply styles to this el like the top:20%; -->
-        <div class="sticky" class:switcher style="">
+        <div class="sticky">
             {#if renderedData}
-                {#if switcher == "bubbles"}
-                    <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} {step} />                
-                {:else if switcher === "transitions"}
-                    {#if step == undefined || step < 2}
-                        <Timeline />
-                    {:else if step >= 2 }    
-                        <Map bind:data={dataMap} />
-                    {/if}
-                {:else if switcher === "instagram"}
-                    <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} {step} />
-                    <!-- {#if value == undefined || value < 2}
-                        <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} {step} />
-                    {:else if value >= 2 && value <= 3 }
-                        <Pie data={renderedData} width={800} />
-                    {/if} -->
-                {/if}
+                {#if step < 13} 
+                    <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} {step} /> 
+                {:else if step >= 13 && step < 14}             
+                    <Timeline />
+                {:else if step >= 14 && step < 15}    
+                    <Map bind:data={dataMap} />
+                {:else if step >= 15}
+                    <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} {step} /> 
+                {/if}  
             {/if}
-            <!-- <div class="step-marker">
-                <p>{value}</p>
-            </div> -->
         </div>
+
+        <!-- INSTAGRAM -->
+        <!-- <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} {step} /> -->
 
         <div class="steps">
             <section id="scrolly">

@@ -208,11 +208,61 @@ ol, ul {
 	margin-bottom: 16px;
 }
 
+.sub-title .oppose {
+	border-radius: 3px;
+    background: #A34131;
+    color: white;
+    padding: 2px 3px;
+}
+
+.sub-title .advocate {
+	border-radius: 3px;
+    background: #4FB477;
+    color: white;
+    padding: 2px 3px;
+}
+
+.editorial .oppose {
+	border-radius: 3px;
+    background: #A34131;
+    color: white;
+    padding: 2px 3px;
+    font-weight: 600;
+}
+
+.editorial .advocate {
+	border-radius: 3px;
+    background: #4FB477;
+    color: white;
+    padding: 2px 3px;
+    font-weight: 600;
+}
+
+.editorial .bold {
+	font-weight: bolder;
+}
+
 .notification .bold {
 	border-radius: 3px;
     background: rgba(255,255,255,.09);
     color: white;
-    padding: 2px 8px;
+    padding: 2px 3px;
+    font-weight: 600;
+}
+
+.notification .oppose {
+	border-radius: 3px;
+    background: #A34131;
+    color: white;
+    padding: 2px 3px;
+    font-weight: 600;
+}
+
+.notification .advocate {
+	border-radius: 3px;
+    background: #4FB477;
+    color: white;
+    padding: 2px 3px;
     font-weight: 600;
 }
 
@@ -286,6 +336,27 @@ blockquote {
 		0 var(--stroke-width) 0 var(--color-text-outline, #fff),
 		var(--stroke-width-n) var(--stroke-width) 0 var(--color-text-outline, #fff),
 		var(--stroke-width-n) 0 0 var(--color-text-outline, #fff); 
+}
+
+.sub-title {
+	font-size: 24px;
+	font-family: "Tiempos Text Web";
+	max-width: 40rem;
+	padding: 16px;
+	margin: 150px auto 0 auto;
+	font-weight: 300;
+	font-size: 24px;
+	text-align: center;
+	text-transform: uppercase;
+	border: none;
+	margin-bottom: 20px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	text-transform: capitalize;
+	text-transform: uppercase;
+	color: white;
+	letter-spacing: 3px;
 }
 
 /* desktop (mouse-enabled device) */
