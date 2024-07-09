@@ -1,6 +1,6 @@
 <script>
 
-    import { extent, max, scaleOrdinal, range, group, hierarchy, pack, rollup, quadtree, forceSimulation, scaleLinear } from "d3";
+    import { extent, max, scaleOrdinal, range, group, hierarchy, pack, rollup, quadtree, quantile, scaleLinear } from "d3";
     import { onMount } from "svelte";
     import { hoveredCircle } from '$stores/misc.js';
 
@@ -24,33 +24,34 @@
     let ordinalGroup = {
         "Oppose":0,
         "Advocate":1,
-        "Neutral":2
+        "No Position":2
     }
-
-
-    // $: console.log($hoveredCircle)
 
     let color = scaleOrdinal(range(Object.keys(ordinalGroup).length), ["#A34131", "#4FB477","#D69C2B"]);
 
-    //your bubbles were really big, so tried to tone it down here, keeping them between 3 and 10px;
     let radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([1,10]).clamp(true)
 
+    $: if (radiusScale && renderedData.length > 0) {
+        const sortedRadii = renderedData.map(d => d.radius).sort((a, b) => a - b);
+        const q30 = quantile(sortedRadii, 0.3);
+        const q60 = quantile(sortedRadii, 0.6);
+        const q90 = quantile(sortedRadii, 0.9);
 
-    $: if (radiusScale) {
+        const [minRange, maxRange] = radiusScale.range();
+        const rangeSpread = maxRange - minRange;
+
         scaleValues = {
-            largest_range: radiusScale.range()[1],
-            smallest_range: radiusScale.range()[0],
-            median_range: (radiusScale.range()[1] + radiusScale.range()[0]) / 2,
-            largest_domain: radiusScale.domain()[1],
-            smallest_domain: radiusScale.domain()[0],
-            median_domain: (radiusScale.domain()[1] + radiusScale.domain()[0]) / 2
+            smallest_range: minRange + rangeSpread * 0.3,
+            median_range: minRange + rangeSpread * 0.6,
+            largest_range: minRange + rangeSpread * 0.9,
+            smallest_domain: q30,
+            median_domain: q60,
+            largest_domain: q90
         };
     }
 
     $: step, doStuff();
     $: renderedData, runSimulation();
-
-    $: console.log(renderedData[0].type, "rendered data")
 
     function doStuff(){
 
@@ -90,7 +91,7 @@
             })
 
             let packing = () => pack()
-                .size([$viewport.width, $viewport.height])
+                .size([$viewport.width*0.9, $viewport.height*0.9])
                 .padding(1)
                 (hierarchy(data)
                 .sum(d => d.value)
@@ -190,14 +191,11 @@
 
         return force;
     }
-
-    // let yNudge;
-    // $: yNudge = $viewport.height * 0.95
 </script>
 <div class="bubbles">
 <svg
-    width={$viewport.width}
-    height={$viewport.height}>
+    width={$viewport.width*0.9}
+    height={$viewport.height*0.9}>
     <g style="transform: translate(0,0);">
         {#if nodes}
             {#each nodes as point,i}
@@ -243,14 +241,19 @@
     }
     .legend {
         position: absolute;
-        bottom: 0px;
+        bottom: 10px;
         width: 100%;
         display: flex;
-        justify-content: end;
+        justify-content: center;
     }
     .legend-container {
         display: flex;
         flex-direction: column;
+    }
+    .bubbles-title {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bolder;
     }
     @media only screen and (max-width: 600px) {
         .legend {

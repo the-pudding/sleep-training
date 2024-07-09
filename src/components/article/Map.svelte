@@ -12,9 +12,9 @@
   let projection;
 
   const colorMapping = {
-        Advocate: "#4FB477",
-        Neutral: "#D69C2B",
-        Oppose: "#A34131"
+        'Advocate': "#4FB477",
+        'No Position': "#D69C2B",
+        'Oppose': "#A34131"
     };
 
   $: positionColor = (position) => colorMapping[position] || "#000000";

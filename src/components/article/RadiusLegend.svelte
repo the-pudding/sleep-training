@@ -7,9 +7,11 @@
       { label: 'Median', label_value: scaleValues.median_domain, value: scaleValues.median_range },
       { label: 'Largest',label_value: scaleValues.largest_domain, value: scaleValues.largest_range },
   ];
+  $: console.log(radiusScaleValues, "radius values");
 </script>
 
 <div class="radius-scale">
+  <div class="radius-label">
     {#if data[0].type == "study"}
     <p>Total citations</p>
     {:else if data[0].type == "article"}
@@ -23,35 +25,63 @@
     {:else}
     <p>Total citations</p>
     {/if}
-    <svg width="180" height="100">
-      {#each radiusScaleValues as scale, index}
-        <g transform="translate({30 + index * 50}, 40)">
-          <circle
-            cx="0"
-            cy="0"
-            r={scale.value}
-            fill="none"
-            stroke="white"
-            stroke-width="1"
-          />
-          <text x="0" y="40" fill="white" text-anchor="middle">{scale.label_value}+</text>
-        </g>
-      {/each}
-    </svg>
-   </div>
+  </div>
+    
+  <div class="scale-container">
+    {#each radiusScaleValues as scale, index}
+      <div class="scale-item">
+        <div class="circle-container">
+          <div class="circle" style="width: {scale.value * 5}px; height: {scale.value * 5}px;"></div>
+        </div>
+        <div class="label">{Math.floor(scale.label_value)}+</div>
+      </div>
+    {/each}
+  </div>    
+</div>
    
-   <style>
-    .radius-scale {
-      display: flex;
-      align-items: center;
-    }
-    .radius-scale p {
-      margin-right: 20px;
-      font-size: 14px;
-    }
+<style>
+  .circle-container {
+    height: 60px; /* Adjust this value based on your largest circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .radius-scale {
+    display: flex;
+    align-items: center;
+  }
+  .radius-scale p {
+    margin-right: 20px;
+    font-size: 14px;
+  }
 
-    text {
-      font-family: var(--sans);
-      font-size: 14px;
-    }
-   </style>
+  .scale-container {
+    min-width: 180px;
+    min-height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
+  .scale-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .circle {
+    border: 1px solid white;
+    border-radius: 50%;
+  }
+
+  .label {
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  text {
+    font-family: var(--sans);
+    font-size: 14px;
+  }
+  </style>

@@ -46,6 +46,12 @@
         textOne = truncateText(data.authors, 60);
         textTwo = data.year;
         break;
+        case 'review':
+          title = truncateText(data.title.toUpperCase(), 70);
+          type = "Study";
+          textOne = truncateText(data.authors, 60);
+          textTwo = data.year;
+          break;
       case 'article':
         title = truncateText(data.title.toUpperCase(), 70);
         type = "Article";

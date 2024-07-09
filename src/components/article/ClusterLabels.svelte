@@ -12,7 +12,7 @@
 
     let outlineColor = {
         "Advocate": "#0d381f",
-        "Neutral":"#4f3a0f",
+        "No Position":"#4f3a0f",
         "Oppose":"#54241c"
     }   
 

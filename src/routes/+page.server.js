@@ -21,7 +21,7 @@ export async function load({fetch}) {
 			country: d.country,
 			type: d.type,
 			year: +d.year,
-			radius: +d.participants || 0,
+			radius: +d.citations || 0,
 			citations: +d.citations || 0
 		}
 	});
@@ -34,7 +34,7 @@ export async function load({fetch}) {
 			country: d.country,
 			type: d.type,
 			year: +d.year,
-			radius: +d.participants || 0,
+			radius: +d.citations || 0,
 			citations: +d.citations || 0
 		}
 	});
