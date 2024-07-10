@@ -24,6 +24,7 @@
 		margin: 0 auto;
 		left: 0;
 		right: 0;
+		display: none;
 	}
 	.wordmark {
 		max-width: 200px;

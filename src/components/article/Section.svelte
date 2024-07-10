@@ -19,7 +19,7 @@
 </script>
 
 
-{#if mounted && stepHandler}
+<!-- {#if mounted && stepHandler} -->
     <!-- THIS FEELS CLEANER TO ME -->
     <ScrollSection {viewportHeight} {switcher} {stepHandler} {copy} {dataMap} />
-{/if}
+<!-- {/if} -->

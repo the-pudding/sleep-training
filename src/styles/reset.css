@@ -224,46 +224,42 @@ ol, ul {
 
 .editorial .oppose {
 	border-radius: 3px;
-    background: #A34131;
-    color: white;
-    padding: 2px 3px;
-    font-weight: 600;
+	background: #4f3030;
+    padding: 0px 3px;
 }
 
 .editorial .advocate {
 	border-radius: 3px;
-    background: #4FB477;
-    color: white;
-    padding: 2px 3px;
-    font-weight: 600;
+	background: #2e5c2d;
+    padding: 0px 3px;
 }
 
 .editorial .bold {
 	font-weight: bolder;
 }
 
-.notification .bold {
+.notification-text span {
+	padding: 0px 3px;
 	border-radius: 3px;
-    background: rgba(255,255,255,.09);
-    color: white;
-    padding: 2px 3px;
-    font-weight: 600;
+	background: rgba(255,255,255,.09);
+	color: white;
+}
+
+.notification .bold {
+    background: rgba(255,255,255,.10);
 }
 
 .notification .oppose {
 	border-radius: 3px;
-    background: #A34131;
-    color: white;
-    padding: 2px 3px;
-    font-weight: 600;
+    background: #4f3030;
 }
 
 .notification .advocate {
-	border-radius: 3px;
-    background: #4FB477;
-    color: white;
-    padding: 2px 3px;
-    font-weight: 600;
+    background: #2e5c2d;
+}
+
+.step-content span {
+	white-space: nowrap;
 }
 
 .step-content .bold {

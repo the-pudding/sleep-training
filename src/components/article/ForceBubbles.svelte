@@ -3,6 +3,7 @@
     import { extent, max, scaleOrdinal, range, group, hierarchy, pack, rollup, quadtree, quantile, scaleLinear } from "d3";
     import { onMount } from "svelte";
     import { hoveredCircle } from '$stores/misc.js';
+    import { fly } from "svelte/transition";
 
     import Tooltip from "$components/article/Tooltip.svelte";
     import Circle from "$components/article/Circle.svelte";
@@ -191,40 +192,40 @@
 
         return force;
     }
+
+    let legendText = {
+        "reddit":"Reddit comments",
+        "book":"Books",
+        "review":"Literature reviews",
+        "study":"Clinical studies",
+        "instagram":"Instagram profiles",
+        "article":"Articles"
+    }
+
 </script>
 <div class="bubbles">
-<svg
-    width={$viewport.width*0.9}
-    height={$viewport.height*0.9}>
-    <g style="transform: translate(0,0);">
-        {#if nodes}
-            {#each nodes as point,i}
-                <Circle {point} nodesLength={nodes.length} {i} color={color(point.data.group)} {animatedIn} {focusHover} />
-            {/each}
-            <ClusterLabels {nodes} {animatedIn} />
-        {/if}
-    </g>
-</svg>
+    {#key renderedData[0].type}
+        <p in:fly={{y:20, duration:500, delay:500}} class="bubbles-title"><span>{legendText[renderedData[0].type]}</span></p>
+    {/key}
+    <svg
+        width={$viewport.width*0.9}
+        height={$viewport.height*0.9}>
+        <g style="transform: translate(0,0);">
+            {#if nodes}
+                {#each nodes as point,i}
+                    <Circle {point} nodesLength={nodes.length} {i} color={color(point.data.group)} {animatedIn} {focusHover} />
+                {/each}
+                <ClusterLabels {nodes} {animatedIn} />
+            {/if}
+        </g>
+    </svg>
 
 {#if $hoveredCircle}
     <Tooltip data={$hoveredCircle.data.info} x={$hoveredCircle.x} y={$hoveredCircle.y} width={300} />
 {/if}
 
     <div class="legend">
-        <div class="legent-container">
-            {#if renderedData[0].type === "reddit"}
-            <p class="bubbles-title">Reddit comments</p>
-            {:else if renderedData[0].type === "book"}
-                <p class="bubbles-title">Books</p>
-            {:else if renderedData[0].type === "review"}
-                <p class="bubbles-title">Literature reviews</p>
-            {:else if renderedData[0].type === "study"}
-                <p class="bubbles-title">Clinical studies</p>
-            {:else if renderedData[0].type === "instagram"}
-                <p class="bubbles-title">Instagram profiles</p>
-            {:else}
-                <p class="bubbles-title">Articles</p>
-            {/if}
+        <div class="">
             <RadiusLegend {scaleValues} data={renderedData} />
         </div>
     </div>
@@ -252,12 +253,32 @@
     }
     .bubbles-title {
         text-align: center;
-        font-size: 20px;
-        font-weight: bolder;
+        font-size: 18px;
+        font-weight: 600;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        text-shadow: -3px -3px 1px rgba(25, 46, 60, 0.4), -3px -2px 1px rgba(25, 46, 60, 0.4), -3px -1px 1px rgba(25, 46, 60, 0.4), -3px 0px 1px rgba(25, 46, 60, 0.4), -3px 1px 1px rgba(25, 46, 60, 0.4), -3px 2px 1px rgba(25, 46, 60, 0.4), -3px 3px 1px rgba(25, 46, 60, 0.4), -2px -3px 1px rgba(25, 46, 60, 0.4), -2px -2px 1px rgba(25, 46, 60, 0.4), -2px -1px 1px rgba(25, 46, 60, 0.4), -2px 0px 1px rgba(25, 46, 60, 0.4), -2px 1px 1px rgba(25, 46, 60, 0.4), -2px 2px 1px rgba(25, 46, 60, 0.4), -2px 3px 1px rgba(25, 46, 60, 0.4), -1px -3px 1px rgba(25, 46, 60, 0.4), -1px -2px 1px rgba(25, 46, 60, 0.4), -1px -1px 1px rgba(25, 46, 60, 0.4), -1px 0px 1px rgba(25, 46, 60, 0.4), -1px 1px 1px rgba(25, 46, 60, 0.4), -1px 2px 1px rgba(25, 46, 60, 0.4), -1px 3px 1px rgba(25, 46, 60, 0.4), 0px -3px 1px rgba(25, 46, 60, 0.4), 0px -2px 1px rgba(25, 46, 60, 0.4), 0px -1px 1px rgba(25, 46, 60, 0.4), 0px 1px 1px rgba(25, 46, 60, 0.4), 0px 2px 1px rgba(25, 46, 60, 0.4), 0px 3px 1px rgba(25, 46, 60, 0.4), 1px -3px 1px rgba(25, 46, 60, 0.4), 1px -2px 1px rgba(25, 46, 60, 0.4), 1px -1px 1px rgba(25, 46, 60, 0.4), 1px 0px 1px rgba(25, 46, 60, 0.4), 1px 1px 1px rgba(25, 46, 60, 0.4), 1px 2px 1px rgba(25, 46, 60, 0.4), 1px 3px 1px rgba(25, 46, 60, 0.4), 2px -3px 1px rgba(25, 46, 60, 0.4), 2px -2px 1px rgba(25, 46, 60, 0.4), 2px -1px 1px rgba(25, 46, 60, 0.4), 2px 0px 1px rgba(25, 46, 60, 0.4), 2px 1px 1px rgba(25, 46, 60, 0.4), 2px 2px 1px rgba(25, 46, 60, 0.4), 2px 3px 1px rgba(25, 46, 60, 0.4), 3px -3px 1px rgba(25, 46, 60, 0.4), 3px -2px 1px rgba(25, 46, 60, 0.4), 3px -1px 1px rgba(25, 46, 60, 0.4), 3px 0px 1px rgba(25, 46, 60, 0.4), 3px 1px 1px rgba(25, 46, 60, 0.4), 3px 2px 1px rgba(25, 46, 60, 0.4), 3px 3px 1px rgba(25, 46, 60, 0.4);
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 22px;
+        font-weight: 600;
+        font-family: var(--serif);
+        font-weight: 400;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+    .bubbles-title span {
+        border-bottom: 1px solid rgba(255,255,255,.8);
+        padding-bottom: 10px;
     }
     @media only screen and (max-width: 600px) {
         .legend {
-        justify-content: center;
-    }
+            justify-content: center;
+        }
   }
 </style>

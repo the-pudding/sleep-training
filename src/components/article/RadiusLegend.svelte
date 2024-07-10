@@ -7,7 +7,6 @@
       { label: 'Median', label_value: scaleValues.median_domain, value: scaleValues.median_range },
       { label: 'Largest',label_value: scaleValues.largest_domain, value: scaleValues.largest_range },
   ];
-  $: console.log(radiusScaleValues, "radius values");
 </script>
 
 <div class="radius-scale">
@@ -78,6 +77,7 @@
     color: white;
     margin-top: 10px;
     text-align: center;
+    font-family: var(--sans);
   }
 
   text {
