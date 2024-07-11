@@ -24,9 +24,9 @@
   </div>
   <div class="notification-source">
     {#if comment.platform === "reddit"}
-    {comment.likes} Votes / <a href="{comment.url}">Source</a>
+      Comment / {comment.likes} Votes / <a href="{comment.url}">Source</a>
     {:else}
-      {comment.likes} Likes / <a href="{comment.url}">Source</a>
+      Comment / {comment.likes} Likes / <a href="{comment.url}">Source</a>
     {/if}
   </div>
 </div>

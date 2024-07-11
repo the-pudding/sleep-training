@@ -15,12 +15,10 @@
       if ((x + width) > $viewport.width) {
       xNudge = -width;
     } else {
-      xNudge = 10;
+      xNudge = $viewport.width * 0.04 ;
     }
   }
-  const yNudge = 15;
-
-  // $: console.log(x,y,data)
+  const yNudge = -$viewport.height * 0.05;
 
   $: xPosition = x + xNudge;
   $: yPosition = y + yNudge;
@@ -34,7 +32,6 @@
   }
   let type = '';
   let textOne = '';
-  let labelTwo = '';
   let textTwo = '';
   let title = '';
 
@@ -61,7 +58,7 @@
       case 'reddit':
         title = truncateText(data.username.toUpperCase(), 40);
         type = "Reddit comment";
-        textTwo = truncateText(data.comment, 140);
+        textTwo = truncateText(data.comment, 200);
         break;
       case 'instagram':
         title = truncateText(data.username.toUpperCase(), 40);
@@ -97,7 +94,7 @@
   {:else if data.type === "reddit"}
     <div style="margin-top: 0px; margin-bottom: 10px; padding-top: 0px;"><span class="tooltip-type">{type}</span></div>
     <div class="tooltip-title">
-      {title}
+      Username: {title}
     </div>
     <div class='info'>
       <span class='info-element'>{textTwo}</span>

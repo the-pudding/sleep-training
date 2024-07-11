@@ -1,8 +1,10 @@
 <script>
     import Notification from "$components/article/Notification.svelte";
     import Scrolly from "$components/helpers/Scrolly.svelte";
+    import Footnote from "$components/article/Footnote.svelte";
     export let copy;
     export let notifications;
+    export let copyFootnote;
     export let spacer = null;
 
     let step;
@@ -36,8 +38,9 @@
                 {#each copy as p}
                     <p class:animationStarted class="editorial-paragraph">{@html p.text}</p>
                 {/each}
-            <div class="spacer" style="height: {noSpacer ? '0vh' : '3vh'}"/>
-        </div>
+                <div class="spacer" style="height: {noSpacer ? '0vh' : '3vh'}"/>
+                <Footnote copy={copyFootnote} />
+            </div>
         </div>
     </Scrolly>
 </section>
@@ -52,14 +55,6 @@
     {/each}
 </div>
 {/if}
-<!-- 
-<div class="debunk">
-    {#if animationStarted}
-        {#if debunk}
-            <Debunk target={debunk} />
-        {/if}
-    {/if}
-</div> -->
 
 
 <style>
@@ -86,12 +81,5 @@
     .scrolly-editorial {
         padding-top: 0px !important;
         margin-top: 0px !important;
-    }
-    .editorial-paragraph .bold {
-        border-radius: 3px;
-        background: rgba(255,255,255,.16);
-        color: white;
-        padding: 1px 5px;
-        font-weight: 600;
     }
 </style>
