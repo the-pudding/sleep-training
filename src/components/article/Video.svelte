@@ -1,5 +1,6 @@
 <script>
   export let video;
+  export let caption;
 
   let videoUrl = '';
   let isPlaying = false;
@@ -45,6 +46,9 @@
 >
   <p>Your browser does not support the video element.</p>
 </video>
+<div class="caption">
+  Source: {caption}
+</div>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="play-pause-icon" on:click={togglePlayPause}>
@@ -68,6 +72,7 @@
     position: relative;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 60vh;
   }
@@ -85,5 +90,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     cursor: pointer;
+  }
+
+  .caption {
+    margin-top: 10px;
+    font-family: "Atlas Grotesk";
+    font-size: 10px;
   }
 </style>

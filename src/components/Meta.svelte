@@ -1,8 +1,8 @@
 <script>
-	export let title = "Sleep Training";
-	export let description = "Sleep Training";
+	export let title = "Is Sleep training Harmful";
+	export let description = "Misinformation and facts behind the internet’s most polarizing parenting debate";
 	export let url = "https://pudding.cool";
-	export let keywords = "";
+	export let keywords = "sleep training, behavioural interventions, cry it out, Ferber, method, babies, baby, research";
 	export let preloadFont = [];
 </script>
 

@@ -7,7 +7,6 @@
     import Video from "$components/article/Video.svelte";
     import Debunk from "$components/article/Debunk.svelte";
     import viewport from "$stores/viewport.js";
-    import arrow from "$svg/arrow.svg"
 
     // COPY CONTEXT SETTING
     import copy from '$data/copy.json';
@@ -35,8 +34,8 @@
     let commentsDivided = data.comments.filter(d => d.category === "divided");
     let commentsCortisol = data.comments.filter(d => d.category === "brain damage");
     let commentsAttachment = data.comments.filter(d => d.category === "attachment");
-    let commentsLazy = data.comments.filter(d => d.category === "lazy");
-    let commentsInstagram = data.comments.filter(d => d.category === "instagram");
+    // let commentsLazy = data.comments.filter(d => d.category === "lazy");
+    // let commentsInstagram = data.comments.filter(d => d.category === "instagram");
 
     // TITLE ANIMATION
     let loaded = false
@@ -141,7 +140,7 @@
     </div>
     <div class="editorial-container">
       <Editorial copy={copy.intro_article} spacer="none" />
-      <Video video="sleep" />
+      <Video video="sleep" caption="Tiffany Remington"/>
       <Editorial copy={copy.intro_article_2} />
     </div>    
     <Mosaic {viewportHeight} album="articles" height=75 /> 
@@ -150,6 +149,7 @@
     </div>  
     <section>
       <Section {viewportHeight} copy={copy.viz_main} stepHandler={SectionMain} switcher="bubbles" />
+      <!-- copyFootnote={copy.footnote_1}  -->
     </section>
     <div class="editorial-container">
       <h3 class="sub-title">Common narratives that are winning on social media</h3>
@@ -160,7 +160,7 @@
     </div>
     <Mosaic {viewportHeight} album="social" height=35 />
     <div class="editorial-container">
-      <h3 class="sub-title">Narrative: Sleep Training <span class="oppose">Damages Babies' Brains</span></h3>
+      <h3 class="sub-title">Narrative: Sleep Training <span class="oppose">Damages Babies&rsquo; Brains</span></h3>
       <Editorial copy={copy.sears_intro} spacer="none" notifications={commentsCortisol} />
     </div>
     <div class="spacer"></div>
@@ -171,29 +171,15 @@
     </div>
     <div class="editorial-container">
       <h3 class="sub-title">Narrative: It Creates <span class="oppose">Insecure Attachment</span></h3>
-      <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} />
-      <Video video="cbum" />
+      <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} copyFootnote={copy.footnote_narvaez} />
+      <Video video="cbum" caption="Chris Williamson" />
       <h3 class="sub-title">Research: There Is<span class="advocate">No Proof of Insecure Attachment</span></h3>
       <Editorial copy={copy.debunk_narvaez_2} spacer="none" />
     </div>
-    <!-- <div class="editorial-container">
-      <h3 class="sub-title">Instagram Will Confuse You</h3>
-      <Editorial copy={copy.instagram_1} spacer="none" />
-      <Editorial copy={copy.instagram_2} notifications={commentsInstagram} spacer="none"/>
-      <Editorial copy={copy.instagram_3} />
-    </div> -->
-    <!-- <section>
-      <Section {viewportHeight} copy={copy.viz_instagram} stepHandler={SectionInstagram} switcher="instagram" />
-    </section>
-    <div class="editorial-container">
-      <Editorial copy={copy.editorial_influencerPackages} spacer="none" />
-      <Mosaic {viewportHeight} album="products" height=65 />
-      <Editorial copy={copy.lazy_parenting} notifications={commentsLazy} spacer="none" />
-    </div> -->
     <div class="editorial-container">
       <h3 class="sub-title">Conclusion</h3>
       <Editorial copy={copy.editorial_conclusion} title="Conclusion" spacer="none" />
-      <h3 class="sub-title">Methodology</h3>
+      <h3 id="methods" class="sub-title">Methods</h3>
       <Editorial copy={copy.methodologies} />
     </div>
   </div>
