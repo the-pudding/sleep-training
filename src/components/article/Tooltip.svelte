@@ -58,7 +58,7 @@
       case 'reddit':
         title = truncateText(data.username.toUpperCase(), 40);
         type = "Reddit comment";
-        textTwo = truncateText(data.comment, 200);
+        textTwo = truncateText(data.short, 200);
         break;
       case 'instagram':
         title = truncateText(data.username.toUpperCase(), 40);

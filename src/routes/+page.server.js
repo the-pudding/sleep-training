@@ -73,6 +73,7 @@ export async function load({fetch}) {
 	data.reddit = response_reddit.map(d => {
 		return {
 			comment: d.comments,
+			short: d.comment_feature,
 			position: d.position,
 			radius: +d.upVotes,
 			url: d.url,

@@ -38,13 +38,13 @@
               <td>{d.title}</td>
               <td>
                 {#if d.theoretical === "TRUE"}
-                  Theoretical
+                  <span class="legend-oppose">Theoretical</span>
                 {:else}
                   Clinical
                 {/if}
               </td>
               <td>
-                Not Relevant
+                <span class="legend-oppose">Not Relevant</span> 
               </td>
             </tr>
           {/each}

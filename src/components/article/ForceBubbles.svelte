@@ -33,11 +33,6 @@
     let radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([1,10]).clamp(true)
 
     $: if (radiusScale && renderedData.length > 0) {
-        const sortedRadii = renderedData.map(d => d.radius).sort((a, b) => a - b);
-        const q30 = quantile(sortedRadii, 0.3);
-        const q60 = quantile(sortedRadii, 0.6);
-        const q90 = quantile(sortedRadii, 0.9);
-
         const [minRange, maxRange] = radiusScale.range();
         const rangeSpread = maxRange - minRange;
 
@@ -45,9 +40,6 @@
             smallest_range: minRange + rangeSpread * 0.3,
             median_range: minRange + rangeSpread * 0.6,
             largest_range: minRange + rangeSpread * 0.9,
-            smallest_domain: q30,
-            median_domain: q60,
-            largest_domain: q90
         };
     }
 
