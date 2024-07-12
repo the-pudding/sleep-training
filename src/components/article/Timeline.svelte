@@ -85,31 +85,43 @@
       {/if}
     </g>
   </svg>
+  <div class="chart-title">
+    <h4>Sleep training studies by year of publication</h4>
+  </div>
 </div>
 
 <style>
+  svg {
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    overflow: visible;
+  }
 
-    svg {
-      position: absolute;
-      top: 50%;
-      transform: translate(0,-50%);
-      left: 0;
-      right: 0;
-      margin: 0 auto;
-      overflow: visible;
-    }
+  circle {
+    transition: stroke 300ms ease, opacity 300ms ease, cx 100ms ease, cy 100ms ease;
+    pointer-events: none;
+  }
+  text {
+    font-family: "Atlas Grotesk";
+    font-weight: 400;
+    font-size: 12px;
+  }
 
-    circle {
-      transition: stroke 300ms ease, opacity 300ms ease, cx 100ms ease, cy 100ms ease;
-      pointer-events: none;
-    }
-    text {
-      font-family: "Atlas Grotesk";
-      font-weight: 400;
-      font-size: 12px;
-    }
+  .timeline-container {
+    position: relative;
+  }
 
-    .timeline-container {
-      position: relative;
-    }
+  .chart-title {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .chart-title h4 {
+    font-size: 22px;
+  }
 </style>
