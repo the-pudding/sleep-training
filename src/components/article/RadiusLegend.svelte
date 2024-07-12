@@ -2,40 +2,78 @@
   export let scaleValues;
   export let data;
 
-  const radiusScaleValues = [
-      { label: 'Smallest', label_value: scaleValues.smallest_domain, value: scaleValues.smallest_range },
-      { label: 'Median', label_value: scaleValues.median_domain, value: scaleValues.median_range },
-      { label: 'Largest',label_value: scaleValues.largest_domain, value: scaleValues.largest_range },
-  ];
+  const radiusScaleValues = {
+    study: {
+      label: "Citations",
+      scales: [
+        { domain: 10, range: scaleValues.smallest_range },
+        { domain: 50, range: scaleValues.median_range },
+        { domain: 100, range: scaleValues.largest_range },
+      ]
+    },
+    review: {
+      label: "Citations",
+      scales: [
+        { domain: 20, range: scaleValues.smallest_range },
+        { domain: 40, range: scaleValues.median_range },
+        { domain: 100, range: scaleValues.largest_range },
+      ]
+    },
+    article: {
+      label: "Referring links",
+      scales: [
+        { domain: 5, range: scaleValues.smallest_range },
+        { domain: 20, range: scaleValues.median_range },
+        { domain: 50, range: scaleValues.largest_range },
+      ]
+    },
+    reddit: {
+      label: "Upvotes",
+      scales: [
+        { domain: 5, range: scaleValues.smallest_range },
+        { domain: 15, range: scaleValues.median_range },
+        { domain: 50, range: scaleValues.largest_range },
+      ]
+    },
+    instagram: {
+      label: "Followers",
+      scales: [
+        { domain: "75k", range: scaleValues.smallest_range },
+        { domain: "130k", range: scaleValues.median_range },
+        { domain: "250k", range: scaleValues.largest_range },
+      ]
+    },
+    book: {
+      label: "Library holdings",
+      scales: [
+        { domain: 60, range: scaleValues.smallest_range },
+        { domain: 200, range: scaleValues.median_range },
+        { domain: 400, range: scaleValues.largest_range },
+      ]
+    },
+  };
+
+  const getScaleData = (type) => radiusScaleValues[type];
 </script>
 
 <div class="radius-scale">
-  <div class="radius-label">
-    {#if data[0].type == "study"}
-    <p>Total citations</p>
-    {:else if data[0].type == "article"}
-    <p>Total links referencing the work</p>
-    {:else if data[0].type == "reddit"}
-    <p>Total upvotes</p>
-    {:else if data[0].type == "instagram"}
-    <p>Total followers</p>
-    {:else if data[0].type == "book"}
-    <p>Library holdings</p>
-    {:else}
-    <p>Total citations</p>
-    {/if}
-  </div>
+  {#if data[0].type}
+    {@const scaleData = getScaleData(data[0].type)}
+    <div class="radius-label">
+      <p>{scaleData.label}</p>
+    </div>
     
-  <div class="scale-container">
-    {#each radiusScaleValues as scale, index}
-      <div class="scale-item">
-        <div class="circle-container">
-          <div class="circle" style="width: {scale.value * 5}px; height: {scale.value * 5}px;"></div>
+    <div class="scale-container">
+      {#each scaleData.scales as scale}
+        <div class="scale-item">
+          <div class="circle-container">
+            <div class="circle" style="width: {scale.range * 5}px; height: {scale.range * 5}px;"></div>
+          </div>
+          <div class="label">{scale.domain}+</div>
         </div>
-        <div class="label">{Math.floor(scale.label_value)}+</div>
-      </div>
-    {/each}
-  </div>    
+      {/each}
+    </div>
+  {/if}
 </div>
    
 <style>
@@ -53,7 +91,6 @@
     margin-right: 20px;
     font-size: 14px;
   }
-
   .scale-container {
     min-width: 180px;
     min-height: 100px;
@@ -61,27 +98,19 @@
     justify-content: space-around;
     align-items: flex-start;
   }
-
   .scale-item {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-
   .circle {
     border: 1px solid white;
     border-radius: 50%;
   }
-
   .label {
     color: white;
     margin-top: 10px;
     text-align: center;
     font-family: var(--sans);
-  }
-
-  text {
-    font-family: var(--sans);
-    font-size: 14px;
   }
   </style>

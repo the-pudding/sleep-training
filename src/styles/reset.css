@@ -211,14 +211,14 @@ ol, ul {
 
 .sub-title .oppose {
 	border-radius: 3px;
-    background: #A34131;
+    background: #4f3030;
     color: white;
     padding: 2px 3px;
 }
 
 .sub-title .advocate {
 	border-radius: 3px;
-    background: #4FB477;
+    background: #2e5c2d;
     color: white;
     padding: 2px 3px;
 }
@@ -263,6 +263,12 @@ ol, ul {
 	white-space: nowrap;
 }
 
+.textbox-footnote {
+	font-size: 12px;
+	white-space: wrap !important;
+	line-height: 1 !important;
+} 
+
 .step-content .bold {
 	border-radius: 3px;
     background: rgba(255,255,255,.16);
@@ -273,23 +279,23 @@ ol, ul {
 
 .legend-advocate {
 	border-radius: 3px;
-    background: #4FB477;
+    background: #2e5c2d;
     color: white;
-    padding: 1px 5px;
+    padding: 1px 3px;
     font-weight: 600;
 }
 .legend-neutral {
 	border-radius: 3px;
-    background: #D69C2B;
+    background: #895e0a;
     color: white;
-    padding: 1px 5px;
+    padding: 1px 3px;
     font-weight: 600;
 }
 .legend-oppose {
 	border-radius: 3px;
-    background: #A34131;
+    background: #4f3030;
     color: white;
-    padding: 1px 5px;
+    padding: 1px 3px;
     font-weight: 600;
 }
 
