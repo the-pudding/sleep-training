@@ -24,6 +24,7 @@
     const focusRedditResearch = data.reddit.filter(d => d.username === "leftpantleg420")[0];
     const focusUmbrellaReview = data.literature_reviews.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/35778903/")[0];
     const focusDouglasReview = data.literature_reviews.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/24042081/")[0];
+    const focusBook = data.books.filter(d => d.title === "Getting Your Child to Sleep... and Back to Sleep")[0];
     // const focusPrice = data.studies.filter(d => d.url === "https://publications.aap.org/pediatrics/article-abstract/130/4/643/30241/Five-Year-Follow-up-of-Harms-and-Benefits-of?redirectedFrom=fulltext")[0];
     const focusMiddleMiss = data.studies.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/21945361/")[0];
     const focusReview = data.literature_reviews.filter(d => d.url === "https://aasm.org/resources/practiceparameters/review_nightwakingschildren.pdf")[0];
@@ -64,10 +65,15 @@
               renderedData: data.articles,
               focusHover: focusNarvaez,
             }
-        case step >= 3 && step < 6:
+        case step >= 4 && step < 5:
             return {
               renderedData: data.books,
               focusHover: null,
+            }
+        case step >= 5 && step < 6:
+            return {
+              renderedData: data.books,
+              focusHover: focusBook,
             }
         case step >= 6 && step < 7:
             return {
@@ -114,12 +120,6 @@
               renderedData: data.studies,
               focusHover: null
             }
-      }
-    }
-    function SectionInstagram(step) {
-      return {
-        renderedData: data.instagram,
-        focusHover: null
       }
     }
 
@@ -171,7 +171,7 @@
     </div>
     <div class="editorial-container">
       <h3 class="sub-title">Narrative: It Creates <span class="oppose">Insecure Attachment</span></h3>
-      <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} copyFootnote={copy.footnote_narvaez} />
+      <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} copyFootnote={copy.footnote_narvaez[0].text} />
       <Video video="cbum" caption="Chris Williamson" />
       <h3 class="sub-title">Research: There Is<span class="advocate">No Proof of Insecure Attachment</span></h3>
       <Editorial copy={copy.debunk_narvaez_2} spacer="none" />

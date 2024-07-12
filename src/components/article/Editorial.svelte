@@ -26,6 +26,7 @@
     if (spacer === "none") {
       noSpacer = true;
     }
+    console.log(copyFootnote);
 </script>
 
 <section id="scrolly" class="scrolly-editorial">
