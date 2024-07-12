@@ -15,7 +15,7 @@
   }
 </script>
   
-<div class="notification" class:animationStarted style="--delay:{index};">
+<div class="notification" class:animationStarted style="--delay:{index*3};">
   <div class="notification-content">
     <div class="notification-likes">
       <img class="icon" src="{getPlatformDetails(comment.platform).icon}" alt="reddit or instagram icon" />
@@ -38,7 +38,7 @@
   .notification {
     font-family: "Atlas Grotesk";
     display: flex-column;
-    background: linear-gradient(5deg, rgba(185,177,219,.10), rgba(226,226,226,.14));
+    background: linear-gradient(5deg, rgba(185,177,219,.10), #293e4c);
     max-width: 550px;
 		margin: 0 auto 20px auto;
     padding: 10px;

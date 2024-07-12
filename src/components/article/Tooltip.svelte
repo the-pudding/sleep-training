@@ -121,7 +121,6 @@
       padding: 1rem 1rem;
       background: #2a2a2a;
       color: white;
-      box-shadow: rgba(0, 0, 0, 0.15) 2px 3px 8px;
       border-radius: 4px;
       transition: top 300ms ease, left 300ms ease;
     }

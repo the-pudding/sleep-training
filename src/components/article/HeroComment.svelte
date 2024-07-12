@@ -20,7 +20,7 @@
 
 <section id="scrolly" class="scrolly-editorial">
 	<Scrolly bind:value={step} >
-        <div data="hi" class="hero-comments-container" style="margin-top:{viewportHeight/4}px;">
+        <div class="hero-comments-container" style="margin-top:{Math.max(viewportHeight/5,100)}px;">
             {#each notifications as comment, index}
                 <div class="notification-wrapper">
                     <Notification {comment} {animationStarted} {index} />

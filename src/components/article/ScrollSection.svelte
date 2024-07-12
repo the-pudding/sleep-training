@@ -16,8 +16,8 @@
     let step;
 
     $: value, handleStepChange()
-
-    console.log(Object.values(copy).length - 1)
+    $: console.log(value)
+    
 
     function handleStepChange() {
 
@@ -37,9 +37,9 @@
     <div class="scroll-section matt-scroll">
 
         <!-- switcher is now a class on sticky--use that to apply styles to this el like the top:20%; -->
-        <div class="sticky">
+        <div class="sticky" style="min-height:{viewportHeight}px;">
             {#if renderedData}
-                {#if step < 13} 
+                {#if step < 13}
                     <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} {step} /> 
                 {:else if step >= 13 && step < 14}             
                     <Timeline />
@@ -85,6 +85,7 @@
         display: flex;
         justify-content: center;
         top: 0;
+        /* display: none; */
     }
     .steps {
         position: relative;

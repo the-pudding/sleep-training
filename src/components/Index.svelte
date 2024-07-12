@@ -135,8 +135,8 @@
     <div class="spacer"></div>
     <div class="title-section">
       <h1 class="title title-large" class:loaded>{@html copy.title}</h1>
-      <h4 class="title byline" class:loaded>by <a href="https://pudding.cool/author/tom-vaillant">Tom Vaillant</a>, July 14, 2024</h4>
       <h2 class="title dek" class:loaded style="--delay:0.5s;">{copy.description}</h2>
+      <h4 class="title byline" class:loaded>by <a href="https://pudding.cool/author/tom-vaillant">Tom Vaillant</a>, July 14, 2024</h4>
     </div>
     <div class="editorial-container">
       <Editorial copy={copy.intro_article} spacer="none" />
@@ -232,7 +232,7 @@
     letter-spacing: -.3px;
     max-width: 360px;
     margin: 0 auto;
-    margin-bottom: 50px;
+    margin-bottom: 15px;
   }
   .spacer {
 		height: 5vh;
