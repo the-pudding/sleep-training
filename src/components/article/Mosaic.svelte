@@ -1,6 +1,5 @@
 <script>
-  import { fly, fade } from 'svelte/transition';
-  import { cubicInOut } from 'svelte/easing';
+  import { fly } from 'svelte/transition';
 	import Scrolly from "$components/helpers/Scrolly.svelte";
 
   export let album = 'articles';

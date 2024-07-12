@@ -315,7 +315,12 @@ ol, ul {
 	padding: 8px;
 	z-index: var(--z-overlay, 1000);
 }
-
+.caption {
+    margin-top: 10px;
+    font-family: "Atlas Grotesk";
+    font-size: 10px;
+	text-align: center;
+}
 .sr-only {
 	clip: rect(0 0 0 0);
 	clip-path: inset(100%);

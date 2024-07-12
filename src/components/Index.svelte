@@ -17,7 +17,6 @@
 
     // DATA IMPORT
     let data = getContext("data");
-    const dataAll = [...data.articles, ...data.studies, ...data.books];
 
     // FOCUSED TOOLTIPS
     const focusNarvaez = data.articles.filter(d => d.url === "https://www.psychologytoday.com/intl/blog/moral-landscapes/201112/dangers-crying-it-out")[0];
@@ -25,7 +24,6 @@
     const focusUmbrellaReview = data.literature_reviews.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/35778903/")[0];
     const focusDouglasReview = data.literature_reviews.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/24042081/")[0];
     const focusBook = data.books.filter(d => d.title === "Getting Your Child to Sleep... and Back to Sleep")[0];
-    // const focusPrice = data.studies.filter(d => d.url === "https://publications.aap.org/pediatrics/article-abstract/130/4/643/30241/Five-Year-Follow-up-of-Harms-and-Benefits-of?redirectedFrom=fulltext")[0];
     const focusMiddleMiss = data.studies.filter(d => d.url === "https://pubmed.ncbi.nlm.nih.gov/21945361/")[0];
     const focusReview = data.literature_reviews.filter(d => d.url === "https://aasm.org/resources/practiceparameters/review_nightwakingschildren.pdf")[0];
 
@@ -35,8 +33,8 @@
     let commentsDivided = data.comments.filter(d => d.category === "divided");
     let commentsCortisol = data.comments.filter(d => d.category === "brain damage");
     let commentsAttachment = data.comments.filter(d => d.category === "attachment");
-    // let commentsLazy = data.comments.filter(d => d.category === "lazy");
-    // let commentsInstagram = data.comments.filter(d => d.category === "instagram");
+    let commentsInstagram = data.comments.filter(d => d.category === "instagram");
+    let commentsConclusion = data.comments.filter(d => d.category === "conclusion");
 
     // TITLE ANIMATION
     let loaded = false
@@ -156,7 +154,7 @@
       <Editorial copy={copy.debunk_intro} spacer="none"/>
       <Debunk target="narvaez" />
       <Debunk target="sears" />
-      <Editorial copy={copy.debunk_intro_2} />
+      <Editorial copy={copy.debunk_intro_2} spacer="none" notifications={commentsInstagram} />
     </div>
     <Mosaic {viewportHeight} album="social" height=35 />
     <div class="editorial-container">
@@ -169,6 +167,11 @@
       <h3 class="sub-title">Research: There Is<span class="advocate">No Proof of Harm</span></h3>
       <Editorial copy={copy.debunk_sears} spacer="none" />
     </div>
+    <div class="img-container">
+      <!-- svelte-ignore a11y-img-redundant-alt -->
+      <img src="assets/images/crib.webp" alt="Image of baby in crib" />
+    </div>
+    <div class="caption">Photo by Marie Despeyroux</div>
     <div class="editorial-container">
       <h3 class="sub-title">Narrative: It Creates <span class="oppose">Insecure Attachment</span></h3>
       <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} copyFootnote={copy.footnote_narvaez[0].text} />
@@ -179,6 +182,7 @@
     <div class="editorial-container">
       <h3 class="sub-title">Conclusion</h3>
       <Editorial copy={copy.editorial_conclusion} title="Conclusion" spacer="none" />
+      <Editorial copy={copy.editorial_conclusion_2} spacer="none" notifications={commentsConclusion} />
       <h3 id="methods" class="sub-title">Methods</h3>
       <Editorial copy={copy.methodologies} />
     </div>
@@ -191,7 +195,6 @@
 		padding: 16px;
 		margin: 0 auto;
 	}
-
 	:global(#article h2 span) {
 		padding: 0 8px;
 	}
@@ -245,7 +248,6 @@
     text-align: center;
     margin-bottom: 100px;
   }
-  
   .title.loaded {
     opacity: 1;
     transform: translateY(0);
@@ -265,6 +267,15 @@
   }
   .byline a {
     color: white;
+  }
+  .img-container {
+    height: 60vh;
+    margin-top: 15vh;
+  }
+  .img-container img {
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: cover;
   }
 
   @media only screen and (max-width: 600px) {

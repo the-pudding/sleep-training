@@ -45,9 +45,4 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
   }
-  .caption {
-    margin-top: 10px;
-    font-family: "Atlas Grotesk";
-    font-size: 10px;
-  }
 </style>
