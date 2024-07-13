@@ -147,7 +147,6 @@
     </div>  
     <section>
       <Section {viewportHeight} copy={copy.viz_main} stepHandler={SectionMain} switcher="bubbles" />
-      <!-- copyFootnote={copy.footnote_1}  -->
     </section>
     <div class="editorial-container">
       <h3 class="sub-title">Common narratives that are winning on social media</h3>

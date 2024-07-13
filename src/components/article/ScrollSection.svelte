@@ -16,8 +16,7 @@
     let step;
 
     $: value, handleStepChange()
-    $: console.log(value)
-    
+    // $: console.log(value)
 
     function handleStepChange() {
 
