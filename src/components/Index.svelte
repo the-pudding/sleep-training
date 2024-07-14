@@ -110,7 +110,7 @@
             }
         case step >= 14:
             return {
-              renderedData: data.studies,
+              renderedData: [data.studies,data.reddit],
               focusHover: null,
             }
         default:
@@ -137,7 +137,7 @@
       <h4 class="title byline" class:loaded>by <a href="https://pudding.cool/author/tom-vaillant">Tom Vaillant</a>, July 14, 2024</h4>
     </div>
     <div class="editorial-container">
-      <Editorial copy={copy.intro_article} spacer="none" />
+      <Editorial first={true} copy={copy.intro_article} spacer="none" />
       <Video video="sleep" caption="Tiffany Remington"/>
       <Editorial copy={copy.intro_article_2} />
     </div>    
@@ -157,13 +157,13 @@
     </div>
     <Mosaic {viewportHeight} album="social" height=35 />
     <div class="editorial-container">
-      <h3 class="sub-title">Narrative: Sleep Training <span class="oppose">Damages Babies&rsquo; Brains</span></h3>
+      <h3 class="sub-title sub-title-smaller">Narrative: Sleep Training <span class="oppose">Damages Babies&rsquo; Brains</span></h3>
       <Editorial copy={copy.sears_intro} spacer="none" notifications={commentsCortisol} />
     </div>
     <div class="spacer"></div>
     <Mosaic {viewportHeight} album="posts" height=75 isSocial={true} />
     <div class="editorial-container">
-      <h3 class="sub-title">Research: There Is<span class="advocate">No Proof of Harm</span></h3>
+      <h3 class="sub-title sub-title-smaller">Research: There is <span class="advocate">No Proof of Harm</span></h3>
       <Editorial copy={copy.debunk_sears} spacer="none" />
     </div>
     <div class="img-container">
@@ -172,23 +172,26 @@
     </div>
     <div class="caption">Photo by Marie Despeyroux</div>
     <div class="editorial-container">
-      <h3 class="sub-title">Narrative: It Creates <span class="oppose">Insecure Attachment</span></h3>
+      <h3 class="sub-title sub-title-smaller">Narrative: It Creates <span class="oppose">Insecure Attachment</span></h3>
       <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} copyFootnote={copy.footnote_narvaez[0].text} />
       <Video video="cbum" caption="Chris Williamson" />
-      <h3 class="sub-title">Research: There Is<span class="advocate">No Proof of Insecure Attachment</span></h3>
+      <h3 class="sub-title sub-title-smaller">Research: There is <span class="advocate">No Proof of Insecure Attachment</span></h3>
       <Editorial copy={copy.debunk_narvaez_2} spacer="none" />
     </div>
-    <div class="editorial-container">
-      <h3 class="sub-title">Conclusion</h3>
+    <div class="editorial-container conclusion">
+      <!-- <h3 class="sub-title">Conclusion</h3> -->
       <Editorial copy={copy.editorial_conclusion} title="Conclusion" spacer="none" />
       <Editorial copy={copy.editorial_conclusion_2} spacer="none" notifications={commentsConclusion} />
-      <h3 id="methods" class="sub-title">Methods</h3>
-      <Editorial copy={copy.methodologies} />
+      <h3 id="methods" class="sub-title sub-title-smaller">Methods</h3>
+      <Editorial methods={true} copy={copy.methodologies} />
     </div>
   </div>
 {/if}
 
 <style>
+  .conclusion {
+    margin-top: 200px;
+  }
 	#article {
 		/* max-width: 40rem; */
 		padding: 16px;

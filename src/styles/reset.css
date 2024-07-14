@@ -29,10 +29,9 @@ mark {
 }
 
 a {
-	color: #9A9DFA;
+	color: #fff;
 	text-decoration: none;
 	border-bottom: 1px solid currentColor;
-	font-weight: bolder;
 }
 
 
@@ -331,7 +330,10 @@ ol, ul {
 	width: 1px;
 }
 blockquote {
-	font-style: italic;
+	border-left: 5px solid rgb(66 89 106);
+    padding-left: 18px;
+    font-family: var(--sans);
+    font-size: 16px;
 }
 .text-outline {
 	--stroke-width: 1px;
@@ -365,6 +367,16 @@ blockquote {
 	text-transform: uppercase;
 	color: white;
 	letter-spacing: 3px;
+}
+
+.sub-title-smaller {
+	font-size: 18px;
+    font-family: var(--sans);
+    font-weight: 600;
+    text-align: left;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 0;
 }
 
 /* desktop (mouse-enabled device) */

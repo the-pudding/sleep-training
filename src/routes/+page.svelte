@@ -17,10 +17,10 @@
 		"https://pudding.cool/assets/fonts/national/National2Web-Bold.woff2"
 	];
 
-	const { title, description, url, keywords } = copy;
+	const { titleNoSpan, description, url, keywords } = copy;
 	setContext("copy", copy);
 	setContext("data", data.data);
 </script>
 
-<Meta {title} {description} {url} {preloadFont} {keywords} />
+<Meta title={titleNoSpan} {description} {url} {preloadFont} {keywords} />
 <Index />

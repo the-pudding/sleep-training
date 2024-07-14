@@ -99,3 +99,9 @@ h6 {
 .step-content a {
 	color: white;
 }
+
+#content .methods p {
+	font-family: var(--sans);
+	font-size: 14px;
+    margin-bottom: 1rem;
+}

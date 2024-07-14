@@ -4,7 +4,7 @@
 
 {#if copy != undefined}
     <div class="footnote">
-        <p><i>{copy}</i></p>
+        <p>{copy}</p>
     </div>
 {/if}
 

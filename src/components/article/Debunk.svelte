@@ -62,13 +62,13 @@
     font-family: "Atlas Grotesk";
     max-width: 40rem;
 		margin: 0 auto 20px auto;
-    background-color: #000;
+    background-color: #121213;
   }
   
   .references-header {
     padding: 10px;
     border-radius: 4px;
-    background-color: #000;
+    background-color: #121213;
     cursor: pointer;
     color: white;
     font-family: "Atlas Grotesk";

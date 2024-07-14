@@ -11,13 +11,18 @@
 
   // TOOLTIP POSITIONING
   let xNudge = 10;
+
+  $: console.log(x,width)
+  
   $: {
-      if ((x + width) > $viewport.width) {
+      if ((x + width + ($viewport.width*.1)) > $viewport.width) {
       xNudge = -width;
     } else {
       xNudge = $viewport.width * 0.04 ;
     }
   }
+
+
   const yNudge = -$viewport.height * 0.05;
 
   $: xPosition = x + xNudge;
@@ -119,10 +124,12 @@
       pointer-events: none;
       font-family: "Atlas Grotesk";
       padding: 1rem 1rem;
-      background: #2a2a2a;
+      background: #273239;
       color: white;
       border-radius: 4px;
       transition: top 300ms ease, left 300ms ease;
+      transform: translate(0,100%);
+      z-index: 100;
     }
     .tooltip-title {
       margin-bottom: 10px;
