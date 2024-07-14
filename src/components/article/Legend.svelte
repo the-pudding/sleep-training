@@ -21,12 +21,13 @@
 
 <style>
     .legend {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    column-gap: 10px;
-    row-gap: 5px;
-    margin-bottom: 0.25rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      column-gap: 10px;
+      row-gap: 5px;
+      margin-bottom: 0.25rem;
+      z-index: 0;
   }
 
   .legend p {

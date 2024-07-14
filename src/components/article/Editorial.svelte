@@ -6,6 +6,8 @@
     export let notifications;
     export let copyFootnote;
     export let spacer = null;
+    export let methods = false;
+    export let first = false;
 
     let step;
     let comments;
@@ -31,13 +33,13 @@
 
 <section id="scrolly" class="scrolly-editorial">
 	<Scrolly bind:value={step} >
-        <div class="editorial-wrapper">
+        <div class="editorial-wrapper" class:methods>
             {#if copy[0].subtitle}
                 <h3>{copy[0].subtitle}</h3>
             {/if}
             <div class="editorial">
-                {#each copy as p}
-                    <p class:animationStarted class="editorial-paragraph">{@html p.text}</p>
+                {#each copy as p, i}
+                    <p class:animationStarted style="font-size:{first && i == 0 ? '24px' : ''};" class="editorial-paragraph">{@html p.text}</p>
                 {/each}
                 <div class="spacer" style="height: {noSpacer ? '0vh' : '3vh'}"/>
                 <Footnote copy={copyFootnote} />

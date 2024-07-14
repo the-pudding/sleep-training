@@ -141,5 +141,17 @@
   }
   .chart-title h4 {
     font-size: 22px;
+    text-align: center;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    text-shadow: -3px -3px 1px rgba(25, 46, 60, 0.4), -3px -2px 1px rgba(25, 46, 60, 0.4), -3px -1px 1px rgba(25, 46, 60, 0.4), -3px 0px 1px rgba(25, 46, 60, 0.4), -3px 1px 1px rgba(25, 46, 60, 0.4), -3px 2px 1px rgba(25, 46, 60, 0.4), -3px 3px 1px rgba(25, 46, 60, 0.4), -2px -3px 1px rgba(25, 46, 60, 0.4), -2px -2px 1px rgba(25, 46, 60, 0.4), -2px -1px 1px rgba(25, 46, 60, 0.4), -2px 0px 1px rgba(25, 46, 60, 0.4), -2px 1px 1px rgba(25, 46, 60, 0.4), -2px 2px 1px rgba(25, 46, 60, 0.4), -2px 3px 1px rgba(25, 46, 60, 0.4), -1px -3px 1px rgba(25, 46, 60, 0.4), -1px -2px 1px rgba(25, 46, 60, 0.4), -1px -1px 1px rgba(25, 46, 60, 0.4), -1px 0px 1px rgba(25, 46, 60, 0.4), -1px 1px 1px rgba(25, 46, 60, 0.4), -1px 2px 1px rgba(25, 46, 60, 0.4), -1px 3px 1px rgba(25, 46, 60, 0.4), 0px -3px 1px rgba(25, 46, 60, 0.4), 0px -2px 1px rgba(25, 46, 60, 0.4), 0px -1px 1px rgba(25, 46, 60, 0.4), 0px 1px 1px rgba(25, 46, 60, 0.4), 0px 2px 1px rgba(25, 46, 60, 0.4), 0px 3px 1px rgba(25, 46, 60, 0.4), 1px -3px 1px rgba(25, 46, 60, 0.4), 1px -2px 1px rgba(25, 46, 60, 0.4), 1px -1px 1px rgba(25, 46, 60, 0.4), 1px 0px 1px rgba(25, 46, 60, 0.4), 1px 1px 1px rgba(25, 46, 60, 0.4), 1px 2px 1px rgba(25, 46, 60, 0.4), 1px 3px 1px rgba(25, 46, 60, 0.4), 2px -3px 1px rgba(25, 46, 60, 0.4), 2px -2px 1px rgba(25, 46, 60, 0.4), 2px -1px 1px rgba(25, 46, 60, 0.4), 2px 0px 1px rgba(25, 46, 60, 0.4), 2px 1px 1px rgba(25, 46, 60, 0.4), 2px 2px 1px rgba(25, 46, 60, 0.4), 2px 3px 1px rgba(25, 46, 60, 0.4), 3px -3px 1px rgba(25, 46, 60, 0.4), 3px -2px 1px rgba(25, 46, 60, 0.4), 3px -1px 1px rgba(25, 46, 60, 0.4), 3px 0px 1px rgba(25, 46, 60, 0.4), 3px 1px 1px rgba(25, 46, 60, 0.4), 3px 2px 1px rgba(25, 46, 60, 0.4), 3px 3px 1px rgba(25, 46, 60, 0.4);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 18px;
+    font-family: var(--serif);
+    font-weight: 400;
   }
 </style>

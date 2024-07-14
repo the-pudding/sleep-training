@@ -7,9 +7,12 @@
 
     import Tooltip from "$components/article/Tooltip.svelte";
     import Circle from "$components/article/Circle.svelte";
+    import CircleLast from "$components/article/CircleLast.svelte";
     import ClusterLabels from "$components/article/ClusterLabels.svelte";
     import RadiusLegend from "$components/article/RadiusLegend.svelte";
     import viewport from "$stores/viewport.js";
+    import ClusterLabelsLast from "$components/article/ClusterLabelsLast.svelte";
+
 
     export let renderedData;
     export let groupedBy;
@@ -19,6 +22,7 @@
     let dataToSimulate;
     let nodes = [];
     let scaleValues;
+    let highData;
 
     let animatedIn = false;
 
@@ -30,7 +34,12 @@
 
     let color = scaleOrdinal(range(Object.keys(ordinalGroup).length), ["#A34131", "#4FB477","#D69C2B"]);
 
-    let radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([1,10]).clamp(true)
+    let radiusScale;
+    if(renderedData.length == 2) {
+        radiusScale = scaleLinear().domain(extent(renderedData[0].concat(renderedData[1]), d => d.radius)).range([1,10]).clamp(true)
+    } else {
+        radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([1,10]).clamp(true)
+    } 
 
     $: if (radiusScale && renderedData.length > 0) {
         const [minRange, maxRange] = radiusScale.range();
@@ -64,24 +73,53 @@
     function runSimulation(){
         $hoveredCircle = null;
 
-        if(nodes.length !== renderedData.length){
-            // console.log("runningSimulation",step,renderedData.length)
+        if(nodes?.length !== renderedData?.length){
             animatedIn = false;
 
-            radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([3,10]).clamp(true)
+            // radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([3,10]).clamp(true)
+            let data;
 
-            let data = ({
+            if(renderedData.length == 2){
+                data = {
+                    "name":"flare",
+                    "children":[]
+                };
+                
+                renderedData.forEach(j => {
+                    let item = {
+                        children: Array.from(
+                            group(j.map(d => {
+                                return {
+                                    value:radiusScale(d.radius),
+                                    
+                                    // YOU NEED THE GROUP TO HAVE A #, SO THAT'S WHY I MAP EACH POSITION TO 0,1,2
+                                    group:ordinalGroup[d[groupedBy]], info:d}
+                            }), d => d["group"]),
+                            ([, children]) => ({children})
+                        )
+                    }
+
+                    data.children.push(item);
+                })
+                // console.log(data)
+
+
+            }
+            else {
+                data = ({
                 children: Array.from(
                     group(renderedData.map(d => {
                         return {
-                            value:radiusScale(d.radius),
+                            value:10,//radiusScale(d.radius),
                             
                             // YOU NEED THE GROUP TO HAVE A #, SO THAT'S WHY I MAP EACH POSITION TO 0,1,2
                             group:ordinalGroup[d[groupedBy]], info:d}
                     }), d => d["group"]),
                     ([, children]) => ({children})
                 )
-            })
+                })
+                // console.log(data)
+            }
 
             let packing = () => pack()
                 .size([$viewport.width*0.9, $viewport.height*0.9])
@@ -92,9 +130,10 @@
 
             dataToSimulate = packing().leaves();
 
-
+            highData = packing();
+            
             setTimeout(() => {
-                nodes = dataToSimulate;
+                nodes = dataToSimulate;               
                 animatedIn = true;
             }, 500)
         }
@@ -196,18 +235,37 @@
 
 </script>
 <div class="bubbles">
-    {#key renderedData[0].type}
-        <p in:fly={{y:20, duration:500, delay:500}} class="bubbles-title"><span>{legendText[renderedData[0].type]}</span></p>
-    {/key}
+    {#if renderedData.length !== 2}
+        {#key renderedData[0].type}
+            <p in:fly={{y:20, duration:500, delay:500}} class="bubbles-title">
+                <span>{legendText[renderedData[0].type]}</span>
+            </p>
+        {/key}
+    {/if}
     <svg
         width={$viewport.width*0.9}
-        height={$viewport.height*0.9}>
+        height={$viewport.height*0.9}
+    >
         <g style="transform: translate(0,0);">
             {#if nodes}
+                {#if renderedData.length == 2 && nodes}
+                    {#each highData.children as point,i}
+                        <CircleLast {point} nodesLength={nodes.length} {i} {animatedIn} />
+                    {/each}
+
+                {/if}
+
                 {#each nodes as point,i}
                     <Circle {point} nodesLength={nodes.length} {i} color={color(point.data.group)} {animatedIn} {focusHover} />
                 {/each}
-                <ClusterLabels {nodes} {animatedIn} />
+
+
+                {#if renderedData.length == 2 && nodes}
+                    <ClusterLabelsLast nodes={[nodes?.filter(d => d.data?.info?.type == 'study')]} {animatedIn} label={"Research"} />
+                    <ClusterLabelsLast nodes={[nodes?.filter(d => d.data?.info?.type == 'reddit')]} {animatedIn} label={"Reddit"} />
+                {:else}
+                    <ClusterLabels {nodes} {animatedIn} />
+                {/if}
             {/if}
         </g>
     </svg>
