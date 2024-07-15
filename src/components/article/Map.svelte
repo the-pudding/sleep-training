@@ -154,4 +154,9 @@
     font-family: var(--serif);
     font-weight: 400;
   }
+  @media only screen and (max-width: 600px) {
+    .chart-title {
+      width: 100%;
+    }
+  }
 </style>

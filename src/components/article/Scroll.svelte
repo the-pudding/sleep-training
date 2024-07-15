@@ -31,6 +31,10 @@
 		color: white;
 	}
 
+	.step-content {
+		width: 100%;
+	}
+
 	.step.active {
 		opacity: 1;
 	}

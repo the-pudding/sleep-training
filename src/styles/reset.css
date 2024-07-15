@@ -260,13 +260,9 @@ ol, ul {
 	color: white;
 }
 
-.step-content span {
-	white-space: nowrap;
-}
-
 .textbox-footnote {
 	font-size: 12px;
-	white-space: wrap !important;
+	white-space: wrap;
 	line-height: 1 !important;
 } 
 
@@ -274,6 +270,7 @@ ol, ul {
 	border-radius: 3px;
     background: rgba(255,255,255,.16);
     color: white;
+	white-space: nowrap;
     padding: 1px 5px;
     font-weight: 600;
 }
@@ -382,7 +379,7 @@ blockquote {
 }
 
 @media only screen and (max-width: 600px) {
-	.step-content span {
+	.step-content .bold {
 		white-space: wrap;
 	}
 }
