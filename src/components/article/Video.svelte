@@ -10,16 +10,18 @@
     if (video === 'cbum') {
       return {
         videoUrl: 'assets/videos/cbum.mp4',
-        posterUrl: 'assets/posters/poster_1.webp'
+        posterUrl: 'assets/posters/poster_1.webp',
+        srcUrl: 'https://www.instagram.com/reel/C43zSHGv6t8/?igsh=eDBzMmY4NWJ0cHpv'
       };
     } 
     return {
       videoUrl: 'assets/videos/sleep.mp4',
-      posterUrl: 'assets/posters/poster.webp'
+      posterUrl: 'assets/posters/poster.webp',
+      srcUrl: 'https://www.tiktok.com/@ustheremingtons/video/7338176510408412446?lang=en'
     };
   };
 
-  $: ({ videoUrl, posterUrl } = getVideoData(video));
+  $: ({ videoUrl, posterUrl, srcUrl } = getVideoData(video));
 </script>
   
 <div class="video-container">
@@ -33,7 +35,7 @@
     <p>Your browser does not support the video element.</p>
   </video>
   <div class="caption">
-    Source: {caption}
+    Source: <a href={srcUrl} target='_blank'>{caption}</a>
   </div>
 </div>
 
