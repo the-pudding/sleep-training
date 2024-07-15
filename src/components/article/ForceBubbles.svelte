@@ -17,6 +17,7 @@
     export let renderedData;
     export let groupedBy;
     export let step;
+    export let caption;
     export let focusHover;
 
     let dataToSimulate;
@@ -274,6 +275,10 @@
     <Tooltip data={$hoveredCircle.data.info} x={$hoveredCircle.x} y={$hoveredCircle.y} width={300} />
 {/if}
 
+    <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+    <div class="caption" tabindex="0">
+        {caption}
+    </div>
     <div class="legend">
         <div class="">
             <RadiusLegend {scaleValues} data={renderedData} />
@@ -325,6 +330,13 @@
     .bubbles-title span {
         border-bottom: 1px solid rgba(255,255,255,.8);
         padding-bottom: 10px;
+    }
+    .caption {
+        position: absolute;
+        bottom: 200px;
+        width: 100%;
+        text-align: center;
+        opacity: 0;
     }
     @media only screen and (max-width: 600px) {
         .legend {

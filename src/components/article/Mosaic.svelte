@@ -5,6 +5,7 @@
   export let album = 'articles';
   export let viewportHeight;
   let value;
+  let altTag;
 
   // let animationStarted = false;
 
@@ -25,6 +26,7 @@
   }
   const getImageUrls = (album) => {
     if (album === 'articles') {
+      altTag = "Image carrousel of article headlines on sleep training.";
       return [
         { url: 'assets/images/articles/article_1.jpg' },
         { url: 'assets/images/articles/article_2.jpg' },
@@ -34,11 +36,13 @@
         { url: 'assets/images/articles/article_6.jpg' },
       ];
     } else if (album === 'social') {
+      altTag = "Image carrousel of article headlines on the sleep training debate.";
       return [
         { url: 'assets/images/social/social_1.png' },
         { url: 'assets/images/social/social_2.png' }
       ];
     } else if (album === 'posts') {
+      altTag = "Social media post images on anti-sleep training narratives.";
       return [
         { url: 'assets/images/posts/post_1.jpg' },
         { url: 'assets/images/posts/post_2.jpg' },
@@ -50,13 +54,7 @@
         { url: 'assets/images/debunk/narvaez.jpg' },
         { url: 'assets/images/debunk/sears.jpg' },
       ];
-    } else if (album === 'products') {
-      return [
-        { url: 'assets/images/products/products_1.jpg' },
-        { url: 'assets/images/products/products_2.jpg' },
-        { url: 'assets/images/products/products_4.jpg' },
-      ];
-    }
+    } 
     return [];
   };
 </script>
@@ -79,7 +77,7 @@
             >
               <img
                 transition:fly={{y:50, duration:500}}
-                src={image.url} alt="Image {i}" style="border-radius: 5px;" />
+                src={image.url} alt={altTag} style="border-radius: 5px;" />
             </div>
         {/if}
       {/each}

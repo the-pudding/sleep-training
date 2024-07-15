@@ -12,7 +12,7 @@
   // TOOLTIP POSITIONING
   let xNudge = 10;
 
-  $: console.log(x,width)
+  // $: console.log(x,width)
   
   $: {
       if ((x + width + ($viewport.width*.1)) > $viewport.width) {
@@ -85,11 +85,13 @@
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div 
     class="tooltip" 
     in:fade={{ duration: 200, delay: 0 }}
     out:fade
     style="left:{xPosition}px; top:{yPosition - 150}px; width:{tooltipWidth}px;"
+    tabindex="0"
 >
   {#if data.type === "instagram"}
     <div style="margin-top: 0px; margin-bottom: 10px; padding-top: 0px;"><span class="tooltip-type">{type}</span></div>

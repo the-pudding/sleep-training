@@ -14,42 +14,46 @@
     }
 </script>
 
-<div class="references-dropdown">
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<div class="references-dropdown" tabindex="0">
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="references-header" on:click={toggleTable}>
     <span>{showTable ? '▼' : '▶'} {capitalize(target)} References</span>
   </div>
   {#if showTable}
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th style="width: 10%;">Year</th>
-            <th style="width: 50%;">Title</th>
-            <th style="width: 20%;">Grounding</th>
-            <th style="width: 20%;">Relevance</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.filter(d => d.target === target) as d}
+  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+    <div class="table-outer-container" tabindex="0">
+      <div class="table-container">
+        <table>
+          <thead>
             <tr>
-              <td>{d.date}</td>
-              <td>{d.title}</td>
-              <td>
-                {#if d.theoretical === "FALSE"}
-                  <span class="legend-oppose">Theoretical article</span>
-                {:else}
-                  Research study
-                {/if}
-              </td>
-              <td>
-                <span class="legend-oppose">Not Relevant</span> 
-              </td>
+              <th>Year</th>
+              <th>Title</th>
+              <th>Grounding</th>
+              <th>Relevance</th>
             </tr>
-          {/each}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {#each data.filter(d => d.target === target) as d}
+              <tr>
+                <td>{d.date}</td>
+                <td>{d.title}</td>
+                <td>
+                  {#if d.theoretical === "FALSE"}
+                    <span class="legend-oppose">Theoretical article</span>
+                  {:else}
+                    Research study
+                  {/if}
+                </td>
+                <td>
+                  <span class="legend-oppose">Not Relevant</span> 
+                </td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
     </div>
   {/if}
 </div>
@@ -74,9 +78,16 @@
     font-family: "Atlas Grotesk";
     font-size: 16px;
   }
+
+  .table-outer-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   
   .table-container {
     padding: 10px;
+    min-width: 600px;
   }
   
   table {
@@ -87,7 +98,14 @@
   th, td {
     padding: 8px;
     text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
+
+  th:nth-child(1), td:nth-child(1) { width: 10%; }
+  th:nth-child(2), td:nth-child(2) { width: 50%; }
+  th:nth-child(3), td:nth-child(3) { width: 20%; }
+  th:nth-child(4), td:nth-child(4) { width: 20%; }
 
   @media only screen and (max-width: 600px) {
     .references-header {

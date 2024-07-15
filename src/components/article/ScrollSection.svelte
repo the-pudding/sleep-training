@@ -11,12 +11,12 @@
 
     let renderedData;
     let focusHover = null;
+    let caption = null;
     let value;
     let newValues;
     let step;
 
     $: value, handleStepChange()
-    // $: console.log(value)
 
     function handleStepChange() {
 
@@ -29,6 +29,7 @@
         newValues = stepHandler(step);
         renderedData = newValues.renderedData;
         focusHover = newValues.focusHover;
+        caption = newValues.caption
     }
 </script>
 
@@ -38,14 +39,14 @@
         <!-- switcher is now a class on sticky--use that to apply styles to this el like the top:20%; -->
         <div class="sticky" style="min-height:{viewportHeight}px;">
             {#if renderedData}
-                {#if step < 13}
-                    <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} {step} /> 
-                {:else if step >= 13 && step < 14}             
-                    <Timeline />
-                {:else if step >= 14 && step < 15}    
-                    <Map bind:data={dataMap} />
-                {:else if step >= 15}
-                    <ForceBubbles {renderedData} {focusHover} groupedBy={"position"} {step} /> 
+                {#if step < 15}
+                    <ForceBubbles {renderedData} {focusHover} {caption} groupedBy={"position"} {step} /> 
+                {:else if step >= 15 && step < 16}             
+                    <Timeline {caption} />
+                {:else if step >= 16 && step < 17}    
+                    <Map bind:data={dataMap} {caption} />
+                {:else if step >= 17}
+                    <ForceBubbles {renderedData} {focusHover} {caption} groupedBy={"position"} {step} /> 
                 {/if}  
             {/if}
         </div>

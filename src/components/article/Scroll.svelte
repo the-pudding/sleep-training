@@ -10,7 +10,8 @@
 		{#each Object.values(copy) as p, i}
 			{@const active = step === i}
 			<div class="step" class:active>
-				<p class="step-content">{@html p.text}</p>
+				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+				<p class="step-content" tabindex="0">{@html p.text}</p>
 			</div>
 		{/each}
 	</Scrolly>

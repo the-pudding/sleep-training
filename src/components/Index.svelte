@@ -47,71 +47,91 @@
             return {
               renderedData: data.reddit,
               focusHover: null,
+              caption: 'Bubble chart of user opinions on Reddit, heavily divided.'
             }
         case step >= 1 && step < 2:
             return {
               renderedData: data.reddit,
               focusHover: focusRedditResearch,
+              caption: 'Bubble chart of user opinions on Reddit, heavily divided.'
             }
         case step >= 2 && step < 3:
             return {
               renderedData: data.articles,
-              focusHover: null
+              focusHover: null,
+              caption: 'Bubble chart of user opinions on news articles, heavily divided.'
             }
         case step >= 3 && step < 4:
             return {
               renderedData: data.articles,
               focusHover: focusNarvaez,
+              caption: 'Bubble chart of user opinions on Reddit, heavily divided.'
             }
         case step >= 4 && step < 5:
             return {
               renderedData: data.books,
               focusHover: null,
+              caption: 'Bubble chart of author opinions on books, heavily divided.'
             }
         case step >= 5 && step < 6:
             return {
               renderedData: data.books,
               focusHover: focusBook,
+              caption: 'Bubble chart of author opinions on books, heavily divided.'
             }
         case step >= 6 && step < 7:
             return {
               renderedData: data.literature_reviews,
-              focusHover: null
+              focusHover: null,
+              caption: 'Bubble chart of medical positions on sleep training literature reviews, almost entirely advocating.'
             }
         case step >= 7 && step < 8:
             return {
               renderedData: data.literature_reviews,
-              focusHover: focusReview
+              focusHover: focusReview,
+              caption: 'Bubble chart of medical positions on sleep training literature reviews, almost entirely advocating.'
             }
         case step >= 8 && step < 9:
             return {
               renderedData: data.literature_reviews,
-              focusHover: focusUmbrellaReview,
+              focusHover: null,
+              caption: 'Bubble chart of medical positions on sleep training literature reviews, almost entirely advocating.'
             }
         case step >= 9 && step < 10:
             return {
               renderedData: data.literature_reviews,
-              focusHover: focusDouglasReview,
+              focusHover: focusUmbrellaReview,
+              caption: 'Bubble chart of medical positions on sleep training literature reviews, almost entirely advocating.'
             }
-        case step >= 10 && step < 11:
+        case step >=10 && step < 11:
             return {
-              renderedData: data.studies,
-              focusHover: null
+              renderedData: data.literature_reviews,
+              focusHover: focusDouglasReview,
+              caption: 'Bubble chart of medical positions on sleep training literature reviews, almost entirely advocating.'
             }
         case step >= 11 && step < 12:
             return {
               renderedData: data.studies,
-              focusHover: focusMiddleMiss,
+              focusHover: null,
+              caption: 'Bubble chart of medical positions in sleep training medical studies, almost entirely advocating.'
             }
         case step >= 12 && step < 13:
             return {
+              renderedData: data.studies,
+              focusHover: focusMiddleMiss,
+              caption: 'Bubble chart of medical positions in sleep training medical studies, almost entirely advocating.'
+            }
+        case step >= 13 && step < 15:
+            return {
               renderedData: data.instagram,
               focusHover: null,
+              caption: 'Bubble chart of opinions from Instagram influencers posting about sleep training, heavily divided.'
             }
-        case step >= 14:
+        case step >= 17:
             return {
               renderedData: [data.studies,data.reddit],
               focusHover: null,
+              caption: 'Nested bubble chart comparing the medical consensus with the division of internet opinions on Reddit.'
             }
         default:
             return {
@@ -283,6 +303,7 @@
   @media only screen and (max-width: 600px) {
     .title-large {
       font-size: 36px;
+      line-height: 1.9;
     }
     p {
       font-size: 16px !important;

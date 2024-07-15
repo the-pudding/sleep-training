@@ -15,7 +15,8 @@
   }
 </script>
   
-<div class="notification" class:animationStarted style="--delay:{index*3};">
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<div class="notification" class:animationStarted style="--delay:{index*3};" tabindex="0">
   <div class="notification-content">
     <div class="notification-likes">
       <img class="icon" src="{getPlatformDetails(comment.platform).icon}" alt="reddit or instagram icon" />

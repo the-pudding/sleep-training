@@ -28,7 +28,6 @@
     if (spacer === "none") {
       noSpacer = true;
     }
-    console.log(copyFootnote);
 </script>
 
 <section id="scrolly" class="scrolly-editorial">
@@ -37,9 +36,10 @@
             {#if copy[0].subtitle}
                 <h3>{copy[0].subtitle}</h3>
             {/if}
-            <div class="editorial">
+            <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+            <div class="editorial" tabindex="0">
                 {#each copy as p, i}
-                    <p class:animationStarted style="font-size:{first && i == 0 ? '24px' : ''};" class="editorial-paragraph">{@html p.text}</p>
+                    <p class:animationStarted class:first={first && i === 0} class="editorial-paragraph">{@html p.text}</p>
                 {/each}
                 <div class="spacer" style="height: {noSpacer ? '0vh' : '3vh'}"/>
                 <Footnote copy={copyFootnote} />
@@ -48,6 +48,7 @@
     </Scrolly>
 </section>
 
+<!-- style="font-size:{first && i == 0 ? '24px' : ''};" -->
 
 {#if comments}
 <div class="editorial-comments">
@@ -61,6 +62,9 @@
 
 
 <style>
+    .first {
+        font-size: 24px !important;
+    }
     .editorial-comments {
         margin: 75px auto;
     }
@@ -84,5 +88,13 @@
     .scrolly-editorial {
         padding-top: 0px !important;
         margin-top: 0px !important;
+    }
+    @media only screen and (max-width: 600px) {
+		.editorial-paragraph {
+            font-size: 16px;
+        }
+        .first {
+        font-size: 20px !important;
+        }
     }
 </style>
