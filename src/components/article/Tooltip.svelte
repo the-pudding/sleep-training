@@ -11,22 +11,27 @@
 
   // TOOLTIP POSITIONING
   let xNudge = 10;
+  const yNudge = -$viewport.height * 0.05;
+  let isMobile = $viewport.width <= 600;
+  let xPosition;
+  let yPosition;
 
   // $: console.log(x,width)
   
   $: {
-      if ((x + width + ($viewport.width*.1)) > $viewport.width) {
-      xNudge = -width;
+    if (isMobile) {
+      xPosition = ($viewport.width / 2 ) - (tooltipWidth / 2);
+      yPosition = $viewport.height / 2;
     } else {
-      xNudge = $viewport.width * 0.04 ;
+      if ((x + width + ($viewport.width*.1)) > $viewport.width) {
+        xNudge = -width;
+      } else {
+        xNudge = $viewport.width * 0.04;
+        xPosition = x + xNudge;
+        yPosition = y + yNudge;
+      }
     }
   }
-
-
-  const yNudge = -$viewport.height * 0.05;
-
-  $: xPosition = x + xNudge;
-  $: yPosition = y + yNudge;
 
   // TOOLTIP CONTENT
   function truncateText(text, maxLength) {
@@ -90,7 +95,8 @@
     class="tooltip" 
     in:fade={{ duration: 200, delay: 0 }}
     out:fade
-    style="left:{xPosition}px; top:{yPosition - 150}px; width:{tooltipWidth}px;"
+    style="left:{isMobile ? xPosition + 'px' : xPosition + 'px'}; top:{isMobile ? yPosition + 'px' : yPosition - 150 + 'px'}; width:{tooltipWidth}px;"
+    class:isMobile
     tabindex="0"
 >
   {#if data.type === "instagram"}
@@ -161,4 +167,8 @@
       margin-top: 2px;
       margin-bottom: 10px;
    }
+   .tooltip.isMobile {
+    position: fixed;
+    transform: translateY(0%);
+  }
   </style>
