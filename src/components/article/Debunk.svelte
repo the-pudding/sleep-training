@@ -37,10 +37,10 @@
               <td>{d.date}</td>
               <td>{d.title}</td>
               <td>
-                {#if d.theoretical === "TRUE"}
-                  <span class="legend-oppose">Theoretical</span>
+                {#if d.theoretical === "FALSE"}
+                  <span class="legend-oppose">Theoretical article</span>
                 {:else}
-                  Clinical
+                  Research study
                 {/if}
               </td>
               <td>

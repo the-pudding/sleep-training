@@ -134,7 +134,7 @@
     <div class="title-section">
       <h1 class="title title-large" class:loaded>{@html copy.title}</h1>
       <h2 class="title dek" class:loaded style="--delay:0.5s;">{copy.description}</h2>
-      <h4 class="title byline" class:loaded>by <a href="https://pudding.cool/author/tom-vaillant">Tom Vaillant</a>, July 14, 2024</h4>
+      <p class="title byline" class:loaded>by <a href="https://pudding.cool/author/tom-vaillant">Tom Vaillant</a>, July 14, 2024</p>
     </div>
     <div class="editorial-container">
       <Editorial first={true} copy={copy.intro_article} spacer="none" />
@@ -179,7 +179,7 @@
       <Editorial copy={copy.debunk_narvaez_2} spacer="none" />
     </div>
     <div class="editorial-container conclusion">
-      <!-- <h3 class="sub-title">Conclusion</h3> -->
+      <h3 class="sub-title">Conclusion</h3>
       <Editorial copy={copy.editorial_conclusion} title="Conclusion" spacer="none" />
       <Editorial copy={copy.editorial_conclusion_2} spacer="none" notifications={commentsConclusion} />
       <h3 id="methods" class="sub-title sub-title-smaller">Methods</h3>

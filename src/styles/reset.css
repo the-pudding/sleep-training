@@ -29,7 +29,8 @@ mark {
 }
 
 a {
-	color: #fff;
+	color: #A8ABF0;
+	font-weight: 600;
 	text-decoration: none;
 	border-bottom: 1px solid currentColor;
 }
@@ -210,27 +211,28 @@ ol, ul {
 
 .sub-title .oppose {
 	border-radius: 3px;
-    background: #4f3030;
+    background: #75211b;
     color: white;
     padding: 2px 3px;
 }
 
 .sub-title .advocate {
 	border-radius: 3px;
-    background: #2e5c2d;
+    background: #0a4c21;
     color: white;
     padding: 2px 3px;
 }
 
 .editorial .oppose {
 	border-radius: 3px;
-	background: #4f3030;
+	background: #75211b;
     padding: 0px 3px;
 }
 
 .editorial .advocate {
 	border-radius: 3px;
-	background: #2e5c2d;
+	background: #0a4c21;
+	color: white;
     padding: 0px 3px;
 }
 
@@ -251,11 +253,12 @@ ol, ul {
 
 .notification .oppose {
 	border-radius: 3px;
-    background: #4f3030;
+    background: #75211b;
 }
 
 .notification .advocate {
-    background: #2e5c2d;
+    background: #0a4c21;
+	color: white;
 }
 
 .step-content span {
@@ -278,21 +281,21 @@ ol, ul {
 
 .legend-advocate {
 	border-radius: 3px;
-    background: #2e5c2d;
+    background: #0a4c21;
     color: white;
     padding: 1px 3px;
     font-weight: 600;
 }
 .legend-neutral {
 	border-radius: 3px;
-    background: #895e0a;
+    background: #d69c2b;
     color: white;
     padding: 1px 3px;
     font-weight: 600;
 }
 .legend-oppose {
 	border-radius: 3px;
-    background: #4f3030;
+    background: #75211b;
     color: white;
     padding: 1px 3px;
     font-weight: 600;
