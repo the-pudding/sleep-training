@@ -5,7 +5,6 @@
     export let animatedIn;
 
     let data;
-    let dataType = null;
     $: {
         data = groups(nodes, d => d.data.info.position)
     }
@@ -44,7 +43,6 @@
         {@const center = centroid(position[1])}
         {@const textWidth = getTextWidth(position[0])}
         <!-- <rect x={center.x - ((textWidth + 30)/2)} y={center.y - 17} width={textWidth} height={25} fill="#1C3A4E" rx="5" ry="5" /> -->
-         {console.log(data[0][1][0].data.info.type)}
          {#if data[0][1][0].data.info.type === "instagram"}
             {#if i == 1}
             <text data-w = {textWidth} x={center.x} y={center.y+20} class="cluster-label cluster-label-stroke" fill="white" style="stroke:{outlineColor[position[0]]};">{position[0]}</text>
@@ -55,6 +53,17 @@
             {:else}
             <text data-w = {textWidth} x={center.x} y={center.y+5} class="cluster-label cluster-label-stroke" fill="white" style="stroke:{outlineColor[position[0]]};">{position[0]}</text>
             <text data-w = {textWidth} x={center.x} y={center.y+5} class="cluster-label" fill="white">{position[0]}</text>
+            {/if}
+         {:else if data[0][1][0].data.info.type === "review" || data[0][1][0].data.info.type === "study"}
+            {#if i == 1}
+                <text data-w = {textWidth} x={center.x - 60} y={center.y + 25} class="cluster-label cluster-label-stroke" fill="white" style="stroke:{outlineColor[position[0]]};">{position[0]}</text>
+                <text data-w = {textWidth} x={center.x - 60} y={center.y + 25} class="cluster-label" fill="white">{position[0]}</text>
+            {:else if i == 0}
+                <text data-w = {textWidth} x={center.x - 10} y={center.y - 10} class="cluster-label cluster-label-stroke" fill="white" style="stroke:{outlineColor[position[0]]};">{position[0]}</text>
+                <text data-w = {textWidth} x={center.x - 10} y={center.y - 10} class="cluster-label" fill="white">{position[0]}</text>
+            {:else}
+                <text data-w = {textWidth} x={center.x} y={center.y+5} class="cluster-label cluster-label-stroke" fill="white" style="stroke:{outlineColor[position[0]]};">{position[0]}</text>
+                <text data-w = {textWidth} x={center.x} y={center.y+5} class="cluster-label" fill="white">{position[0]}</text>
             {/if}
          {:else}
          <text data-w = {textWidth} x={center.x} y={center.y+5} class="cluster-label cluster-label-stroke" fill="white" style="stroke:{outlineColor[position[0]]};">{position[0]}</text>

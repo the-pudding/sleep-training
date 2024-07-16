@@ -72,6 +72,7 @@
 
 
     function runSimulation(){
+        console.log(renderedData[0].type);
         $hoveredCircle = null;
 
         if(nodes?.length !== renderedData?.length){
@@ -241,7 +242,12 @@
     {#if renderedData.length !== 2}
         {#key renderedData[0].type}
             <p in:fly={{y:20, duration:500, delay:500}} class="bubbles-title">
-                <span>{legendText[renderedData[0].type]}</span>
+                {#if renderedData[0].type === undefined}
+                    <!-- Matt, why is this not working I'm going nuts -->
+                    <span>Test title</span>
+                {:else}
+                    <span>{legendText[renderedData[0].type]}</span>
+                {/if}
             </p>
         {/key}
     {/if}
