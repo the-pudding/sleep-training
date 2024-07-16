@@ -62,7 +62,13 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="timeline-container" style="width: {$viewport.width}px; height: {$viewport.height}px;">
-  <svg height={$viewport.height} width={$viewport.width} >
+  <svg height={$viewport.height} width={$viewport.width} aria-labelledby="chartTitle chartDesc" >
+    <title id="chartTitle" style="opacity: 0;">
+      Sleep training studies plotted by their year of publication
+    </title>
+    <desc id="chartDesc" style="opacity: 0;">
+      This chart visualizes the publication date of sleep training studies on a timeline, all were published between 1980 and 2022.
+    </desc>
     <g >
       <line x1={$viewport.width / 2} y1={75} x2={$viewport.width / 2} y2={$viewport.height -50} stroke="white" />
       {#if nodes.length > 0}

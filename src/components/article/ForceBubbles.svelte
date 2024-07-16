@@ -233,6 +233,8 @@
         "instagram":"Instagram profiles",
         "article":"Articles"
     }
+    $: chartTitle = `Sleep training opinions across ${legendText[renderedData[0].type]}`;
+    $: chartDesc = `This bubble chart visualizes the division of opinions on sleep training in ${legendText[renderedData[0].type]}. Each bubble represents a data point, with its size indicating the influence of the opinion. The bubbles are grouped into three clusters based on the position of the data point, whether Advocating, Opposed to or without a position on sleep training.`;
 
 </script>
 <div class="bubbles">
@@ -249,12 +251,10 @@
         aria-labelledby="chartTitle chartDesc"
     >
         <title id="chartTitle" style="opacity: 0;">
-                {legendText[renderedData[0].type]} Bubble Chart
+            {chartTitle}
         </title>
         <desc id="chartDesc" style="opacity: 0;">
-                This bubble chart visualizes {legendText[renderedData[0].type]}. 
-                Each bubble represents a data point, with its size indicating the value.
-                The bubbles are grouped into clusters based on their type.
+            {chartDesc}
         </desc>
         <g style="transform: translate(0,0);">
             {#if nodes}

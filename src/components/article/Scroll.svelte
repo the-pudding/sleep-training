@@ -41,7 +41,7 @@
 
 	@media only screen and (max-width: 600px) {
 		.step-content p {
-			font-size: 14px !important;
+			font-size: 16px !important;
 		}
 	}
 </style>

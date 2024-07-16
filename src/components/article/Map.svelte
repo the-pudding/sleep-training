@@ -87,7 +87,14 @@
   <svg 
     width={$viewport.width}
     height={$viewport.height}
+    aria-labelledby="chartTitle chartDesc"
   >
+    <title id="chartTitle" style="opacity: 0;">
+      Sleep training studies mapped by their country of publication
+    </title>
+    <desc id="chartDesc" style="opacity: 0;">
+      This chart visualizes the locations of sleep training studies on a map, 85% were published in Western countries.
+    </desc>
     <g>
       {#if pathGenerator}
         <path class="earth" d={pathGenerator({ type: 'Sphere' })} />
