@@ -5,7 +5,6 @@
   export let album = 'articles';
   export let viewportHeight;
   let value;
-  let altTag;
 
   $: album, images = getImageUrls(album);
 
@@ -24,33 +23,38 @@
   }
   const getImageUrls = (album) => {
     if (album === 'articles') {
-      altTag = "Image carrousel of article headlines on sleep training.";
       return [
-        { url: 'assets/images/articles/article_1.jpg' },
-        { url: 'assets/images/articles/article_2.jpg' },
-        { url: 'assets/images/articles/article_3.jpg' },
-        { url: 'assets/images/articles/article_4.jpg' },
-        { url: 'assets/images/articles/article_5.jpg' },
-        { url: 'assets/images/articles/article_6.jpg' },
+        { url: 'assets/images/articles/article_1.jpg',
+          alt: 'HuffPost article headline: "Cry it Out: The Method that Kills Baby Brain Cells".'
+         },
+        { url: 'assets/images/articles/article_2.jpg',
+          alt: "CNN article headline: 'It's OK to let your baby cry himself to sleep, study finds'." },
+        { url: 'assets/images/articles/article_3.jpg',
+        alt: 'Article headline: "Screaming to sleep: the moral imperative to end "cry it out".' },
+        { url: 'assets/images/articles/article_4.jpg',
+        alt: 'Slate article headline: "Cry, baby cry." ' },
+        { url: 'assets/images/articles/article_5.jpg',
+        alt: 'The Cut article headline: "Stop shaming women for teaching their babies to sleep".' },
+        { url: 'assets/images/articles/article_6.jpg',
+        alt: ' Harvard review headline: "Children need attention and reassurance, Harvard researchers say".' },
       ];
     } else if (album === 'social') {
-      altTag = "Image carrousel of article headlines on the sleep training debate.";
       return [
-        { url: 'assets/images/social/social_1.png' },
-        { url: 'assets/images/social/social_2.png' }
+        { url: 'assets/images/social/social_1.png',
+        alt: "The Cut article headline: 'My exhausted year in Instagram's sleep training rabbit hole'." },
+        { url: 'assets/images/social/social_2.png',
+        alt: 'The Cut article headline: "How TikTok has supercharged the age-old debate over sleep training".' }
       ];
     } else if (album === 'posts') {
-      altTag = "Social media post images on anti-sleep training narratives.";
       return [
-        { url: 'assets/images/posts/post_1.jpg' },
-        { url: 'assets/images/posts/post_2.jpg' },
-        { url: 'assets/images/posts/post_3.jpg' },
-        { url: 'assets/images/posts/post_4.jpg' },
-      ];
-    } else if (album === 'debunk') {
-      return [
-        { url: 'assets/images/debunk/narvaez.jpg' },
-        { url: 'assets/images/debunk/sears.jpg' },
+        { url: 'assets/images/posts/post_1.jpg',
+          alt: "Instagram post asking 'Is sleep training really bad for your child?'' and 'Will it damage your baby's brain'." },
+        { url: 'assets/images/posts/post_2.jpg',
+          alt: "Instagram post investigating whether sleep training causes high stress and damages connections with babies." },
+        { url: 'assets/images/posts/post_3.jpg',
+          alt: "Instagram post with the headline 'Sleep training isn't normal'." },
+        { url: 'assets/images/posts/post_4.jpg',
+          alt: "Instagram post with a poll on whether or not 'Sleep training will harm my baby'." },
       ];
     } 
     return [];
@@ -75,7 +79,7 @@
             >
               <img
                 transition:fly={{y:50, duration:500}}
-                src={image.url} alt={altTag} style="border-radius: 5px;" />
+                src={image.url} alt={image.alt} style="border-radius: 5px;" />
             </div>
         {/if}
       {/each}
