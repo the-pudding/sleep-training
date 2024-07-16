@@ -190,10 +190,10 @@
       <!-- svelte-ignore a11y-img-redundant-alt -->
       <img src="assets/images/crib.webp" alt="Image of baby in crib" />
     </div>
-    <div class="caption">Photo by Marie Despeyroux</div>
+    <div class="caption">Photo by Marie Despeyroux on <a href="https://unsplash.com/photos/babys-white-wooden-crib-lowlight-photography-2xuyxsLNFOU" target="_blank">Unsplash</a></div>
     <div class="editorial-container">
       <h3 class="sub-title sub-title-smaller">Narrative: It Creates <span class="oppose">Insecure Attachment</span></h3>
-      <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} copyFootnote={copy.footnote_narvaez[0].text} />
+      <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} />
       <Video video="cbum" caption="Chris Williamson" />
       <h3 class="sub-title sub-title-smaller">Research: There is <span class="advocate">No Proof of Insecure Attachment</span></h3>
       <Editorial copy={copy.debunk_narvaez_2} spacer="none" />

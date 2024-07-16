@@ -76,7 +76,7 @@
   }
   .notification-source {
     text-align: left;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: lighter;
     margin-top: 5px;
     margin-left: 30px;

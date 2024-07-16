@@ -29,7 +29,7 @@ mark {
 }
 
 a {
-	color: #A8ABF0;
+	color: #BBBDF7;
 	text-decoration: none;
 	border-bottom: 1px solid currentColor;
 }
@@ -316,7 +316,7 @@ ol, ul {
 .caption {
     margin-top: 10px;
     font-family: "Atlas Grotesk";
-    font-size: 10px;
+    font-size: 12px;
 	text-align: center;
 }
 .sr-only {

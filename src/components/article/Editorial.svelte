@@ -1,10 +1,8 @@
 <script>
     import Notification from "$components/article/Notification.svelte";
     import Scrolly from "$components/helpers/Scrolly.svelte";
-    import Footnote from "$components/article/Footnote.svelte";
     export let copy;
     export let notifications;
-    export let copyFootnote;
     export let spacer = null;
     export let methods = false;
     export let first = false;
@@ -42,7 +40,6 @@
                     <p class:animationStarted class:first={first && i === 0} class="editorial-paragraph">{@html p.text}</p>
                 {/each}
                 <div class="spacer" style="height: {noSpacer ? '0vh' : '3vh'}"/>
-                <Footnote copy={copyFootnote} />
             </div>
         </div>
     </Scrolly>
