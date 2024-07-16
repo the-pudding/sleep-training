@@ -7,8 +7,6 @@
   let value;
   let altTag;
 
-  // let animationStarted = false;
-
   $: album, images = getImageUrls(album);
 
   let images = [];

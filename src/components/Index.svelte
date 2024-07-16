@@ -158,7 +158,7 @@
     </div>
     <div class="editorial-container">
       <Editorial first={true} copy={copy.intro_article} spacer="none" />
-      <Video video="sleep" caption="Tiffany Remington"/>
+      <Video video="sleep" caption="Tiffany Remington" aria-label="TikTok influencer Tiffany films herself as she rocks her baby to sleep, emotionally wrought after many sleepless nights she gives up and decides to start sleep training." />
       <Editorial copy={copy.intro_article_2} />
     </div>    
     <Mosaic {viewportHeight} album="articles" height=75 /> 
@@ -194,7 +194,7 @@
     <div class="editorial-container">
       <h3 class="sub-title sub-title-smaller">Narrative: It Creates <span class="oppose">Insecure Attachment</span></h3>
       <Editorial copy={copy.debunk_narvaez} spacer="none" notifications={commentsAttachment} />
-      <Video video="cbum" caption="Chris Williamson" />
+      <Video video="cbum" caption="Chris Williamson"  aria-label="Fitness athlete and influencer Cbum talks to Chris about his opinion on sleep training, denouncing it as causing attachment issues for babies." />
       <h3 class="sub-title sub-title-smaller">Research: There is <span class="advocate">No Proof of Insecure Attachment</span></h3>
       <Editorial copy={copy.debunk_narvaez_2} spacer="none" />
     </div>

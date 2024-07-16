@@ -246,7 +246,16 @@
     <svg
         width={$viewport.width*0.9}
         height={$viewport.height*0.9}
+        aria-labelledby="chartTitle chartDesc"
     >
+        <title id="chartTitle" style="opacity: 0;">
+                {legendText[renderedData[0].type]} Bubble Chart
+        </title>
+        <desc id="chartDesc" style="opacity: 0;">
+                This bubble chart visualizes {legendText[renderedData[0].type]}. 
+                Each bubble represents a data point, with its size indicating the value.
+                The bubbles are grouped into clusters based on their type.
+        </desc>
         <g style="transform: translate(0,0);">
             {#if nodes}
                 {#if renderedData.length == 2 && nodes}

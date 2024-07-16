@@ -72,6 +72,7 @@
     letter-spacing: 3px;
     text-transform: uppercase;
     text-anchor: middle;
+    pointer-events: none;
 }
 
 .cluster-label-stroke {
@@ -81,5 +82,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    pointer-events: none;
 }
 </style>

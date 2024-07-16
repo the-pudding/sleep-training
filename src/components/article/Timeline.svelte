@@ -22,7 +22,7 @@
 
     let yScale = scaleLinear()
       .domain(extent(data.filter(d => d.year > 1980), d => d.year))
-      .range([$viewport.height - (paddingY*2), 0]).clamp(true);
+      .range([$viewport.height -50, 75]).clamp(true);
 
     const colorMapping = {
         'Advocate': "#4FB477",
@@ -62,9 +62,9 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="timeline-container" style="width: {$viewport.width}px; height: {$viewport.height}px;">
-  <svg height={$viewport.height - (paddingY*2)} width={$viewport.width} >
-    <g  style="margin-top: 20px;">
-      <line x1={$viewport.width / 2} y1="0" x2={$viewport.width / 2} y2={$viewport.height - (paddingY*2)} stroke="white" />
+  <svg height={$viewport.height} width={$viewport.width} >
+    <g >
+      <line x1={$viewport.width / 2} y1={75} x2={$viewport.width / 2} y2={$viewport.height -50} stroke="white" />
       {#if nodes.length > 0}
         {#each nodes as node, index}
           <circle
@@ -91,16 +91,6 @@
 </div>
 
 <style>
-  svg {
-    position: absolute;
-    top: 50%;
-    transform: translate(0,-50%);
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    overflow: visible;
-  }
-
   circle {
     transition: stroke 300ms ease, opacity 300ms ease, cx 100ms ease, cy 100ms ease;
     pointer-events: none;
@@ -113,11 +103,6 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
-
-  .timeline-container {
-    position: relative;
-  }
-
   .chart-title {
     position: absolute;
     top: 10px;

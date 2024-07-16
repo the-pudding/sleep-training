@@ -52,6 +52,7 @@
 <style>
 .cluster-label {
     color: white;
+    pointer-events: none;
     font-size: 17px;
     font-family: "Atlas Grotesk";
     font-weight: 700;
@@ -64,6 +65,7 @@
     stroke-width: 5px;
     stroke-linecap: round;
     stroke-opacity: .8;
+    pointer-events: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
