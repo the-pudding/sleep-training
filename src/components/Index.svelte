@@ -200,7 +200,7 @@
     </div>
     <div class="editorial-container conclusion">
       <h3 class="sub-title">Conclusion</h3>
-      <Editorial copy={copy.editorial_conclusion} title="Conclusion" spacer="none" />
+      <Editorial copy={copy.editorial_conclusion} title="It's your decision" spacer="none" />
       <Editorial copy={copy.editorial_conclusion_2} spacer="none" notifications={commentsConclusion} />
       <h3 id="methods" class="sub-title sub-title-smaller">Methods</h3>
       <Editorial methods={true} copy={copy.methodologies} />
