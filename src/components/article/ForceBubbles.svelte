@@ -36,11 +36,12 @@
     let color = scaleOrdinal(range(Object.keys(ordinalGroup).length), ["#A34131", "#4FB477","#D69C2B"]);
 
     let radiusScale;
-    if(renderedData.length == 2) {
-        radiusScale = scaleLinear().domain(extent(renderedData[0].concat(renderedData[1]), d => d.radius)).range([1,10]).clamp(true)
-    } else {
-        radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([1,10]).clamp(true)
-    } 
+    
+    // if(renderedData.length == 2) {
+    //     radiusScale = scaleLinear().domain(extent(renderedData[0].concat(renderedData[1]), d => d.radius)).range([1,10]).clamp(true)
+    // } else {
+    //     radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([1,10]).clamp(true)
+    // } 
 
     $: if (radiusScale && renderedData.length > 0) {
         const [minRange, maxRange] = radiusScale.range();
@@ -77,6 +78,12 @@
 
         if(nodes?.length !== renderedData?.length){
             animatedIn = false;
+
+            if(renderedData.length == 2) {
+                radiusScale = scaleLinear().domain(extent(renderedData[0].concat(renderedData[1]), d => d.radius)).range([1,10]).clamp(true)
+            } else {
+                radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([1,10]).clamp(true)
+            } 
 
             // radiusScale = scaleLinear().domain(extent(renderedData, d => d.radius)).range([3,10]).clamp(true)
             let data;
@@ -296,9 +303,11 @@
         {caption}
     </div>
     <div class="legend">
-        <div class="">
-            <RadiusLegend {scaleValues} data={renderedData} />
-        </div>
+        {#if renderedData.length > 0 && radiusScale && scaleValues}
+            <div class="">
+                <RadiusLegend {scaleValues} data={renderedData} />
+            </div>
+        {/if}
     </div>
 </div>
 
