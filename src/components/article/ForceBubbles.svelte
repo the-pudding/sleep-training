@@ -112,7 +112,7 @@
                 children: Array.from(
                     group(renderedData.map(d => {
                         return {
-                            value:10,//radiusScale(d.radius),
+                            value:radiusScale(d.radius),
                             
                             // YOU NEED THE GROUP TO HAVE A #, SO THAT'S WHY I MAP EACH POSITION TO 0,1,2
                             group:ordinalGroup[d[groupedBy]], info:d}
@@ -255,6 +255,7 @@
         width={$viewport.width*0.9}
         height={$viewport.height*0.9}
         aria-labelledby="chartTitle chartDesc"
+        style="overflow:visible;"
     >
         <title id="chartTitle" style="opacity: 0;">
             {chartTitle}

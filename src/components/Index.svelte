@@ -199,7 +199,7 @@
       <Editorial copy={copy.debunk_narvaez_2} spacer="none" />
     </div>
     <div class="editorial-container conclusion">
-      <h3 class="sub-title">It's your decision</h3>
+      <h3 class="sub-title">It&rsquo;s your decision</h3>
       <Editorial copy={copy.editorial_conclusion} spacer="none" />
       <Editorial copy={copy.editorial_conclusion_2} spacer="none" notifications={commentsConclusion} />
       <h3 id="methods" class="sub-title sub-title-smaller">Methods</h3>
@@ -214,7 +214,7 @@
   }
 	#article {
 		/* max-width: 40rem; */
-		padding: 16px;
+		/* padding: 16px; */
 		margin: 0 auto;
 	}
 	:global(#article h2 span) {

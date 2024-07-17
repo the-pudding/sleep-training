@@ -1,7 +1,7 @@
 
 body {
 	/* background-color: var(--color-bg, white); */
-	background: linear-gradient(180deg, #1A2127 0px, #1A2E3C 300px);
+	background:#1A2E3C;
 	color: #FFFFFF;
 	line-height: 1.4;
 	/* font-family: var(--font-body, serif); */
@@ -261,9 +261,10 @@ ol, ul {
 }
 
 .textbox-footnote {
-	font-size: 12px;
+	font-size: 14px;
 	white-space: wrap;
 	line-height: 1 !important;
+	line-height: 1.2;
 } 
 
 .step-content .bold {

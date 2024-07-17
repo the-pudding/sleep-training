@@ -91,8 +91,7 @@
       font-size: 16px;
     }
     .notification {
-      margin-left: 10px;
-      margin-right: 10px;
+      max-width: calc(100% - 40px);
     }
   }
 </style>

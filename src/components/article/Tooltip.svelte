@@ -152,7 +152,7 @@
 
     }
     .info-element {
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 400;
       margin-bottom: 0px;
       padding-bottom: 0px;
