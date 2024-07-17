@@ -39,13 +39,13 @@
         <!-- switcher is now a class on sticky--use that to apply styles to this el like the top:20%; -->
         <div class="sticky" style="min-height:{viewportHeight}px;">
             {#if renderedData}
-                {#if step < 15}
+                {#if step < 16}
                     <ForceBubbles {renderedData} {focusHover} {caption} groupedBy={"position"} {step} /> 
-                {:else if step >= 15 && step < 16}             
+                {:else if step >= 16 && step < 17}             
                     <Timeline {caption} />
-                {:else if step >= 16 && step < 17}    
+                {:else if step >= 17 && step < 18}    
                     <Map bind:data={dataMap} {caption} />
-                {:else if step >= 17}
+                {:else if step >= 18}
                     <ForceBubbles {renderedData} {focusHover} {caption} groupedBy={"position"} {step} /> 
                 {/if}  
             {/if}

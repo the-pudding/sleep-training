@@ -115,19 +115,19 @@
               focusHover: null,
               caption: 'Bubble chart of medical positions in sleep training medical studies, almost entirely advocating.'
             }
-        case step >= 12 && step < 13:
+        case step >= 12 && step < 14:
             return {
               renderedData: data.studies,
               focusHover: focusMiddleMiss,
               caption: 'Bubble chart of medical positions in sleep training medical studies, almost entirely advocating.'
             }
-        case step >= 13 && step < 15:
+        case step >= 14 && step < 16:
             return {
               renderedData: data.instagram,
               focusHover: null,
               caption: 'Bubble chart of opinions from Instagram influencers posting about sleep training, heavily divided.'
             }
-        case step >= 17:
+        case step >= 18:
             return {
               renderedData: [data.studies,data.reddit],
               focusHover: null,
