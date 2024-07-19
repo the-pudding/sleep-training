@@ -10,10 +10,6 @@
 			>{@html wordmark}</a
 		>
 	</div>
-
-	<div class="stickers">
-		<img src="{base}/assets/header.png" alt="">
-	</div>
 </header>
 
 <style>
