@@ -30,7 +30,7 @@
 
 <section id="scrolly" class="scrolly-editorial">
 	<Scrolly bind:value={step} >
-        <div class="editorial-wrapper" class:methods>
+        <div class="editorial-wrapper" class:methods id={methods ? 'igsource' : ''}>
             {#if copy[0].subtitle}
                 <h3>{copy[0].subtitle}</h3>
             {/if}

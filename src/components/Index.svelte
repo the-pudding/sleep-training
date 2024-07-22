@@ -7,6 +7,7 @@
     import Video from "$components/article/Video.svelte";
     import Debunk from "$components/article/Debunk.svelte";
     import viewport from "$stores/viewport.js";
+    import Footer from "$components/footer/Footer.svelte"
 
     // COPY CONTEXT SETTING
     import copy from '$data/copy.json';
@@ -206,6 +207,7 @@
       <Editorial methods={true} copy={copy.methodologies} />
     </div>
   </div>
+  <Footer />
 {/if}
 
 <style>
