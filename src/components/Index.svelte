@@ -187,10 +187,9 @@
       <h3 class="sub-title sub-title-smaller">Research: There is <span class="advocate">No Proof of Harm</span></h3>
       <Editorial copy={copy.debunk_sears} spacer="none" />
     </div>
-    <div class="img-container">
-      <!-- svelte-ignore a11y-img-redundant-alt -->
+    <!-- <div class="img-container">
       <img src="assets/images/crib.webp" alt="Image of baby in crib" />
-    </div>
+    </div> -->
     <div class="caption">Photo by Marie Despeyroux on <a href="https://unsplash.com/photos/babys-white-wooden-crib-lowlight-photography-2xuyxsLNFOU" target="_blank">Unsplash</a></div>
     <div class="editorial-container">
       <h3 class="sub-title sub-title-smaller">Narrative: It Creates <span class="oppose">Insecure Attachment</span></h3>
