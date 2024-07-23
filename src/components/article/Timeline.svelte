@@ -14,12 +14,6 @@
     let years;
     let yearsToShow;
 
-    // let margin = { top: 20, right: 20, bottom: 20, left: 40 };
-    // $: innerHeight = $viewport.height - margin.top - margin.bottom;
-    // $: innerWidth = $viewport.width - margin.left - margin.right;
-
-    let paddingY = 75;
-
     let yScale = scaleLinear()
       .domain(extent(data.filter(d => d.year > 1980), d => d.year))
       .range([$viewport.height -50, 75]).clamp(true);
@@ -48,11 +42,11 @@
           years = [...new Set(data.map(d => d.year))];
           yearsToShow = years.filter((year, index) => {
             if (year >= 2000) {
-              return year % 2 === 0;
-            } else if (year >= 1990) {
               return year % 4 === 0;
+            } else if (year >= 1990) {
+              return year % 6 === 0;
             } else {
-              return year % 10 === 0;
+              return year % 8 === 0;
             }
           });
           }
