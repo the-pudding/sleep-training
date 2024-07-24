@@ -60,43 +60,62 @@
   {#if data[0].type}
     {@const scaleData = getScaleData(data[0].type)}
     <div class="radius-label">
-      <p>{scaleData.label}</p>
+      <p>Circles Sized by {scaleData.label}</p>
     </div>
-    
+    <div class="container">
+
+
+    <p class="scale-label">Fewer {scaleData.label}</p>
     <div class="scale-container">
-      {#each scaleData.scales as scale}
+      {#each scaleData.scales as scale, i}
         <div class="scale-item">
           <div class="circle-container">
-            <div class="circle" style="width: {scale.range * 5}px; height: {scale.range * 5}px;"></div>
+            <div class="circle" style="width: {(i * 5) + 10}px; height: {(i * 5) + 10}px;"></div>
           </div>
-          <div class="label">{scale.domain}+</div>
+          <!-- <div class="label">{scale.domain}+</div> -->
         </div>
       {/each}
+    </div>
+    <p class="scale-label">More {scaleData.label}</p>
     </div>
   {/if}
 </div>
    
 <style>
-  .circle-container {
-    height: 60px; /* Adjust this value based on your largest circle */
+  .container {
     display: flex;
-    align-items: center;
     justify-content: center;
+  }
+  .scale-label {
+    font-size: 12px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    font-family: var(--sans);
+    margin: 0;
+  }
+  .radius-label p{
+    font-family: var(--sans);
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    margin-bottom: 10px;
+  }
+
+  .circle-container {
+    display: flex;
   }
   .radius-scale {
     display: flex;
     align-items: center;
-  }
-  .radius-scale p {
-    margin-right: 20px;
-    font-size: 14px;
+    flex-direction: column;
   }
   .scale-container {
-    min-width: 180px;
-    min-height: 100px;
+    width: 70px;
     display: flex;
+    flex-direction: row;
     justify-content: space-around;
-    align-items: flex-start;
+    align-items: center;
   }
   .scale-item {
     display: flex;
@@ -104,8 +123,10 @@
     align-items: center;
   }
   .circle {
-    border: 1px solid white;
+    background-color: white;
     border-radius: 50%;
+    opacity: .7;
+
   }
   .label {
     color: white;

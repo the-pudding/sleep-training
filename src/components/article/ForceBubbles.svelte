@@ -262,14 +262,7 @@
         width={$viewport.width*0.9}
         height={$viewport.height*0.9}
         aria-describedby="chartDescription"
-        style="overflow:visible;"
-    >
-        <!-- <title id="chartTitle" style="opacity: 0;">
-            {chartTitle}
-        </title> -->
-        <!-- <desc id="chartDesc" style="opacity: 0;">
-            {chartDesc}
-        </desc> -->
+        style="overflow:visible;"    >
         <div id="chartDescription" style="display: none;">{chartDesc}</div>
         <g style="transform: translate(0,0);">
             {#if nodes}
