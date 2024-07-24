@@ -1,5 +1,5 @@
 <script>
-	export let title = "Is Sleep Training Harmful";
+	export let title = "Is Sleep Training Harmful?";
 	export let description = "Misinformation and facts behind the internet’s most polarizing parenting debate";
 	export let url = "https://pudding.cool";
 	export let keywords = "sleep training, behavioural interventions, cry it out, Ferber, method, babies, baby, research";
@@ -19,7 +19,7 @@
 	<meta property="og:type" content="article" />
 	<meta property="og:locale" content="en_US" />
 
-	<meta property="og:image" content="{url}/assets/social-facebook.jpg" />
+	<meta property="og:image" content="{url}/assets/facebook.jpg" />
 	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="600" />
@@ -29,7 +29,7 @@
 	<meta name="twitter:creator" content="@puddingviz" />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
-	<meta name="twitter:image:src" content="{url}/assets/social-twitter.jpg" />
+	<meta name="twitter:image:src" content="{url}/assets/facebook.jpg" />
 
 	<meta name="robots" content="max-image-preview:large" />
 
