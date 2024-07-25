@@ -69,7 +69,7 @@
 <footer>
     <div class="footer-wrapper">
         {#if storyRecirculation}
-            <p class="stories-title">We&rsquo;ve published <span class="bold">186</span> awesome stories on topics such as <a href="">Spotify</a>, <a>birthdays</a>, <a>rickrolling</a>, and more.</p>
+            <p class="stories-title">We&rsquo;ve published <span class="bold">186</span> awesome stories on topics such as <a href="https://pudding.cool/2021/10/judge-my-music/" target=_blank>Spotify</a>, <a href="https://pudding.cool/2018/04/birthday-paradox/" target=_blank>birthdays</a>, <a href="https://pudding.cool/2021/07/rickrolling/" target=_blank>rickrolling</a>, and more.</p>
 
             <section class="stories">
 
