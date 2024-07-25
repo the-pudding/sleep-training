@@ -54,22 +54,9 @@
         };
     }
 
-    $: step, doStuff();
     $: renderedData, runSimulation();
+    $: console.log(step)
 
-    function doStuff(){
-
-        if(step >= 0){
-            showBubbles();
-        }
-        if(step == 1){
-            //do stuff here!
-        }
-    }
-
-    function showBubbles(){
-
-    }
 
 
     function runSimulation(){
@@ -151,7 +138,7 @@
 
     onMount(() => {
         
-        runSimulation();
+        // runSimulation();
         // YOU ACTUALLY DON'T NEED THE SIMULATION TO RUN, but it's here if you do!
 
         // const simulation = forceSimulation(dataToSimulate)

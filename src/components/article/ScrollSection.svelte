@@ -16,11 +16,17 @@
     let newValues;
     let step;
 
+
+    $: console.log(value)
+
     $: value, handleStepChange()
 
     function handleStepChange() {
 
-        if ((step === Object.values(copy).length - 1) && value === undefined) {
+        if(step == 0 && value == undefined) {
+            step = 0;
+        }
+        else if ((step === Object.values(copy).length - 1) && value === undefined) {
             step = Object.values(copy).length - 1;
         } else {
             step = value;
