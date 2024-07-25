@@ -206,7 +206,7 @@
       <Editorial methods={true} copy={copy.methodologies} />
     </div>
   </div>
-  <Footer />
+  <Footer backgroundColor={"#f7f7f7"} storyRecirculation={true} />
 {/if}
 
 <style>

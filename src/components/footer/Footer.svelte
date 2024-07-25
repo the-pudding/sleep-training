@@ -6,6 +6,8 @@
 
 	let localURL;
 	let stories = [];
+    let dataFiltered;
+
     export let backgroundColor = "#F4F4F4";
     export let width;
     export let storyRecirculation = false;
@@ -54,7 +56,11 @@
         if(storyRecirculation){
             const response = await fetch(url);
 	    	const data = await response.json();
-    		stories = data.filter((d) => !localURL.includes(d.url)).slice(0, 4);
+
+    		dataFiltered = data.filter((d) => !localURL.includes(d.url))
+            stories = dataFiltered.slice(0, 6);
+
+            console.log(dataFiltered)
         }
         
 	});
@@ -63,21 +69,32 @@
 <footer>
     <div class="footer-wrapper">
         {#if storyRecirculation}
+            <p class="stories-title">We&rsquo;ve published <span class="bold">186</span> awesome stories on topics such as <a href="">Spotify</a>, <a>birthdays</a>, <a>rickrolling</a>, and more.</p>
+
             <section class="stories">
-                {#each stories as { hed, url, image }}
-                    {@const href = url.startsWith("http")
-                        ? url
-                        : `https://pudding.cool/${url}`}
-                    <div class="story">
-                        <a {href}>
-                            <img
-                                src="https://pudding.cool/common/assets/thumbnails/640/{image}.jpg"
-                                alt="thumbnail"
-                            />
-                            <span>{hed}</span>
-                        </a>
-                    </div>
-                {/each}
+
+                <div class="stories-wrapper" style="min-width: {(stories.length * (300+20))+30}px;">
+                    {#each stories as { date, bgColor, fgColor, tease, hed, url, image }}
+                        {@const href = url.startsWith("http")
+                            ? url
+                            : `https://pudding.cool/${url}`}
+                        <div class="story">
+                            <a {href}>
+                                <div class="story-img-wrapper">
+                                    <img
+                                        src="https://pudding.cool/common/assets/thumbnails/960/{image}.jpg"
+                                        alt="thumbnail"
+                                    />
+                                </div>
+                                
+                                <div class="story-desc" style="background-color:{bgColor}; color:{fgColor};">
+                                    <p class="story-hed">{tease}</p>
+                                    <p class="story-date">{date.slice(0,2)}/{date.slice(6,10)}</p>
+                                </div>
+                            </a>
+                        </div>
+                    {/each}
+                </div>
             </section>
         {/if}
 
@@ -166,7 +183,7 @@
 
 <style>
     .footer-wrapper {
-        max-width: 1200px;
+        width: 100%;
         margin: 0 auto;
     }
     .row {
@@ -174,6 +191,20 @@
         margin-bottom: 30px;
         justify-content: space-between;
         flex-wrap: wrap;
+    }
+
+    .stories-title {
+        font-size: 18px;
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto;
+        width: calc(100% - 50px);
+        font-family: 'Atlas Typewriter';
+        margin-bottom: 50px;
+    }
+
+    .stories-title .bold{
+        font-weight: 600;
     }
 
     .row-label {
@@ -309,17 +340,28 @@
 
 	.stories {
 		margin: 0 auto;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		max-width: 70em;
+        overflow: scroll;
+        width: 100%;
+        margin-bottom: 200px;
 	}
+
+    .stories-wrapper {
+        display: flex;
+        padding-left: 30px;
+    }
+
+    .story-date {
+        font-family: 'Atlas Typewriter';
+        font-size: 12px;
+        -webkit-font-smoothing: antialiased;
+    }
 
 	.story {
 		display: block;
-		width: 100%;
 		border: none;
-		margin-bottom: 3rem;
+        width: 300px;
+        height: 400px;
+        margin-right: 20px;
 	}
 
 	.story a {
@@ -327,7 +369,34 @@
 		font-weight: 900;
 		text-decoration: none;
 		border: none;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
 	}
+    .story-img-wrapper {
+        height: 1px;
+        flex-grow: 1;
+    }
+    .story-img-wrapper img {
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+    }
+
+    .story-desc {
+        position: relative;
+        padding: 16px 11px 11px 15px;
+        border-top: 1px solid #181818;
+        background-color: #ccc;
+    }
+
+    .story-hed {
+        margin: 0;
+        font-family: var(--serif);
+        font-size: 14px;
+        -webkit-font-smoothing: auto;
+        line-height: 1.3;
+    }
 
 	.story span {
 		display: block;
