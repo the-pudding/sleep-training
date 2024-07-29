@@ -1,5 +1,5 @@
 <script>
-	export let title = "Is Sleep Training Harmful?";
+	export let title = "Is Sleep Training Safe or Harmful?";
 	export let description = "Misinformation and facts behind the internet’s most polarizing parenting debate";
 	export let url = "https://pudding.cool";
 	export let keywords = "sleep training, behavioural interventions, cry it out, Ferber, method, babies, baby, research";
