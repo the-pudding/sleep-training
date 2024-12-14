@@ -45,7 +45,6 @@
 		},
 		{ name: "Patreon", url: "https://patreon.com/thepudding/" },
 		// { name: "privacy", url: "https://pudding.cool/privacy/" },
-		// { name: "newsletter", url: "https://thepuddingmail.substack.com" },
 		{ name: "RSS", url: "https://pudding.cool/feed/index.xml" }
 	];
 
@@ -113,11 +112,11 @@
                 <div class="sticker-col">
                     <div class="sticker-outline sticker-outline-circle">
                         <div class="sticker">
-                            <a target="_self" href="https://thepuddingmail.substack.com/"><img src="assets/branding/subscribe.png" alt=""></a>
+                            <a target="_self" href="https://pudding.cool/subscribe"><img src="assets/branding/subscribe.png" alt=""></a>
                         </div>
                     </div>
                     <!-- <div class="link">
-                        <a target="_self" href="https://thepuddingmail.substack.com/">Subscribe to the newsletter<span class="link-arrow">{@html arrow}</span>
+                        <a target="_self" href="https://pudding.cool/subscribe">Subscribe to the newsletter<span class="link-arrow">{@html arrow}</span>
                         </a>
                     </div> -->
                 </div>
@@ -131,7 +130,7 @@
 
                 <div class="sticker-col">
                     <div class="link">
-                        <a target="_self" href="https://thepuddingmail.substack.com/">Subscribe to the <span class="arrow-no-wrap">newsletter<span class="link-arrow">{@html arrow}</span></span></a>
+                        <a target="_self" href="https://pudding.cool/subscribe">Subscribe to the <span class="arrow-no-wrap">newsletter<span class="link-arrow">{@html arrow}</span></span></a>
                     </div>
                 </div>
             </div>
