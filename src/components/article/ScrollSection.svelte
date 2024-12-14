@@ -16,9 +16,6 @@
     let newValues;
     let step;
 
-
-    $: console.log(value)
-
     $: value, handleStepChange()
 
     function handleStepChange() {

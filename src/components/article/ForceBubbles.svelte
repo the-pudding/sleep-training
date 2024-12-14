@@ -55,12 +55,8 @@
     }
 
     $: renderedData, runSimulation();
-    $: console.log(step)
-
-
 
     function runSimulation(){
-        console.log(renderedData[0].type);
         $hoveredCircle = null;
 
         if(nodes?.length !== renderedData?.length){

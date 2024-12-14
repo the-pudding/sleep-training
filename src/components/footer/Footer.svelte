@@ -58,9 +58,9 @@
 	    	const data = await response.json();
 
     		dataFiltered = data.filter((d) => !localURL.includes(d.url))
+
             stories = dataFiltered.slice(0, 6);
 
-            console.log(dataFiltered)
         }
         
 	});
@@ -68,7 +68,7 @@
 
 <footer>
     <div class="footer-wrapper">
-        {#if storyRecirculation}
+        {#if storyRecirculation && stories.length > 0}
             <p class="stories-title">We&rsquo;ve published <span class="bold">186</span> awesome stories on topics such as <a href="https://pudding.cool/2021/10/judge-my-music/" target=_blank>Spotify</a>, <a href="https://pudding.cool/2018/04/birthday-paradox/" target=_blank>birthdays</a>, <a href="https://pudding.cool/2021/07/rickrolling/" target=_blank>rickrolling</a>, and more.</p>
 
             <section class="stories">
@@ -88,8 +88,8 @@
                                 </div>
                                 
                                 <div class="story-desc" style="background-color:{bgColor}; color:{fgColor};">
-                                    <p class="story-hed">{tease}</p>
-                                    <p class="story-date">{date.slice(0,2)}/{date.slice(6,10)}</p>
+                                    <p class="story-hed">{hed}</p>
+                                    <!-- <p class="story-date">{date.slice(0,2)}/{date.slice(6,10)}</p> -->
                                 </div>
                             </a>
                         </div>
@@ -360,7 +360,6 @@
 		display: block;
 		border: none;
         width: 300px;
-        height: 400px;
         margin-right: 20px;
 	}
 
@@ -374,12 +373,12 @@
         flex-direction: column;
 	}
     .story-img-wrapper {
-        height: 1px;
+        height: auto;
         flex-grow: 1;
     }
     .story-img-wrapper img {
         width: 100%;
-        object-fit: cover;
+        object-fit: fill;
         height: 100%;
     }
 
